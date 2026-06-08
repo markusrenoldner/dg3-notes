@@ -1,0 +1,574 @@
+
+
+\emph{\textbf{(Lecture 6)}}\\
+
+We are now going to investigate the relation between geodesics and distances. We will see that a length minimizing curve is always a geodesic, but a geodesic between two points is \emph{not} always length minimizing.
+
+To talk about length minimizing curves, we need to talk about variations of curves, i.e. how curves vary smoothly.
+
+\begin{colordef}{Smooth Variation of a Curve}{}
+A smooth variation of a curve $\gamma: [a,b] \to M$ is a smooth map $\phi: [a,b] \times (-\varepsilon, \varepsilon) \to M,\ (t,s)\mapsto \phi(t,s)$ such that
+\[
+\phi(t, 0) = \gamma(t) \quad \forall t \in [a,b].
+\]
+\end{colordef}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Define the base curve gamma
+\draw[thick,Leman,domain=0:2,smooth,samples=100] 
+    plot (\x, {0.5 + 0.4*sin(180*\x) + 0.3*\x}) node[right] {$\gamma(t)$};
+
+% Draw a varied curve phi_s(t)
+\draw[thick,Groseille,dashed,domain=0:2,smooth,samples=100] 
+    plot (\x, {0.5 + 0.4*sin(180*\x) + 0.3*\x + 0.2*sin(90*\x) + 0.2}) node[above] {$\phi_s(t),\ s=$const.};
+
+\end{tikzpicture}
+\end{center}
+
+For $s=0$ we recover the original curve, but varying $s$ yields other curves. We will use the notation $\phi_s(t) = \phi(t,s)$.\\
+
+There are two natural vector fields in this situation. For this recall vector fields along a curve from Definition \ref{def:vecfield-along-curve}. We have for a fixed $s$ the \emph{tangent vector field along the variation} $\phi$, by
+\begin{equation}
+    \label{eq:variation_tangent_vector_field}
+    \frac{\partial \phi_s}{\partial t} := \mathrm{d}\phi\left(\frac{\partial}{\partial t}\right) 
+\end{equation}
+and the so called \emph{variation vector field}, which is tangent to $s\mapsto\phi_s(t)$ for a fixed $t$
+\begin{equation}    
+    \label{eq:variation_vector_field}
+    \frac{\partial \phi}{\partial s} := \mathrm{d}\phi\left(\frac{\partial}{\partial s}\right)
+\end{equation}
+
+In analogy with vector fields along a curve, $\frac{\partial \phi}{\partial t}$, $\frac{\partial \phi}{\partial s}$ cannot always be extended to vector fields on $M$.
+
+\begin{colremark}
+    Recall chapter 3.5 from \cite{tsakanikas2024dg2}. Both $t\mapsto \phi$ as well as $s\mapsto \phi$ are maps from an interval to a manifold, so $\frac{\partial}{\partial t},\frac{\partial}{\partial s}$ are the classic partial derivatives (or tangent vectors in $T \mathbb{R}$), which are then pushed forward by the differentials of $\phi$. So \eqref{eq:variation_tangent_vector_field} and \eqref{eq:variation_vector_field} are defined exactly like the usual tangent vectors of curves on manifolds.
+    
+    The notation $\frac{\partial \phi}{\partial t}$ is justified because in local coordinates these abstract tangent vectors become the usual partial derivatives.
+    \[
+    \left(\frac{\partial \phi}{\partial t}\right)^k = \frac{\partial \phi^k}{\partial t}, \qquad \left(\frac{\partial \phi}{\partial s}\right)^k = \frac{\partial \phi^k}{\partial s}
+    \]
+    where of course $\phi^k$ are the component functions of the coordinate representation $\widehat{\phi}=\psi\circ\phi = (\phi^1,...,\phi^n)$, where $\psi$ is any chart on the manifold, and $\widehat{\phi}:I\to \mathbb{R}^n$.
+\end{colremark}
+
+
+
+\begin{colorlem}{Symmetry of Covariant Derivatives in Variations}{symmetry_covariant_derivative_variations}
+Let $\phi: [a,b] \times (-\varepsilon, \varepsilon) \to M$ be a smooth variation of a curve, and $\nabla$ the Levi-Civita connection. Then
+\[
+\nabla_{\frac{\partial \phi}{\partial t}} \frac{\partial \phi}{\partial s} = \nabla_{\frac{\partial \phi}{\partial s}} \frac{\partial \phi}{\partial t}.
+\]
+\end{colorlem}
+
+This means $\left[\frac{\partial \phi}{\partial s},\frac{\partial \phi}{\partial t}\right]=0$, where we have to keep in mind that the two fields have to be extended, but this extension does not change the commutator in this case.
+
+\begin{proof}
+
+In local coordinates:
+\[
+\left(\nabla_{\frac{\partial \phi}{\partial t}} \frac{\partial \phi}{\partial s}\right)^k = \frac{\partial}{\partial t}\left(\frac{\partial \phi^k}{\partial s}\right) + \Gamma^k_{ij} \frac{\partial \phi^i}{\partial t} \frac{\partial \phi^j}{\partial s}
+\]
+where $\frac{\partial}{\partial t}$ denotes the derivative along the curve $t \mapsto \phi_s(t)$.
+
+Similarly:
+\[
+\left(\nabla_{\frac{\partial \phi}{\partial s}} \frac{\partial \phi}{\partial t}\right)^k = \frac{\partial}{\partial s}\left(\frac{\partial \phi^k}{\partial t}\right) + \Gamma^k_{ij} \frac{\partial \phi^i}{\partial s} \frac{\partial \phi^j}{\partial t}
+\]
+
+Since $\displaystyle \frac{\partial}{\partial s}\frac{\partial}{\partial t}\phi^k = \frac{\partial}{\partial t}\frac{\partial}{\partial s}\phi^k$ and $\Gamma^k_{ij} = \Gamma^k_{ji}$, the two expressions are equal.
+\end{proof}
+
+\begin{proof}[Alternative proof]
+
+On the manifold $[a,b] \times (-\varepsilon, \varepsilon)$, we have
+\[
+\left[\frac{\partial}{\partial t}, \frac{\partial}{\partial s}\right] = 0.
+\]
+So
+\[
+0 = \mathrm{d}\phi\left(\left[\frac{\partial}{\partial t}, \frac{\partial}{\partial s}\right]\right) = \left[\mathrm{d}\phi\left(\frac{\partial}{\partial t}\right), \mathrm{d}\phi\left(\frac{\partial}{\partial s}\right)\right] = \left[\frac{\partial \phi}{\partial t}, \frac{\partial \phi}{\partial s}\right].
+\]
+Since $\nabla$ is symmetric. The result follows.
+
+\end{proof}
+
+
+
+\begin{colorlem}{Differentiability of Length Function}{differentiability_length_function}
+If $\gamma$ is a $C^1$, non-singular ($\dot{\gamma} \neq 0$) curve on $(a,b)$, and $\phi$ is a smooth variation of $\gamma$, the length function $s \mapsto l(\phi_s)$ is differentiable near $s = 0$ and satisfies
+\[
+\frac{\mathrm{d}}{\mathrm{d}s} l(\phi_s) = \int_a^b \frac
+    {\big\langle \nabla_{\frac{\partial \phi}{\partial t}} \frac{\partial \phi}{\partial s},\; \frac{\partial \phi}{\partial t} \big\rangle}
+    {\big\Vert\frac{\partial \phi}{\partial t}\big\Vert} 
+\,\mathrm{d}t
+\]
+\end{colorlem}
+
+\begin{proof}
+Recall Definition \ref{def:curve-length}.
+\[
+l(\gamma_s) = \int_a^b \sqrt{\left\langle \dot{\gamma}_s, \dot{\gamma}_s \right\rangle} \,\mathrm{d}t = \int_a^b \sqrt{\left\langle \frac{\partial \phi}{\partial t}, \frac{\partial \phi}{\partial t} \right\rangle} \,\mathrm{d}t.
+\]
+Consequentially,
+\[
+\frac{\mathrm{d}}{\mathrm{d}s} l(\gamma_s) = \int_a^b \frac{\frac{\partial}{\partial s}\left\langle \frac{\partial \phi}{\partial t}, \frac{\partial \phi}{\partial t}\right\rangle}{2\sqrt{\left\langle \frac{\partial \phi}{\partial t}, \frac{\partial \phi}{\partial t}\right\rangle}} \,\mathrm{d}t = 
+\int_a^b \frac{\left\langle \nabla_{\frac{\partial \phi}{\partial s}} \frac{\partial \phi}{\partial t},\; \frac{\partial \phi}{\partial t}\right\rangle}
+% {\left\|\frac{\partial \phi}{\partial t}\right\|} 
+{\big\Vert\frac{\partial \phi}{\partial t}\big\Vert} 
+\,\mathrm{d}t.
+\]
+By the previous lemma \ref{lem:symmetry_covariant_derivative_variations}:
+\[
+= \int_a^b \frac{\left\langle \nabla_{\frac{\partial \phi}{\partial t}} \frac{\partial \phi}{\partial s},\; \frac{\partial \phi}{\partial t}\right\rangle}
+% {\left\|\frac{\partial \phi}{\partial t}\right\|} 
+{\big\Vert\frac{\partial \phi}{\partial t}\big\Vert} 
+\,\mathrm{d}t
+\]
+\end{proof}
+
+
+\begin{colortheo}{First Variation of Length}{}
+Let $\gamma: [a,b] \to M$ be smooth with $\|\dot{\gamma}\| = \mathrm{const}$ (I can always reparametrise to achieve this). For any smooth variation of $\gamma$, $\phi: [a,b] \times (-\varepsilon, \varepsilon) \to M$,
+\begin{equation}
+    \label{eq:first_variation}
+    \left.\frac{\mathrm{d}}{\mathrm{d}s} l(\phi_s)\right|_{s=0} = \frac{b-a}{l(\gamma)}\left(\left.\left\langle \frac{\partial \phi}{\partial s},\; \dot{\gamma}\right\rangle\right|_{t=a}^{t=b} - \int_a^b \left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \nabla_{\dot{\gamma}} \dot{\gamma}\right\rangle \,\mathrm{d}t\right).
+\end{equation}
+\end{colortheo}
+
+\begin{proof}
+Since $\|\dot{\gamma}\| = \mathrm{const}$, we have $l(\gamma) = (b-a)\|\dot{\gamma}\|$.
+
+From the lemma \ref{lem:differentiability_length_function}
+\[
+\left.\frac{\mathrm{d}}{\mathrm{d}s} l(\phi_s)\right|_{s=0} = \int_a^b \frac{\left\langle \nabla_{\dot{\gamma}} \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \dot{\gamma}\right\rangle}{\|\dot{\gamma}\|} \,\mathrm{d}t = \frac{1}{\|\dot{\gamma}\|} \int_a^b \left\langle \nabla_{\dot{\gamma}} \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \dot{\gamma}\right\rangle \,\mathrm{d}t
+\]
+\[
+= \frac{1}{\|\dot{\gamma}\|} \int_a^b \left(\frac{\mathrm{d}}{\mathrm{d}t}\left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \dot{\gamma}\right\rangle - \left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \nabla_{\dot{\gamma}} \dot{\gamma}\right\rangle\right) \,\mathrm{d}t
+\]
+\[
+= \frac{1}{\|\dot{\gamma}\|} \left(\left.\left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \dot{\gamma}\right\rangle\right|_{t=a}^{t=b} - \int_a^b \left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \nabla_{\dot{\gamma}} \dot{\gamma}\right\rangle \,\mathrm{d}t\right)
+\]
+\[
+= \frac{b-a}{l(\gamma)} \left(\left.\left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \dot{\gamma}\right\rangle\right|_{t=a}^{t=b} - \int_a^b \left\langle \left.\frac{\partial \phi}{\partial s}\right|_{s=0},\; \nabla_{\dot{\gamma}} \dot{\gamma}\right\rangle \,\mathrm{d}t\right).
+\]
+
+
+\end{proof}
+
+
+\begin{colorlem}{Geodesics are Critical Points of Length}{geodesics_critical_points_length}
+If $\gamma$ is a geodesic, then $\gamma$ is a critical point of the length functional $l$ under any variation that fixes the endpoints. That is, if $\phi_s(a) = \gamma(a)$ and $\phi_s(b) = \gamma(b)$ for all $s$, then $\left.\frac{\mathrm{d}}{\mathrm{d}s} l(\phi_s)\right|_{s=0} = 0$.
+\end{colorlem}
+
+\begin{proof}
+As $\phi_s(a) = \gamma(a)$ and $\phi_s(b) = \gamma(b)$ for all $s$, we have
+$$
+\frac{\mathrm{d}}{\mathrm{d}s} \phi(a,0)=
+\frac{\mathrm{d}}{\mathrm{d}s} \phi(b,0)=0.
+$$
+Moreover, since $\gamma$ is a geodesic, $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$. Hence, by the first variation formula, \eqref{eq:first_variation},
+$$
+\left.\frac{\mathrm{d}}{\mathrm{d}s} l(\phi_s)\right|_{s=0} 
+= 0.
+$$
+\end{proof}
+
+
+
+
+
+
+\subsection{Application to classical mechanics}
+
+In classical mechanics, we study (say smooth) trajectories of particles $f(t):[a,b]\to \Omega$, which are curves on a manifold, and we are interested in how these trajectories vary under small perturbations. Here, let $\Omega \subset \mathbb{R}^n$ be an open domain. The variation vector field $\frac{\partial \phi}{\partial s}$ captures exactly this idea of how the trajectory changes when we vary it smoothly. One way to axiomatise the dynamics of a particle is to postulate that the trajectory of the particle makes stationary a certain functional, called the \emph{action}.
+
+Let $\mathcal{L} \in C^\infty([a,b]\times \Omega \times \mathbb{R}^n)$. We define the \emph{action}
+\[
+S_{\mathcal{L}}[f] := \int_a^b \mathcal{L}\big(t, f(t), f'(t)\big)\,dt.
+\]
+
+If $f$ is a stationary point of $S_{\mathcal{L}}$ under a certain class of variations, then $f$ solves a very important PDE, the \emph{Euler--Lagrange equations}, which model the dynamics of the particle.
+
+
+\begin{colorlem}{First variation and Euler--Lagrange equations}{}
+
+Let $F:(-\delta,\delta)\times [a,b]\to \Omega$ be a smooth variation of $f$ with
+$F(0,t)=f(t)$ and fixed endpoints $F(s,a)=f(a)$, $F(s,b)=f(b)$. Then we get the \emph{first variation of the action} by
+\[
+\frac{d}{ds} S_{\mathcal{L}}[F(s,\cdot)]\bigg|_{s=0}
+=
+\int_a^b \partial_s F^i(0,t)\cdot \Big(\partial_{x^i}\mathcal{L} - \frac{d}{dt}\partial_{v^i}\mathcal{L}\Big)
+\big[t,f(t),f'(t)\big]dt.
+\]
+Further, if $f$ is stationary for all such variations, it satisfies the \emph{Euler--Lagrange equations}
+\[
+\partial_{x^i}\mathcal{L}(t,f,f') - \frac{d}{dt}\partial_{v^i}\mathcal{L}(t,f,f') = 0,
+\quad i=1,\dots,n.\tag{EL1}
+\]
+\end{colorlem}
+\begin{proof}
+See exercise 7.3.
+\end{proof}
+
+\begin{colexample}{Particles in a conservative force field} 
+For a particle of mass $m$ moving under a conservative force $g$ with potential $U(x)$ (so that $\nabla U = g$), the Lagrangian is
+\[
+\mathcal{L}(t,x,v) = \frac{1}{2}m|v|^2 - U(x).
+\]
+In this case, the Euler--Lagrange equations reduce to Newton's second law of motion,
+\[
+m\frac{d^2 f^i}{dt^2}(t) = -\partial_i U(f(t)).
+\]
+\end{colexample}
+
+
+
+
+We place the dynamics on a Riemannian manifold, $(M,g)$. Let $\mathcal{L}:TM \to \mathbb{R}$ be a smooth Lagrangian.
+
+
+For simplicity we consider the general manifold case only with Lagrangians independet of time.
+
+For a smooth curve $\gamma:[a,b]\to M$, define the action
+\[
+S_{\mathcal{L}}[\gamma] := \int_a^b \mathcal{L}(\gamma(t), \dot{\gamma}(t)) \, dt.
+\]
+
+Let $\phi:(-\delta,\delta)\times[a,b]\to M$ be a smooth variation of $\gamma$ with fixed endpoints, and let
+\[
+V(t) := \left.\frac{\partial \phi}{\partial s}(s,t)\right|_{s=0}
+\]
+be the variation field along $\gamma$. 
+
+
+\begin{colorlem}{First variation and EL on manifolds}{}
+The first variation of the action is
+\[
+\left.\frac{d}{ds} S_{\mathcal{L}}[\phi(s,\cdot)] \right|_{s=0}
+=
+\left[ \frac{\partial \mathcal{L}}{\partial v^i}(\gamma,\dot{\gamma}) \, V^i \right]_{t=a}^{t=b}
++
+\int_a^b \left(
+\frac{\partial \mathcal{L}}{\partial x^i}(\gamma,\dot{\gamma})
+-
+\frac{d}{dt}\frac{\partial \mathcal{L}}{\partial v^i}(\gamma,\dot{\gamma})
+\right) V^i \, dt.
+\]
+In particular, if $\gamma$ is a stationary point of $S_{\mathcal{L}}$ under all variations fixing the endpoints, then $\gamma$ satisfies the Euler--Lagrange equations
+\begin{equation}
+\label{EL2}
+% \tag{EL2}
+\frac{\partial \mathcal{L}}{\partial x^i}(\gamma,\dot{\gamma})
+-
+\frac{d}{dt}\frac{\partial \mathcal{L}}{\partial v^i}(\gamma,\dot{\gamma})
+= 0,
+\quad i=1,\dots,n.\tag{EL2}
+\end{equation}
+
+\end{colorlem}
+\begin{proof}
+See exercise 7.4a.
+\end{proof}
+
+We remove now all external forces, and study the case where it depends only on position and velocity. This is the case of a free particle moving on a Riemannian manifold. For $(x,v)\in TM$, we choose it be 
+\begin{equation}
+    \label{eq:kinetic_energy_lagrangian}
+    \mathcal{L}(x,v) := \frac12 g_x(v,v).
+\end{equation}
+
+This can be thought of as an extension of the Newtonian function for the kinetic energy in
+the setting of Riemannian manifolds. For a smooth curve $\gamma:[a,b]\to M$, the associated action is the (curve) \emph{energy}, as investigated in Exercise 2.1, defined by
+\begin{equation}
+    \label{eq:energy_functional}
+    \mathcal{E}[\gamma] := \int_a^b g(\dot\gamma(t),\dot\gamma(t))dt.
+\end{equation}
+
+As we will see, this definition leads to geodesics as the natural trajectories.
+
+
+
+
+
+\begin{colexample}{Energy functional and geodesics}{}
+Let $\mathcal{L}$ be as in \eqref{eq:kinetic_energy_lagrangian}, $S=\mathcal{E}$ as in \eqref{eq:energy_functional}, and $\phi:(-\delta,\delta)\times[a,b]\to M$ be a smooth variation of $\gamma$ with fixed endpoints. Then the \emph{first variation of the energy} is
+$$
+\frac{d}{ds}\mathcal{E}[\phi(s,\cdot)]\Big|_{s=0}
+=
+\Big[ g\big(\partial_s\phi,\dot\gamma\big)\Big]_{t=a}^{t=b}
+-\int_a^b g\big(\partial_s\phi,\nabla_{\dot\gamma}\dot\gamma\big)dt.
+$$
+
+In particular, if $\gamma$ is stationary under all such variations, then \eqref{EL2} reduces to
+\begin{equation}
+    \nabla_{\dot\gamma}\dot\gamma = 0,\tag{EL3}
+\end{equation}
+
+i.e. $\gamma$ is a geodesic. See exercise 7.4b for a derivation.
+\end{colexample}
+
+The structure is identical to the Euclidean case: the Euler--Lagrange equations persist in local coordinates, and the choice of pure kinetic energy as the Lagrangian means there are no force terms, and the Euler--Lagrange equations reduce to the geodesic equation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{The exponential map}
+
+Recall that by Theorem \ref{thm:existence_uniqueness_geodesics} for any $p \in M$, and $v \in T_p M$ there exists a unique maximal geodesic $\gamma_{p,v}$ with $\gamma_{p,v}(0) = p$, and $\dot{\gamma}_{p,v}(0) = v$, and that the component functions $\gamma_{p,v}^k (t)$ are smooth functions of the initial data $p$ and $v$ in any local coordinate system.
+
+We introduce first the domain of the exponential map. We denote by $\Omega_p \subset T_p M$ the set of tangent vectors $v \in T_p M$ such that $\gamma_{p,v}$ exists for $t\in [0,1]$,
+\[
+\Omega_p=\{\,v\in T_pM : \gamma_{p,v}\ \text{exists on }[0,1]\,\}.
+\]
+
+\begin{colorlem}{$\Omega_p$ is star-shaped around the origin}{}
+Let \(\Omega_p \subset T_pM\) be defined as above. Then \(\Omega_p\) is \emph{star-shaped} around \(0\); that is, if \(v \in \Omega_p\) and \(\lambda \in [0,1]\), then \(\lambda v \in \Omega_p\).
+\end{colorlem}
+
+
+\begin{proof}
+Let $v \in \Omega_p$, so the geodesic $\gamma_{p,v}$ is defined on $[0,1]$. For any $\lambda \in [0,1]$, define $\sigma(t) = \gamma_{p,v}(\lambda t)$. Then $\sigma$ satisfies the geodesic equation with initial conditions $\sigma(0) = p$ and $\dot{\sigma}(0) = \lambda v$, so by uniqueness $\sigma = \gamma_{p,\lambda v}$. Moreover, $\sigma$ is defined at least for $t \in [0,1/\lambda] \supset [0,1]$, which shows that $\gamma_{p,\lambda v}$ exists on $[0,1]$. Therefore, $\lambda v \in \Omega_p$, and since $0 \in \Omega_p$, it follows that $\Omega_p$ is star-shaped around $0$.
+\end{proof}
+
+
+
+
+% \begin{colremark}[Some simple consequences]
+% \label{rem:star-shaped}
+% In the above setting we have:
+% \begin{itemize}[itemsep=0pt, topsep=0pt]
+%     \item If the initial velocity is zero, the geodesic doesn't move, so $\gamma_{p,0}$ satisfies $\gamma_{p,0}(t) = p$ for all $t$. Hence, in particular, $0 \in \Omega_p$.
+%     \item If $v \in \Omega_p$, and $\lambda \in [0,1]$ then $\gamma_{p,\lambda v}(t) = \gamma_{p,v}(\lambda t)$, and so in particular we have that $\lambda v \in \Omega_p$.
+% \end{itemize}
+% \end{colremark}
+
+% To see the second assertion, define $\sigma(t) = \gamma_{p,v}(\lambda t)$. Then
+% \[
+% \dot{\sigma}(t) = \lambda \dot{\gamma}_{p,v}(\lambda t).
+% \]
+% Its acceleration is
+% \[
+% \nabla_{\dot{\sigma}} \dot{\sigma} = \lambda^2 \nabla_{\dot{\gamma}_{p,v}} \dot{\gamma}_{p,v} = 0,
+% \]
+% so it is a geodesic itself. Moreover, $\sigma(0) = \gamma(0)$ and $\dot{\sigma}(0) = \lambda \dot{\gamma}(0) = \lambda v$, so by uniqueness $\sigma=\gamma_{p,\lambda v}$. 
+
+% We call sets $\Omega_p$ that satisfy both assertions in Remark \ref{rem:star-shaped} \emph{star-shaped} domains.\\
+
+
+We introduce now the exponential map, which takes a tangent vector and returns the point reached by following the geodesic starting at $p$ in direction $v$ after $t=1$. 
+
+\begin{colordef}{Exponential map}{exponential_map}
+We define $\exp_p : \Omega_p \to M$ such that
+\[
+\exp_p(v) = \gamma_{p,v}(1),
+\]
+with $\gamma_{p,v}$ as in Theorem \ref{thm:existence_uniqueness_geodesics}. Equivalently, $\exp_p(tv) = \gamma_{p,v}(t)$.
+\end{colordef}
+
+% \begin{center}
+% \begin{tikzpicture}[scale=1.5]
+% % Sphere outline (2D projection)
+% \draw[thick] (0,0) circle (1);
+
+% % Point p on top of sphere
+% \coordinate (p) at (0,1);
+% \fill (p) circle (0.8pt) node[above right] {$p$};
+
+% % Horizontal tangent line at p
+% \draw[thick, Leman] ($(p)+(-2,0)$) -- ($(p)+(2,0)$);
+
+% % Vector v in tangent plane (longer)
+% \draw[->, Groseille, thick] (p) -- ++(0.8,0) node[above] {$v$};
+
+% % Image of exp_p(v) on sphere (projected along circle)
+% \coordinate (q) at (0.8,0.6); % on circle
+% \fill (q) circle (0.8pt) node[right] {$\exp_p(v)$};
+% \end{tikzpicture}
+% \end{center}
+
+Consider e.g. $M:=S^1$, $p$ any point on the circle, and $v \in T_p S^1$ a non-zero tangent vector. Then $\exp_p(v)$ is the point on the circle reached by following the geodesic starting at $p$ in direction $v$ for time $t=1$.
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Draw circle (S^1)
+    \draw[thick] circle (1);
+    
+    % Mark point p on circle
+    \draw[fill=black] (0,1) circle (0.05);
+    \node[above] at (0,1) {$p$};
+    
+    % Draw tangent line at p
+    \draw[thick, Groseille] (-2,1) -- (2,1);
+    
+    % Draw tangent vector
+    \draw[->, thick, Canard, shift={(0,1)}] (0,0) -- (1,0);
+    \node[right, above, Canard] at (1,1) {$v \in T_p S^1$};
+
+    % Image of exp_p(v) on sphere (projected along circle)
+    \coordinate (q) at (0.8,0.6); % on circle
+    \fill (q) circle (0.8pt) node[right] {$\exp_p(v)$};
+    
+    % Label the circle
+    \node at (1,-0.7) {$S^1$};
+    
+    % Draw normal vector (radius)
+    \draw[dashed, gray] (0,0) -- (0,1);
+\end{tikzpicture}
+\end{center}
+
+
+    
+
+One can informally think of it as a map sending \emph{straight lines}, i.e. the set $\{\lambda v: \lambda \in [0,1]\}$, through the origin in $T_p M$ to geodesics through $p$ in $M$.
+
+
+
+We study now the differential of the exponential map at $v$,
+$$\mathrm{d} \exp_p\big|_v : T_v(T_p M) \to T_{\exp_p(v)} M.$$
+For this recall the following.
+
+
+For any finite dimensional vector space $V$, we have $V\cong T_v V$ via $\Phi_v:V\to T_vV$. The latter is defined by $u\mapsto$$D_u|_v$ with $D_u|_v(f):= \frac{\mathrm{d}}{\mathrm{d}t}\big|_{t=0}f(v+tu)$ for any $f\in C^\infty(M)$ (see e.g. Exercise 4.2 of \cite{tsakanikas2024dg2}). 
+
+% In a basis, where $u=u^i e_i$, and where $x^i(e_j)=\delta^i_j$, we have $\Phi_v(u) = u^i \frac{\partial}{\partial x^i}\big|_v$.
+
+Hence, whenever we view some $u\in T_pM$ as an element of $T_vT_pM$, we actually work with $\Phi_v(u)$, but write only $u$. To make this identification be compatible with our Riemannian metric setting, we define an inner product on $T_vT_pM$ via the isomorphism $\Phi_v$ as
+$$\langle w_1, w_2 \rangle_{T_v(T_p M)} := \langle \Phi_v^{-1}(w_1), \Phi_v^{-1}(w_2) \rangle_{T_p M}.$$
+
+(This is analogous to the pullback of a metric as in Definition \ref{def:pullbackmetric} but $\Phi_v$ plays the role of the differential of the inducing map.) With this convention, the inner product on $T_v(T_p M)$ agrees with the inner product on $T_p M$, under the identification $\Phi_v$. 
+
+To give some intuition on the differential of the exponential consider this: By definition, $\exp_p(tv)=\gamma_{p,v}(t)$. We compute now the curve velocity. For this define $c:t\mapsto tv$, so that $\gamma_{p,v}=\exp\circ\ c$.
+\begin{align*}
+    \gamma'_{p,v}(t) 
+    &= \mathrm{d} \gamma_{p,v} \left ( \frac{\mathrm{d}}{\mathrm{d}t}\bigg|_t \right )\\
+    &=\mathrm{d} \exp_p|_{c(t)} \circ \mathrm{d} c\left ( \frac{\mathrm{d}}{\mathrm{d}t}\bigg|_t \right )\\
+    &=\mathrm{d} \exp_p|_{vt}\left ( c' (t)\right )
+\end{align*}
+
+
+Evaluating at $t=1$ shows that $\mathrm{d} \exp_p|_{v}\left ( v\right )$ is precisely the velocity of the geodesic at $t=1$, $\gamma'_{p,v}(1)$.\\
+
+
+
+
+
+
+\begin{colorlem}{Differential of Exponential Map}{differential_exponential_map}
+The differential $\mathrm{d}\exp_p|_{v=0} : T_v T_p M \to T_p M$ is the identity map, hence $\exp_p$ is a local diffeomorphism around $v = 0$.
+\end{colorlem}
+
+
+\begin{proof}
+
+By the inverse function theorem, it suffices to show that $\mathrm{d}\exp_p|_{v=0}$ is invertible. For this recall that $T_{v=0}\, T_p M \cong T_p M$, as discussed above. We will show that $\mathrm{d}\exp_p|_{v=0} = \mathrm{id}_{T_p M}$. For any map $F: N \to M$, if $\gamma$ is a curve in $N$,
+\[
+\mathrm{d}F(\dot{\gamma}(0)) = \left.\frac{\mathrm{d}}{\mathrm{d}t}(F \circ \gamma)\right|_{t=0},
+\]
+see e.g. Proposition 3.17 and Corollary 3.18 in \cite{tsakanikas2024dg2}. In particular, for $\exp_p$: $t\bar{v} \mapsto \gamma_{p,\bar{v}}(t)$, where $\gamma(t) = t\bar{v}$, $\dot{\gamma}(0) = \bar{v}$. So
+\[
+\mathrm{d}\exp_p|_{v=0}(\bar{v}) = \left.\frac{\mathrm{d}}{\mathrm{d}t}\gamma_{p,\bar{v}}(t)\right|_{t=0} = \bar{v} \qquad \forall \bar{v} \in T_p M.
+\]
+Hence $\mathrm{d}\exp_p\big|_{v=0}=\mathrm{id}_{T_pM}$, which is invertible. Therefore, \(\exp_p\) is a local diffeomorphism at \(v=0\).
+\end{proof}
+
+
+\begin{colorlem}{Isometries commute with exponential}{}
+Let $(M,g_M)$ and $(N,g_N)$ be smooth Riemannian manifolds and let 
+$\Phi : M \to N$ be an isometry, then $\Phi(\exp_p(v)) = \exp_{\Phi(p)}(\mathrm{d}\Phi(v))$ for all $v \in T_p M$. 
+\end{colorlem}
+
+In other words, the following diagram commutes for any $p$.
+\[
+\begin{tikzcd}
+T_p M \arrow[r,"d_p \Phi"] \arrow[d,"\exp_p"'] & T_{\Phi(p)} N \arrow[d,"\exp_{\Phi(p)}"] \\
+M \arrow[r,"\Phi"'] & N
+\end{tikzcd}
+\]
+
+\begin{proof}
+See exercise 6.1.
+\end{proof}
+
+A consequence of the above lemma is that if $\Phi$ is an isometry, then $\Phi$ sends geodesics to geodesics. In particular, if $\gamma$ is a geodesic in $M$, then $\Phi \circ \gamma$ is a geodesic in $N$. This is because $\Phi(\exp_p(v)) = \exp_{\Phi(p)}(\mathrm{d}\Phi(v))$ means that the image under $\Phi$ of the geodesic starting at $p$ with initial velocity $v$ is the geodesic starting at $\Phi(p)$ with initial velocity $\mathrm{d}\Phi(v)$. More formally we have
+\begin{equation*}
+    \Phi(\gamma_{p,v}(t)) = \gamma_{\Phi(p),\mathrm{d}\Phi(v)}(t)
+\end{equation*}
+for all $t \in [0,1]$.
+
+
+\begin{colorlem}{Isometries and Killing fields on connected manifolds}{}
+Let \((M,g)\) be a smooth, \emph{connected} Riemannian manifold.
+\begin{enumerate}
+    \item If \(\Phi_1,\Phi_2 : M \to M\) are isometries such that, for some \(p \in M\), and they agree at \(p\) and have the same differential at \(p\), i.e. $\Phi_1(p)=\Phi_2(p)$ and $d_p\Phi_1=d_p\Phi_2$ then \(\Phi_1=\Phi_2\).
+
+    \item If \(X \in \Gamma(TM)\) is a Killing vector field such that, for some \(p \in M\), $X|_p=0$, and $(\nabla X)|_p=0$, then \(X=0\) on \(M\).
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+See Exercise 6.2.
+\end{proof}
+
+\begin{colorlem}{Geodesics orthogonal to a submanifold}{}
+Let \((M,g)\) be a connected Riemannian manifold and \(N \subset M\) a smooth submanifold.  
+
+\begin{enumerate}[itemsep=0pt, topsep=0pt]
+    \item Let \(p \in M\) and \(q \in N\) be such that there exists a \(C^1\) curve \(\gamma:[0,1]\to M\) with \(\gamma(0)=p\), \(\gamma(1)=q\), and \(\ell(\gamma) \le \ell(\sigma)\) for all \(C^1\) curves \(\sigma\) from \(p\) to \(N\). Then \(\gamma\) is a geodesic and \(\dot\gamma(1) \perp T_{q}N\).  
+    \item If \(\gamma:[0,1]\to N\) minimizes length between points in \(N\), then \(\nabla_{\dot\gamma}\dot\gamma(t) \perp T_{\gamma(t)}N\) for all \(t \in [0,1]\).
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+See Exercise 6.3.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{colordef}{Injectivity Radius}{injectivity_radius}
+Let $B_r(0) = \{ v : \|v\|_g < r \}$. The injectivity radius at $p \in M$ is defined by
+\[
+i(p) = \sup\{r > 0 : \exp_p \text{ is a diffeomorphism on } B_r(0) \subset T_p M\}.
+\]
+\end{colordef}
+The injectivity radius of $M$ is $i(M) = \inf_{p \in M} i(p)$. This is the largest radius for which the exponential map is simultaneously a diffeomorphism at every point on the manifold.
+
+To get some intuition of this slightly abstract definition, we will look at some examples.
+
+
+\begin{colexample}{}{}
+Recall that by Remark \ref{rem:euclidean_geodesics_are_straight} geodesics on $\mathbb{R}^n$ with the Euclidean metric $g_E$ are straight lines, i.e. $\gamma_{p,v}(t) = p + tv$. So $\exp_p(v) = p + v$, which is a global diffeomorphism. Hence, $i(p) = \infty$ for all $p$.
+
+Upon identifying $T_p \mathbb{R}^n$ with $\mathbb{R}^n$ itself, via the translation map $v \mapsto p + v$, the exponential map becomes the identity.
+\end{colexample}
+
+\begin{colexample}{}{}
+On the round sphere $S^2$ in $\mathbb{R}^3$, $\exp_p$ maps straight lines on $T_p S^2$ to great circles on $S^2$. So $i(p) = \pi R$.
+\end{colexample}
+
+
