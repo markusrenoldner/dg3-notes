@@ -1,0 +1,649 @@
+
+
+
+
+
+\subsection{Normal coordinates}
+\emph{\textbf{(Lecture 7)}}\\
+
+
+
+Let $(M, g)$ be a Riemannian manifold.
+$\forall p \in M$, $v \in T_p M$: $\gamma_{p,v}(t)$ is the maximal geodesic from Theorem \ref{thm:existence_uniqueness_geodesics} with $\gamma(0) = p$, $\dot{\gamma}(0) = v$. Recall the exponential map $\exp_p : \Omega_p \subseteq T_p M \to M$ from Definition \ref{def:exponential_map}, given by $\exp_p(tv) = \gamma_{p,v}(t)$. The exponential map \emph{flattens out} the geometry of the manifold as much as possible. Its inverse is a coordinate chart of the \emph{normal coordinates}.\\
+
+For this, we identify $T_p M$ with $\mathbb{R}^n$ via a basis, $\{e_1, \ldots, e_n\}$, which is orthonormal with respect to $g|_p$ (so that any $v\in T_pM$ can be expanded as $v=v^i e_i$). From this perspective one can view the normal coordinates as a push-forward of the \emph{cartesian coordinates on the tangent space} via $\exp_p$.
+
+\begin{colremark}
+\label{rem:nonuniqueness_normal_coordinates}
+The choice of the basis $\{e_i\}$ is not canonical, and different choices will lead to different normal coordinates.
+\end{colremark}
+
+
+Recall that any orthonormal basis $\{e_i\}$ of $T_pM$ induces an isomorphism $E: \mathbb{R}^n \to T_p M, x \mapsto x^i e_i$, where $x=(x^1,...,x^n)$. Recall further that $\exp_p$ is a local diffeomorphism by Lemma \ref{lem:differential_exponential_map}, so we can restrict $\exp_p$ to a neighborhood $V$ of $0 \in T_p M$ such that $\exp_p$ is a diffeomorphism there. We set $U:=\exp_p(V)$ and call it a \emph{normal neighborhood} of $p$.
+
+\begin{colordef}{Normal coordinates}{normal_coordinates}
+Let $E$ and $U$ be as above. Then we define the \emph{normal coordinates} on $U$ by the chart $\varphi: U \to \mathbb{R}^n$ as
+
+$$\varphi :=E^{-1}\circ \exp_p^{-1}.$$
+
+% \begin{center}
+% \begin{tikzcd}
+% \phi:U \arrow{r}{\exp_p^{-1}} & T_p M \arrow{r}{E^{-1}} & \mathbb{R}^n
+% \end{tikzcd}
+% \end{center}
+
+\end{colordef}
+
+
+
+\begin{colremark}
+We have that 
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+\item On the chart, $x(q)=(x^1(q),...,x^n(q))=E^{-1}(\exp_p^{-1}(q))$.
+\item For $v\in T_pM$, $\exp_p(v)\in M$ and so  $x(\exp_p(v)) =E^{-1}(\exp_p^{-1}(\exp_p(v))=(v^1,...,v^n)$.
+\item
+The coordinate expression of the exponential, $\widetilde{\exp}_p$, in normal coordinates is the identity map, as 
+$$\widetilde{\exp}_p
+:= \varphi\circ\exp_p\circ E
+= E^{-1}\circ\exp_p^{-1}\circ\exp_p\circ\ E
+=\mathrm{Id}_{\mathbb{R}^n}.
+$$
+% \item By definition of the exponential, $x^i(\gamma_{p,v}(t)) = t \cdot v^i$.
+\item Geodesics through $p$ are straight lines. Let $\gamma(0)=p, \dot{\gamma}(0)=v$. Then $\gamma(t)=\exp_p(tv)$. Define the curve $c(t):=\varphi(\gamma(t))$ on the chart. Then $c(t)=E^{-1}(tv)=t(v^1,...,v^n)$.
+\item The normal coordinates of $p$ are $(0, . . . , 0)$, because by definition $\exp_p(0)=p$.
+\end{itemize}
+\end{colremark}
+
+
+\begin{colorlem}{The metric normal coordinates}{metric_normal_coordinates}
+In normal coordinates centered at $p$,
+\[
+g_{ij}(0) = \delta_{ij}, \quad \partial_k g_{ij}(0) = 0, \quad \Gamma_{ij}^k(0) = 0.
+\]
+\end{colorlem}
+
+Second derivatives of the metric in normal coordinates do not necessarily vanish at $p$. Those are related to the \emph{curvature tensor}.
+
+\begin{proof}
+Since $x^i(\exp_p(v)) = v^i$ by definition, we have $x^i(\exp_p(t \cdot e_j)) = t \, \delta_j^i$. Hence, for all $j = 0, 1, \ldots, n$, the curve $t \mapsto \exp_p(t \cdot e_j)$ is the $x^j$-coordinate curve and $\frac{\partial}{\partial x^j}$ is the tangent of this curve. Therefore,
+\[
+\frac{\partial}{\partial x^j}\bigg|_p = \frac{\mathrm{d}}{\mathrm{d} t}(\exp_p(t \, e_j))\bigg|_{t=0} = \mathrm{d} \exp_p\big|_{v=0}(e_j) = e_j.
+\]
+
+So
+\[
+g_{ij}(x(p)) =g_{ij}(0) = g\left(\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right)\bigg|_p = g(e_i, e_j)|_p  = \delta_{ij},
+\]
+since $\{e_i\}_{i=1}^n$ is an orthonormal basis.
+
+Recall that by Definition \ref{def:exponential_map}, the curve $\gamma_{p,v}(t) = \exp_p(tv)$ is a geodesic for any $v$. Therefore, in normal coordinates: $\gamma_{p,v}^k(t) = t \cdot v^k$. So the geodesic equation, $\ddot{\gamma}_{p,v}^k(t) + \Gamma_{ij}^k(\gamma_{p,v}(t))\, \dot{\gamma}_{p,v}^i \, \dot{\gamma}_{p,v}^j = 0$, becomes
+
+\begin{equation}
+    \label{eq:geodesic_equation_normal_coordinates}
+    \Gamma_{ij}^k(\gamma_{p,v}(t))\, v^i v^j = 0
+\end{equation}
+and by letting $t=0$ we have for any $v$
+\[
+\Gamma_{ij}^k(0)\, v^i v^j = 0.
+\]
+
+Since $\Gamma_{ij}^k(0)$ is symmetric in $i, j$, wie obtain $\Gamma_{ij}^k(0) = 0$.
+
+And to obtain the second property above we use Definition \ref{def:christoffel} and Theorem \ref{thm:levi_civita}, we find that
+\[
+\partial_k g_{ij} = \partial_k \left\langle \frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j} \right\rangle = g_{aj}\, \Gamma_{ki}^a + g_{ai}\, \Gamma_{kj}^a.
+\]
+
+So $\partial_k g_{ij}(0) = 0$.
+\end{proof}
+
+\begin{colremark}
+Equation \eqref{eq:geodesic_equation_normal_coordinates} shows that the Christoffel symbols vanish along the geodesic $\gamma_{p,v}$, for all $v$. So the \emph{radial} directions are special. (Geodesics are radial lines in normal coordinates, see previous remark.)
+\end{colremark}
+
+
+$\exp_p\big|_v$ is a linear map between inner product spaces, so we can ask how it interacts with the inner product.
+
+\begin{colorlem}{Gauss lemma}{gauss}
+For all $v \in \Omega_p\subset T_pM$, and for all $w \in T_v \Omega_p$ we have
+\[
+\left\langle \mathrm{d} \exp_p\big|_v (v),\, \mathrm{d} \exp_p\big|_v (w) \right\rangle = \langle v, w \rangle.
+\]
+\end{colorlem}
+
+This means of course that 
+\begin{enumerate}
+\item[a)] $\| \mathrm{d} \exp_p\big|_v (v) \| = \|v\|$.
+\item[b)] For all $w \in T_v(T_p M)$ orthogonal to $v$, we have:
+\[
+\left\langle \mathrm{d} \exp_p\big|_v (v),\, \mathrm{d} \exp_p\big|_v (w) \right\rangle = 0.
+\]
+\end{enumerate}
+
+The Gauss lemma does not imply that $\exp_p$ is an isometry. An alternative proof can be found in exercise 7.4c.
+
+\begin{proof}
+a) Recall that $\exp_p(tv) = \gamma_{p,v}(t)$. So $\dot{\gamma}_{p,v}(t) = \frac{\mathrm{d}}{\mathrm{d} t}(\exp_p(tv)) = \mathrm{d} \exp_p\big|_{tv}(v)$. We evaluate this at $t=1$ and get
+$$\dot{\gamma}_{p,v}(1) = \mathrm{d} \exp_p\big|_v (v).$$
+
+But $\gamma_{p,v}$ is a geodesic, so $\|\dot{\gamma}_{p,v}(1)\| = \|\dot{\gamma}_{p,v}(0)\| = \|v\|$.
+
+
+b) We will use the first variation formula for the length. Without loss of generality, $\|w\| = \|v\|$. This curve goes through $v$, and $\alpha(0)=v$ and $\alpha'(0)=w$, so it's a circle around the origin in the tangent space.
+
+Let 
+$$\alpha(s) = \cos(s) \cdot v + \sin(s) \cdot w,$$ 
+so $\alpha(0) = v$, $\dot{\alpha}(0) = w$, and $\|\alpha(s)\| = \|v\|$, since $v \perp w$, $\|v\| = \|w\|$ wrt. $g$.
+
+If $\phi(t, s) = \exp_p(t \cdot \alpha(s))$, then the variation of the curve $\gamma_{p,v}(t)$, and $\phi_s(t)$ is a geodesic, because it is $\gamma_{p,\alpha(s)}(t)$, by Definition \ref{def:exponential_map}. By the first variation formula of the length, \eqref{eq:first_variation}, we have
+\[
+\frac{\mathrm{d}}{\mathrm{d} s} \ell(\phi_s)\bigg|_{s=0} = \frac{1}{\ell(\gamma_{p,v})} \left\langle \frac{\partial \phi}{\partial s}\bigg|_{s=0,\, t=1},\, \dot{\gamma}(1) \right\rangle. \quad (*)
+\]
+
+But $\ell(\phi_s) = \int_0^1 \left\| \frac{\partial \phi}{\partial t} \right\| \mathrm{d} t = \int_0^1 \|v\| \, \mathrm{d} t = \|v\|$, and $\dot{\gamma}(1) = \mathrm{d} \exp_p\big|_v (v)$.
+
+\[
+\frac{\partial \phi}{\partial s}\bigg|_{t=1} = \frac{\partial}{\partial s}(\exp_p(t \cdot \alpha(s)))\bigg|_{t=1} = \mathrm{d} \exp_p\big|_{\alpha(s)}(\dot{\alpha}(s)),
+\]
+and therefore
+\[
+\frac{\partial \phi}{\partial s}\bigg|_{s=0,\, t=1} = \mathrm{d} \exp_p\big|_v (w).
+\]
+
+So $(*)$ yields $0 = \left\langle \mathrm{d} \exp_p\big|_v (v),\, \mathrm{d} \exp_p\big|_v (w) \right\rangle$.
+\end{proof}
+
+The Gauss Lemma implies that in the \emph{radial direction}, the metric coefficients are the same as in the Euclidean case. For this consider the following situation.
+
+
+Let $v \in V \subset T_p M$, where $V$ is the neighborhood of $0$ on which $\exp_p$ is a diffeomorphism. Let $S\in \Gamma(TM)$ be defined on the normal neighborhood $U = \exp_p(V)$ by
+\[
+S(\exp_p(v)) := \mathrm{d} \exp_p\big|_v (v),
+\]
+or equivalently $S(q) := \mathrm{d} \exp_p\big|_{\exp_p^{-1}(q)} (\exp_p^{-1}(q))$, where $q=\exp_p(v) \in U$. Let $(x^1,\dots,x^n)$ be normal coordinates with associated coordinate basis $\left\{\frac{\partial}{\partial x^i}\big|_p\right\}$. 
+
+
+Let $(x^1,\dots,x^n)$ be normal coordinates centered at $p$ with coordinate basis $\left\{\frac{\partial}{\partial x^i}\big|_p\right\}$. Since $\varphi = E^{-1} \circ \exp_p^{-1}$, we have $x(q) = \varphi(q) = E^{-1}(v)$, and therefore
+\[
+v = x^i \frac{\partial}{\partial x^i}\Big|_p.
+\]
+
+% \todo[inline]{  }
+% Since $\varphi = E^{-1} \circ \exp_p^{-1}$, we have for $q=\exp_p(v)$:
+% \[
+% x = \varphi(q) = E^{-1}(v),
+% \]
+% hence $v = x^i \frac{\partial}{\partial x^i}\big|_p$.
+% Then
+% \[
+% v = x^i \frac{\partial}{\partial x^i}\Big|_p.
+% \]
+
+Hence
+\[
+S(q)
+= x^i\, \mathrm{d}\exp_p|_v \left( \frac{\partial}{\partial x^i}\Big|_p \right ).
+\]
+
+Since $E : \mathbb{R}^n \to T_p M, x \mapsto x^i e_i$ and $\varphi^{-1} = \exp_p \circ E : \mathbb{R}^n \to M$, we have
+\[
+\frac{\partial}{\partial x^i}\Big|_q
+= d(\varphi^{-1})|_x(e_i)
+= d(\exp_p \circ E)|_x(e_i)
+= d\exp_p|_v\left( \frac{\partial}{\partial x^i}\Big|_p \right ).
+\]
+Therefore,
+\[
+S(q) = x^i \frac{\partial}{\partial x^i}\Big|_q.
+\]
+(Alternatively, one can compute the coordinate expression $\widetilde{S} = d\varphi \circ S \circ \varphi^{-1}$. At $x=\varphi(q)=E^{-1}(v)$ this yields $\widetilde{S}(x)=x$, hence $\widetilde{S}^i(x)=x^i$.)
+
+Such vector fields are called \emph{radial vector fields}. This is of course a coordinate-dependent property. \\
+
+Now using the Gauss lemma, the field $S$, and the fact that $\mathrm{d} \exp_p\big|_v$ is the identity in normal coordinates, we get 
+$$\left\langle x^i \frac{\partial}{\partial x^i},w^i \frac{\partial}{\partial x^i}\right\rangle=\left\langle S(\exp_p(v)),\mathrm{d} \exp_p\big|_v(w)\right\rangle
+= \langle v, w \rangle$$ 
+so we find
+\[
+g_{ij}(x)\, x^i w^j = \delta_{ij} x^i w^j.\]
+
+Since this identity holds for all $w$, the coefficients of $w^j$ must agree, hence
+\begin{equation}
+    \label{eq:gauss_lemma_radial_vector_field}
+    g_{ij}(x)\, x^i = x^j.
+\end{equation}
+So for the \emph{radial} directions, the metric coefficients are the same as in the Euclidean case.
+
+
+
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    % Draw grid
+    \draw[gray!30, step=0.5] (-2,-2) grid (2,2);
+    
+    % Draw axes
+    \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+    
+    % Draw origin
+    \fill (0,0) circle (1.5pt);
+    
+    % Draw radial vector field
+    \foreach \x in {-2,-1.5,...,2} {
+        \foreach \y in {-2,-1.5,...,2} {
+            \pgfmathsetmacro{\r}{sqrt(\x*\x + \y*\y)}
+            \pgfmathsetmacro{\scale}{0.15}
+            \pgfmathsetmacro{\vx}{\scale*\x}
+            \pgfmathsetmacro{\vy}{\scale*\y}
+            \ifdim\r pt>0.1pt
+                \draw[->,Groseille] (\x,\y) -- (\x+\vx,\y+\vy);
+            \fi
+        }
+    }
+    
+    % Optional: draw some circles centered at origin
+    \draw[Canard!100, dashed] (0,0) circle (0.5);
+    \draw[Canard!100, dashed] (0,0) circle (1);
+    \draw[Canard!100, dashed] (0,0) circle (1.5);
+\end{tikzpicture}
+\end{center}
+\caption{A radial vector field.}
+\end{figure}
+
+
+\begin{colremark}
+    As also visible in the figure, the radial vector field is orthogonal to the spheres centered at $0$ in $T_p M$. Indeed, one can show that the exponential map sends spheres centered at $0$ in $T_p M$ to surfaces orthogonal to the geodesics $\gamma_{p,v}$.
+\end{colremark}
+
+Recall the notion of a \emph{normal neighborhood} from Definition \ref{def:normal_coordinates}.
+
+\begin{colordef}{Convex neighborhood}{}
+We consider normal coordinates on normal neighborhoods $U$ of $p$ (any $q \in U$ can be connected with a geodesic segment to $p$). The intersection of such neighborhoods is called a \emph{convex} neighborhood.
+\end{colordef}
+
+
+
+
+
+
+
+\subsection{Riemannian polar coordinates}
+
+Recall remark \ref{rem:nonuniqueness_normal_coordinates}. Instead of using Cartesian coordinates on $T_p M$, we could use polar coordinates and push them forward on $M$ via $\exp_p$.
+
+Assume $\dim M = 2$, and let $e_1, e_2$ be an orthonormal frame at $p$. Let $M\supset W_p = \exp_p\left(\{ v \in T_p M : \|v\| < i(p) \}\right)$ be the image of the largest ball on which $\exp_p$ is a diffeomorphism, see Definition \ref{def:injectivity_radius} and Lemma \ref{lem:differential_exponential_map}. Let $x,y$ be the normal coordinates of Definition \ref{def:normal_coordinates} on $W_p$, i.e. 
+\begin{align*}
+    x:= [E^{-1}(\exp_p^{-1}(q))]^1,\\
+    y:= [E^{-1}(\exp_p^{-1}(q))]^2.
+\end{align*}
+We define now the polar coordinates induced by the normal coordinates, also known as \emph{Riemannian polar coordinates} by
+\[
+x = r \cos \theta, \quad y = r \sin \theta, \qquad r = \sqrt{x^2 + y^2}, \quad \cos \theta = \frac{x}{\sqrt{x^2 + y^2}}.
+\]
+
+In exercise 7.2a, we show that on $\mathbb{R}^n$ they coincide with the usual polar coordinates. In 7.2b and c, we compute metrics on other manifolds in \emph{Riemannian polar coordinates}.
+
+
+
+\begin{colorlem}{Metric in polar coordinates}{}
+In these coordinates,
+\[
+g = \mathrm{d} r \otimes \mathrm{d} r + b^2(r, \theta) \, \mathrm{d} \theta \otimes \mathrm{d} \theta = \mathrm{d} r^2 + b^2(r, \theta) \, \mathrm{d} \theta^2,
+\]
+with
+\[
+\lim_{r \to 0} b(r, \theta) = 0, \quad \lim_{r \to 0} \frac{\partial b}{\partial r}(r, \theta) = 1, \quad \lim_{r \to 0} \frac{\partial^2 b}{\partial r^2}(r, \theta) = 0.
+\]
+Equivalently, $b(r, \theta) = r + O(r^3)$ as $r \to 0$.
+\end{colorlem}
+
+
+\begin{colremark}
+On the flat plane $\mathbb{R}^n$, we have $g_E = \mathrm{d} r^2 + r^2 \, \mathrm{d} \theta^2$, which again coincides with the usual polar coordinates. This formula for the metric is derived in exercise 1.3.
+\end{colremark}
+
+\begin{proof}
+In polar coordinates:
+\[
+q(r, \theta) = \exp_p(r \cos \theta \cdot e_1 + r \sin \theta \cdot e_2) = \exp_p(r \cdot (\cos \theta \, e_1 + \sin \theta \, e_2)).
+\]
+So $r \mapsto q(r, \theta)$ is a geodesic (with $\theta$ fixed), and its tangent vector is $\frac{\partial}{\partial r}$. Explicitly:
+\begin{align*}
+    \frac{\partial}{\partial r}\bigg|_{\exp_p(v)} &= d\exp_p\big|_v (\cos \theta \, e_1 + \sin \theta \, e_2),\\
+\frac{\partial}{\partial \theta}\bigg|_{\exp_p(v)} &= d\exp_p\big|_v \big(r \cdot (-\sin \theta \, e_1 + \cos \theta \, e_2)\big),
+\end{align*}
+where $v = r(\cos\theta \, e_1 + \sin\theta \, e_2)$.
+
+Since $r \mapsto q(r,\theta)$ is a geodesic, $\left\| \frac{\partial}{\partial r} \right\|$ is constant in $r$. As $r \to 0$:
+\[
+\left\| \frac{\partial}{\partial r} \right\| \to \| \cos \theta \, e_1 + \sin \theta \, e_2 \| = 1,
+\]
+so $g_{rr} = 1$ everywhere. (This is Gauss lemma part (a).)
+
+In other words, since $r \mapsto q(r,\theta)$ is a geodesic with initial velocity $\cos\theta \, e_1 + \sin\theta \, e_2$ (a unit vector), it has constant unit speed. Hence $\left\|\frac{\partial}{\partial r}\right\| \equiv 1$, i.e., $g_{rr} = 1$ everywhere, by Gauss lemma part (a).
+
+For the off-diagonal term, note that in $T_pM$ the vectors $\cos\theta \, e_1 + \sin\theta \, e_2$ (radial) and $-\sin\theta \, e_1 + \cos\theta \, e_2$ (tangential) are orthogonal. By Gauss lemma part (b):
+\[
+g_{r\theta} = \left\langle \frac{\partial}{\partial r}, \frac{\partial}{\partial \theta} \right\rangle = r \cdot \langle \cos\theta \, e_1 + \sin\theta \, e_2, \, -\sin\theta \, e_1 + \cos\theta \, e_2 \rangle_{T_pM} = 0.
+\]
+
+Therefore:
+\[
+g = g_{rr} \, dr^2 + 2 g_{r\theta} \, dr \, d\theta + g_{\theta\theta} \, d\theta^2 = dr^2 + g_{\theta\theta} \, d\theta^2.
+\]
+
+Now we compute $b(r, \theta) = \left\| \frac{\partial}{\partial \theta} \right\| = \sqrt{g_{\theta\theta}}$.
+
+From the coordinate transformation $x = r \cos \theta$, $y = r \sin \theta$:
+\[
+\frac{\partial}{\partial r} = \cos \theta \, \frac{\partial}{\partial x} + \sin \theta \, \frac{\partial}{\partial y},
+\]
+\[
+\frac{\partial}{\partial \theta} = -r \sin \theta \, \frac{\partial}{\partial x} + r \cos \theta \, \frac{\partial}{\partial y}.
+\]
+
+Therefore:
+\begin{align*}
+g_{\theta\theta} &= r^2 \, g\!\left(-\sin \theta \, \tfrac{\partial}{\partial x} + \cos \theta \, \tfrac{\partial}{\partial y}, \; -\sin \theta \, \tfrac{\partial}{\partial x} + \cos \theta \, \tfrac{\partial}{\partial y}\right) \\
+&= r^2 \left(\sin^2 \theta \, g_{xx} - 2 \sin \theta \cos \theta \, g_{xy} + \cos^2 \theta \, g_{yy}\right).
+\end{align*}
+
+In normal coordinates centered at $p$, we have $g_{ij}(0) = \delta_{ij}$ and $\partial_k g_{ij}(0) = 0$, so Taylor expansion gives:
+\[
+g_{xx} = 1 + O(r^2), \quad g_{xy} = O(r^2), \quad g_{yy} = 1 + O(r^2).
+\]
+
+Substituting:
+\[
+g_{\theta\theta} = r^2 \left(\sin^2 \theta (1 + O(r^2)) - 2 \sin \theta \cos \theta \cdot O(r^2) + \cos^2 \theta (1 + O(r^2))\right) = r^2 + O(r^4).
+\]
+
+Therefore:
+\[
+b(r, \theta) = \sqrt{g_{\theta\theta}} = \sqrt{r^2 + O(r^4)} = r + O(r^3),
+\]
+which gives $\lim_{r \to 0} b(r,\theta) = 0$, $\lim_{r \to 0} \frac{\partial b}{\partial r}(r,\theta) = 1$, and $\lim_{r \to 0} \frac{\partial^2 b}{\partial r^2}(r,\theta) = 0$.
+\end{proof}
+
+
+
+
+
+% \todo[inline]{  }
+% \begin{proof}
+% In polar coordinates: $q(r, \theta) = \exp_p(r \cos \theta \cdot e_1 + r \sin \theta \cdot e_2) = \exp_p(r \cdot (\cos \theta \, e_1 + \sin \theta \, e_2))$.
+
+% So $r \mapsto q(r, \theta)$ is a geodesic.
+
+% Geodesic tangent vector: $\frac{\partial}{\partial r}$.
+
+% So $\left\| \frac{\partial}{\partial r} \right\| = \text{const}$. As $r \to 0$: $\left\| \frac{\partial}{\partial r} \right\| = \| \cos \theta \cdot e_1 + \sin \theta \cdot e_2 \| = 1$.
+
+% So $g_{rr} = 1$ everywhere. (this was just part a of the Gauss lemma)
+
+% And:
+% \[
+% \frac{\partial}{\partial r}\bigg|_{\exp_p(v)} = \mathrm{d} \exp_p\big|_v (\cos \theta \, e_1 + \sin \theta \, e_2),
+% \]
+% \[
+% \frac{\partial}{\partial \theta}\bigg|_{\exp_p(v)} = \mathrm{d} \exp_p\big|_v (r \cdot (-\sin \theta \, e_1 + \cos \theta \, e_2)).
+% \]
+
+% By Gauss lemma: $\left\langle \frac{\partial}{\partial r}, \frac{\partial}{\partial \theta} \right\rangle = 0$.
+
+% So: $g = \mathrm{d} r^2 + b^2 \, \mathrm{d} \theta^2$, where $b = \left\| \frac{\partial}{\partial \theta} \right\|$.
+
+% By change of coordinates:
+% \[
+% \frac{\partial}{\partial r} = \cos \theta \, \frac{\partial}{\partial x} + \sin \theta \, \frac{\partial}{\partial y},
+% \]
+% \[
+% \frac{\partial}{\partial \theta} = -r \sin \theta \, \frac{\partial}{\partial x} + r \cos \theta \, \frac{\partial}{\partial y}.
+% \]
+
+% So
+% \[
+% b(r, \theta) = \sqrt{g_{xx} \sin^2 \theta - 2 g_{xy} \cos \theta \sin \theta + g_{yy} \cos^2 \theta} \cdot r.
+% \]
+
+% At $r = 0$: $g_{ij} = \delta_{ij}$, so $\frac{b(r, \theta)}{r} \to 1 \quad \forall\, \theta$.
+% \end{proof}
+
+
+% \todo[inline]{  }
+
+% \begin{proof}
+% From the Gauss lemma:
+% \[
+% g_{rr} = \left\langle \frac{\partial}{\partial r}, \frac{\partial}{\partial r} \right\rangle = 1,
+% \]
+% \[
+% g_{r\theta} = \left\langle \frac{\partial}{\partial r}, \frac{\partial}{\partial \theta} \right\rangle = 0,
+% \]
+% \[
+% g = g_{rr} \, \mathrm{d}r^2 + 2 g_{r\theta} \, \mathrm{d}r \, \mathrm{d}\theta + g_{\theta\theta} \, \mathrm{d}\theta^2 = \mathrm{d}r^2 + g_{\theta\theta} \, \mathrm{d}\theta^2.
+% \]
+
+% Now we compute $b(r, \theta) = \left\| \frac{\partial}{\partial \theta} \right\|$.
+
+% From the coordinate transformation $x = r \cos \theta$, $y = r \sin \theta$:
+% \[
+% \frac{\partial}{\partial r} = \cos \theta \, \frac{\partial}{\partial x} + \sin \theta \, \frac{\partial}{\partial y},
+% \]
+% \[
+% \frac{\partial}{\partial \theta} = -r \sin \theta \, \frac{\partial}{\partial x} + r \cos \theta \, \frac{\partial}{\partial y}.
+% \]
+
+% Therefore:
+% \[
+% g_{\theta\theta} = r^2 \, g\left(-\sin \theta \, \frac{\partial}{\partial x} + \cos \theta \, \frac{\partial}{\partial y}, -\sin \theta \, \frac{\partial}{\partial x} + \cos \theta \, \frac{\partial}{\partial y}\right)
+% \]
+% \[
+% = r^2 \left(\sin^2 \theta \, g_{xx} - 2 \sin \theta \cos \theta \, g_{xy} + \cos^2 \theta \, g_{yy}\right).
+% \]
+
+% As $r \to 0$, by Taylor expansion we have $g_{ij}(r \cos \theta, r \sin \theta) \to \delta_{ij}$ and $\partial_k g_{ij}(0) = 0$, so:
+% \[
+% g_{xx} = 1 + O(r^2), \quad g_{xy} = O(r^2), \quad g_{yy} = 1 + O(r^2).
+% \]
+
+% Substituting:
+% \[
+% g_{\theta\theta} = r^2 \left(\sin^2 \theta (1 + O(r^2)) - 2 \sin \theta \cos \theta \, O(r^2) + \cos^2 \theta (1 + O(r^2))\right) = r^2 + O(r^4).
+% \]
+
+% Therefore:
+% \[
+% b(r, \theta) = \sqrt{g_{\theta\theta}} = \sqrt{r^2 + O(r^4)} = r + O(r^3).
+% \]
+% \end{proof}
+
+So of course this lemma was just an application of gauss lemma rephrased in polar coordinates. but we see that in polar coordinates, the theorem is particularly useful, because the radial direction is special in this setting.\\
+
+
+
+
+
+
+
+In \emph{Riemannian polar coordinates}, the curve $\gamma(r) = (r, \theta)$ is a geodesic, with
+\[
+\|\dot{\gamma}\| = \left\|\frac{\partial}{\partial r}\right\| = 1.
+\]
+This is because in the original definition, this curve is $r \mapsto \exp_p(r \cdot u)$ where $u = \cos\theta_0 \, e_1 + \sin\theta_0 \, e_2$ is a unit vector, which is exactly the geodesic $\gamma_{p,u}$ with initial velocity $u$.
+The tangent vector is $\frac{\partial}{\partial r}$, and we just proved $g_{rr} = \left\|\frac{\partial}{\partial r}\right\|^2 = 1$. So indeed $\|\dot{\gamma}\| = 1$. Therefore, the curve length of $\gamma$ is
+\[
+\ell(\gamma|_{[0,r]}) = \int_0^r \|\dot{\gamma}(s)\|\,\mathrm{d}s = \int_0^r 1\,\mathrm{d}s = r.
+\]
+
+
+
+The radial coordinate $r$ in \emph{Riemannian polar coordinates} is literally the distance traveled along the radial geodesic from $p$. So the \emph{sphere of radius} $r$ in $T_p M$ maps under $\exp_p$ to the set of points reached by traveling distance $r$ along radial geodesics from $p$.
+
+% \vspace{1cm}
+% This is a key step toward showing that radial geodesics are actually distance-minimizing (within the injectivity radius). We already know that if a curve between two points has minimum length, then it is a geodesic (from the first variation formula)
+
+% \todo[inline]{ link }
+% up to reparametrization: we need a parametrization with constant speed.
+
+% The converse is not always true, but:
+
+% \vspace{1cm}
+
+
+
+This is a key step toward showing that radial geodesics are actually distance-minimizing (within the injectivity radius). One direction of the relationship between geodesics and length-minimizing curves is easy: by Lemma~\ref{lem:geodesics_critical_points_length}, geodesics are critical points of the length functional. The converse, that a length-minimizing curve must be a geodesic, up to reparametrization by arc length, also follows from the first variation formula, by a bump-function argument applied to the integrand. We will record this as Corollary~\ref{cor:geodesics_minimise_length_locally} below.
+
+What is not automatic, and is the real content of the next theorem, is that within the injectivity radius radial geodesics actually \emph{achieve} the infimum defining the distance:
+
+
+\begin{colortheo}{Radial geodesics minimize locally}{radial_geodesics_minimize}
+Let $p, q \in (M,g)$ and $d(p,q) < i(p)$. If $\gamma \colon [0,1] \to M$, $\gamma(0) = p$, $\gamma(1) = q$ is such that $\ell(\gamma) = d(p,q)$, then $\gamma$ is a radial geodesic from $p$, up to reparametrization.
+\end{colortheo}
+\begin{proof}
+We prove the statement in dimension $2$. Let $d = d(p,q)$.
+
+Fix polar coordinates $(r,\theta)$ around $p$, defined on the ball $r < i(p)$. In these coordinates,
+\[
+g = \mathrm{d}r^2 + b^2(r,\theta)\,\mathrm{d}\theta^2.
+\]
+For any $t_0 \in [0,1]$ such that $\gamma|_{[0,t_0]}$ lies in the chart, writing $\gamma(t) = (r(t), \theta(t))$:
+\[
+\ell(\gamma|_{[0,t_0]}) = \int_0^{t_0} \sqrt{\dot r^2 + b^2 \dot\theta^2}\,\mathrm{d}t \geqslant \int_0^{t_0} |\dot r|\,\mathrm{d}t \geqslant r(t_0) - r(0) = r(t_0). \tag{$\ast$}
+\]
+Since $\ell(\gamma) = d < i(p)$, the curve cannot escape the chart: if it did, $r(t)$ would reach $i(p)$, forcing $\ell(\gamma) \geqslant i(p)$, a contradiction. So $\gamma([0,1])$ lies in the chart, and applying ($\ast$) at $t_0 = 1$ gives $d = \ell(\gamma) \geqslant r(1)$. Conversely, the radial geodesic from $p$ to $\gamma(1)$ has length $r(1)$, so $d \leqslant r(1)$. Hence $\ell(\gamma) = r(1)$, i.e. equality holds in ($\ast$).
+
+In particular, at every $t$ where $\gamma$ is differentiable,
+\[
+\sqrt{\dot r^2 + b^2(r,\theta)\dot\theta^2} = |\dot r|,
+\]
+so $b(r,\theta)\dot\theta = 0$. Since $b > 0$ for $r > 0$, we get $\dot\theta(t) = 0$ for $t > 0$. Thus $\theta$ is constant along $\gamma$, so $\gamma$ is a radial curve. Reparametrizing by arc length (i.e. parametrise so that $\left\lVert \gamma'(t) \right\rVert$ is constant in $t$) gives a radial geodesic from $p$.
+\end{proof}
+
+
+Let $(M, g)$ be a Riemannian manifold and $p \in M$. For any $R < i(p)$, the metric ball and the image of the Euclidean ball under the exponential map coincide.
+
+\begin{colorcor}{Metric balls via the exponential map}{metric_balls_exponential_map}
+We have
+\[
+B(p, R) = \exp_p\{v \in T_pM : \|v\| \leqslant R\}.
+\]
+Moreover, the metric sphere equals the exponential image of the Euclidean sphere:
+\[
+\partial B(p, R) = \exp_p\{v \in T_pM : \|v\| = R\} = \{q \in M : d(p, q) = R\}.
+\]
+\end{colorcor}
+
+
+The content of this theorem is that two a priori different notions of ``ball'' agree within the injectivity radius:
+\begin{itemize}
+    \item The \emph{metric ball} $B(p, R) = \{q \in M : d(p, q) \leqslant R\}$, defined via the Riemannian distance $d$, which is an infimum over lengths of \emph{all} curves from $p$ to $q$.
+    \item The \emph{exponential image} $\exp_p\{v : \|v\| \leqslant R\}$, the set of endpoints of radial geodesics from $p$ of length at most $R$.
+\end{itemize}
+
+% The inclusion ``$\supseteq$'' is immediate: if $q = \exp_p(v)$ with $\|v\| \leqslant R$, then the radial geodesic from $p$ to $q$ has length $\|v\|$, so $d(p, q) \leqslant \|v\| \leqslant R$.
+
+% The nontrivial inclusion ``$\subseteq$'' follows from the preceding Proposition: within the injectivity radius, if $d(p, q) < i(p)$, then any curve realizing this distance is (a reparametrization of) a radial geodesic. In particular, $q = \exp_p(v)$ for some $v$ with $\|v\| = d(p, q) \leqslant R$.
+
+% The condition $R < i(p)$ is essential: beyond the injectivity radius, $\exp_p$ fails to be injective, and the exponential image of a Euclidean ball may wrap around the manifold (e.g., on $S^2$ with $i(p) = \pi$, the exponential image of a ball of radius $R > \pi$ covers the sphere multiple times).
+
+\begin{proof}[Proof sketch]
+The inclusion ``$\supseteq$'' is immediate: if $q = \exp_p(v)$ with $\|v\| \leqslant R$, then the radial geodesic from $p$ to $q$ has length $\|v\|$, so $d(p, q) \leqslant \|v\| \leqslant R$.
+
+For the nontrivial inclusion ``$\subseteq$'', let $q \in B(p,R)$, so $d(p,q) \leqslant R < i(p)$. Curves $\gamma$ from $p$ to $q$ with $\ell(\gamma) \geqslant i(p)$ cannot achieve the infimum, so we may restrict attention to curves with $\ell(\gamma) < i(p)$. For any such curve, the argument in the proof of Theorem~\ref{thm:radial_geodesics_minimize} shows
+% For the nontrivial inclusion ``$\subseteq$'', we first observe that within the injectivity radius, the infimum defining $d(p, q)$ is actually attained. Indeed, for any curve $\gamma$ from $p$ to $q$ with $\ell(\gamma) < i(p)$, the argument in the proof of Theorem~\ref{thm:radial_geodesics_minimize} shows 
+that $\gamma$ stays in the normal chart and satisfies
+\[
+\ell(\gamma) \geqslant \|\exp_p^{-1}(q)\|.
+\]
+Hence the radial geodesic from $p$ to $q$, which has length exactly $\|\exp_p^{-1}(q)\|$, achieves the infimum, and $d(p, q) = \|\exp_p^{-1}(q)\|$.
+
+By Theorem~\ref{thm:radial_geodesics_minimize}, this minimizer is (a reparametrization of) a radial geodesic, so $q = \exp_p(v)$ for some $v$ with $\|v\| = d(p, q) \leqslant R$.
+
+The condition $R < i(p)$ is essential: beyond the injectivity radius, $\exp_p$ fails to be injective, and the exponential image of a Euclidean ball need no longer coincide with the metric ball (e.g., on $S^2$ with $i(p) = \pi$, the exponential image of a ball of radius $R > \pi$ wraps around the sphere).
+\end{proof}
+
+
+
+
+
+
+
+
+\begin{colordef}{Locally length-minimizing curve}{}
+A curve $\gamma \colon I \to (M,g)$ \emph{locally minimizes the length} if for all $t_0 \in I$, there exists $\varepsilon > 0$ such that for all $t_0 - \varepsilon \leqslant t_1 \leqslant t_2 \leqslant t_0 + \varepsilon$:
+\[
+d(\gamma(t_1), \gamma(t_2)) = \ell(\gamma|_{[t_1, t_2]}).
+\]
+\end{colordef}
+
+A consequence of the previous results is that locally length-minimizing curves are precisely the geodesics, up to reparametrization.
+
+
+\begin{colorcor}{Geodesics minimze the length locally}{geodesics_minimise_length_locally}
+A curve locally minimizes the length if and only if it is a reparametrization of a geodesic.
+\end{colorcor}
+
+\begin{proof}[Proof sketch]
+``$\impliedby$'': Let $\gamma$ be a geodesic and $t_0 \in I$. Choose $\varepsilon > 0$ small enough that $\gamma([t_0 - \varepsilon, t_0 + \varepsilon])$ lies inside a normal ball around $\gamma(t_0)$ of radius less than $i(\gamma(t_0))$. For any $t_1, t_2$ in this interval, Theorem~\ref{thm:radial_geodesics_minimize} applied at $\gamma(t_1)$ shows that the length-minimizer from $\gamma(t_1)$ to $\gamma(t_2)$ is a radial geodesic. 
+
+By uniqueness of geodesics with given initial data (Theorem~\ref{thm:existence_uniqueness_geodesics}), this radial geodesic coincides with $\gamma|_{[t_1, t_2]}$, up to reparametrization. Hence $\ell(\gamma|_{[t_1, t_2]}) = d(\gamma(t_1), \gamma(t_2))$.
+
+``$\implies$'': Suppose $\gamma$ locally minimizes length. Reparametrize by arc length (i.e. parametrise so that $\left\lVert \gamma'(t) \right\rVert$ is constant in $t$). For each $t_0 \in I$, pick $\varepsilon$ as above so that locally $\gamma$ realizes the distance between its endpoints. By Theorem~\ref{thm:radial_geodesics_minimize}, $\gamma|_{[t_0 - \varepsilon, t_0 + \varepsilon]}$ is a radial geodesic from $\gamma(t_0 - \varepsilon)$, hence in particular a geodesic. Since being a geodesic is a local condition, $\gamma$ is a geodesic on all of $I$.
+\end{proof}
+
+% \vspace{4cm}
+% We know that if a curve between two points has minimum length, then it is a geodesic (from the first variation formula), up to reparametrization. (Need a parametrization with constant speed.)
+
+% The converse is not always true, but:
+
+% \begin{colortheo}{Radial geodesics minimize locally}{}
+% Let $p, q \in (M,g)$ and $d(p,q) < i(p)$. If $\gamma \colon [0,1] \to M$, $\gamma(0) = p$, $\gamma(1) = q$ is such that $\ell(\gamma) = d(p,q)$, then $\gamma$ is a radial geodesic from $p$, up to reparametrization.
+% \end{colortheo}
+
+% \begin{proof}
+% We will only prove the above in $\dim 2$. Let $d = d(p,q)$.
+
+% Let us fix polar coordinates $(r,\theta)$ around $p$ (defined for $r < i(p)$). In these coordinates:
+% \[
+% g = \mathrm{d}r^2 + b^2(r,\theta)\,\mathrm{d}\theta^2.
+% \]
+
+% If $\gamma(t) = (r(t), \theta(t))$: For any $t_0 \in (0,1)$ such that $\gamma|_{[0,t_0]}$ stays inside the domain of the polar coordinate chart:
+% \[
+% \ell(\gamma|_{[0,t_0]}) = \int_0^{t_0} \|\dot{\gamma}\|\,\mathrm{d}t = \int_0^{t_0} \sqrt{(\dot{r})^2 + b^2\,(\dot{\theta})^2}\,\mathrm{d}t \geqslant \int_0^{t_0} \sqrt{(\dot{r})^2}\,\mathrm{d}t \geqslant r(t_0) - r(0).
+% \]
+% Since $r(0) = 0$, we get $\ell(\gamma|_{[0,t_0]}) \geqslant r(t_0)$.
+
+% Since $\ell(\gamma|_{[0,1]}) < i(p)$: $\gamma$ cannot escape the domain of the polar coordinate chart, so $q = \gamma(1)$ belongs there, and
+% \[
+% d(p,q) = \ell(\gamma|_{[0,1]}) \geqslant r(1) = \text{length of radial geodesic connecting } p \text{ to } q \geqslant d(p,q).
+% \]
+
+% So equality holds, which implies $\dot{\theta}(t) = 0$. So $\gamma$ coincides with the $\theta = \mathrm{const}$ curve.
+% \end{proof}
+
+% \begin{colortheo}{Metric balls via the exponential map}{}
+% If $R < i(p)$:
+% \[
+% B(p,R) = \exp_p\{v \in T_pM : \|v\| \leqslant R\},
+% \]
+% and
+% \[
+% \partial B(p,R) = \exp_p\{v \in T_pM : \|v\| = R\} = \{q \in M : d(p,q) = R\}.
+% \]
+% \end{colortheo}
+
+% A curve $\gamma \colon I \to (M,g)$ \emph{locally minimizes the length} if for all $t_0 \in I$, there exists $\varepsilon > 0$ such that for all $t_0 - \varepsilon \leqslant t_1 \leqslant t_2 \leqslant t_0 + \varepsilon$:
+% \[
+% d(\gamma(t_1), \gamma(t_2)) = \ell(\gamma|_{[t_1, t_2]}).
+% \]
+
+% \begin{colortheo}{Local characterization of geodesics}{}
+% A curve locally minimizes the length if and only if it is a reparametrization of a geodesic.
+% \end{colortheo}
+
+
+

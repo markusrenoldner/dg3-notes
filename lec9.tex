@@ -1,0 +1,619 @@
+\section{Curvature}
+
+\emph{\textbf{(Lecture 9)}}\\
+
+
+We will study the curvature of a Riemannian manifold from an intrinsic viewpoint: relative acceleration of nearby geodesics, angles of triangles, etc.
+
+\begin{colordef}{Riemann curvature tensor}{riemann-curvature-tensor}
+The \emph{Riemann curvature tensor} $R\in T^1_3(M)$ of a connection $\nabla$ is defined as
+\[
+R(X,Y)\,Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X,Y]} Z.
+\]
+\end{colordef}
+
+One can view $R(X,Y)$ as an operator from $\Gamma(TM)$ to itself via $R(X,Y) = [\nabla_X, \nabla_Y] - \nabla_{[X,Y]}$, so $R(X,Y)\,Z\in \Gamma(TM)$.
+
+\begin{colortheo}{$R$ is a tensor field}{curvature_tensor_is_tensor}
+$R$ is $C^\infty$-linear in all its arguments.
+\end{colortheo}
+
+\begin{proof}
+It suffices to prove it is $C^\infty$-linear in all its arguments.
+
+Recall: $[fX, Y] = f[X,Y] - Y(f)\,X$.
+
+So
+\begin{align*}
+R(fX, Y)\,Z &= \nabla_{fX} \nabla_Y Z - \nabla_Y \nabla_{fX} Z - \nabla_{[fX,Y]} Z \\
+&= f\,\nabla_X \nabla_Y Z - \nabla_Y(f\,\nabla_X Z) - \nabla_{f[X,Y] - Y(f)X} Z \\
+&= f\,\nabla_X \nabla_Y Z - Y(f)\,\nabla_X Z - f\,\nabla_Y \nabla_X Z - f\,\nabla_{[X,Y]} Z + Y(f)\,\nabla_X Z \\
+&= f\,R(X,Y)\,Z.
+\end{align*}
+Similarly for the other arguments.
+\end{proof}
+
+We will be only interested in the Riemann curvature tensor of the Levi-Civita connection of $(M,g)$.
+
+To get some geometrical intuition of $R$ consider the following situation.
+
+
+Let $X, Y$ be coordinate vector fields, so $[X,Y] = 0$, by \eqref{eq:coordinate_fields_commute}. Starting from $p \in M$ and successively flowing along $X$, $Y$, $-X$, $-Y$ for small times $s_1, s_2, s_1, s_2$ respectively, we obtain a closed loop $\gamma(s_1, s_2)$ at $p$ (the loop closes exactly because the flows of $X$ and $Y$ commute). Let $P \colon T_pM \to T_pM$ denote parallel transport once around this loop. Then we have the following
+
+\begin{colorlem}{Characterisation of the Riemann curvature tensor}{}
+\[
+\frac{P Z - Z}{s_1 \cdot s_2} \xrightarrow{s_1, s_2 \to 0} R(X,Y) \cdot Z.
+\]
+\end{colorlem}
+\begin{proof}
+See exercise 9.4b.
+\end{proof}
+
+
+% \begin{center}
+% \begin{tikzpicture}[scale=4, >=stealth, line join=round]
+%   % the loop
+%   \draw[->, thick] (0,0) -- (1,0);
+%   \draw[->, thick] (1,0) -- (1,1);
+%   \draw[->, thick] (1,1) -- (0,1);
+%   \draw[->, thick] (0,1) -- (0,0);
+ 
+%   % corner labels
+%   \node[below left]  at (0,0) {$p$};
+ 
+%   % edge labels
+%   \node[below] at (0.5, 0)   {$s_1\, X$};
+%   \node[right] at (1, 0.5)   {$s_2\, Y$};
+%   \node[above] at (0.5, 1)   {$-s_1\, X$};
+%   \node[left]  at (0, 0.5)   {$-s_2\, Y$};
+ 
+%   % the vector Z at p, and its image after transport
+%   \draw[->, blue, thick] (0,0) -- (0.35, 0.5);
+%   \node[blue, right] at (0.32, 0.45) {$Z$};
+ 
+%   \draw[->, red!70!black, thick, dashed] (0,0) -- (0.5, 0.35);
+%   \node[red!70!black, below right] at (0.45, 0.30) {$P Z$};
+% \end{tikzpicture}
+% \end{center}
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[scale=5, >=stealth, line join=round]
+  % the loop
+  \draw[->, thick] (0,0) -- (1,0) node[midway, below] {$s_1 X$};
+  \draw[->, thick] (1,0) -- (1,1) node[midway, right] {$s_2 Y$};
+  \draw[->, thick] (1,1) -- (0,1) node[midway, above] {$-s_1 X$};
+  \draw[->, thick] (0,1) -- (0,0) node[midway, left]  {$-s_2 Y$};
+
+  \node[below left] at (0,0) {$p$};
+
+  % Z before transport
+  \draw[->, Canard, very thick] (0,0) -- (0.30, 0.55) node[pos=1, above] {$Z$};
+
+  % PZ after transport (slightly rotated to show discrepancy)
+  \draw[->, Groseille, very thick, dashed] (0,0) -- (0.50, 0.40) node [pos=1, below right] {$PZ$};
+
+  % the gap
+  \draw[->, Ardoise] (0.30, 0.55) -- (0.50, 0.40);
+  \node[Ardoise] at (0.7, 0.5) {$\sim s_1 s_2 R(X,Y)Z$};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+
+So $R(X,Y)Z$ measures, to leading order, the failure of parallel transport around an infinitesimal coordinate loop of area $s_1 s_2$ to return $Z$ to itself.\\
+ 
+\begin{colremark}
+This gives a heuristic explanation for one of the symmetries of $R$ that we will prove rigorously in Theorem~\ref{thm:symmetries-riemann-curvature-tensor}. Since $P$ is a linear isometry, expanding $\langle PZ, PW\rangle = \langle Z, W\rangle$ to leading order in $s_1 s_2$ forces
+\[
+\langle R(X,Y)Z, W\rangle + \langle Z, R(X,Y)W\rangle = 0,
+\]
+i.e.\ $R(X,Y)$ is skew-symmetric in its last two arguments.
+\end{colremark}
+
+
+Recall the musical isomorphism $\flat \colon TM \to T^*M$, $X \mapsto X^\flat = g(X, \cdot)$, with components $X_a = g_{ab} X^b$. We use it to lower the vector-valued output of $R$ to a $(0,4)$-tensor. (Since $\nabla g = 0$ for the Levi-Civita connection, lowering and raising indices commutes with $\nabla$, which will be convenient later.)
+
+
+
+\begin{colordef}{The (0,4) Riemann curvature tensor}{}
+We define the $(0,4)$-Riemann curvature tensor $\widehat{R} \in T^0_4(M)$ by
+\begin{align*}
+    \widehat{R}(X,Y,Z,W) &:= g(R(X,Y)\cdot W,\, Z) \\
+    &= -\,g(R(X,Y)\cdot Z,\, W)\\
+    &= (R(X,Y)W)^\flat(Z).
+\end{align*}
+\end{colordef}
+
+Be aware, that this tensor is often the subject of confusion: different authors have different sign conventions, and further, the $\widehat{\cdot}$ symbol is often not written explicitly.
+
+The components of $R$ as a $(1,3)$-tensor are defined by
+\[
+R(\partial_\gamma, \partial_\delta)\,\partial_\beta = R^\alpha{}_{\beta\gamma\delta}\,\partial_\alpha,
+\]
+so that $R^\alpha{}_{\beta\gamma\delta} = \big(R(\partial_\gamma, \partial_\delta)\,\partial_\beta\big)^\alpha$. The components of the $(0,4)$-tensor $\widehat R$ are defined as usual by evaluation on the coordinate basis,
+\[
+\widehat R_{\alpha\beta\gamma\delta} = \widehat R(\partial_\alpha, \partial_\beta, \partial_\gamma, \partial_\delta) = g(\partial_\alpha,\, R(\partial_\gamma, \partial_\delta)\,\partial_\beta) = g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
+\]
+From now on we drop the hat and write
+\begin{equation}
+    \label{eq:riemann-tensor-notation}
+    R_{\alpha\beta\gamma\delta} := g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{colorlem}{Components of the Riemann tensor}{}
+% \[
+% R^a{}_{b\gamma\delta} = \partial_\gamma \Gamma^a_{\delta b} - \partial_\delta \Gamma^a_{\gamma b} + \Gamma^a_{\gamma \lambda}\,\Gamma^\lambda_{\delta b} - \Gamma^a_{\delta \lambda}\,\Gamma^\lambda_{\gamma b},
+% \]
+% and
+% \[
+% R_{\alpha\beta\gamma\delta} = \frac{1}{2}\left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta} + \partial^2_{\alpha\delta}\,g_{\beta\gamma} - \partial^2_{\beta\delta}\,g_{\alpha\gamma}\right) + \partial g \cdot \partial g.
+% \]
+% \end{colorlem}
+
+
+% \begin{proof}
+%     old one
+% \begin{align*}
+% R^a{}_{b\gamma\delta} &= \big(R(\partial_\gamma, \partial_\delta)\,\partial_b\big)^a \\
+% &= \big(\nabla_{\partial_\gamma} \nabla_{\partial_\delta} \partial_b - \nabla_{\partial_\delta} \nabla_{\partial_\gamma} \partial_b\big)^a \\
+% &= \partial_\gamma (\nabla_{\partial_\delta} \partial_b)^a + \Gamma^a_{\gamma\lambda}\,(\nabla_{\partial_\delta} \partial_b)^\lambda - (\gamma \leftrightarrow \delta) \\
+% &= \partial_\gamma\!\left(\partial_\delta (\partial_b)^a + \Gamma^a_{\delta k}\,(\partial_b)^k\right) + \Gamma^a_{\gamma\lambda}\!\left(\partial_\delta(\partial_b)^\lambda + \Gamma^\lambda_{\delta k}\,(\partial_b)^k\right) - (\gamma \leftrightarrow \delta) \\
+% &= \partial_\gamma \Gamma^a_{\delta b} + \Gamma^a_{\gamma\lambda}\,\Gamma^\lambda_{\delta b} - (\gamma \leftrightarrow \delta). \qedhere
+% \end{align*}
+% \end{proof}
+
+
+
+
+
+\begin{colorlem}{Components of the Riemann tensor}{}
+In local coordinates, the components of the Riemann tensor are
+\begin{equation}
+    \label{eq:riemann-curvature-tensor-components1}
+    R^a{}_{b\gamma\delta} = \partial_\gamma \Gamma^a_{\delta b} - \partial_\delta \Gamma^a_{\gamma b} + \Gamma^a_{\gamma\lambda}\,\Gamma^\lambda_{\delta b} - \Gamma^a_{\delta\lambda}\,\Gamma^\lambda_{\gamma b}.
+\end{equation}
+The components of the lowered tensor $R_{\alpha\beta\gamma\delta} = g_{\alpha\mu}\,R^\mu{}_{\beta\gamma\delta}$ can be written as
+\begin{equation}
+    \label{eq:riemann-curvature-tensor-components2}
+    R_{\alpha\beta\gamma\delta} = \tfrac{1}{2}\left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta} + \partial^2_{\alpha\delta}\,g_{\beta\gamma} - \partial^2_{\beta\delta}\,g_{\alpha\gamma}\right) + Q(g, \partial g),
+\end{equation}
+where $Q(g, \partial g)$ is a function of $g$, its inverse $g^{-1}$, and first derivatives $\partial g$, but no higher derivatives.
+\end{colorlem}
+
+
+We will derive the first formula here. Equation \eqref{eq:riemann-curvature-tensor-components2} is a consequence of the first formula and the Christoffel formula, Definition \ref{def:christoffel}.
+
+\begin{proof}
+
+By the definition of the Riemann tensor (Definition~\ref{def:riemann-curvature-tensor}) and the fact that coordinate vector fields commute, \eqref{eq:coordinate_fields_commute},
+\[
+R(\partial_\gamma, \partial_\delta)\,\partial_b = \nabla_{\partial_\gamma} \nabla_{\partial_\delta} \partial_b - \nabla_{\partial_\delta} \nabla_{\partial_\gamma} \partial_b.
+\]
+
+By the definition of the Christoffel symbols (Definition~\ref{def:christoffel}):
+\[
+\nabla_{\partial_\delta} \partial_b = \Gamma^\lambda_{\delta b}\,\partial_\lambda.
+\]
+
+Applying $\nabla_{\partial_\gamma}$ to both sides and using the Leibniz rule for the connection (Definition~\ref{def:connection}, axiom 3):
+\begin{align*}
+\nabla_{\partial_\gamma}\!\left(\Gamma^\lambda_{\delta b}\,\partial_\lambda\right) 
+&= \partial_\gamma\!\left(\Gamma^\lambda_{\delta b}\right)\,\partial_\lambda + \Gamma^\lambda_{\delta b}\,\nabla_{\partial_\gamma}\partial_\lambda \\
+&= \partial_\gamma\!\left(\Gamma^\lambda_{\delta b}\right)\,\partial_\lambda + \Gamma^\lambda_{\delta b}\,\Gamma^a_{\gamma\lambda}\,\partial_a.
+\end{align*}
+
+Renaming the dummy index $\lambda \to a$ in the first term:
+\[
+\nabla_{\partial_\gamma}\!\left(\Gamma^\lambda_{\delta b}\,\partial_\lambda\right) = \partial_\gamma\!\left(\Gamma^a_{\delta b}\right)\,\partial_a + \Gamma^a_{\gamma\lambda}\,\Gamma^\lambda_{\delta b}\,\partial_a.
+\]
+
+The analogous expression with $\gamma$ and $\delta$ swapped is:
+\[
+\nabla_{\partial_\delta}\!\left(\Gamma^\lambda_{\gamma b}\,\partial_\lambda\right) = \partial_\delta\!\left(\Gamma^a_{\gamma b}\right)\,\partial_a + \Gamma^a_{\delta\lambda}\,\Gamma^\lambda_{\gamma b}\,\partial_a.
+\]
+
+Subtracting:
+\[
+R(\partial_\gamma, \partial_\delta)\,\partial_b = \left(\partial_\gamma \Gamma^a_{\delta b} - \partial_\delta \Gamma^a_{\gamma b} + \Gamma^a_{\gamma\lambda}\,\Gamma^\lambda_{\delta b} - \Gamma^a_{\delta\lambda}\,\Gamma^\lambda_{\gamma b}\right)\partial_a.
+\]
+
+Reading off the $\partial_a$-component yields \eqref{eq:riemann-curvature-tensor-components1}.
+
+% \textbf{Step 2: derivation of $R_{\alpha\beta\gamma\delta}$.}
+
+% Lowering the index using $g$:
+% \[
+% R_{\alpha\beta\gamma\delta} = g_{\alpha\mu}\,R^\mu{}_{\beta\gamma\delta} = g_{\alpha\mu}\!\left(\partial_\gamma \Gamma^\mu_{\delta\beta} - \partial_\delta \Gamma^\mu_{\gamma\beta} + \Gamma^\mu_{\gamma\lambda}\,\Gamma^\lambda_{\delta\beta} - \Gamma^\mu_{\delta\lambda}\,\Gamma^\lambda_{\gamma\beta}\right).
+% \]
+
+% The last two terms are products of Christoffel symbols, hence (by the formula for Christoffel symbols in terms of $g$, equation~\eqref{eq:christoffel-formula}) products of $g^{-1}$ and $\partial g$ — these contribute to $Q(g, \partial g)$.
+
+% For the first two terms, recall the Christoffel formula:
+% \[
+% \Gamma^\mu_{\delta\beta} = \tfrac{1}{2}\,g^{\mu\nu}\!\left(\partial_\delta g_{\beta\nu} + \partial_\beta g_{\delta\nu} - \partial_\nu g_{\delta\beta}\right).
+% \]
+
+% Therefore:
+% \[
+% g_{\alpha\mu}\,\partial_\gamma \Gamma^\mu_{\delta\beta} = g_{\alpha\mu}\,\partial_\gamma\!\left[\tfrac{1}{2}\,g^{\mu\nu}\!\left(\partial_\delta g_{\beta\nu} + \partial_\beta g_{\delta\nu} - \partial_\nu g_{\delta\beta}\right)\right].
+% \]
+
+% Applying the product rule, the only second-derivative-of-$g$ terms come from $\partial_\gamma$ hitting the inner parenthesis (not $g^{\mu\nu}$ or $g_{\alpha\mu}$, since those only contribute first derivatives). The contraction $g_{\alpha\mu}\,g^{\mu\nu} = \delta_\alpha^\nu$ then collapses the $\nu$ index to $\alpha$:
+% \[
+% g_{\alpha\mu}\,\partial_\gamma \Gamma^\mu_{\delta\beta} = \tfrac{1}{2}\!\left(\partial^2_{\gamma\delta} g_{\beta\alpha} + \partial^2_{\gamma\beta} g_{\delta\alpha} - \partial^2_{\gamma\alpha} g_{\delta\beta}\right) + (\text{terms with } \partial g \cdot \partial g).
+% \]
+
+% Similarly:
+% \[
+% g_{\alpha\mu}\,\partial_\delta \Gamma^\mu_{\gamma\beta} = \tfrac{1}{2}\!\left(\partial^2_{\delta\gamma} g_{\beta\alpha} + \partial^2_{\delta\beta} g_{\gamma\alpha} - \partial^2_{\delta\alpha} g_{\gamma\beta}\right) + (\text{terms with } \partial g \cdot \partial g).
+% \]
+
+% Subtracting, the $\partial^2_{\gamma\delta}\,g_{\beta\alpha}$ and $\partial^2_{\delta\gamma}\,g_{\beta\alpha}$ terms cancel (partial derivatives commute), leaving:
+% \[
+% g_{\alpha\mu}\!\left(\partial_\gamma \Gamma^\mu_{\delta\beta} - \partial_\delta \Gamma^\mu_{\gamma\beta}\right) = \tfrac{1}{2}\!\left(\partial^2_{\gamma\beta} g_{\delta\alpha} - \partial^2_{\gamma\alpha} g_{\delta\beta} - \partial^2_{\delta\beta} g_{\gamma\alpha} + \partial^2_{\delta\alpha} g_{\gamma\beta}\right) + Q(g, \partial g).
+% \]
+
+% Relabelling to match the stated formula (using symmetry $\partial^2_{\gamma\beta} = \partial^2_{\beta\gamma}$):
+% \[
+% R_{\alpha\beta\gamma\delta} = \tfrac{1}{2}\!\left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta} + \partial^2_{\alpha\delta}\,g_{\beta\gamma} - \partial^2_{\beta\delta}\,g_{\alpha\gamma}\right) + Q(g, \partial g). \qedhere
+% \]
+\end{proof}
+
+
+\begin{colremark}{}{}
+Note: $R = 0$ on $(\mathbb{R}^n, g_E)$. Conversely, one can show that $(M,g)$ is locally isometric to $(\mathbb{R}^n, g_E)$ if and only if $R = 0$.
+\end{colremark}
+
+
+
+
+% \begin{colremark}{}{}
+% In normal coordinates around $p$: $g|_p = \delta_{ij}$, $\partial g|_p = 0$, see Lemma \ref{lem:metric_normal_coordinates}. So there, we have
+% \begin{equation}
+%     \label{eq:riemann-curvature-normal-coordinates}
+%     R_{\alpha\beta\gamma\delta}\big|_p = \frac{1}{2}\left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta} + \partial^2_{\alpha\delta}\,g_{\beta\gamma} - \partial^2_{\beta\delta}\,g_{\alpha\gamma}\right)\bigg|_p.
+% \end{equation}
+
+% In addition, by the Gauss lemma: in normal coordinates \eqref{eq:gauss_lemma_radial_vector_field} holds not just at $p$, i.e. $g_{ij}\,x^i = \delta_{ij}\,x^i$. Differentiating yields
+% \[
+% \left(\partial_\gamma\,g_{\beta\delta} + \partial^2_{\gamma\alpha}\,g_{\beta\delta} + \partial^2_{\beta\gamma}\,g_{\alpha\delta}\right)\big|_p = 0.
+% \]
+
+% So in normal coordinates at $p$:
+% \[
+% R_{\alpha\beta\gamma\delta}\big|_p = \left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta}\right)\big|_p.
+% \]
+% \end{colremark}
+
+
+
+
+
+
+
+
+\begin{colremark}{}{}
+In normal coordinates around $p$, by Lemma~\ref{lem:metric_normal_coordinates}, $g_{ij}|_p = \delta_{ij}$ and $\partial g|_p = 0$. So the formula for $R_{\alpha\beta\gamma\delta}$ from \eqref{eq:riemann-curvature-tensor-components2} simplifies at $p$ to
+\begin{equation}
+    \label{eq:riemann-curvature-normal-coordinates}
+    R_{\alpha\beta\gamma\delta}\big|_p = \tfrac{1}{2}\!\left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta} + \partial^2_{\alpha\delta}\,g_{\beta\gamma} - \partial^2_{\beta\delta}\,g_{\alpha\gamma}\right)\bigg|_p,
+\end{equation}
+since the derivative terms $\partial g$ terms vanish at $p$. Moreover, by the Gauss lemma, the identity \eqref{eq:gauss_lemma_radial_vector_field} holds on the entire normal neighborhood (not just at $p$):
+\[
+g_{ij}(x)\,x^i = x_j.
+\]
+Differentiating three times with respect to $x^\delta$, $x^\beta$, $x^\gamma$ and evaluating at $p$ (where $x = 0$ and $\partial g|_p = 0$) yields the cyclic identity
+\[
+\partial^2_{\beta\gamma}\,g_{\alpha\delta}\big|_p + \partial^2_{\gamma\delta}\,g_{\alpha\beta}\big|_p + \partial^2_{\delta\beta}\,g_{\alpha\gamma}\big|_p = 0.
+\]
+Substituting this into \eqref{eq:riemann-curvature-normal-coordinates}, the formula simplifies to
+\[
+R_{\alpha\beta\gamma\delta}\big|_p = \left(\partial^2_{\beta\gamma}\,g_{\alpha\delta} - \partial^2_{\alpha\gamma}\,g_{\beta\delta}\right)\big|_p.
+\]
+\end{colremark}
+
+
+
+\begin{colortheo}{Symmetries of the Riemann curvature tensor}{symmetries-riemann-curvature-tensor}
+\begin{enumerate}
+\item Antisymmetry in the first pair: $R(X,Y)\,Z = -R(Y,X)\,Z$
+\item Antisymmetry in the last arguments: $\langle R(X,Y)\cdot W, Z \rangle = -\langle R(X,Y)\cdot Z, W \rangle$
+\item Symmetry pairwise: ${R}(X,Y,Z,W) = {R}(Z,W,X,Y)$
+\item $1^\text{st}$ Bianchi identity: $R(X,Y,Z,W) + R(Z,X,Y,W) + R(Y,Z,X,W) = 0$
+\item $2^\text{nd}$ Bianchi identity: $(\nabla_X R)(Y,Z,V,W) + (\nabla_Z R)(X,Y,V,W) + (\nabla_Y R)(Z,X,V,W) = 0$
+\end{enumerate}
+\end{colortheo}
+
+Recall \eqref{eq:riemann-tensor-notation} for the notation of $R_{\alpha\beta\gamma\delta}$: the last three bullets are the $(0,4)$-Riemann curvature tensor, and the first two are the $(1,3)$-Riemann curvature tensor.
+
+\begin{proof}
+It suffices to prove the identities in one coordinate system for coordinate vector fields. We choose normal coordinates at $p$. The statements become:
+
+\begin{enumerate}
+    \item[i-iii)] $R_{\alpha\beta\gamma\delta} = -R_{\beta\alpha\gamma\delta} = -R_{\alpha\beta\delta\gamma} = R_{\gamma\delta\alpha\beta}$
+    
+    \item[iv)] $R_{\alpha\beta\gamma\delta} + R_{\gamma\alpha\beta\delta} + R_{\beta\gamma\alpha\delta} = 0$
+    
+    \item[v)] $\nabla_\alpha R_{\beta\gamma\delta\varepsilon} + \nabla_\gamma R_{\alpha\beta\delta\varepsilon} + \nabla_\beta R_{\gamma\alpha\delta\varepsilon} = 0$
+\end{enumerate}
+
+Identities i-iii) follow immediately from the explicit expression \eqref{eq:riemann-curvature-normal-coordinates}, and iv) follows from i-iii). For v), since $\Gamma|_p = 0$, we have
+\[
+    \nabla_\alpha R_{\beta\gamma\delta\varepsilon}\big|_p = \partial_\alpha R_{\beta\gamma\delta\varepsilon}\big|_p,
+\]
+and the cyclic sum of $\partial_\alpha R_{\beta\gamma\delta\varepsilon}$ at $p$ vanishes by direct computation from \eqref{eq:riemann-curvature-normal-coordinates}.
+\end{proof}
+
+
+\begin{colremark}[$R$ as a map on bivectors]{}
+    \label{rem:R-map-on-bivectors111}
+Since $R$ is antisymmetric in its first two arguments, we can view it as a map on bivectoors:
+\[
+R(X, Y) = \widetilde R(X \wedge Y),
+\]
+where $X \wedge Y \in \Lambda^2 T_p M$. The antisymmetry $X \wedge Y = -Y \wedge X$ in $\Lambda^2 T_p M$ then automatically encodes the antisymmetry $R(X, Y) = -R(Y, X)$.
+
+This is a special case of the following general algebraic fact. Let $V$ be a vector space and $B: V \times V \to \mathbb{R}$ a bilinear, alternating form (i.e.\ $B(X, Y) = -B(Y, X)$). Then $B$ \emph{factors through} the exterior product: there is a unique linear map $\widetilde B: \Lambda^2 V \to \mathbb{R}$ such that
+\[
+B(X, Y) = \widetilde B(X \wedge Y) \qquad \text{for all } X, Y \in V.
+\]
+One can check this by defining $\widetilde B(X \wedge Y) := B(X, Y)$ on simple bivectors and extending by linearity, then verifying well-definedness (the relations defining $\Lambda^2 V$ are respected) and uniqueness (simple bivectors $X \wedge Y$ span $\Lambda^2 V$).
+\end{colremark}
+
+\begin{colorlem}{Geodesic deviation equation}{geodesic-deviation}
+Let $(M, g)$ be a smooth Riemannian manifold and let $\phi : (-\epsilon, \epsilon) \times [0, 1] \to M$ be a smooth map such that, for each $s \in (-\epsilon, \epsilon)$, the curve $\gamma_s = \phi(s, \cdot)$ is a geodesic. Define the vector fields along $\phi$
+\[
+T = \mathrm{d}\phi\!\left(\frac{\partial}{\partial t}\right), \qquad X = \mathrm{d}\phi\!\left(\frac{\partial}{\partial s}\right).
+\]
+Then
+\[
+\nabla_T \nabla_T X = -R(X, T)\, T.
+\]
+\end{colorlem}
+
+\begin{proof}
+See exercise 9.3.
+\end{proof}
+
+Here, intuitively, $X$ measures the infinitesimal separation between nearby geodesics; thus, the Riemann curvature tensor measures the \emph{relative acceleration} of nearby geodesics.
+
+
+
+
+
+
+
+\begin{colordef}{Flat manifold}{flat-manifold}
+A Riemannian manifold $(M, g)$ is called \emph{(locally) flat} if every point $p \in M$ has a neighborhood that is isometric to an open subset of Euclidean space $(\mathbb{R}^n, g_E)$. Equivalently, around each $p$ one can find coordinates in which $g_{ij} = \delta_{ij}$ on a neighborhood of $p$.
+\end{colordef}
+
+\begin{colremark}{}{}
+This is a \emph{local} condition. Globally, a flat manifold need not look like $\mathbb{R}^n$. The flat torus $T^n = \mathbb{R}^n / \mathbb{Z}^n$ and the flat cylinder $S^1 \times \mathbb{R}$ are both locally flat but globally distinct from $\mathbb{R}^n$.
+\end{colremark}
+
+\begin{colorlem}{Flat $\iff$ $R = 0$}{flat-iff-R-zero}
+A Riemannian manifold $(M, g)$ is locally flat if and only if $R \equiv 0$.
+\end{colorlem}
+
+\begin{proof}[Proof sketch of the easy direction]
+If $(M, g)$ is locally flat, then in coordinates where $g_{ij} = \delta_{ij}$ all Christoffel symbols vanish, so $R = 0$ by the formula \eqref{eq:riemann-curvature-tensor-components1}. Since $R$ is a tensor, (Theorem \ref{thm:curvature_tensor_is_tensor}) this holds in every coordinate system.
+
+The other direction is more complicated.
+\end{proof}
+
+
+
+\begin{colremark}[Degrees of freedom of the curvature tensor]
+In 2D, there is only one independent component. This single number is the \emph{Gaussian curvature}. 
+
+Using a combinatorial argument, one can show that in higher dimensions, we have more degrees of freedom. One can show that in 3D, we have 6 independent components. In 4D, we have 20 independent components.
+
+\end{colremark}
+
+
+
+
+
+
+
+
+
+
+\subsection{Sectional curvature}
+
+
+\begin{colordef}{Sectional curvature}{sectional-curvature}
+Let $(M, g)$ be a Riemannian manifold and $\Pi \subseteq T_p M$ a 2-dimensional subspace spanned by linearly independent vectors $X, Y \in T_p M$. The \emph{sectional curvature} associated to $\Pi$ is
+\[
+K(X, Y) := \frac{R(X, Y, X, Y)}{\|X\|^2\,\|Y\|^2 - \langle X, Y\rangle^2}.
+\]
+\end{colordef}
+
+\begin{colremark}{}{}
+The numerator $R(X, Y, X, Y)$ is the $(0,4)$-tensor evaluated on $(X, Y, X, Y)$; equivalently, in $(1,3)$-form,
+\[
+R(X, Y, X, Y) = \langle R(X, Y)\, Y,\, X\rangle.
+\]
+The denominator $\|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2 = \|X \wedge Y\|^2$ is the squared area of the parallelogram spanned by $X$ and $Y$, so $K(\Pi)$ is a \emph{ratio of areas} and depends only on the plane $\Pi$, not on the choice of spanning vectors. We will verify this independence in the next lemma.
+\end{colremark}
+
+
+
+\begin{colorlem}{Sectional curvature}{}
+$K(X,Y)$ is independent of the choice of $X, Y$ spanning $\Pi$.
+\end{colorlem}
+
+\begin{colremark}{}{}
+As $K$ depends only on the plane $\Pi$, we write also $K(\Pi)$ instead of $K(X,Y)$.
+\end{colremark}
+
+\begin{proof}
+Let $e_1, e_2$ be an orthonormal basis of $\Pi$, so that $X = X^1 e_1 + X^2 e_2$ and $Y = Y^1 e_1 + Y^2 e_2$.
+
+Then due to the symmetries of $R$ one can show that
+\[
+R(X,Y,X,Y) = \left(\det \begin{pmatrix} X^1 & Y^1 \\ X^2 & Y^2 \end{pmatrix}\right)^2 R(e_1, e_2, e_1, e_2),
+\]
+and further one can easily compute that 
+\[
+\|X\|^2\,\|Y\|^2 - \langle X, Y \rangle^2 = \left(\det \begin{pmatrix} X^1 & Y^1 \\ X^2 & Y^2 \end{pmatrix}\right)^2. \qedhere
+\]
+\end{proof}
+
+
+
+
+
+
+\begin{colremark}[$R$ as a quadratic form on bivectors]{}
+
+\todo[inline]{ this is kind of a duplicate of the remark \ref{rem:R-map-on-bivectors111} }
+
+The wedge product $X \wedge Y$ here is the bivector in $\Lambda^2 T_p M$, the space of \emph{bivectors} (or 2-vectors) on $T_p M$. This is the same algebraic construction as the wedge product of covectors used to build differential forms, just applied to vectors instead. The induced inner product on $\Lambda^2 T_p M$ is
+\[
+\langle X \wedge Y,\, Z \wedge W\rangle = \langle X, Z\rangle \langle Y, W\rangle - \langle X, W\rangle \langle Y, Z\rangle,
+\]
+so in particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, matching our denominator.
+
+By the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), the curvature tensor descends to a bilinear map
+\[
+\widetilde R : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad \widetilde R(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
+\]
+and the pairwise symmetry (item 3) makes $\widetilde R$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. In this picture the sectional curvature reads
+\[
+K(\Pi) = \frac{\widetilde R(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
+\]
+which looks a bit like a Rayleigh-quotient: it depends only on the bivector $X \wedge Y$ up to scaling, equivalently only on the plane $\Pi = \mathrm{span}(X, Y)$.
+\end{colremark}
+
+
+
+
+
+We introduce now the  Ricci tensor. It controls volume distortion: it measures how volumes of small geodesic balls deviate from the Euclidean volume in the direction $v$. Equivalently, $\mathrm{Ric}$ governs the average behaviour of nearby geodesics: if $\mathrm{Ric}(\dot\gamma, \dot\gamma) > 0$, geodesics neighbouring $\gamma$ tend on average to converge.
+
+\begin{colordef}{Ricci curvature}{ricci-curvature}
+The \emph{Ricci tensor} $\mathrm{Ric} \in T^0_2(M)$ is the trace of the curvature operator in the first slot:
+\[
+\mathrm{Ric}(X, Y) := \mathrm{tr}\!\left(Z \mapsto R(Z, X)\, Y\right).
+\]
+\end{colordef}
+In components,
+\[
+\mathrm{Ric}_{\alpha\beta} = R^\mu{}_{\alpha\mu\beta} = g^{\mu\nu}\, R_{\nu\alpha\mu\beta}.
+\]
+If $\{e_i\}_{i=1}^n$ is a local orthonormal frame, then
+\[
+\mathrm{Ric}(X, Y) = \sum_{i=1}^n R(e_i, X, e_i, Y).
+\]
+
+The Ricci tensor is symmetric, $\mathrm{Ric}(X, Y) = \mathrm{Ric}(Y, X)$ (see Exercis 9.1a).
+\begin{colremark}[There is one unique Ricci tensor]{}
+There are three possible contractions of the upper index of $R^a{}_{bcd}$ with one of the lower indices:
+\begin{itemize}
+    \item $R^a{}_{acd} = 0$, since this contracts a symmetric tensor ($g^{a\mu}$, used to raise the index) with one antisymmetric in $(\mu, a)$ (the antisymmetry of $R_{\mu acd}$ in its first pair).
+    \item $R^a{}_{bad} = \mathrm{Ric}_{bd}$ (this is of course the Ricci tensor).
+    \item $R^a{}_{bca} = -R^a{}_{bac} = -\mathrm{Ric}_{bc}$, (this is the negative Ricci tensor).
+\end{itemize}
+So up to sign, there is only one nontrivial contraction of $R$.
+\end{colremark}
+
+
+
+
+
+
+\begin{colordef}{Scalar curvature}{scalar-curvature}
+The \emph{scalar curvature} $S \in C^\infty(M)$ is the trace of the Ricci tensor with respect to $g$,
+\[
+S := g^{ij}\, \mathrm{Ric}_{ij}.
+\]
+\end{colordef}
+Equivalently, in a local orthonormal frame $\{e_i\}_{i=1}^n$, we have
+\[
+S = \sum_{i=1}^n \mathrm{Ric}(e_i, e_i) = \sum_{i,j=1}^n R(e_i, e_j, e_i, e_j).
+\]
+
+The three curvatures form a hierarchy of decreasing information:
+\[
+\underbrace{R}_{\text{full tensor}} \;\longrightarrow\; \underbrace{\mathrm{Ric}}_{\text{symmetric (0,2)-tensor}} \;\longrightarrow\; \underbrace{S}_{\text{scalar}}.
+\]
+Each is a contraction of the previous: $\mathrm{Ric}$ is a trace of $R$, and $S$ is a trace of $\mathrm{Ric}$. At each step information is lost, but the resulting object is simpler to work with.
+
+\begin{colorlem}{Curvatures on a space of constant sectional curvature}{constant-sectional-curvature}
+If $(M, g)$ has constant sectional curvature $K$, then
+\[
+\mathrm{Ric}_{ij} = (n-1)\, K\, g_{ij}, \quad S = n(n-1)\, K.
+\]
+\end{colorlem}
+
+\begin{proof}
+See handwritten notes.
+\end{proof}
+
+\begin{colexample}{Spaces of constant sectional curvature}{}
+The round sphere $S^n$ (and its quotients, e.g.\ $\mathbb{RP}^n$) has constant positive sectional curvature. Hyperbolic space $\mathbb{H}^n$ has constant negative sectional curvature. Euclidean space $\mathbb{R}^n$ has $K = 0$, hence $\mathrm{Ric} = 0$ and $S = 0$.
+\end{colexample}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Riemannian submanifolds}
+
+We introduce some natural notions for submanifolds, and characterize the geometry of submanifolds in terms of the curvature tensors.
+
+Let $N^n$ be a submanifold of $(M^m,g)$, so locally, for all $p\in N$, there exists a coordinate system $(x^1, \ldots, x^m)$ on $U\subset M$ such that 
+$$N\cap U=\{p\in M: x^{n+1}(p)=....=x^m(p)=0\}.$$
+
+The tangent space of $N$ at $p$ is 
+$$T_pN = \{v\in T_pM: v^{n+1} = \cdots = v^m = 0\},$$
+
+where $v^i$ are the coordinates of $v$ in the basis $\partial_i$. There is also the \emph{perpendicular space} to $N$ at $p$:
+$$T_pN^\perp = \{w\in T_pM: w^1 = \cdots = w^n = 0\}=\{w\in T_pM: w\perp T_p N\}$$
+
+where $\perp$ is to be understood with respect to the metric $g$. We define the orthogonal projections 
+\begin{align*}
+\pi^T: T_pM &\to T_pN \\ 
+\pi^\perp: T_pM &\to T_pN^\perp.
+\end{align*}
+
+So all $X$ can be decomposed as 
+$$v = v^T + v^\perp,$$
+
+where $v^T = \pi^T(v)$ and $v^\perp = \pi^\perp(v)$, because $T_pM = T_pN \oplus T_pN^\perp$.
+
+\begin{colordef}{Metric on Riemannian submanifold}{}
+We define the \emph{induced metric} (first fundamental form) on $N$ by $\bar g := g|_{T_pN}$, i.e. at each $p\in N$, we take the bilinear form $g_p: T_pM \times T_pM \to \mathbb{R}$ and restrict both arguments to vectors in $T_pN$:
+
+\[
+\bar{g}_p(u,v) = g_p(u,v), \quad u,v \in T_pN.
+\]
+\end{colordef}
+
+
+
+For any vector fields $X, Y$ on $N$, we decompose the covariant derivative (computed in $M$) into tangential and normal components:
+$$\nabla_X Y = \pi^T(\nabla_X Y) + \pi^\perp(\nabla_X Y),$$
+where the first term is the induced connection on $N$, and the second one the \emph{second fundamental form}.
+
+

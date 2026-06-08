@@ -1,0 +1,303 @@
+
+
+
+
+
+
+
+
+
+
+\section{Completeness of manifolds}
+\emph{\textbf{(Lecture 8)}}\\
+
+
+
+What can we say about the geodesic flow on Riemannian manifolds that are complete as metric spaces?
+
+In what follows, $(M,g)$ is connected.
+
+\begin{colordef}{Completeness}{}
+Let $(M,g)$ be a Riemannian manifold.
+\begin{enumerate}
+\item We will say that a maximal geodesic $\gamma \colon I \to M$ is \emph{complete} if $I = \mathbb{R}$.
+\item We will say that $(M,g)$ is \emph{geodesically complete} if every maximal geodesic is complete.
+\item $(M, d_g)$ is a \emph{complete metric space} (or simplify \emph{complete}) if every Cauchy sequence converges.
+\end{enumerate}
+\end{colordef}
+
+Examples
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item On $(\mathbb{R}^2,g_E)$, all maximal geodesics are complete
+    \item On the disk $(\mathbb{D}^2,g_E)$ this is not true\\
+\end{itemize}
+
+We will now characterize geodesic completeness (i.e. the Riemannian metric structure) in terms of the metric space structure of $(M, d_g)$. For simplicity we will assume connectedness, but this is not really necessary.
+
+\begin{colortheo}{Hopf--Rinow}{}
+The following are equivalent for a connected $(M,g)$:
+\begin{enumerate}
+\item[(a)] $(M,g)$ is geodesically complete.
+\item[(b)] There exists $p \in M$ such that every maximal geodesic through $p$ is complete.
+\item[(c)] Every closed metric ball in the metric space $(M, d_g)$ is compact.
+\item[(d)] $(M, d_g)$ is a complete metric space.
+\end{enumerate}
+\end{colortheo}
+
+Recall that (c) is also called the \emph{Bolzano--Weierstrass property}. Sometimes this theorem is stated only as an equivalence between (a) and (d). The requirement of connectedness is only required for (b).\\
+
+We will prove first the following intermediate result:
+
+\begin{colorlem}{Geodesics from a complete point}{geodesics_from_complete_point}
+Let $(M,g)$ be connected and $p \in M$. If every maximal geodesic through $p$ is complete, then for all $q \in M$ there exists a geodesic $\gamma$ from $p$ to $q$ of length $\ell(\gamma) = d(p,q)$.
+\end{colorlem}
+
+\begin{colremark}{}{}
+The hypothesis is equivalent to saying that $\Omega_p = T_pM$. As a corollary: if $\Omega_p = T_pM$, then $\exp_p$ is onto.
+\end{colremark}
+
+Locally this is always true, as we have seen before in Lemma \ref{lem:differential_exponential_map}. And it is also globally true, if every maximal geodesic through $p$ is complete. 
+
+
+
+
+
+
+
+
+
+\begin{proof}
+Let $d := d(p,q) > 0$.
+ 
+Choose $\varepsilon$ such that $0 < \varepsilon < \min\{i(p),\, d\}$, so that $\exp_p$ is a diffeomorphism on $\overline{B_\varepsilon(0)} \subset T_pM$. By Corollary \ref{cor:metric_balls_exponential_map},
+\[
+\bar{B}(p,\varepsilon) = \{x \in M : d(p,x) \leqslant \varepsilon\} = \exp_p\{v \in T_pM : \|v\| \leqslant \varepsilon\},
+\]
+and in particular the metric sphere $\partial B(p,\varepsilon) = \exp_p\{v : \|v\| = \varepsilon\}$ is compact.\\
+
+We choose now the initial direction. Since $\partial B(p,\varepsilon)$ is compact and $x \mapsto d(x,q)$ is continuous, there exists $y_1 \in \partial B(p,\varepsilon)$ minimizing $d(\cdot, q)$ on $\partial B(p,\varepsilon)$. Write $y_1 = \exp_p(v)$ with $\|v\| = \varepsilon$, set $v_1 = v/\|v\|$, and define
+\[
+\gamma(t) := \exp_p(t v_1).
+\]
+By the hypothesis (every maximal geodesic through $p$ is complete), $\gamma$ is defined for all $t \in \mathbb{R}$. Note that $\|\dot{\gamma}\| \equiv 1$ and $\gamma(\varepsilon) = y_1$. \emph{Note that this is the only point in the proof where the completeness hypothesis is used.} We claim that $\gamma(d) = q$, which proves the theorem since $\ell(\gamma|_{[0,d]}) = d$.\\
+ 
+Step 1: we show that $d(y_1, q) = d - \varepsilon$.
+
+Any piecewise $C^1$ curve $\sigma$ from $p$ to $q$ must cross $\partial B(p,\varepsilon)$ at some point $y$, so
+\[
+\ell(\sigma) \geqslant \varepsilon + d(y, q) \geqslant \varepsilon + d(y_1, q).
+\]
+Taking the infimum over all such $\sigma$ gives $d \geqslant \varepsilon + d(y_1, q)$, i.e., $d(y_1, q) \leqslant d - \varepsilon$. Combined with the triangle inequality $d \leqslant \varepsilon + d(y_1,q)$, we get equality.\\
+ 
+Step 2: Setting up the continuity argument.
+
+By the triangle inequality, for all $s \in [0,d]$,
+\[
+d(p,q) \leqslant d(p, \gamma(s)) + d(\gamma(s), q) \leqslant s + d(\gamma(s), q),
+\]
+so
+\[
+d(\gamma(s), q) \geqslant d - s \qquad \forall\, s \in [0,d]. \tag{$*$}
+\]
+Define
+\[
+J := \{s \in [0,d] : d(\gamma(s), q) = d - s\}.
+\]
+We will show $d \in J$, which gives $d(\gamma(d), q) = 0$, hence $\gamma(d) = q$. We observe:
+\begin{enumerate}
+\item $0 \in J$, since $\gamma(0) = p$.
+\item $J$ is downward closed: if $t_0 \in J$ and $t \in [0, t_0]$, then 
+\[
+d(\gamma(t), q) \leqslant d(\gamma(t), \gamma(t_0)) + d(\gamma(t_0), q) \leqslant (t_0 - t) + (d - t_0) = d - t,
+\]
+which combined with $(*)$ gives $t \in J$.
+\item $J$ is closed in $[0,d]$, by continuity of $s \mapsto d(\gamma(s), q)$.
+\item $\varepsilon \in J$, by Step~1.\\
+\end{enumerate}
+ 
+Step 3: Inductive step.
+
+We claim that if $t_0 \in J$ with $t_0 < d$, then there exists $\varepsilon' > 0$ such that $t_0 + \varepsilon' \in J$. Choose $\varepsilon'$ such that $0 < \varepsilon' < \min\{i(\gamma(t_0)),\, d(\gamma(t_0), q)\}$. As in Step~1, applied now at $\gamma(t_0)$ instead of $p$ (using that $d(\gamma(t_0),q) = d - t_0 > 0$), there exists $z \in \partial B(\gamma(t_0), \varepsilon')$ minimizing $d(\cdot, q)$ on this sphere, and
+\[
+d(z, q) = d(\gamma(t_0), q) - \varepsilon' = d - t_0 - \varepsilon'.
+\]
+Write $z = \exp_{\gamma(t_0)}(w)$ with $\|w\| = \varepsilon'$, and define
+\[
+\tilde{\gamma}(s) := \exp_{\gamma(t_0)}\!\left(s\,\tfrac{w}{\|w\|}\right), \qquad s \in [0, \varepsilon'],
+\]
+so $\tilde{\gamma}(0) = \gamma(t_0)$, $\tilde{\gamma}(\varepsilon') = z$, and $\|\dot{\tilde{\gamma}}\| \equiv 1$. Consider the concatenated curve
+\[
+a(t) := \begin{cases} \gamma(t), & 0 \leqslant t \leqslant t_0, \\ \tilde{\gamma}(t - t_0), & t_0 \leqslant t \leqslant t_0 + \varepsilon'. \end{cases}
+\]
+Then $a$ is piecewise $C^1$ with $\ell(a) = t_0 + \varepsilon'$, and
+\[
+d(p, z) \;\geqslant\; d(p,q) - d(z,q) \;=\; d - (d - t_0 - \varepsilon') \;=\; t_0 + \varepsilon' \;=\; \ell(a).
+\]
+Since also $d(p,z) \leqslant \ell(a)$ trivially, $a$ is length-minimizing from $p$ to $z$. 
+By Corollary \ref{cor:geodesics_minimise_length_locally}, $a$ is (a reparametrization of) a geodesic; since $\|\dot a\| = 1$ on each piece, $a$ is itself a geodesic. In particular $a$ is smooth at $t_0$, so $\dot{a}(t_0^-) = \dot{a}(t_0^+)$. But $a|_{[0,t_0]} = \gamma|_{[0,t_0]}$ gives $\dot a(t_0^-) = \dot\gamma(t_0)$, so $\tilde\gamma(\,\cdot\,)$ and $\gamma(t_0 + \,\cdot\,)$ are geodesics with the same initial position $\gamma(t_0)$ and the same initial velocity $\dot\gamma(t_0)$. By uniqueness of geodesics (Theorem \ref{thm:existence_uniqueness_geodesics})
+\[
+\tilde\gamma(s) = \gamma(t_0 + s) \qquad \forall\, s \in [0, \varepsilon'].
+\]
+In particular $\gamma(t_0 + \varepsilon') = \tilde\gamma(\varepsilon') = z$, so
+\[
+d(\gamma(t_0 + \varepsilon'), q) = d(z, q) = d - (t_0 + \varepsilon'),
+\]
+which means $t_0 + \varepsilon' \in J$.\\
+ 
+Step 4: Conclusion.
+
+Let $t^* := \sup J$. Since $J$ is closed (item~3), $t^* \in J$. If $t^* < d$, then by Step~3 there exists $\varepsilon' > 0$ with $t^* + \varepsilon' \in J$, contradicting the definition of $t^*$. Hence $t^* = d$, so $d \in J$ and $\gamma(d) = q$.
+\end{proof}
+
+
+
+
+
+
+
+
+% \vspace{2cm}
+
+
+% \begin{proof}
+% Let $d = d(p,q) > 0$ and choose $\varepsilon$ such that $0 < \varepsilon < \min\{i(p),\, d(p,q)\}$. Note that $\exp_p$ is a diffeomorphism on $\{v \in T_pM : \|v\| \leqslant \varepsilon\}$. Let 
+% $$\bar{B}(p,\varepsilon) = \{q \in M : d(p,q) \leqslant \varepsilon\}=\exp_p\{v \in T_pM: \left\lVert v \right\rVert\leq\epsilon \}.$$
+
+% Since $\partial B(p,\varepsilon)$ is compact, there exists $y_1 \in \partial B(p,\varepsilon)$ which is the minimum of $d(\cdot, q)$ on $\partial B(p,\varepsilon)$.
+% Note that $y_1 = \exp_p(v)$ with $\|v\| = \varepsilon$. If $v_1 = \frac{v}{\|v\|}$, set
+% \[
+% \gamma(t) = \exp_p(t\,v_1).
+% \]
+
+% This can be defined for all $t \in \mathbb{R}$. So $\gamma(\varepsilon) = y_1$. Note that $\|\dot{\gamma}\| = 1$. We want to show that $\gamma(t)$ passes through $q$ at $t = d$.
+
+% Note by the triangle inequality: $d \leqslant \varepsilon + d(y_1, q)$, so $d(y_1, q) \geqslant d - \varepsilon$. But because $y_1$ is the minimum: $d(y_1, q) \leqslant d - \varepsilon$ (compare with a curve passing through $\partial B(p,\varepsilon)$).
+
+% We will show the stronger statement. Note that by the triangle inequality, for all $s \in [0,d]$:
+% \[
+% d(p,q) \leqslant d(p, \gamma(s)) + d(\gamma(s), q) \leqslant s + d(\gamma(s), q),
+% \]
+% so
+% \[
+% d(\gamma(s), q) \geqslant d - s \qquad \forall\, s \in [0,d]. \qquad (*)
+% \]
+
+% We continue by continuity. Let $J = \{s \in [0,d] : d(\gamma(s), q) = d - s\}$. If we show that $d \in J$, we are done.
+
+% Observe that we have
+% \begin{enumerate}
+% \item $0 \in J$, since $\gamma(0) = p$.
+% \item $J$ is an interval: if $t_0 \in J$, then $t \in J$ for all $t \in [0, t_0]$.
+% Since $d(\gamma(t), q) \leqslant d(\gamma(t), \gamma(t_0)) + d(\gamma(t_0), q) \leqslant t_0 - t + d - t_0 = d - t$. So using $(*)$, equality holds.
+% \item $J$ is closed (by continuity of $d(\gamma(\cdot), q)$).
+% \item $\varepsilon \in J$.
+% \end{enumerate}
+
+% We will show that $J = [0,d]$. It suffices to show that if $t_0 < d$ belongs to $J$, then $J$ contains $[t_0, t_0 + \varepsilon')$ for some $\varepsilon' > 0$.
+
+% Let $t_0 \in J$, $0 < t_0 < d$. Like in the first step, if $0 < \varepsilon' < \min\{i(\gamma(t_0)),\, d(\gamma(t_0), q)\}$:
+
+% On the metric sphere $\partial B(\gamma(t_0), \varepsilon')$, I can find the point $z$ which is closest to $q$.
+
+% As in the case of $p$ and $y_1$: if $z = \exp_{\gamma(t_0)}(w)$, $\|w\| = \varepsilon'$, and $\tilde{\gamma}(s) = \exp_{\gamma(t_0)}\!\left(\frac{w}{\|w\|}\,s\right)$, then $\tilde{\gamma}(\varepsilon') = z$, and
+% \[
+% d(z, q) = d(\gamma(t_0), q) - \varepsilon' = d - t_0 - \varepsilon'.
+% \]
+
+% Let
+% \[
+% a(t) = \begin{cases} \gamma(t), & 0 \leqslant t \leqslant t_0, \\ \tilde{\gamma}(t - t_0), & t_0 \leqslant t \leqslant t_0 + \varepsilon'. \end{cases}
+% \]
+
+% We will show that $a(t)$ is a length-minimizing curve and therefore coincides with $\gamma(t)$.
+
+% Compute:
+% \[
+% d(a(0),\, a(t_0 + \varepsilon')) = d(p, z) \geqslant d(p,q) - d(z,q) = d - (d - t_0 - \varepsilon') = t_0 + \varepsilon' = \ell(a).
+% \]
+
+% So $a$ achieves the minimum length, hence $a$ is a geodesic. By uniqueness, $a = \gamma$.
+
+% And $\gamma(t_0 + \varepsilon') = z$, so $d(\gamma(t_0 + \varepsilon'), q) = d(z,q) = d - (t_0 + \varepsilon')$.
+
+% So $t_0 + \varepsilon' \in J$.
+% \end{proof}
+
+
+
+
+
+
+
+
+We prove now the Hopf--Rinow theorem.
+
+
+\begin{proof}
+$a \implies b$: Obvious, since (a) implies in particular that all maximal geodesics through any fixed $p$ are complete.
+
+$b \implies c$: We first show that $\bar B(p, R)$ is compact for the specific $p$ from hypothesis (b). By Lemma \ref{lem:geodesics_from_complete_point}, every $q \in M$ can be written as $q = \exp_p(v)$ with $\|v\| = d(p,q)$, so 
+\[
+\bar{B}(p,R) = \exp_p\{v \in T_pM : \|v\| \leqslant R\}.
+\]
+The right hand side is the image, under the continuous map $\exp_p$ (defined on all of $T_pM$ by hypothesis~(b)), of a closed and bounded, and therefore compact subset of $T_pM \cong \mathbb{R}^n$. So $\bar B(p, R)$ is compact. For an arbitrary $z \in M$ and $R > 0$, the triangle inequality gives 
+$$\bar B(z, R) \subseteq \bar B(p, R + d(p,z)).$$ 
+
+So $\bar B(z, R)$ is a closed subset of a compact set, hence compact.
+
+$c \implies d$: Let $(x_n)$ be a Cauchy sequence in $M$. Then $(x_n)$ is bounded, so it is contained in some closed ball $\bar B(x_1, R)$, which is compact by (c). Hence $(x_n)$ has a convergent subsequence $(x_{n_k}) \to x$, and a Cauchy sequence with a convergent subsequence converges to the same limit.
+
+$d \implies a$: Let $\gamma \colon I \to M$ be a maximal geodesic. By Lemma \ref{lem:geodesics_constant_speed}, $\|\dot\gamma\|$ is constant; reparametrizing by a constant if necessary (which does not change whether $I = \mathbb{R}$), we may assume $\|\dot\gamma\| = 1$. Write $I = (t_-, t_+)$ and assume for contradiction that $t_+ < +\infty$ (the case $t_- > -\infty$ is symmetric). Pick any $0 \in I$. For $t_n \in [0, t_+)$ with $t_n \to t_+$, we have 
+$$d(\gamma(t_m), \gamma(t_n)) \leqslant |t_m - t_n|,$$
+
+so $(\gamma(t_n))$ is Cauchy and by (d) converges to some $q \in M$. Now apply local ODE existence to the geodesic equation in a chart around $q$: there exists $\delta > 0$ such that for any initial condition $(p_0, v_0)$ in some neighborhood of $(q, \cdot)$ in the tangent bundle, the geodesic $\gamma_{p_0, v_0}$ exists on $[0, \delta]$. (Uniformity is possible because the relevant set of initial conditions has compact closure in $TM$: $\gamma(t_n) \to q$ and $\|\dot\gamma(t_n)\| \equiv 1$.) Pick $n$ large enough that $t_+ - t_n < \delta$ and $(\gamma(t_n), \dot\gamma(t_n))$ lies in this neighborhood. Then the geodesic with initial data $(\gamma(t_n), \dot\gamma(t_n))$ exists on $[0, \delta]$, and by uniqueness it agrees with $\gamma(t_n + \,\cdot\,)$ on $[0, t_+ - t_n)$. This extends $\gamma$ past $t_+$, contradicting maximality.
+\end{proof}
+
+
+
+
+
+
+% \vspace{2cm}
+% \begin{proof}
+
+% $a \implies b$: Obvious.
+
+% $b \implies c$: 
+% From the previous proposition: $B(p,R) = \exp_p\{v \in T_pM : \|v\| \leqslant R\}$. 
+% So it is the image through a continuous map of a compact set.
+
+% % If $b$ is true then the $\exp_p$ is onto.
+
+
+% % $B(p,R)\subset B(z,R+d(z,p))$
+
+
+
+
+% $c \implies d$: Let $(x_n)$ be Cauchy sequence in $M$, so it is also bounded. Further $(x_n)$ is contained in a compact set, so there exists a subsequence $(x_{n_k})$ which converges to some $x \in M$. 
+
+% Since $(x_{n_k})$ is a subsequence of a Cauchy sequence, it is also Cauchy. A Cauchy sequence that has a convergent subsequence must converge to the same limit. Therefore $(x_n) \to x$.
+
+% % Cauchy sequences are bounded, hence contained in a closed metric ball, which is compact.
+
+% $d \implies a$: Let $\gamma \colon I \to \mathbb{R}$ be a maximal geodesic, $\|\dot{\gamma}\| = 1$, $I = (t_-, t_+)$, $t_+ < +\infty$.
+
+% Assume $0 \in I$. Then 
+% $$\ell(\gamma|_{[0,t_+)}) = \int_0^{t_+} \|\dot{\gamma}\|\,\mathrm{d}t = t_+ < +\infty.$$
+
+% So $\gamma|_{[0,t_+)}$ stays in a bounded set. If $t_n \in [0, t_+)$ is an increasing sequence with $t_n \to t_+$, then $\gamma(t_n)$ converges to $q \in M$ (it has to be Cauchy, since $d(\gamma(t_m), \gamma(t_n)) \leqslant |t_m - t_n|$).
+
+% In local coordinates around $q$: $\gamma(t)$ is a solution to the second-order ODE
+% \[
+% \ddot{\gamma}^k + \Gamma_{ij}^k(\gamma(t))\,\dot{\gamma}^i\,\dot{\gamma}^j = 0,
+% \]
+% which stays bounded, hence the maximal solution can be extended. Contradiction.
+% \end{proof}
+
+
+
+
+
+We remark that the term \emph{synthetic geometry} describes the approach using properties like geodesics, distance, etc. Hopf--Rinow is part of a synthetic view of geometry.
+
