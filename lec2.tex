@@ -1,0 +1,423 @@
+
+
+
+\newpage
+\section{Riemannian metrics}
+
+\emph{\textbf{(Lecture 2)}}\\
+
+\begin{colordef}{Riemannian Metric}{}
+A Riemannian metric $g$ on a manifold $M$ of dimension $n$ is a map $g_p: T_pM \times T_pM \to \mathbb{R}$ at every point $p \in M$ such that:
+\begin{enumerate}
+    \item $g_p$ is bilinear: $g_p(\alpha w + \beta u, v) = \alpha g_p(w, v) + \beta g_p(u, v)$ for all $\alpha, \beta \in \mathbb{R}$ and $u, v, w \in T_pM$
+    \item $g_p$ is symmetric: $g_p(w, v) = g_p(v, w)$
+    \item $g_p$ is positive definite: $g_p(v, v) \geq 0$ with equality iff $v = 0$
+    \item $g_p$ is smooth: $p \mapsto g_p$ is smooth in any local coordinate system (see below).
+\end{enumerate}
+We will sometimes use the following notation for the metric:
+$$\left \langle v,w \right \rangle:=g(v,w).$$
+\end{colordef}
+
+$g$ is a section of the bundle of covariant 2-tensors on $M$. Therefore it can be written in local coordinates as
+\begin{equation}
+    \label{eq:metric_local_coordinates}
+    g = g_{ij} \mathrm{d}x^i \otimes \mathrm{d}x^j
+\end{equation}
+
+and the components $g_{ij}$ can be found by
+$$g_{ij} = g\left(\frac{\mathrm{d}}{\mathrm{d} x^i}, \frac{\mathrm{d}}{\mathrm{d} x^j}\right).$$
+This is what the smoothness condition means: $g_{ij}$ are smooth functions. And in our convention, they live on the manifold $M$. The matrix of components $[g_{ij}]$ is symmetric, positive definite.
+We would like to remark, that some people also omit the $\otimes$ symbol and write $g = g_{ij} \mathrm{d}x^i \mathrm{d}x^j$.
+
+\begin{colorlem}{Change of coordinates for metric components}{}
+\[
+\tilde{g}_{ij} \frac{\partial y^i}{\partial x^a} \frac{\partial y^j}{\partial x^b} = g_{ab}
+\]
+\end{colorlem}
+\begin{proof}
+See exercise 1.3.
+\end{proof}
+
+In matrix form:
+\[
+[\tilde{g}] = \left[\frac{\partial x}{\partial y}\right]^T [g] \left[\frac{\partial x}{\partial y}\right]
+\]
+
+\begin{colordef}{Euclidean Metric}{}
+Let $M=\mathbb{R}^n$, then we define the Eculidean metric (or \emph{flat} metric) $g_E$ (or $g_{\mathbb{R}^n}$) to coincide with the Euclidean inner product on $\mathbb{R}^n$:
+\[
+g_E\left(v,w\right) :=  \left \langle v,w \right \rangle_{\mathbb{R}^n}.
+\]
+\end{colordef}
+
+This means that its components are given by
+\begin{align*}
+    g_{ij}&=
+    g_E\left(\frac{\mathrm{d}}{\mathrm{d}x^i}, \frac{\mathrm{d}}{\mathrm{d}x^j}\right) \\
+    &=g_E\left(
+        0\frac{\mathrm{d}}{\mathrm{d}x^1}+...+1\frac{\mathrm{d}}{\mathrm{d}x^i}+....0\frac{\mathrm{d}}{\mathrm{d}x^n},
+        0\frac{\mathrm{d}}{\mathrm{d}x^1}+...+1\frac{\mathrm{d}}{\mathrm{d}x^j}+....0\frac{\mathrm{d}}{\mathrm{d}x^n}\right)\\
+    &= \delta_{ij}
+\end{align*}
+
+Expanded in the Euclidean standard basis, we have
+$$g_E =  \mathrm{d}x^i \otimes \mathrm{d}x^i$$
+
+or also written as $(\mathrm{d}x^1)^2 + \dots + (\mathrm{d}x^n)^2$.
+
+When expanding the same metric in polar coordinates $x = r \cos \theta,  y = r \sin \theta$ (on $\mathbb{R}^2$), we get
+$$\tilde{g}_E = \mathrm{d}r\otimes \mathrm{d}r + r^2 \mathrm{d}\theta\otimes \mathrm{d}\theta.$$
+
+See exercise 1.3 for a derivation.\\
+
+
+We make the following informal but nevertheless useful definition.
+
+\begin{colordef}{Geometric property}{}
+A geometric property is a property that is invariant under changes of coordinates.\\
+A bit more concretely: objects in $M$ or $T_pM$ (or products and sections thereof) that can be described in different coordinates may have such properties.
+\end{colordef}
+
+Examples of such properties are
+
+\begin{itemize}
+    \item Smoothness of a function, (co)vector field, or metric.
+    \item Norm of a tangent vector
+    \[
+    \|x\| := \sqrt{g(x, x)}
+    \]
+    \item Angle $\angle$ between two non-zero vectors
+    \[
+    \cos \left( \angle(u, v) \right) := \frac{g(u, v)}{\|u\| \cdot \|v\|}
+    \]
+    \item Length of a curve (see lemma \ref{lem:length_properties})
+\end{itemize}
+
+
+\subsection{Lengths and distances}
+
+A curve \(\gamma: (a,b) \to M\) is called piecewise \(C^k\) if it is continuous and there exist \(t_0 = a < t_1 < \dots < t_m = b\) such that
+\[
+\gamma|_{[t_i, t_{i+1}]} \text{ is } C^k \quad \forall i = 0, \dots, m-1.
+\]
+
+\begin{colordef}{Length of a curve}{curve-length}
+Let \(\gamma: (a,b) \to (M, g)\) be piecewise \(C^1\). Then the length of \(\gamma\) is
+\[
+l(\gamma) = \int_a^b \|\gamma'(t)\| \, dt
+\]
+\end{colordef}
+
+Technically to define the length, absolute continuity, or $\gamma\in W^{1,1}(a,b)$ would be enough.
+
+\begin{colorlem}{Characteristics of the length functional}{length_properties}
+The length functional has the following properties:
+
+\begin{enumerate}
+    \item \( l(\gamma) > 0 \), and "=" iff \(\gamma\) is constant.
+    \item Additivity: If \(\gamma : [a,b] \to M\), \(c \in (a,b)\):
+    \[
+    l(\gamma|_{[a,b]}) = l(\gamma|_{[a,c]}) + l(\gamma|_{[c,b]})
+    \]
+    \item Invariant under reparametrization:
+    If \( h : (c,d) \to (a,b) \) is piecewise \(C^1\), monotone and onto, then
+    \[
+    l(\gamma \circ h) = l(\gamma)
+    \]
+    Hence the length is a geometric property.
+\end{enumerate}
+\end{colorlem}
+\begin{proof}
+See exercise 2.1.
+\end{proof}
+
+\begin{colordef}{Riemannian Distance Function}{}
+Let \((M,g)\) be a Riemannian manifold; \(p, q \in M\). We define the Riemannian distance function:
+\begin{align*}
+    d_g : M \times M &\to [0, +\infty]\\
+    (p, q) &\mapsto \inf
+    \left\{ l(\gamma), \gamma \text{ piecewise } C^1, \gamma(0) = p, \gamma(1) = q \right\}
+\end{align*}
+\end{colordef}
+
+The Riemannian distance has the following properties.
+\begin{colorlem}{}{}
+% \begin{colremark}
+The distance function satisfies \(d_g(p, q) = +\infty\) iff \(p, q\) belong to different connected components of \(M\).
+
+Further, \((M, d_g)\) is a metric space, i.e.
+\begin{itemize}
+    \item \(d_g(p, q) = d_g(q, p)\)
+    \item \(d_g(p, q) \leq d_g(p, z) + d_g(z, q)\)
+    \item \(d_g(p, q) \geq 0\)
+    \item \(d_g(p, q) = 0 \iff p = q\)
+\end{itemize}
+% \end{colremark}
+\end{colorlem}
+\begin{proof}
+See exercise 2.2.\\
+\end{proof}
+
+
+\subsection{Integration on Riemannian manifolds}
+Let \((M, g)\) be a Riemannian manifold and \(h \in C^0(M)\). We want to define the integral:
+\[
+\int_{M} h
+\]
+
+This itself makes no sense a priori, as there is no natural notion of integration of functions on manifolds. One can only meaningfully integrate differential forms over manifolds. We will therefore use the metric to define a volume form, which we can use to integrate functions.
+
+\begin{colordef}{Integral over a chart domain}{}
+Let \((U, \phi)\) be a local coordinate chart, with associated coordinates \((x^1, \dots, x^n)\). We define
+\[
+\int_{U} h \, dV_g := \int_{\phi(U)} h \left( \phi^{-1}(x) \right) \sqrt{\det \left[ g_{ij}(x) \right]}\circ\phi^{-1} \, \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n
+\]
+The left hand side itself is defined via the usual integral on $\mathbb{R}^n$ as follows:
+$$
+\int_{\phi(U)} f \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n
+:=
+\int_{\phi(U)} f \mathrm{d}x^1 ... \mathrm{d}x^n
+$$
+as explained in Definition 11.11 in \cite{tsakanikas2024dg2}.
+\end{colordef}
+
+Here, $h\circ\phi^{-1}$ is the coordinate representation of $h$, and $\sqrt{\det[g_{ij}]}$ is the volume density.
+
+The volume form of $(M, g)$ is the top-form $dV_g$ expressed in local coordinates by
+$$dV_g = \sqrt{\det[g_{ij}]}\circ\phi^{-1} \, \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n.$$
+
+Integrating $hdV_g$ over $U$ is well defined, see Definition 11.11 in \cite{tsakanikas2024dg2}.
+
+Attention: the $d$ in $dV_g$ does not mean this is a differential. It is an abuse of notation make the integral look like to usual one on $\mathbb{R}^n$.
+
+Furthermore we want to remark that the above definition assumes that $g_{ij}$ are functions on $M$, not $\mathbb{R}^n$.
+\\
+
+We can now glue the charts together to get an integral over $M$.
+
+
+\begin{colordef}{Integral over $M$}{}
+Let \(\{\chi_a\}_{a \in A}\) be a partition of unity, such that \(\operatorname{supp} \chi_a\) is contained in some local coordinate chart \(U_a\). Then we define
+\[
+\int_{M} h \, dV_g := \sum_{a \in A} \int_{U} h \cdot \chi_a \, dV_g
+\]
+\end{colordef}
+
+\begin{colorlem}{}{}
+The above definitions are coordinate independent.
+\end{colorlem}
+\begin{proof}
+See exerise 1.5, and chapter 11 in \cite{tsakanikas2024dg2}.
+\end{proof}
+
+% \begin{proof}
+% If \((y^1, \dots, y^n)\) is a different coordinate chart associated to \(\psi\), then:
+% \[
+% \det[\tilde{g}] = \det\left[ \frac{\partial x}{\partial y} \right]^2 \det[g]
+% \]
+
+% If \(F: \Omega \to \mathbb{R}^n\) is a diffeomorphism:
+% \[
+% \int_{\Omega} h(x) \, dx = \int_{\Omega} h(F^{-1}(y)) \cdot \det\left( \frac{\partial x}{\partial y} \right) dy
+% \]
+
+% With \(F = \psi \circ \phi^{-1}\), if \(U\) is the common domain of \(\phi, \psi\):
+% \[
+% \int_{\phi(U)} h(\phi^{-1}(x)) \sqrt{\det[g]} \, dx = \int_{\psi(U)} h(\psi^{-1}(y)) \sqrt{\det[\tilde{g}]} \, dy
+% \]
+
+% To define \(\int_{M} h \, dV_g\): Let \(\{\chi_a\}_{a \in A}\) be a partition of unity, such that \(\operatorname{supp} \chi_a\) is contained in some local coordinate chart \(V_a\). Then \(h = \sum_{a \in A} \chi_a \cdot h\). Define:
+% \[
+% \int_{M} h \, dV_g = \sum_{a \in A} \int_{M} h \cdot \chi_a \, dV_g
+% \]
+
+% Volume of \(M\):
+% \[
+% \int_{M} dV_g
+% \]
+
+% If \(M\) is oriented: Volume form (n-form) in local coordinates:
+% \[
+% \omega_g = \sqrt{\det[g]} \, \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n
+% \]
+
+% Invariant under changes of coordinates \(x \to y\) with \(\det\left[\frac{\partial y}{\partial x}\right] > 0\).
+% \end{proof}
+
+As functions, metrics can be pulled back via smooth maps, which allows to define new metrics from old ones.
+
+\begin{colordef}{Pullback of a Metric}{pullbackmetric}
+Let \(F: M \to (N, g)\) be an immersion. We define $\forall p \in M, \forall x, y \in T_pM$ the pullback of \(g\) via \(F\) by
+\[
+F^*g(x, y) := g(\mathrm{d}F_p(x), \mathrm{d}F_p(y))
+\]
+\end{colordef}
+
+We also say that \(F^*g\) is the metric induced on \(M\) by \(F\).
+
+\begin{colorlem}{}{}
+\(F^*g\) is a Riemannian metric.
+\end{colorlem}
+
+\begin{proof}
+It is obviously symmetric and bilinear. Positivity (using that $F$ is an immersion): \(F^*g(x, x) = g(\mathrm{d}F(x), \mathrm{d}F(x)) > 0\), "=" iff \(\mathrm{d}F(x) = 0 \iff x = 0\).
+\end{proof}
+
+
+In local coordinates one gets
+\[
+F^*g_{ij} = g\left(\mathrm{d}F\left(\frac{\mathrm{d}}{\mathrm{d} x^i}\right), \mathrm{d}F\left(\frac{\mathrm{d}}{\mathrm{d} x^j}\right)\right) = \frac{\partial F^a}{\partial x^i} g_{ab} \frac{\partial F^b}{\partial x^j}.
+\]
+
+In exercise 1.4, we derive this for the case where $g$ is the Euclidean metric.\\
+
+In exercise 2.3, we pull back the Euclidean metric to the sphere via the stereographic projection and get the so called \emph{round metric}. This exercise also shows that sometimes, when pulling back the Euclidean metric in particular, it is easier to use the fact that
+$$g_E = dx^i \otimes dx^i$$
+
+together with the fact that the pullback of a tensor product is the tensor product of the pullbacks, i.e. in this case $F^*g_E = F^*dx^i \otimes F^*dx^i$. This is a very straight forward generalisation of Lemma 8.19)b) in \cite{tsakanikas2024dg2}.\\
+
+
+\begin{colexample}{}{}
+Let \(M\) be the graph of a function:
+\[
+f: \mathbb{R}^{n-1} \to \mathbb{R} \quad \text{in } \mathbb{R}^n.
+\]
+
+In local coordinates \((x^1, \dots, x^{n-1})\) on \(M\), \(f\) induces an immersion
+\[
+F(x^1, \dots, x^{n-1}) = (x^1, \dots, x^{n-1}, f(x^1, \dots, x^{n-1})).
+\]
+
+So we have
+\[
+\frac{\partial F}{\partial x^i} = (0, \dots, 0, 1, 0, \dots, 0, \frac{\partial f}{\partial x^i}).
+\]
+
+This gives us the following induced metric on \(M\):
+\[
+(F^*g_E)_{ij} = g_E\left(\frac{\partial F}{\partial x^i}, \frac{\partial F}{\partial x^j}\right) = \delta_{ij} + \frac{\partial f}{\partial x^i} \frac{\partial f}{\partial x^j}.
+\]
+\end{colexample}
+
+
+
+\subsection{Isometry, musical isomorphism, and other nice things}
+
+We recall the following \emph{inner-product preserving} map on linear spaces.
+
+\begin{colordef}{Linear Isometry on Tangent Spaces}{}
+Let \(T_pM\) and \(T_qN\) be tangent spaces equipped with metrics \(g\) and \(h\), respectively. A linear map $L: T_pM \to T_qN$ is a \emph{linear isometry} if
+\[
+h(Lv, Lw) = g(v,w)
+\quad \text{for all } v,w \in T_pM.
+\]
+\end{colordef}
+
+With this, we can define \emph{metric preserving} maps between Riemannian manifolds.
+
+
+\begin{colordef}{Isometries}{}
+Let \(F: (M, g) \to (N, h)\) be a smooth map.
+
+\begin{itemize}
+    \item \(F\) is a local isometry if \(\mathrm{d}F_p: (T_pM, g_p) \to (T_{F(p)}N, h)\) is a linear isometry for all \(p \in M\).
+    \item \(F\) is a global isometry if it is a local isometry and bijective. In this case $(M,g)$ and $(N,h)$ are geometrically identical.
+    \item \(F\) is locally conformal if \(\mathrm{d}F_p\) is bijective and \(F^*h = \lambda g\) for some \(\lambda \in C^\infty(M), \lambda > 0\).
+\end{itemize}
+\end{colordef}
+
+
+Local isometries (i.e. their differentials) preserve norms and angles, locally conformal maps (i.e. their differentials) preserve angles.
+
+
+$F$ being a local isometry implies that $\mathrm{d}F_p$ is bijective and hence $F$ is an immersion and hence a local diffeomorphism. 
+%We have $F^*g = h$.
+
+If $\mathrm dF_p$ is a linear isometry for all $p \in M$, then
+\[
+(F^*h)_p(v,w)
+= h_{F(p)}\big(\mathrm dF_p v, \mathrm dF_p w\big)
+= g_p(v,w)
+\quad \text{for all } v,w \in T_pM.
+\]
+Hence,
+\[
+F^*h = g.
+\]
+
+
+\begin{colorlem}{}{}
+If \(F: (M, g) \to (N, h)\) is an isometry of metric spaces, then \(F\) is smooth and a Riemannian isometry.
+\end{colorlem}
+\begin{proof}
+Was skipped in the lecture.
+\end{proof}
+
+\begin{colortheo}{}{}
+If \(M\) is a smooth manifold, then it admits a Riemannian metric.
+\end{colortheo}
+
+\begin{proof}
+Let \(\{U_a, \phi_a\}_{a \in A}\) be an atlas on \(M\) and let \(\{\chi_\beta\}_{\beta \in B}\) be a subordinate partition of unity, i.e. \(\forall \beta \in B: \chi_\beta \in C^\infty(M,[0,1]), \operatorname{supp} \chi_\beta \subseteq U_{a(\beta)}\) for some \(a(\beta) \in A\), \(\operatorname{supp} \chi_\beta \cap \operatorname{supp} \chi_{\beta'} \neq \emptyset\) for finitely many \(\beta\), \(\sum_\beta \chi_\beta = 1\).
+
+For all \(\beta \in B\): On \(U_{a(\beta)}\) consider the metric \(g_\beta = \phi_{a(\beta)}^* g_E\).
+
+Set \(g = \sum_{\beta} \chi_\beta \cdot g_\beta\).
+
+Then, \(g\) is well-defined (finite sum at every point).
+In addition, \(g\) is symmetric, bilinear. What is left is to check positive definiteness. We have
+\[
+g(x, x) > 0 \quad \forall x \in T_pM
+\]
+and further
+\[
+g(x, x) = 0 \iff \sum_\beta \chi_\beta \cdot g_\beta(x, x) = 0
+\]
+which implies that for all $\beta$
+$$\chi_\beta \cdot g_\beta(x, x) = 0.$$
+And this means that if $\chi_\beta(p) \neq 0$ for some $\beta$, then
+\[g_\beta(x, x) = 0 \implies x = 0.
+\]
+\end{proof}
+
+
+
+
+\begin{colorlem}{Musical Isomorphism}{}
+Let $(M, g)$ be a Riemannian manifold. For any 1-form $\omega \in \Gamma(T^*M)$, define the vector field $\omega^\# \in \Gamma(TM)$ by the condition
+\[
+g(X, \omega^\#) = \omega(X) \quad \forall X \in \Gamma(TM).
+\]
+Due to positive definiteness of $g$, this vector field is uniquely defined. Then we have in local coordinates
+\[
+(\omega^\#)^i = g^{ij} \omega_j,
+\]
+where $(g^{ij})$ is the inverse of the metric matrix $(g_{ij})$.
+\end{colorlem}
+\begin{proof}
+See exercise 3.4a.
+\end{proof}
+
+
+\begin{colordef}{Gradient of a Function}{}
+Let $(M, g)$ be a Riemannian manifold and $f \in C^\infty(M)$. The gradient $\nabla f \in \Gamma(TM)$ is defined by $g(\nabla f, X) = \mathrm{d}f(X)$ for all $X \in \Gamma(TM)$, or equivalently
+$$\nabla f := (\mathrm{d}f)^\# .$$
+In local coordinates, $\nabla f = g^{ij} \frac{\partial f}{\partial x^j} \frac{\partial}{\partial x^i}$, where $(g^{ij})$ is the inverse of the metric matrix $(g_{ij})$. See also exercise 3.4b.
+\end{colordef}
+\begin{colorlem}{Induced Metric on Cotangent Space}{}
+Let $(M, g)$ be a Riemannian manifold. Define a $(2, 0)$-tensor $\tilde{g}$ on 1-forms by
+\[
+\tilde{g}(\omega_1, \omega_2) := g(\omega_1^\#, \omega_2^\#) \quad \forall \omega_1, \omega_2 \in \Gamma(T^*M).
+\]
+Then $\tilde{g}$ is symmetric and positive definite. In local coordinates, its coefficients are
+\[
+\tilde{g}^{ij} = g^{ij},
+\]
+where $g^{ij}$ is the inverse matrix of the metric coefficients $g_{ij}$.
+\end{colorlem}
+\begin{proof}
+See exercise 3.4c.
+\end{proof}
+
+
+

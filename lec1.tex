@@ -1,0 +1,217 @@
+
+
+
+\section{Short review of Differential Topology}
+\emph{\textbf{(Lecture 1)}}\\
+
+
+The following section is a quick revision of the material covered in Differential Geometry II at EPFL, 
+\cite{tsakanikas2024dg2}.
+
+\begin{colordef}{Smooth Manifold}{manifold}
+A differentiable (or smooth) manifold of dimension n is a Hausdorff, second countable topological space M such that there exists a collection of open sets $\{U_a\}_{a \in A}$ of M and homeomorphisms $\phi_a: U_a \to \phi_a(U_a) \subseteq \mathbb{R}^n$ with the following properties:
+
+\begin{enumerate}
+    \item $\bigcup_{a \in A} U_a = M$
+    \item For all $a, b \in A$ such that $U_a \cap U_b \neq \emptyset$, the map $\phi_a \circ \phi_b^{-1}$ is a smooth diffeomorphism between open subsets of $\mathbb{R}^n$.
+    \item The collection $\{U_a, \phi_a\}$ is maximal.
+\end{enumerate}
+We will write $M^n$ to indicate the dimension of the manifold.
+\end{colordef}
+
+\begin{colremark}[]
+We recall some facts.
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item The dimension is locally constant (invariance of domain theorem).
+    \item We call $\{U_a, \phi_a\}$ a coordinate chart. and $\phi_a^{-1}$ a parametrisation.
+    \item We call $(x^1, \dots, x^n) = \phi_a$ or more explicitely $x^i:U_a\to\mathbb{R},p\mapsto [\phi_a(p)]^i$ the local coordinates.
+    \item $\phi_1\circ \phi_2^{-1}$ is called a transition map or coordinate transformation.
+    \item $\{U_a, \phi_a\}_{a\in A}$ is called an atlas, if it satisfies 1) and 2). If it also satisfies 3), we call it a differentiable structure.
+    \item The Hausdorff property is needed to guarantee the uniqueness of limits, which is important for defining continuity and smoothness.
+    \item The second countability condition (existence of countable basis of open sets) is needed to guarantee the existence of partitions of unity,
+\end{itemize}
+\end{colremark}
+
+\begin{colordef}{Partition of Unity}{partofunity}
+Let $\{U_a, \phi_a\}$ be an atlas on a mfd. $M$. A partition of unity subordinate to $\{U_a, \phi_a\}$ is a collection of smooth functions $\{\chi_\beta:M\to \mathbb{R}\}_{\beta \in B}$ such that:
+\begin{enumerate}[itemsep=0pt, topsep=0pt]
+    \item $\forall\beta\exists \alpha$ s.t. $\operatorname{supp}\chi_\beta\subset U_\alpha$
+    \item For all $\beta$, $\operatorname{supp} \chi_\beta \cap \operatorname{supp} \chi_\gamma \neq \emptyset$ for finitely many $\gamma$.
+    \item $\sum_{\beta} \chi_\beta = 1$, which is a finite sum, due to 2.
+\end{enumerate}
+\end{colordef}
+
+\begin{colremark}
+In our settings, partitions of unity always exist. We only consider manifolds that are locally Euclidean, Hausdorff, and second countable. This implies paracompactness, which in turn implies the existence of partitions of unity.
+\end{colremark}
+
+\begin{colordef}{Smooth function}{smooth_function}
+A function $f: M^m \to N^n$ is called smooth if its expression in any local coordinate charts $\tilde{f} = \psi \circ f \circ \varphi^{-1}: \varphi(U) \to \psi(V)$ is smooth. The same applies to continuity, Hölder continuity, and continuous differentiability of order k.
+\end{colordef}
+
+\begin{colremark}
+It is enough to check the smoothness of $f$ in one local coordinate chart, due to the smoothness of transition maps.\\
+If the transition maps were merely $C^k$, we could only talk about $C^k$ functions at most.
+\end{colremark}
+
+
+Functions (and in fact also all covariant tensors, like k-forms) can be pulled back via smooth maps while vector fields (and in fact also all contravariant tensors, like vector fields) can be pushed forward via certain smooth maps. 
+
+\begin{colordef}{Pullback of a function}{pullback_function}
+If $f: M \to N$ is smooth, then for all $h : N \to \mathbb{R}$, we can always define the pullback of $h$ via $f$ by 
+\begin{align*}
+    f^*h: M &\to \mathbb{R}\\
+    p &\mapsto h \circ f(p)
+\end{align*}
+
+We have that $f^* : C^k(N) \to C^k(M)$ is an $\mathbb{R}$-linear map.
+\end{colordef}
+
+We will introduce tangent vectors now. We can view a tangent vector as a direction of differentiation or as a differential operator of a smooth function.
+\begin{colordef}{Tangent and Cotangent Space}{tangent_cotangent_space}
+Let $M$ be a smooth manifold of dim $n$, $p \in M$, and $f,g\in C^\infty(M)$. A tangent vector $v$ at p is a linear map $v: C^\infty(M) \to \mathbb{R}$ satisfying the Leibniz rule
+\[
+v(fg) = v(f)g(p) + f(p)v(g)
+\]
+The $\mathbb{R}$-vector space of tangent vectors at p is then denoted by $T_pM$. It has dimension $n$.
+\end{colordef}
+
+There is a natural basis of $T_pM$ given by the tangent vectors along the coordinate curves. 
+
+
+\begin{colordef}{Coordinate basis vectors}{coordinate_basis}
+Let $M,n,p,f,g,v$ be as above.\\
+We define the coordinate basis vector
+$$\left.\frac{\mathrm{d}}{\mathrm{d}x^i}\right|_p f := \left(\frac{\mathrm{d}}{\mathrm{d}x^i} (f \circ \varphi)\right) \bigg|_{\varphi(p)}.$$
+\end{colordef}
+
+\begin{colorlem}{Basis of $T_pM$}{basis_tangent_space}
+The set $\left\{\left.\frac{\mathrm{d}}{\mathrm{d}x^i}\right|_p\right\}_{i=1}^n$ is a basis of $T_pM$. 
+\end{colorlem}
+\begin{proof}
+See chapter 3 in \cite{tsakanikas2024dg2}
+\end{proof}
+
+We define the dual notation.
+
+\begin{colordef}{Cotangent space and differential of a function}{cotangent_space}
+The dual space of $T_pM$ is called the cotangent space and is denoted by $T_p^*M$. For $f \in C^\infty(M)$, the differential of $f$ at $p$ is the linear map $\mathrm{d}F_p: T_pM \to \mathbb{R}$ defined by 
+$$\mathrm{d}F_p(v) := v(f).$$ 
+So we have $\mathrm{d}F_p\in T_p^*M$.
+\end{colordef}
+
+\begin{colorlem}{Basis of $T_p^*M$}{basis_cotangent_space}
+The set $\{\mathrm{d}x^i|_p\}_{i=1}^n$ consisting of the differentials of the coordinate functions $x^i: U\subset M \to \mathbb{R}$ is a basis of $T_p^*M$. 
+\end{colorlem}
+\begin{proof}
+See chapter 8 and appendix C in \cite{tsakanikas2024dg2}
+\end{proof}
+
+
+In local coordinates: $\{\mathrm{d}x^i\}_{i=1}^n$ is the dual basis of $\left\{\frac{\mathrm{d}}{\mathrm{d} x^i}\right\}_{i=1}^n$, as we have
+\[
+\mathrm{d}x^i \left( \frac{\mathrm{d}}{\mathrm{d} x^j} \right) = \frac{\mathrm{d}}{\mathrm{d} x^j} (x^i) = \delta_j^i.
+\]
+
+In the following we will use the Einstein summation convenction, which implies summation over repeated indices. For example, we write
+\[v = v^i \frac{\mathrm{d}}{\mathrm{d} x^i}
+\]instead of
+\[v = \sum_{i=1}^n v^i \frac{\mathrm{d}}{\mathrm{d} x^i}
+\]
+as the dimension $n$ is usually clear from the context.
+
+
+\begin{colordef}{Vector Field and Covector Field / 1-form}{vector_covector_field}
+A vector field is an assignment/map $X:p \mapsto v \in T_pM$ that is smooth in local coordinates/when written in the coordinate basis
+\[
+v = v^i \frac{\mathrm{d}}{\mathrm{d} x^i}.
+\]
+We write $\Gamma(TM)$ for the set of all vector fields on $M$.\\
+
+A covector-field or (differential) 1-form is an assignment/map $\omega:p \mapsto \omega_p \in T_p^*M$ that is smooth in local coordinates/when written in the coordinate basis
+\[
+\omega_p = \omega_i \mathrm{d}x^i|_p.
+\]
+We write $\Gamma(T^*M)$ for the set of all covector fields on $M$.
+\end{colordef}
+
+The next result is easy to show, but nevertheless important.
+
+\begin{colorlem}{Change of Coordinates for vectors and covectors}{change_coordinates_vectors_covectors}
+\[
+\mathrm{d}y^i = \frac{\partial y^i}{\partial x^j} \, \mathrm{d}x^j
+\]
+\[
+\frac{\mathrm{d}}{\mathrm{d} x^i} = \frac{\partial y^j}{\partial x^i} \frac{\mathrm{d}}{\mathrm{d} y^j}
+\]
+\end{colorlem}
+\begin{proof}
+See chapter 3 in \cite{tsakanikas2024dg2}.
+\end{proof}
+
+
+\begin{colremark}
+This allows to translate a tangent vector (field)
+$$v=v^i \frac{\mathrm{d}}{\mathrm{d}x^i}=\tilde v^j \frac{\mathrm{d}}{\mathrm{d}y^j}$$
+from the $x^i$ to the $y^i$ coordinates. From the lemma we find
+$$\tilde v^j = \frac{\partial x^i}{\partial y^j} v^i$$
+and similarly for a covector field.\\
+One can also easily recover the components $v^i$ from the vector field $v$ by evaluating $v$ on the coordinate functions:
+$$v^i = v(x^i)$$
+and similarly for a covector field $\omega$:
+$$\omega_i = \omega\left(\frac{\mathrm{d}}{\mathrm{d}x^i}\right)$$ 
+\end{colremark}
+
+We introduce the differential of a map, which can be interpreted as its linearisation at a point.
+
+\begin{colordef}{Differential / pushforward of a Map}{differential_pushforward}
+Let $F: M \to N$ be a smooth map. The push forward or differential $F_*$ or $\mathrm{d}F: T_pM \to T_{F(p)}N$ is defined by:
+\[
+\mathrm{d}F(v)(h) = v(h \circ F)
+\]
+
+In local coordinates this is the jacobian matrix of $F$:
+\[
+[\mathrm{d}F]^a_b = \frac{\partial F^a}{\partial x^b}
+\]
+
+If $\gamma:(-\epsilon,\epsilon)\to M$ is a curve with $\gamma(0)=p$ and $\gamma'(0)=v$, then
+\[
+\mathrm{d}F_p(\gamma'(0)) = (F\circ \gamma)'(0) = \frac{\mathrm{d}}{\mathrm{d}t} (F\circ \gamma(t))\bigg|_{t=0}
+\]
+\end{colordef}
+
+\begin{colordef}{Immersions, Embeddings, and Diffeomorphisms}{immersions_embeddings_diffeomorphisms}
+We introduce three important types of maps, based on the rank of the differential $\mathrm{d}F$.
+\begin{itemize}
+    \item $F$ is an immersion if $\mathrm{d}F$ is injective.
+    \item $F$ is an embedding if it is an immersion and a homeomorphism onto its image.
+    \item $F$ is a diffeomorphism if it is bijective and both $F$ and $F^{-1}$ are smooth.
+\end{itemize}
+\end{colordef}
+
+\begin{colortheo}{Inverse Function Theorem}{inverse_function_theorem}
+If $F: M \to N$ is smooth and $\mathrm{d}F: T_pM \to T_{F(p)}N$ is 
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item injective $\implies$ locally around $p$ F is an embedding
+    \item bijective $\implies$ locally around $p$ F is a diffeomorphism
+\end{itemize}
+\end{colortheo}
+\begin{proof}
+See Theorems 4.8 and 4.14 in \cite{tsakanikas2024dg2}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
