@@ -1,0 +1,486 @@
+
+
+\emph{\textbf{(Lecture 5)}}\\
+
+\begin{colordef}{Vector Field Along a Curve}{vecfield-along-curve}
+Let $\gamma: I \to M$ be a smooth curve. We call a smooth map
+\todo[inline]{ find a good notation for the bundle }
+\[
+X:t \longmapsto X_t \in T_{\gamma(t)} M
+\]
+a \emph{vector field along a curve} for $t \in I$, assigning to each $t$ a tangent vector at $\gamma(t)$.
+\end{colordef}
+
+\begin{colremark}
+If $\gamma$ self-intersects (i.e., $\gamma(t_1) = \gamma(t_2)$), $X_{t_1}$ does not have to be the same as $X_{t_2}$ (so not a unique value at all points of $M$ belonging to the image of $\gamma$).
+
+In this case: $X$ does not extend to a vector field on $M$. If $\gamma$ is an embedded curve, $X$ always extends (non-uniquely, i.e. in many different ways) to an element of $\Gamma(TM)$.
+
+Locally (i.e., restricting the domain of $\gamma$): Any curve is embedded.
+\end{colremark}
+
+
+
+\begin{colorlem}{Covariant Derivative Along a Curve}{}
+Let $\gamma: I \to M$ be a smooth curve and $X$ a vector field along $\gamma$. The covariant derivative $\nabla_{\dot{\gamma}} X$ is uniquely defined at each $t \in I$, independently of any local extension of $X$ around $\gamma(t)$.
+\end{colorlem}
+
+\begin{proof}[Sketch of proof]
+
+Assuming $\gamma'(t)\neq 0$, restrict to $\gamma|_{(t-\epsilon,t+\epsilon)}$ so that it is embedded curve.
+
+
+
+Extend $X$ to a vector field in a neighborhood of $\gamma(t)$ in $M$. Then, in local coordinates around $\gamma(t)$:
+\begin{align*}
+\left(\nabla_{\dot{\gamma}} X|_{\gamma(t)}\right)^k
+&= \dot{\gamma}^i \frac{\partial}{\partial x^i} X^k + \Gamma_{ij}^k(\gamma(t))\ \dot{\gamma}^i X^j \\
+&= \frac{\mathrm{d}}{\mathrm{d}t} X^i_t + \Gamma_{ij}^k(\gamma(t))\ \dot{\gamma}^i X^j_t
+\end{align*}
+
+
+The last expression depends only on the values along $\gamma$.
+\end{proof}
+
+\subsection*{Levi-Civita connection}
+
+On a general manifold: An infinite family of connections. The difference of two such connections, $\nabla - \overline{\nabla}$ is always a (1,2)-tensor field (see exercise 4.1c). If $M$ is equipped with a Riemannian metric, there exists a unique \emph{natural} connection.
+
+\begin{colortheo}{Levi-Civita Connection}{levi_civita}
+Let $(M, g)$ be a Riemannian manifold. There exists a \textit{unique} connection $\nabla$ (called the Levi-Civita connection) such that:
+\begin{enumerate}
+    \item $\nabla$ is torsion-free: $\Gamma_{ij}^k = \Gamma_{ji}^k$ (if true in one coordinate system, it's true for all; since the torsion is a tensor).
+    \item $\nabla$ respects the metric: for any $X, Y, Z \in \Gamma(TM)$,
+    \[
+    X(g(Y, Z)) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)
+    \]
+    (equivalently, $\nabla_X g = 0$ for all $X$.)
+\end{enumerate}
+\end{colortheo}
+
+\begin{proof}
+
+
+\textit{Uniqueness}: It suffices to prove that in any local coordinate system, conditions 1. \& 2. uniquely fix the Christoffel symbols.
+
+In any local coordinates $(x^1, \ldots, x^n)$ we have
+
+\begin{align*}
+\frac{\partial}{\partial x^i} g_{jh} &= \frac{\partial}{\partial x^i}\left(g\left(\frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right)\right) \\
+&= g\left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^h}\right) \\
+&= g\left(\Gamma_{ij}^a \frac{\partial}{\partial x^a}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \Gamma_{ih}^a \frac{\partial}{\partial x^a}\right) \\
+& = \Gamma_{ij}^a g_{ah} + \Gamma_{ih}^a g_{aj}
+\tag{4}
+\end{align*}
+
+Permuting indices:
+
+\[
+\frac{\partial}{\partial x^h} g_{ij} = \Gamma_{hj}^a g_{ai} + \Gamma_{hi}^a g_{aj} \quad \tag{1}
+\]
+
+\[
+\frac{\partial}{\partial x^j} g_{ih} = \Gamma_{ji}^a g_{ah} + \Gamma_{jh}^a g_{ai} \quad \tag{2}
+\]
+
+So (1) + (2) - (4):
+
+\[
+\frac{\partial}{\partial x^i} g_{jh} + \frac{\partial}{\partial x^j} g_{ih} - \frac{\partial}{\partial x^h} g_{ij} = 2 \Gamma_{ij}^a g_{ah}
+\]
+
+So i can solve this for $\Gamma$, as the above is just a matrix product. We obtain, after renaming the indices,
+\begin{equation}
+    \label{eq:christoffel_levi_civita}
+    \Gamma_{ij}^k = \frac{1}{2} g^{kd} \left( \frac{\partial}{\partial x^i} g_{jd} + \frac{\partial}{\partial x^j} g_{id} - \frac{\partial}{\partial x^d} g_{ij} \right)
+\end{equation}
+
+Where, as usual, $[g^{ij}]$ is the inverse matrix of $[g_{ij}]$. We see, that $\Gamma$ is uniquely determined by the metric $g$.\\
+
+\textit{Existence}:
+Instead of using the above formula to construct a connection, we go a slightly different path. Let us use the shorthand notation $\langle \cdot, \cdot \rangle := g(\cdot, \cdot)$. In order to define $\nabla_X Y$, $X, Y \in \Gamma(TM)$, it suffices to define $\langle \nabla_X Y, Z \rangle$, $\forall X, Y, Z \in \Gamma(TM)$.
+
+(1)
+\[
+X \langle Y, Z \rangle = \langle \nabla_X Y, Z \rangle + \langle Y, \nabla_X Z \rangle
+\]
+
+(2)
+\[
+Y \langle X, Z \rangle = \langle \nabla_Y X, Z \rangle + \langle X, \nabla_Y Z \rangle
+\]
+
+(3)
+\[
+Z \langle X, Y \rangle = \langle \nabla_Z X, Y \rangle + \langle X, \nabla_Z Y \rangle
+\]
+
+We use now the torsion-free condition, $\nabla_X Y - \nabla_Y X = [X, Y]$.
+
+From (1), (2), (3), we obtain Koszul's formula:
+
+\[
+\langle \nabla_X Y, Z \rangle
+= \frac{1}{2} \Big(
+    X(\langle Y, Z \rangle) + Y(\langle X, Z \rangle) - Z(\langle X, Y \rangle) + \langle [X, Y], Z \rangle + \langle [Z, X], Y \rangle - \langle [Y, Z], X \rangle \Big)
+\]
+
+One can use this formula to define a connection $\nabla$ on $M$. It is essentially a coordinate-free definition of, the Levi-Civita connection, while equation \eqref{eq:christoffel_levi_civita} is its coordinate expression.
+\todo[inline]{ clean up the equation numbers }
+
+\end{proof}
+
+
+\begin{colexample}{Euclidean connection on $\mathbb{R}^n$ is Levi-Civita}{connection_Rn_is_levi_civita}
+On $(\mathbb{R}^n, g_E)$, the standard directional derivative from equation \eqref{eq:connection_Rn}, $(D_X Y)^k = X^i \frac{\partial Y^k}{\partial x^i}$, is the Levi-Civita connection. The Christoffel symbols are zero in this case, as one can also verify using \eqref{eq:christoffel_levi_civita}.
+\end{colexample}
+
+
+
+\begin{colremark}[Levi-Civita Connection]
+The Levi-Civita connection is the canonical connection on $(M, g)$. From now on, when referring to the connection of a Riemannian manifold, we will always mean the Levi-Civita connection.
+\end{colremark}
+
+
+Any construction based on a metric has to be preserved by isometries, as the latter identify geometric structures. In particular this holds for the Levi-Civita connection.
+\begin{colorlem}{Isometries Preserve the Levi-Civita Connection}{}
+If $F: (M, g) \longrightarrow (N, h)$ is a (local) isometry and $X, Y \in \Gamma(TM)$, then
+\[
+dF(\nabla_X^{(g)} Y) = \nabla_{dF(X)}^{(h)} dF(Y).
+\]
+\end{colorlem}
+
+\begin{proof}
+
+All the terms in the Koszul formula are "respected" by $dF$. I.e. we have $F$-isometry
+
+\[
+\langle dF(v), dF(w) \rangle_h = \langle v, w \rangle_g
+\]
+
+As well as
+\[
+[dF(v), dF(w)] = dF([v, w])
+\]
+for any smooth map.
+
+So Koszuls formula stays the same under pushforwards by isometries, and therefore the Levi-Civita connection is preserved by isometries.
+\todo[inline]{make this proof more readable}
+\end{proof}
+
+
+
+
+\begin{colorlem}{Christoffel symbols via orthogonal projection for an immersion}{}
+
+
+Let $\Psi:\Omega\subset\mathbb{R}^n\to\mathbb{R}^N$ be a smooth immersion with induced metric $g=\Psi^* g_E$, and let $\Pi^\top$ denote orthogonal projection onto $T\Psi(\Omega)$. Then
+\[
+\Pi^\top\Big(\frac{d}{dx^i }\frac{d \Psi}{ dx^j}\Big) = \Gamma^k_{ij}\,\frac{d\Psi}{dx^k}.
+\]
+\end{colorlem}
+
+\begin{proof}
+See exercise 5.4.
+\end{proof}
+
+
+
+
+
+\subsection{Parallel transport}
+
+On a general manifold, parallel transport is the closest thing to a constant vector field along a curve.
+
+\begin{colordef}{Parallel Transport}{}
+    \todo[inline]{ make this definition of par. transp a bit more concise }
+Let $\gamma: I \to M$ be smooth, and $\nabla$ be any connection. For $s,t\in I$, the \emph{parallel transport} along $\gamma$
+\[
+P_{s,t}:T_{\gamma(s)}M \longrightarrow T_{\gamma(t)}M,
+\]
+defined as follows: for $v\in T_{\gamma(s)}M$, let $X$ be the unique vector field along $\gamma$ such that
+\[
+\nabla_{\dot{\gamma}}X=0,\qquad X_s=v.
+\]
+Then
+\[
+P_{s,t}(v):=X_t.
+\]
+Equivalently, if $X$ is parallel along $\gamma$, then $X_t=P_{s,t}(X_s)$.
+\end{colordef}
+
+\begin{colortheo}{Existence and Uniqueness of Parallel Transport}{}
+For every $p \in M$, $v \in T_pM$, and smooth curve $\gamma: I \to M$ with $\gamma(0) = p$, there exists a unique vector field $X$ along $\gamma$ such that $X_0 = v$ and $\nabla_{\dot{\gamma}} X = 0$.
+
+\end{colortheo}
+
+\begin{proof}
+It suffices to do the construction in a local coordinate chart on $M$
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} X^k + \Gamma_{ij}^k \dot{\gamma}^i X^j = 0
+\]
+
+This is a linear ODE, so ODE theory yields a unique solution.
+\end{proof}
+
+We note that the parallel transport has several nice properties, in particular for the Levi-Civita connection.
+\begin{colorlem}{Basic Properties of Parallel Transport}{basic_properties_parallel_transport}
+Let $\gamma:I\to M$ be smooth, and let $P_{s,t}:T_{\gamma(s)}M\longrightarrow T_{\gamma(t)}M$ denote parallel transport along $\gamma$.
+
+\begin{enumerate}
+    \item For all $s,t\in I$, $P_{s,t}$ is a linear isomorphism, with inverse $P_{t,s}$.
+    \item If $\nabla$ is the Levi-Civita connection of $(M,g)$, then $P_{s,t}$ is an isometry:
+    \[
+    g_{\gamma(t)}\!\big(P_{s,t}v,P_{s,t}w\big)=g_{\gamma(s)}(v,w),
+    \qquad v,w\in T_{\gamma(s)}M.
+    \]
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+Parallel transport along $\gamma$ is defined by a linear ODE in each coordinate chart,
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} X^k + \Gamma_{ij}^k(\gamma(t))\, \dot{\gamma}^i X^j = 0.
+\]
+The equation is linear in $X$, so the solution depends linearly on the initial condition
+$v \in T_{\gamma(0)}M$. By existence and uniqueness for linear ODEs, for each $v$ there is a unique
+vector field $X(t)$ along $\gamma$.
+
+Hence the map
+\[
+P_t : v \longmapsto X(t)
+\]
+is linear and bijective, with inverse given by solving the ODE backward in time.\\
+
+Concerning the isometry property, let $X, Y$ be vector fields on $\gamma$ s.t. $\nabla_\gamma X = \nabla_\gamma Y = 0$. Then
+$$\frac{\mathrm{d}}{\mathrm{d}t} \left \langle X,Y \right \rangle = \gamma' (\left \langle X,Y \right \rangle) = \left \langle \nabla_\gamma X,Y \right \rangle + \left \langle X,\nabla_\gamma Y \right \rangle = 0,$$
+
+where we have used that for $f(p):=\left \langle X_p,Y_p \right \rangle$ we have $\frac{\mathrm{d}}{\mathrm{d}t}(f\circ \gamma)(t) = \mathrm{d}\gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right )(f)=\gamma'(t)f$. 
+
+The map $t\mapsto \left \langle X(t),Y(t) \right \rangle$ lives on $I\subset \mathbb{R}$, and has zero derivative, so we get $\left \langle X(t),Y(t) \right \rangle = \left \langle X(0),Y(0) \right \rangle$, which is exactly the isometric property.
+\end{proof}
+
+In particular, if $\gamma(a)=\gamma(b)$ then $P_t:T_{\gamma(a)} M \to T_{\gamma(b)} M$ is the identity map, so parallel transport along a closed curve is an isometry of the tangent space at the base point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Geodesics and the exponential map}
+
+\subsection{Geodesics}
+
+We define geodesics as curves whose velocity is parallel along the curve.
+
+\begin{colordef}{Geodesic}{geodesic}
+A geodesic is a curve $\gamma: I \to M$ that satisfies
+\[
+\nabla_{\dot{\gamma}} \dot{\gamma} = 0.
+\]
+\end{colordef}
+
+In local coordinates, this yields the \emph{geodesic equations},
+\begin{equation}
+    \label{eq:geodesic_equation}
+    \ddot{\gamma}^k + \Gamma_{ij}^k \dot{\gamma}^i \dot{\gamma}^j = 0
+\end{equation}
+
+where $\Gamma_{ij}^k$ are the Christoffel symbols of the connection.
+
+\begin{colremark}
+If we reparametrize: $\gamma' = \gamma \circ h$: one can show that $\nabla_{\dot{\gamma}'} \dot{\gamma}' \parallel \dot{\gamma}'$, i.e. there exists a function $\lambda(t)$ such that $\nabla_{\dot{\gamma}'} \dot{\gamma}' =\lambda \dot{\gamma}'$. But we do not necessarily have $\nabla_{\dot{\gamma}'} \dot{\gamma}'=0$ anymore so the above definition is parametrisation dependent. Any curve which satisfies $\nabla_{\dot{\gamma}'} \dot{\gamma}' =\lambda \dot{\gamma}'$ can always be reparametrised to geodesics.
+\end{colremark}
+
+
+
+Consider now an embedded hypersurface $S$ in $\mathbb{R}^n$ with the induced metric, and the Levi-Civita connection $\nabla$ of $g$. Recall further example \ref{ex:connection_Rn_is_levi_civita}, and \eqref{eq:connection_Rn}. One can show that on $S\subset \mathbb{R}^n$, the Levi-Civita connection is the projection of the Euclidean connection on $\mathbb{R}^n$ onto $TS$ (to do so, define $\nabla_X Y:=\Pi(D_X Y)$ and verify the assumptions of Theorem \ref{thm:levi_civita}). So we have
+\[\nabla_{\dot{\gamma}} \dot{\gamma} = \Pi(D_{\dot{\gamma}} \dot{\gamma}),\]
+where $\Pi$ is the $g$-orthogonal projection onto the tangent space $T_{\gamma(t)}S$, and where $D$ is Euclidean connection on $\mathbb{R}^n$ as in equation \eqref{eq:connection_Rn}.
+
+In this setting, a curve $\gamma:(a,b) \to S$ is a geodesic iff
+\[
+0 = \nabla_{\dot{\gamma}} \dot{\gamma} = \Pi(D_{\dot{\gamma}} \dot{\gamma}),
+\]
+where $\ddot\gamma:=D_{\dot{\gamma}} \dot{\gamma} = \frac{\mathrm{d}^2\gamma}{\mathrm{d}t^2}$. So here, the \emph{ambient acceleration in} $\mathbb{R}^n$ of a geodesic is orthogonal to the surface, $\ddot\gamma\perp T_{\gamma(t)}S$.
+
+
+\begin{colexample}{Geodesics on \((S^n, g_{S^n})\)}{}
+Consider \((S^n, g_{S^n})\), where \(g_{S^n}\) is the metric induced from \((\mathbb{R}^{n+1}, g_e)\). In view of the previous discussion, geodesics \(\gamma\) are exactly curves whose acceleration in \(\mathbb{R}^{n+1}\) is orthogonal to \(TS^n\). Since \(T_{\gamma(t)}S^n = \gamma(t)^\perp\), the condition \(\ddot\gamma \perp T_{\gamma(t)}S^n\) implies \(\ddot\gamma = \lambda(t)\gamma\). Hence the subspace
+\[
+V := \mathrm{span}\{\gamma(t), \dot\gamma(t)\}
+\]
+is invariant under time differentiation, so \(\gamma(t) \subset V\) for all \(t\). Therefore \(\gamma\) lies in a 2-dimensional linear subspace through the origin, and thus is a great circle.
+\end{colexample}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Draw circle (S^1)
+    \draw[thick] circle (1);
+    
+    % Mark point p on circle
+    \draw[fill=black] (0,1) circle (0.05);
+    \node[above] at (0,1) {$\gamma(t)$};
+    
+    % Draw tangent line at p
+    \draw[thick, Groseille] (-2,1) -- (2,1);
+    
+    % Draw tangent vector
+    \draw[->, thick, Canard, shift={(0,1)}] (0,0) -- (1,0);
+    \node[right, above, Canard] at (1,1) {$\dot\gamma$};
+
+    \node[right, above, Groseille] at (-1,1) {$T_{\gamma(t)} S^{n}$};
+    \draw[fill=black] (0,0) circle (0.05);
+    \node[right, below, black] at (0,0) {$0\in\mathbb{R}^{n+1}$};
+    
+    % acceleration
+    \draw[->, thick, Canard, shift={(0,0)}] (0,1) -- (0,0.5);
+    \node[right, Canard] at (0,0.5) {$\ddot\gamma$};
+
+    % Image of exp_p(v) on sphere (projected along circle)
+    % \coordinate (q) at (0.8,0.6); % on circle
+    % \fill (q) circle (0.8pt) node[right] {$\exp_p(v)$};
+    
+    % Label the circle
+    \node at (1,-0.7) {$S^1$};
+    
+    % Draw normal vector (radius)
+    \draw[dashed, gray] (0,0) -- (0,1);
+\end{tikzpicture}
+\end{center}
+
+\begin{colortheo}{Existence and Uniqueness of Geodesics}{existence_uniqueness_geodesics}
+
+For every $p \in M$ and $v \in T_pM$, there exists a unique maximal (domain can not be extended) geodesic $\gamma: (-\epsilon, \epsilon) \to M$ such that $\gamma(0) = p$ and $\dot{\gamma}(0) = v$. 
+\end{colortheo}
+
+For such $p,v$ we will denote the curve by $\gamma_{p,v}(t)$ from now on.
+
+\begin{proof}[Proof sketch]
+ODE theory yields existence and uniqueness of solutions to the geodesic equations, \eqref{eq:geodesic_equation}, and that $\gamma$ depends smoothly on $p$ and $v$. 
+\end{proof}
+
+\begin{colorcor}{}{}
+If you have two curves $\gamma_1, \gamma_2$ such that $\gamma_1(0) = \gamma_2(0)$ and $\dot{\gamma}_1(0) = \dot{\gamma}_2(0)$, then on the common domain of intersection they have to agree, i.e. they are subcurves of the same maximal geodesic.
+\end{colorcor}
+
+
+
+\begin{colremark}
+\label{rem:euclidean_geodesics_are_straight}
+Recall that $\Gamma_{ij}^k=0$ in cartesian coordinates due to \eqref{eq:christoffel_levi_civita}. Hence geodesics satisfy $\ddot{\gamma}^k + \Gamma_{ij}^k \dot{\gamma}^i \dot{\gamma}^j = \ddot{\gamma}^k = 0$, so by integrating twice we get $\gamma^k(t) = a^k t + b^k$, i.e. geodesics are straight lines in $\mathbb{R}^n$. Hence they minimize the distance between points.
+
+On a general Riemannian manifold, this is not necessarily true (for example, on the sphere). However, geodesics are always stationary points of the length functional, as we will see later.
+\todo[inline]{ link stationary points and local minimsaion }
+\end{colremark}
+
+From the definition, we can easily show that $\left\lVert \gamma' \right\rVert=g(\gamma',\gamma')$ is constant in $t$, i.e. geodesics are parametrised at constant speed.
+
+\begin{colorlem}{Geodesics are parametrised at constant speed}{geodesics_constant_speed}
+Let $\gamma$ be a geodesic on $(M,g)$, and let $\nabla$ be the Levi-Civita connection. Then 
+$$\frac{\mathrm{d}}{\mathrm{d}t} g(\gamma',\gamma')=0.$$
+\end{colorlem}
+\begin{proof}
+    \begin{align*}
+        \frac{\mathrm{d}}{\mathrm{d}t} g(\gamma',\gamma')
+        &= \mathrm{d} \gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right ) \left ( g(\gamma',\gamma') \right )\\
+        &= \gamma'(t) g(\gamma',\gamma')\\
+        &= g(\nabla_{\gamma'}\gamma',\gamma') + g(\gamma',\nabla_{\gamma'}\gamma'). 
+    \end{align*}
+    But $\nabla_{\gamma'}\gamma'=0$ as $\gamma$ is a geodesic, so we yield the result.
+\end{proof}
+
+
+
+We present now a version of Nöther's Theorem.
+
+\begin{colorlem}{Nöther's Theorem for Geodesics}{noether}
+Let $X \in \Gamma(TM)$ be Killing, $\nabla$ the Levi-Civity connection, and $\gamma$ be a Geodesic on $(a,b)$. Then the function $t \mapsto g(X|_{\gamma(t)}, \dot{\gamma})$ is constant for $t \in (a, b)$.
+\end{colorlem}
+
+\begin{proof}
+See exercise 5.1a.
+\end{proof}
+
+Any function $F: TM \to \mathbb{R}$ such that $F(\gamma(t), \dot{\gamma}(t))$ is constant when $\gamma$ is a geodesic is called a \emph{constant of motion} for the geodesic flow. Classically, Nöther's theorem states that for any \emph{symmetry} of the system, there is a corresponding constant of motion. In this case, the function $t \mapsto g(X|_{\gamma(t)}, \dot{\gamma})$ is a constant of motion along the geodesic. The symmetry is given by the Killing vector field $X$, which, as we have seen is related to isometries of the manifold, see Lemma \ref{lem:killing_generates_isometries}.
+
+We will see later, that isometries map geodesics to geodesics.
+
+
+
+\begin{colexample}{Geodesics and constants of motion in the Poincaré Half-Plane}{}
+Let $\mathbb{H}^2:=\{(x,y):y>0\}$ be the Poincaré half-plane with $g_H = \frac{dx^2 + dy^2}{y^2}$. In exercise 5.2 we show that 
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item Maps $f(z) = \frac{az+b}{cz+d}$, with $ad-bc>0$, are isometries
+    \item The geodesic equations are given by 
+    \[
+    \ddot{x} - \frac{2}{y} \dot{x}\dot{y} = 0, \quad 
+    \ddot{y} + \frac{1}{y} (\dot{x}^2 - \dot{y}^2) = 0,
+    \]
+    with conserved quantities
+    \[
+    E = g_H(\dot{\gamma}, \dot{\gamma}), \quad P = \frac{\dot{x}}{y^2},
+    \]  
+    P being a constant of motion associated to the Killing vector field $\frac{\partial}{\partial x}$, as in Lemma \ref{lem:noether}.
+\item The geodesics are semicircles orthogonal to the x-axis.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0,>=stealth]
+
+    % Axes and boundary
+    \draw[<->] (-4.2,0) -- (4.3,0) node[right] {$x$};
+    \draw[->] (0,0) -- (0,3.35) node[above] {$y$};
+
+    % Geodesics in H^2: vertical lines and semicircles orthogonal to y=0
+    \draw[->,very thick,Rouge] (0.0,0) -- (0.0,3.0);
+    \draw[<-,very thick,Groseille] (-3.2,0) arc[start angle=180,end angle=0,radius=1.6];
+    \draw[->,very thick,Canard] (0.0,0) arc[start angle=180,end angle=0,radius=2.0];
+    \draw[->,very thick,Leman] (0,0) arc[start angle=180,end angle=0,radius=0.9];
+
+    \node at (3,3) {\small $\mathbb H^2=\{(x,y):y>0\}$};
+\end{tikzpicture}
+\end{center}
+
+\end{colexample}
+
+
+
+\begin{colorlem}{Parallel orthonormal frame along a geodesic}{parallel_orthonormal_frame}
+Let $\gamma:[0,1]\to M$ be a geodesic. Then there exists an orthonormal frame $\{E_i\}_{i=1}^n$ along $\gamma$ such that
+\[
+E_1(t)\ \text{is collinear with }\dot{\gamma}(t), 
+\qquad
+\nabla_{\dot{\gamma}}E_i=0 \quad \text{for all } i=1,\dots,n.
+\]
+
+Moreover, for any vector field $X=X_i(t)\,E_i|_{\gamma(t)}$ parallel-transported along $\gamma$, one has
+\[
+\nabla_{\dot{\gamma}}X=0
+\quad\Longleftrightarrow\quad
+X_i(t) \text{ is constant in $t$ for all } i.
+\]
+\end{colorlem}
+
+\begin{proof}
+See exercise 5.3.
+\end{proof}
+
+
+
