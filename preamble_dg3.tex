@@ -1,0 +1,191 @@
+
+
+
+
+\documentclass[11pt,a4paper]{article}
+% \usepackage[left=1.5cm,right=1.5cm, bottom=2.5cm, top=2.5cm]{geometry}
+\usepackage[left=3cm,right=3cm, bottom=2.5cm, top=2.5cm]{geometry}
+
+
+
+
+% \usepackage{showlabels}
+\usepackage{showkeys}
+
+
+
+% TODO NOTES
+\setlength {\marginparwidth }{1.5cm}
+\usepackage{todonotes}
+% \usepackage[disable]{todonotes}
+
+
+% EQUATIONS
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\numberwithin{equation}{section}
+
+
+% LONG ARROWS FOR MAPPINGS
+% \renewcommand{\to}{\longrightarrow}
+% \renewcommand{\mapsto}{\longmapsto}
+
+
+% COLORS EPFL STYLE
+% https://inside.epfl.ch/corp-id/en/brand-identity-guidelines/
+\usepackage{xcolor}
+\definecolor{Groseille}{RGB}{181,31,31}
+\definecolor{Canard}{RGB}{0,116,128}
+\definecolor{Rouge}{RGB}{255,0,0}
+\definecolor{Leman}{RGB}{0,167,159}
+\definecolor{Ardoise}{RGB}{65,61,58}
+\definecolor{Perle}{RGB}{202,199,199}
+
+
+% THEOREMS
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+% THEOREMS IN COLORED BOXES
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\newtcbtheorem
+[number within=section] % tcolorbox handles section-prefixed numbering
+{colortheo}
+{Theorem}
+{
+    % colback =Groseille!8,
+    colback =Groseille!0,
+    colframe=Groseille,
+    fonttitle=\bfseries,
+}
+{thm} % necessary label prefix
+
+\newtcbtheorem
+[use counter from=colortheo] % shared counter
+{colordef}
+{Definition}
+{
+    % colback =Ardoise!10,
+    colback =Ardoise!0,
+    colframe=Ardoise,
+    fonttitle=\bfseries,
+}
+{def} % necessary label prefix
+
+\newtcbtheorem
+[use counter from=colortheo] % shared counter
+{colorlem}
+{Lemma}
+{
+    % colback =Groseille!10,
+    colback =Groseille!0,
+    colframe=Groseille,
+    fonttitle=\bfseries,
+}
+{lem} % necessary label prefix
+
+\newtcbtheorem
+[use counter from=colortheo] % shared counter
+{colorcor}
+{Corollary}
+{
+    % colback =Groseille!10,
+    colback =Groseille!0,
+    colframe=Groseille,
+    fonttitle=\bfseries,
+}
+{cor} % necessary label prefix
+
+\newtcbtheorem
+[use counter from=colortheo] % shared counter
+{colexample}
+{Example}
+{
+    % colback=Canard!5,
+    colback=Canard!0,
+    colframe=Canard,
+    fonttitle=\bfseries,
+}
+{ex} % necessary label prefix
+
+\makeatletter
+% \newtheorem{colexample}[tcb@cnt@colortheo]{Example}
+\newtheorem{colremark}[tcb@cnt@colortheo]{Remark}
+\makeatother
+
+
+% ZERO INDENTATION
+\setlength\parindent{0pt}
+
+
+% BIBLIOGRAPHY
+% \usepackage[backend = biber, sorting=none]{biblatex}
+\usepackage[hyperref,backend=biber,backref,backrefstyle=none,style=alphabetic]{biblatex}
+% \addbibresource{~/tex_templates/bibliography.bib}
+\addbibresource{bib_dg3.bib}
+
+
+% LINK COLOUR
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    allcolors=blue
+}
+
+
+% FANCY HEADER
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% \fancyhead[C]{}
+% \fancyhead[]{}
+% \fancyhead[C]{\leftmark}
+% \fancyfoot[C]{\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0.4pt}
+
+
+% CODE
+% \usepackage{listings}
+% \usepackage{pythonhighlight}
+% \lstset {language=C++}
+
+
+% DRAWINGS
+\usepackage{tikz-3dplot}
+\usepackage{tikz}
+% \usepackage{tikzcd}
+\usepackage{tikz-cd} 
+% \usetikzlibrary{arrows.meta}
+% \usetikzlibrary{arrows}
+% \tikzset{>={Latex[width=1.5mm,length=2mm]}}
+
+
+% TABLES AND IMAGES
+\usepackage{graphicx}
+\usepackage{float}
+% \usepackage[font=small,skip=5pt]{caption} % reduce space between caption and figure
+
+
+% GLOBAL ITEMSEP SETTING
+\usepackage{enumitem}
+% \setitemize{itemsep=0pt}
+% \setitemize{notopsep}
+
+
+% TABLE OF CONTENT DEPTH
+\setcounter{tocdepth}{2}
+
+
+% BRITISH DATE CONVENTION
+\usepackage[UKenglish]{babel} 
+\usepackage[UKenglish]{isodate}
+\cleanlookdateon
