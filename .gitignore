@@ -1,2 +1,11 @@
 
 *.pdf
+*.log
+*.blg
+*.bbl
+*.aux
+*.bcf
+*.out
+*.xml
+*.tdo
+*.toc
