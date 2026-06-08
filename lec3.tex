@@ -1,0 +1,398 @@
+\newpage
+
+\section{Tensors}
+
+\emph{\textbf{(Lecture 3)}}\\
+
+
+
+\begin{colordef}{Tangent bundle}{}
+The tangent bundle is the disjoint union of all tangent spaces of $M$,
+\[
+TM = \bigsqcup_{p \in M} T_p M
+\]
+and admits a natural projection map $\pi:TM \to M$, $(p,v) \mapsto p$
+\end{colordef}
+
+
+
+\begin{colorlem}{Properties of $TM$}{}
+It naturally has the structure of a smooth manifold of dimension $\dim(TM) = 2\dim(M)$.
+
+If $(U, \phi)$ is a local coordinate chart on $M$ with coordinates $(x^1, \dots, x^n)$, then the tangent bundle $TU = \bigsqcup_{p \in U} T_p M$ inherits a coordinate chart defined by
+\begin{align*}
+    \widetilde{\phi}: TU &\longrightarrow \mathbb{R}^{2n} \\
+    (p, v) &\mapsto (x^1(p), \dots, x^n(p), v^1, \dots, v^n)
+\end{align*}
+where $v = v^i \frac{\partial}{\partial x^i}|_p$ are the components of $v$ in the coordinate basis at $p$.
+
+Interestingly, one can show that any section, i.e. any vector field $X: M \to TM$, is an immersion!
+\end{colorlem}
+\begin{proof}
+    See chapter 3 of \cite{tsakanikas2024dg2} and exercise 3.2.
+\end{proof}
+
+So locally: $TM$ looks like the product $U \times \mathbb{R}^n$. But not necessarily globally, see example below.
+
+\begin{colexample}{}{}
+$M = \mathbb{S}^1$, then $T\mathbb{S}^1 \cong \mathbb{S}^1 \times \mathbb{R}$ (the tangent bundle is trivial). But $T\mathbb{S}^2$ is not a product bundle (it is a non-trivial vector bundle).
+\end{colexample}
+
+\begin{colremark}
+As a manifold, $TM$ is always homeomorphic to an open neighborhood of the diagonal $\Delta$ in $M \times M$.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Axes
+    \draw[->] (-0.5, 0) -- (2.5, 0) node[right] {$M$};
+    \draw[->] (0, -0.5) -- (0, 2.5) node[above] {$M$};
+
+    % Diagonal line f(x) = x
+    \draw[thick, Groseille] (0, 0) -- (2, 2);
+
+    % Labels
+    \node[below left] at (0, 0) {$0$};
+    \node[Groseille, below right] at (1.5, 1.5) {$\Delta$};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\end{colremark}
+
+
+(Given a Riemannian metric, this identification follows using the exponential map, introduced later.) So for any two differentiable structures on $M$, the corresponding tangent bundles are homeomorphic as manifolds and they have the same homotopy invariants.\\
+
+\begin{colordef}{Vector Field}{}
+A vector field $X$ is a smooth section (=right inverse) of the projection map $\pi$ of the tangent bundle $TM$, i.e., a smooth map
+\[
+X: M \longrightarrow TM, \quad p \longrightarrow X_p \in T_p M.
+\]
+In other words given  the bundle projection $\pi: TM \to M$, we have $\pi \circ X = \mathrm{id}_M$.
+
+Recall, that the set of all vector fields on $M$ is denoted by $\Gamma(TM)$ (or sometimes by $\Gamma(M)$ or $\mathfrak{X}(M)$).
+\end{colordef}
+
+$\Gamma(TM)$ is a $C^\infty(M)$ module. If $f \in C^\infty(M)$, $X \in \Gamma(TM)$, then $fX \in \Gamma(TM)$. This means that $\Gamma(TM)$ is a module over the ring $C^\infty(M)$: we can multiply vector fields by smooth functions and add them together, and these operations satisfy the expected properties. This structure is fundamental to differential geometry, as it allows us to work with vector fields as objects that can be scaled by functions and combined linearly.\\
+
+Similarly for $T^*M$, we can define the cotangent bundle.
+
+\begin{colordef}{Cotangent Bundle}{}
+The cotangent bundle is the disjoint union of all cotangent spaces of $M$,
+\[
+T^*M = \bigsqcup_{p \in M} T_p^* M
+\]
+and admits a natural projection map $\pi:T^*M \to M$, $(p,\omega) \mapsto p$. It also has a natural smooth manifold structure of dimension $2\dim(M)$, and locally looks like $U \times \mathbb{R}^n$. The charts are defined by $(p, \omega) \mapsto (x^1(p), \dots, x^n(p), \omega_1, \dots, \omega_n)$ where $\omega = \omega_i \mathrm{d}x^i|_p$.
+\end{colordef}
+
+
+\begin{colordef}{1-forms}{}
+A 1-form is a smooth section of the cotangent bundle $T^*M$, i.e., a smooth map $\omega: M \to T^*M,p\mapsto \omega_p$. The set of all 1-forms on $M$ is denoted by $\Gamma(T^*M)$ (or $\Gamma^*(M)$).
+\end{colordef}
+
+\begin{colexample}{}{}
+If $f_1, \ldots, f_s, h_1, \ldots, h_s \in C^\infty(M)$,
+\[
+\omega = \sum_{i=1}^{s} f_i \, \mathrm{d}h_i
+\]
+is a 1-form.
+\end{colexample}
+
+\begin{colremark}[Straightening vector fields]
+If $X \in \Gamma(TM)$, $X|_p \neq 0$: Locally one can find coordinates around $p$ such that $X = \frac{\partial}{\partial x^1}$.
+
+However, if $\omega \in \Gamma(T^*M)$, then in general, one cannot express $\omega$ as $\mathrm{d}f$ for some $f \in C^\infty(M)$ (unless $\mathrm{d}\omega = 0$).
+\end{colremark}
+
+
+
+
+\subsection{Tensors at a point $p$}
+
+Let $\omega \in T_p^* M$. I can think of it as a linear map
+\[
+\omega: T_p M \longrightarrow \mathbb{R}.
+\]
+
+Similarly: I can think of any $v \in T_p M$ as
+\[
+v: T_p^* M \longrightarrow \mathbb{R}
+\]
+
+\begin{colordef}{Tensor at a point}{tensor_at_point}
+A tensor of type $(k, l)$ at $p$ is a multilinear map
+\[
+T: \underbrace{T_p^* M \times \cdots \times T_p^* M}_{k \text{ times}} \times \underbrace{T_p M \times \cdots \times T_p M}_{l \text{ times}} \longrightarrow \mathbb{R}.
+\]
+\end{colordef}
+
+\begin{colremark}[General tensors]
+\label{rem:general_tensors}
+One can easily generalize tensors to multilinear maps on general finite-dimensional vectorspaces and their duals, independent of any manifold structure. Then one considers multilinear maps of the form
+\[T: \underbrace{V^* \times \cdots \times V^*}_{k \text{ times}} \times \underbrace{V \times \cdots \times V}_{l \text{ times}} \longrightarrow \mathbb{R}.\]
+\end{colremark}
+
+\begin{colexample}{}{}
+Some important examples of tensors to develop intuition.
+\begin{itemize}
+\item Tangent vector $v\in T_p M$: $(1,0)$ tensor
+\item Covector $\omega \in T_p^* M$: $(0,1)$ tensor
+\item Riemannian metric $g \in T_p^* M \otimes T_p^* M$: $(0,2)$ tensor
+\end{itemize}
+The first index denotes the \emph{vectorial} part, the second one the \emph{covectorial} part (nonstandard terminology).
+\end{colexample}
+
+
+
+
+\subsection{Tensor product}
+\begin{colordef}{Tensor Product}{}
+Given $T_1$ of type $(k_1, l_1)$ and $T_2$ is of type $(k_2, l_2)$, then $T_1 \otimes T_2$ is a tensor of type $(k_1 + k_2, l_1 + l_2)$ defined by
+\begin{align*}
+    &(T_1 \otimes T_2)(\omega_1, \ldots,  \omega_{k_1+k_2}; v_1, \ldots, v_{l_1+l_2})
+    \\&\qquad\qquad\qquad
+    := T_1(\omega_1, \ldots, \omega_{k_1}; v_1, \ldots, v_{l_1}) \cdot T_2(\omega_{k_1+1}, \ldots, \omega_{k_1+k_2}; v_{l_1+1}, \ldots, v_{l_1+l_2})
+\end{align*}
+\end{colordef}
+
+One can easily check the following facts:
+
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item The tensor product is not commutative: $T_1 \otimes T_2 \neq T_2 \otimes T_1$.
+    \item
+It is bilinear in each argument:
+\begin{align*}
+    T_1 \otimes (a T_2) &= a \cdot (T_1 \otimes T_2), \quad a \in \mathbb{R}\\
+    T_1 \otimes (T_2 + T_3) &= T_1 \otimes T_2 + T_1 \otimes T_3
+\end{align*}
+\end{itemize}
+
+
+
+
+\subsection{Coordinate basis}
+
+Recall from lemmas \ref{lem:basis_tangent_space} and \ref{lem:basis_cotangent_space} if $(x^1, \ldots, x^n)$ local coordinates around $p$ then
+\begin{align*}
+    \left\{ \frac{\partial}{\partial x^i} \right\}_{i=1}^{n} = \text{Basis of } T_p M\\
+    \left\{ \mathrm{d}x^i \right\}_{i=1}^{n} = \text{Basis of } T_p^* M
+\end{align*}
+\begin{colorlem}{Basis of $(k,l)$-tensors}{}
+The set
+\[
+\left\{ \frac{\partial}{\partial x^{i_1}} \otimes \cdots \otimes \frac{\partial}{\partial x^{i_k}} \otimes \mathrm{d}x^{j_1} \otimes \cdots \otimes \mathrm{d}x^{j_l} \right\}_{(i_1, \ldots, i_k, j_1, \ldots, j_l)}
+\]
+forms a basis of the space of $(k, l)$-tensors at $p$.
+\end{colorlem}
+\begin{proof}
+See Proposition C.9 in \cite{tsakanikas2024dg2}.
+\end{proof}
+
+Because of the above lemma, for every tensor $T$ there exist unique components $T^{i_1 \cdots i_k}_{j_1 \cdots j_l}$ such that
+\[
+T = T^{i_1 \cdots i_k}_{j_1 \cdots j_l} \frac{\partial}{\partial x^{i_1}} \otimes \cdots \otimes \frac{\partial}{\partial x^{i_k}} \otimes \mathrm{d}x^{j_1} \otimes \cdots \otimes \mathrm{d}x^{j_l}
+\]
+
+That's why we have been writing $g = g_{ij} \, \mathrm{d}x^i \otimes \mathrm{d}x^j$, see equation \eqref{eq:metric_local_coordinates}. \\
+
+We use indices up for the contravariant (vectorial) indices and indices down for the covariant (covectorial) indices.\\
+
+To recover the components of a tensor $T$ in local coordinates, we can apply $T$ to the corresponding basis vectors, see Proposition C.9 in \cite{tsakanikas2024dg2}.. For example, for a $(k,l)$-tensor $T$, we have
+\begin{equation}
+    \label{eq:tensor_components}
+    T^{i_1 \cdots i_k}_{j_1 \cdots j_l} = T\left( \mathrm{d}x^{i_1}, \ldots, \mathrm{d}x^{i_k}; \frac{\partial}{\partial x^{j_1}}, \ldots, \frac{\partial}{\partial x^{j_l}} \right).
+\end{equation}
+
+
+
+
+\subsection{Change of coordinates}
+
+If we want to switch from one coordinate system to another, we would like to know how the components of a tensor change under a change of coordinates. Let us consider a change of coordinates
+\[
+(x^1, \dots, x^n) \longrightarrow (y^1, \dots, y^n)
+\]
+Recall from lemma \ref{lem:change_coordinates_vectors_covectors} that $\mathrm{d}y^i = \frac{\partial y^i}{\partial x^a}\cdot \mathrm{d}x^a$ and $\frac{\partial}{\partial y^j} = \frac{\partial x^b}{\partial y^j} \cdot \frac{\partial}{\partial x^b}$. Then we have the following lemma.
+
+\begin{colorlem}{Change of coordinates for tensors}{}
+Under a change of coordinates $(x^1, \dots, x^n) \longrightarrow (y^1, \dots, y^n)$, the components of a $(k,l)$-tensor transform as:
+\[
+T^{i_1 \dots i_k}_{j_1 \dots j_l} = T^{a_1 \dots a_k}_{b_1 \dots b_l} \frac{\partial y^{i_1}}{\partial x^{a_1}} \cdots \frac{\partial y^{i_k}}{\partial x^{a_k}} \cdot \frac{\partial x^{b_1}}{\partial y^{j_1}} \cdots \frac{\partial x^{b_l}}{\partial y^{j_l}}
+\]
+\end{colorlem}
+
+\begin{proof}
+Let \(T\) be a \((k,l)\)-tensor at \(p\) and recall equation \eqref{eq:tensor_components}
+\[
+T^{a_1 \dots a_k}_{b_1 \dots b_l} = T(\mathrm{d}x^{a_1}, \dots, \mathrm{d}x^{a_k}; \frac{\partial}{\partial x^{b_1}}, \dots, \frac{\partial}{\partial x^{b_l}}).
+\]
+Under a change of coordinates \(x \mapsto y\), the basis transforms as
+\[
+\mathrm{d}y^{i} = \frac{\partial y^i}{\partial x^a} \, \mathrm{d}x^a, \quad
+\frac{\partial}{\partial y^j} = \frac{\partial x^b}{\partial y^j} \, \frac{\partial}{\partial x^b}.
+\]
+Applying \(T\) to the new basis gives
+\[
+\begin{aligned}
+T(\mathrm{d}y^{i_1}, \dots, \mathrm{d}y^{i_k}; \frac{\partial}{\partial y^{j_1}}, \dots, \frac{\partial}{\partial y^{j_l}})
+&= T\Big(\frac{\partial y^{i_1}}{\partial x^{a_1}} \mathrm{d}x^{a_1}, \dots, \frac{\partial y^{i_k}}{\partial x^{a_k}} \mathrm{d}x^{a_k}; \frac{\partial x^{b_1}}{\partial y^{j_1}} \frac{\partial}{\partial x^{b_1}}, \dots, \frac{\partial x^{b_l}}{\partial y^{j_l}} \frac{\partial}{\partial x^{b_l}}\Big) \\
+&= \frac{\partial y^{i_1}}{\partial x^{a_1}} \cdots \frac{\partial y^{i_k}}{\partial x^{a_k}} \frac{\partial x^{b_1}}{\partial y^{j_1}} \cdots \frac{\partial x^{b_l}}{\partial y^{j_l}} \, T(\mathrm{d}x^{a_1}, \dots, \mathrm{d}x^{a_k}; \frac{\partial}{\partial x^{b_1}}, \dots, \frac{\partial}{\partial x^{b_l}}) \\
+&= \frac{\partial y^{i_1}}{\partial x^{a_1}} \cdots \frac{\partial y^{i_k}}{\partial x^{a_k}} \frac{\partial x^{b_1}}{\partial y^{j_1}} \cdots \frac{\partial x^{b_l}}{\partial y^{j_l}} \, T^{a_1 \dots a_k}_{b_1 \dots b_l}.
+\end{aligned}
+\]
+\end{proof}
+
+This transformation behavior is what historically led to the following terminology for the indices of a tensor:
+\begin{itemize}
+\item Covariant part: Indices down (transforms with multiplication with the Jacobian for the \emph{$y$-to-$x$ transformation} $\frac{\partial x}{\partial y}$)
+\item Contravariant part: Indices up (transforms with inverse Jacobian $\frac{\partial y}{\partial x}$)
+\end{itemize}
+
+\begin{colordef}{Space of Tensors}{space_tensors_at_point}
+The space of tensors of type $(k, l)$ at a point $p \in M$ is denoted by
+$$\otimes^k T_pM\otimes ^l T_p^*M.$$
+
+Recalling Definition \ref{def:tensor_at_point}, it consists of multilinear maps
+$$Q: \underbrace{T_p^* M \times \cdots \times T_p^* M}_{k \text{ times}} \times \underbrace{T_p M \times \cdots \times T_p M}_{l \text{ times}} \longrightarrow \mathbb{R}.$$
+\end{colordef}
+
+\begin{colremark}[Characterisation of tensors]
+Recall Remark \ref{rem:general_tensors}. Let $T$ be a $(k,l)$ tensor over $V$, meaning $$T: \underbrace{V^* \times \cdots \times V^*}_{k \text{ times}} \times \underbrace{V \times \cdots \times V}_{l \text{ times}} \longrightarrow \mathbb{R}.$$
+Then, by forgetting $(k_1,l_1)$ of its entries, we can think of it as a multilinear map in the rest of the $(k_1,l_1)$-variables. This way we get
+$$
+T:\underbrace{V^* \times \cdots \times V^*}_{k-k_1} \times \underbrace{V \times \cdots \times V}_{l-l_1} \longrightarrow \otimes^{k_1}V\otimes^{l_1}V^*,$$
+so the image of $T$ is a multilinear map on the rest of the $(k_1,l_1)$-variables.\\
+
+Consider as a simple example, the $(1,1)$ tensor $Q$ (so $Q\in \otimes^1 V \otimes^1 V^* = V \otimes V^*$). Then $Q$ is a bilinear map
+$$Q: V^* \times V \to \mathbb{R}.$$
+
+If I forget the first variable, I can think of it as a map $Q: V \to V$ defined by
+$$Q: V \to V, v\mapsto Q(\cdot,v).$$
+
+
+Similarly, if I forget the second variable, I can think of it as a map
+$$Q: V^* \to V^*, \omega\mapsto Q(\omega,\cdot).$$
+
+Obviously \emph{forgetting} means to evaluate the tensor at this variable, and then considering the remaining variables as the input of the resulting multilinear map.
+
+We remark that here we have identified $V\cong (V^*)^*$.
+\end{colremark}
+
+
+% \begin{colremark}
+% If $Q \in \mathcal{T}^k T_p M \otimes \mathcal{T}^l T_p^* M$:
+% \[
+% Q: T_p^* M \times \cdots \times T_p^* M \times T_p M \times \cdots \times T_p M \longrightarrow \mathbb{R}
+% \]
+
+% If $T$ is a $(k, l)$ tensor over a vector space $V$:
+% \[
+% T: V^* \times \cdots \times V^* \times V \times \cdots \times V \longrightarrow \mathbb{R}
+% \]
+
+% Then: If I ``forget'' the last $(k_i, l_i)$ of its entries, I can think of it as a multilinear map in the rest of the $(k_i, l_i)$-variables.
+
+% In this way: I can identify for example,
+% \[
+% Q \in V \otimes V^* \quad \text{with a map } Q: V \longrightarrow V
+% \]
+% a $(1,1)$-tensor.
+% \end{colremark}
+\begin{colorlem}{Tensor Product in Coordinates}{}
+Let $f$ be a $(k_1, l_1)$-tensor and $g$ be a $(k_2, l_2)$-tensor with components $f_{i_1 \cdots i_{k_1}}^{j_1 \cdots j_{l_1}}$ and $g_{i_1 \cdots i_{k_2}}^{j_1 \cdots j_{l_2}}$ respectively. Then the tensor product $f \otimes g$ is a $(k_1 + k_2, l_1 + l_2)$-tensor with components
+\[
+(f \otimes g)_{i_1 \cdots i_{k_1} i_{k_1+1} \cdots i_{k_1+k_2}}^{j_1 \cdots j_{l_1} j_{l_1+1} \cdots j_{l_1+l_2}} = f_{i_1 \cdots i_{k_1}}^{j_1 \cdots j_{l_1}} \cdot g_{i_{k_1+1} \cdots i_{k_1+k_2}}^{j_{l_1+1} \cdots j_{l_1+l_2}}.
+\]
+\end{colorlem}
+
+
+
+We introduce another operation on tensors: the contraction. Given a tensor of type $(k.l)$, with components $T^{i_1 \cdots i_k}_{j_1 \cdots j_l}$, we can contract one contravariant and one covariant index to get a tensor of type $(k-1, l-1)$ with components
+
+\begin{colordef}{Contraction of Tensors in coordinates}{contraction_tensors_coordinates}
+    Choose one contravariant and one covariant index and sum them:
+\[
+\operatorname{tr}_{(k,l)}: \{ (k, l) \text{ tensors} \} \longrightarrow \{ (k-1, l-1) \text{ tensors} \}
+\]
+with respect to the $i$-th index up, $j$-th index down by the rule
+$$(\operatorname{tr}_{(i_a,j_b)} T)^{i_1 \cdots i_{a-1} i_{a+1} \cdots i_k}_{j_1 \cdots j_{b-1} j_{b+1} \cdots j_l} = T^{i_1 \cdots i_{a-1} a i_{a+1} \cdots i_k}_{j_1 \cdots j_{b-1} a j_{b+1} \cdots j_l},$$
+where we sum over the repeated index $a$ as always.
+\end{colordef}
+
+\begin{colexample}{}{}
+    To understand this, consider $a=b=1$. Then we have
+    $$(\operatorname{tr}_{(1,1)} T)^{i_2 \cdots i_k}_{j_2 \cdots j_l} = T^{a i_2 \cdots i_k}_{a j_2 \cdots j_l}.$$
+    In the case of a $(1,1)$ tensor: This is just its trace as a linear map. Indeed, if $Q$ is a $(1,1)$ tensor, we can identify it with a linear map $Q: V \to V$ and $\operatorname{tr}_{(1,1)} Q = Q^i_i$ is the usual trace of this linear map.
+\end{colexample}
+
+We remark, that there is a more abstract, but \emph{less useful} definition that does not rely on coordinates.\\
+
+As the usual trace of a linear map, the above definition is in fact independent of the choice of coordinates.
+\begin{colorlem}{Contraction is coordinate-independent}{}
+The contraction of tensors is independent of the choice of coordinates.
+\end{colorlem}
+\begin{proof}
+    See exercise 3.1.
+\end{proof}
+
+
+
+
+\subsection{Tensor fields}
+\begin{colordef}{Tensor field, space of tensor fields}{tensor_field}
+A tensor field of type $(k, l)$ on $M$ is an assignment at every point $p \in M$ of a $(k, l)$ tensor $T_p$, such that the components $T^{i_1 \cdots i_k}_{j_1 \cdots j_l}$ are smooth functions in any local coordinate system.
+
+The space $\Gamma(E)$ denotes all smooth sections of a vector bundle $E \to M$, hence we will denote the space of all $(k, l)$-tensor fields by
+$$\Gamma(\otimes^k TM \otimes^l T^*M).$$
+
+For brevity, the following notation is also common:
+$$T^k_l(M):=\Gamma(\otimes^k TM \otimes^l T^*M).$$
+
+See also \cite{tsakanikas2024dg2}, chapter 8.2.
+\end{colordef}
+
+Of course for $T\in \Gamma(\otimes^k TM \otimes^l T^*M)$ we have that for any $p\in M$, $T_p\in \otimes^k T_p M \otimes^l T_p^* M$ is a $(k,l)$-tensor at $p$, according to Definition \ref{def:space_tensors_at_point}.\\
+
+
+The Riemannian metric is an example of a smooth tensor field of type $(0, 2)$.
+
+\begin{colremark}
+If $T$ is a $(k, l)$-tensor field, we can view it as a $C^\infty(M)$-multilinear map
+\[
+T: \underbrace{\Gamma(T^*M) \times \cdots \times \Gamma(T^*M)}_{k \text{ times}} \times \underbrace{\Gamma(TM) \times \cdots \times \Gamma(TM)}_{l \text{ times}} \longrightarrow C^\infty(M).
+\]
+
+The key property is that $T$ is \emph{pointwise}: for any $\omega_1, \dots, \omega_k \in \Gamma(T^*M)$ and $X_1, \dots, X_l \in \Gamma(TM)$, the value $T(\omega_1, \dots, \omega_k, X_1, \dots, X_l)$ at a point $p \in M$ depends only on the values of these fields at $p$:
+\[
+T(\omega_1, \dots, \omega_k, X_1, \dots, X_l)|_p = T_p(\omega_1|_p, \dots, \omega_k|_p, X_1|_p, \dots, X_l|_p).
+\]
+
+In particular, if any of the vector field arguments vanishes at $p$ (i.e., $X_i|_p = 0$), then the result is zero at $p$.
+
+This pointwise property is equivalent to $T$ being $C^\infty(M)$-multilinear in its arguments.
+\end{colremark}
+
+\begin{colexample}{}{}
+Consider the divergence operator $\operatorname{div}: \Gamma(\mathbb{R}^n) \to C^\infty(\mathbb{R}^n)$ defined by
+\[
+\operatorname{div}(X) = \frac{\partial X^i}{\partial x^i}.
+\]
+This is not a tensor field because it fails to be $C^\infty(\mathbb{R}^n)$-multilinear. Specifically
+\[
+\operatorname{div}(fX) = \frac{\partial (fX^i)}{\partial x^i} = f \frac{\partial X^i}{\partial x^i} + X^i \frac{\partial f}{\partial x^i} \neq f \cdot \operatorname{div}(X).
+\]
+This violates the required linearity property.
+\end{colexample}
+
+The example indicates that for $T$ to be a tensor field, it must be $C^\infty(M)$-multilinear in its arguments. However we get more.
+
+\begin{colortheo}{Characterization of Tensor Fields}{}
+A map
+$$T: \underbrace{\Gamma(T^*M) \times \cdots \times \Gamma(T^*M) \times \Gamma(TM) \times \cdots \times \Gamma(TM)}_{\text{$k$ copies of $\Gamma^*$, $l$ copies of $\Gamma$}} \longrightarrow C^\infty(M)$$
+is a tensor field according to definition \ref{def:tensor_field} if and only if it is $C^\infty(M)$-multilinear.
+\end{colortheo}
+
+\begin{proof}[Proof idea.]
+The direction "tensors are $C^\infty(M)$-multilinear" is true by definition. The converse, "$C^\infty(M)$-linear functional $\implies$ 1-form" is harder and needs a proof. For this one first shows that $\omega(Y)$ at $p$ depends only on $Y|_p$, i.e., it acts pointwise. Why? Because of what a tensor field is: it is an assignment $p\mapsto T_p$, where $T_p$ is a tensor that only depends on $p$.\\
+
+For (0,1) tensors, see exercise 3.5.
+\end{proof}

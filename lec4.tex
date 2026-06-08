@@ -1,0 +1,675 @@
+
+\newpage
+\section{Vector Fields and flows}
+
+\emph{\textbf{(Lecture 4)}}\\
+
+
+Recall that a vector field $X\in \Gamma(TM)$ is a differential operator $X: C^\infty(M) \to C^\infty(M)$. In local coordinates $(x^1, \dots, x^n)$, a vector field can be expressed as $X = X^i \frac{\partial}{\partial x^i}$.
+
+\begin{colordef}{Lie Bracket/Commutator of Vector Fields}{lie_bracket}
+Let $X, Y \in \Gamma(TM)$. The Lie bracket (or commutator) $[-,-] : \Gamma(TM) \times \Gamma(TM) \to \Gamma(TM)$ of $X$ and $Y$ is defined by
+\[
+[X, Y] := X \circ Y - Y \circ X
+\]
+where $X$ and $Y$ are viewed as differential operators on $C^\infty(M)$.
+\end{colordef}
+
+Although $X \circ Y$ is a second order differential operator, $[X, Y]$ is a vector field (first order differential operator). Which can be seen by considering its coordinate expression.
+\begin{align*}
+    [X, Y]^h &= X(Y^h) - Y(X^h) \\
+&= X^i \frac{\partial}{\partial x^i} (Y^h \frac{\partial}{\partial x^h}) - Y^i \frac{\partial}{\partial x^i} (X^h \frac{\partial}{\partial x^h}) \\
+&= X^i \frac{\partial Y^h}{\partial x^i} - Y^i \frac{\partial X^h}{\partial x^i}.
+\end{align*}
+
+\begin{colremark}
+Properties (see exercise 3.3):
+\begin{itemize}
+    \item $\mathbb{R}$ linearity
+    \item $[X, Y] = -[Y, X]$ (anti-commutativity/-symmetry)
+    \item Jacobi's identity
+    \[
+    [[X, Y], Z] + [[Z, X], Y] + [[Y, Z], X] = 0
+    \]
+    \item $[f X, g Y] = f \cdot g [X, Y] + X(g) \cdot f \cdot Y - Y(f) \cdot g \cdot X$
+\end{itemize}
+\end{colremark}
+
+If $[X, Y]$ were a tensor field, then it would have to be of type (1,2). But $[fX,Y]\neq f[X,Y]$, as it involves derivatives of $f$. So $[-,-]$ is not tensorial.\\
+
+% One can easily show that for $X,Y$ being coordinate vector fields, the Lie bracket vanishes, i.e. in any local coordinate charts
+% \begin{equation}
+%     \label{eq:coordinate_fields_commute}
+%     \left[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right] = 0.
+% \end{equation}
+
+% Indeed, let $(U,x)$ be a coordinate chart on a smooth manifold $M$. Recall that $\frac{\partial}{\partial x^i}(x^j) = \delta_i^j$ is constant. Hence
+% \[
+% \left[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right](x^k)
+% =
+% \frac{\partial}{\partial x^i}\!\left(\frac{\partial x^k}{\partial x^j}\right)
+% -
+% \frac{\partial}{\partial x^j}\!\left(\frac{\partial x^k}{\partial x^i}\right)
+% =0
+% \]
+% for all $k$, so coordinate vector fields commute.\\
+
+One can easily show that for $X,Y$ being coordinate vector fields, the Lie bracket vanishes, i.e. in any local coordinate chart
+\begin{equation}
+    \label{eq:coordinate_fields_commute}
+    \left[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right] = 0.
+\end{equation}
+
+Indeed, let $(U,x)$ be a coordinate chart on a smooth manifold $M$. Recall that $\frac{\partial}{\partial x^i}(x^j) = \delta_i^j$ is constant. Hence, for any coordinate function $x^k$,
+\[
+\left[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right](x^k)
+=
+\frac{\partial}{\partial x^i}\!\left(\frac{\partial}{\partial x^j}(x^k)\right)
+-
+\frac{\partial}{\partial x^j}\!\left(\frac{\partial}{\partial x^i}(x^k)\right)
+=
+\frac{\partial}{\partial x^i}(\delta_j^k)
+-
+\frac{\partial}{\partial x^j}(\delta_i^k)
+=0.
+\]
+
+Thus the bracket vanishes on all coordinate functions and is therefore the zero field.\\
+
+$(\Gamma(TM), [-,-])$ is an infinite-dimensional Lie algebra with the Lie group of diffeomorphisms of $M$ to itself, $\operatorname{Diff}(M)$, provided that $M$ is compact. (The Lie group is a manifold equipped with a compatible group structure such that the group operations are smooth maps.)
+
+
+
+\subsection{Flow of a vector field}
+
+
+Let $X \in \Gamma(TM)$.
+
+\begin{colordef}{Integral Curve of a Vector Field}{}
+A curve $\gamma: (a,b) \longrightarrow M$ is an integral curve of $X$ if
+\[
+\dot{\gamma}(t) = X\circ \gamma(t), \quad \forall t \in (a,b).
+\]
+\end{colordef}
+
+In local coordinates:
+\[
+(\gamma')^h(t) = X^h(\gamma(t)).
+\]
+
+We recall the following result from classic ODE theory.
+
+\begin{colortheo}{Local Well-Posedness of ODEs}{}
+Let $F:\mathbb{R}\times\mathbb{R}^n\to\mathbb{R}^n$ be smooth. For every $u_0\in\mathbb{R}^n$, the IVP
+$$
+u'(t)=F(t,u(t)), \quad u(0)=u_0
+$$
+admits a unique maximal solution $u:(T_-,T_+)\to\mathbb{R}^n$, where $T_\pm\in(0,\infty]$, such that:
+
+\begin{itemize}
+    \item Maximality: $u$ cannot be extended beyond $(T_-,T_+)$.
+    \item Blow-up alternative: If $T_+<\infty$ (resp. $T_->-\infty$), then $|u(t)|\to\infty$ as $t\uparrow T_+$ (resp. $t\downarrow T_-$).
+    \item Smooth dependence: For any compact $[a,b]\subset (T_-,T_+)$, the map $u_0 \mapsto u|_{[a,b]}$ is smooth.
+\end{itemize}
+
+\end{colortheo}
+
+Characterisation of maximality: the blow-up alternative is equivalent to the statement that if
+$$
+\sup_{t \in [0,T_+)} |u(t)| < \infty,
+$$
+then $T_+ = +\infty$ (and similarly for $T_-$). In other words, a maximal solution can be extended past any finite time unless its norm becomes unbounded/as long as it remains bounded.
+
+
+Moreover, $u(t) = u(t; u_0)$ depends smoothly on its arguments. This means that the \emph{flow map} $\Phi(t, u_0) := u(t; u_0)$ is smooth in both $t$ and $u_0$. However, the flow is not defined on a uniform time interval for all initial conditions $u_0$; rather, for each $u_0$, there exists some time interval $(-T_-(u_0), T_+(u_0))$ on which the flow is defined.\\
+
+By working in local coordinates, the above theorem implies the following:
+
+\begin{colortheo}{Flow of a Vector Field}{flow_vector_field}
+Let $X \in \Gamma(TM)$. For every open, precompact subset $U \subset M$ (compact closure $\overline{U}$), there exist $\delta > 0$ and a unique smooth map
+\[
+\Phi: (-\delta, \delta) \times \overline{U} \longrightarrow M
+\]
+called the flow map, such that for all $q \in \overline{U}$, the curve $\gamma(t) = \Phi_t(q)$ is an integral curve of $X$ starting from $q$, i.e.,
+\[
+\left\{
+\begin{array}{l}
+\dfrac{\mathrm{d}}{\mathrm{d}t} \Phi_t(q) = X|_{\Phi_t(q)} \\[0.3cm]
+\Phi_0(q) = q
+\end{array}
+\right.
+\]
+
+Moreover, if $X$ is compactly supported, then $U = M$ and $\delta = +\infty$.
+
+See also \cite{tsakanikas2024dg2}, chapter 7.3.
+\end{colortheo}
+
+\begin{proof}
+See \cite{tsakanikas2024dg2}, chapter 7.3.
+\end{proof}
+
+
+
+
+\begin{colremark}
+Two integral curves cannot intersect (uniqueness of solutions of ODEs) $\implies \Phi_t$ is a diffeomorphism on its image.
+\end{colremark}
+
+Moreover, they form a semigroup, meaning that for all $t_1, t_2 \in (-\delta, \delta)$ and $q \in \overline{U}$, we have
+\[
+\Phi_{t_1+t_2}(q)
+= (\Phi_{t_1} \circ \Phi_{t_2})(q).
+\]
+
+
+\begin{colexample}{}{}
+    \label{ex:flow_of_coordinate_vector_field}
+If $X = \frac{\partial}{\partial x^1}$, we solve the flow equation. The differential equation for the flow $\Phi_t(x) = (x^1(t), \ldots, x^n(t))$ is
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} \Phi_t^k(x) = X^k(\Phi_t(x))
+\]
+where $X^k$ are the components of $X$. Since $X = \frac{\partial}{\partial x^1}$, we have $X^k = \delta_1^k$ and in particular $X^k(\Phi_t(x))=\delta^1_k$, so:
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} \Phi_t^k(x) = \delta_1^k = \begin{cases} 1 & \text{if } k=1 \\ 0 & \text{if } k \neq 1 \end{cases}
+\]
+
+With initial condition $\Phi_0(x^1, \ldots, x^n) = (x^1, \ldots, x^n)$, integrating gives:
+\[
+\Phi_t((x^1, \ldots, x^n)) = (x^1 + t, x^2, \ldots, x^n).
+\]
+
+So the flow translates points in the $x^1$-direction at unit speed, as expected.
+\end{colexample}
+
+
+
+\begin{colorlem}{Straightening a Vector Field}{}
+Let $X \in \Gamma(TM)$ with $X_p \neq 0$ at some point $p \in M$. Then there exists a local coordinate system around $p$ in which $X = \frac{\partial}{\partial x^1}$.
+\end{colorlem}
+\begin{proof}
+See exercise 2.4.
+\end{proof}
+
+
+\begin{colorlem}{Commuting Vector Fields Generate Coordinates}{}
+Let $X, Y \in \Gamma(TM)$ be smooth, $[X, Y] = 0$, and let $X_p$ and $Y_p$ be linearly independent at $p \in M$, then there exists local coordinates $(x^1, x^2)$ around $p$ such that $X = \frac{\partial}{\partial x^1}$ and $Y = \frac{\partial}{\partial x^2}$.
+\end{colorlem}
+
+\begin{proof}
+See exercise 4.4.
+\end{proof}
+
+
+
+If we drop the compactness assumption, the flow from Theorem \ref{thm:flow_vector_field} doesn't necessarily exist for all times. To see this consider the following example.
+\begin{colexample}{}{}
+
+On $\mathbb{R}$: Let $X = y^2 \frac{\mathrm{d}}{\mathrm{d}y}$ and $y_0 > 0$. The integral curve $y(t)$ satisfies $\dot{y} = y^2$, which gives
+\[
+y(t) = \frac{1}{\frac{1}{y_0} - t}.
+\]
+
+This solution is only defined for $t < \frac{1}{y_0}$, showing that the flow reaches infinity in finite time.
+\end{colexample}
+
+A vector field generates the flow(s), a one-parameter family of diffeomorphisms. One can form the commutator on the group of such diffeomorphisms.\\
+
+Recall now Definition \ref{def:lie_bracket}. 
+
+\begin{colremark}
+One can show that in local coordinates, the commutator of two flows can be expressed as
+\[
+[X,Y]^k = \lim_{t,s \to 0} \frac{\left(\Phi^{(Y)}_{-s} \circ \Phi^{(X)}_{-t} \circ \Phi^{(Y)}_{s} \circ \Phi^{(X)}_{t}(p)\right)^k - p^k}{ts}.
+\]
+\end{colremark}
+
+This expression quantifies how much the flows of $X$ and $Y$ fail to commute. The four successive flows applied in sequence would return to $p$ if $[X,Y] = 0$; otherwise, we drift by an amount proportional to $ts$. The Lie bracket captures the leading-order term in this drift. Thus the geometric notion of flow non-commutativity coincides with the algebraic definition of the commutator.
+
+
+
+
+\subsection{Lie derivative}
+\begin{colordef}{Lie Derivative}{}
+Let $X \in \Gamma(TM)$ and $\{\phi_t\}_{t \in \mathbb{R}}$ be its flow. The Lie derivative is defined by:
+
+\begin{itemize}
+    \item For $f \in C^\infty(M)$:
+    \[
+    \mathcal{L}_X f(p) = \lim_{t \to 0} \frac{f(\phi_t(p)) - f(p)}{t}
+    \]
+
+    \item For $Y \in \Gamma(TM)$:
+    \[
+    (\mathcal{L}_X Y)_p
+    = \lim_{t \to 0} \frac{(\mathrm{d}\phi_{-t})_{\phi_t(p)}(Y|_{\phi_t(p)}) - Y|_p}{t}
+    = \lim_{t \to 0} \frac{Y|_{\phi_t(p)} - \mathrm{d}(\phi_{+t})_p(Y|_p)}{t}
+    \]
+\end{itemize}
+\end{colordef}
+
+% \begin{figure}[H]
+% \begin{center}
+% \begin{tikzpicture}[scale=1]
+
+% % Bottom curve
+% \draw[thick] (0,0) .. controls (2,0) and (4,0) .. (6,0);
+
+% % Middle curve
+% \draw[thick] (0,1) .. controls (2,0.8) and (4,1.2) .. (6,1.8);
+
+% % Top curve
+% \draw[thick] (0,2) .. controls (2,1.8) and (4,2.2) .. (6,2.8);
+
+% % X-field: bottom row of horizontal arrows
+% \foreach \x in {0.8,2.2,3.6,5} {
+%     \draw[thick,->] (\x,0.0) -- ++(0.8,0);
+% }
+% % Middle row of horizontal arrows tangent to the middle curve
+% \foreach \x/\slope in {0.8/0.1,2.2/-0.1,3.6/0.15,5/0.2} {
+%     \draw[thick,->] (\x,0.8) -- ++(0.7,\slope*0.7);
+% }
+
+% % Top row of horizontal arrows tangent to the top curve
+% \foreach \x/\slope in {0.8/0.05,2.2/0.15,3.6/0.2,5/0.25} {
+%     \draw[thick,->] (\x,1.8) -- ++(0.7,\slope*0.7);
+% }
+
+% % Y-field: row of vertical, upwards arrows
+% \foreach \x/\h in {1.5/0.7,3/0.9,4.5/1.2,5.5/1.5} {
+%     \draw[thick,->] (\x,0) -- (\x,\h);
+% }
+
+% % Label of Y-vector field
+% \node at (5.8,0.9) {$Y$};
+
+% % Label with left arrow
+% \node at (9,0.9) {$\mathcal{L}_XY=0$};
+
+% \end{tikzpicture}
+% \end{center}
+% \end{figure}
+
+
+\begin{colortheo}{Lie Derivative of Functions and Vector Fields}{}
+Let $X \in \Gamma(TM)$ with flow $\{\phi_t\}_{t \in \mathbb{R}}$. Then:
+\begin{align*}
+\mathcal{L}_X f &= X(f) \quad \text{for all } f \in C^\infty(M), \\
+\mathcal{L}_X Y &= [X, Y] \quad \text{for all } Y \in \Gamma(TM).
+\end{align*}
+\end{colortheo}
+
+\begin{proof}
+    See handwritten notes from the lecture.
+\end{proof}
+
+
+
+\begin{colorlem}{Extension of Lie Derivative to Tensor Fields}{lie_derivative_extension_tensor}
+The Lie derivative $\mathcal{L}_X$ extends to all tensor fields by requiring two \emph{axioms}:
+\begin{enumerate}
+    \item For $\omega \in \Gamma(T^*M)$: $(\mathcal{L}_X \omega)(Y) := \mathcal{L}_X(\omega(Y)) - \omega(\mathcal{L}_X Y)$
+    \item Leibniz rule: $\mathcal{L}_X(T_1 \otimes T_2) = (\mathcal{L}_X T_1) \otimes T_2 + T_1 \otimes (\mathcal{L}_X T_2)$
+\end{enumerate}
+
+This yields a map
+% \[
+% \mathcal{L}_X: \Gamma(\otimes^k TM \otimes^l T^*M) \longrightarrow \Gamma(\otimes^k TM \otimes^l T^*M)
+% \]
+\[
+\mathcal{L}: \Gamma(TM)\times T^k_l(M) \longrightarrow T^k_l(M)
+\]
+with $\mathcal{L}_X$ commuting with contractions.
+
+\todo[inline]{maybe add the coordinate expression for this map}
+
+\end{colorlem}
+
+Note that this extension is unique, but we will not prove this here.
+
+We remark that the first axiom is natural, because $\mathcal{L}_X(\omega(Y)) = (\mathcal{L}_X \omega)(Y) + \omega(\mathcal{L}_X Y)$ mimicks a sort of chain rule.
+
+
+\begin{proof}[Proof sketch]
+Build inductively using the two axioms. For $(k,l)$-tensors, decompose as products of vectors and covectors, apply the Leibniz rule.
+\end{proof}
+
+
+Further more, this construction respects contractions (Definition \ref{def:contraction_tensors_coordinates}). Indeed, if $w \in \Gamma(\mathrm{T}^*M)$, $Y \in \Gamma(\mathrm{T}M)$, then $w \otimes Y$ is of type $(1,1)$, and in coordinates we have
+$$
+(w \otimes Y)^\alpha_\beta = w_\beta Y^\alpha.
+$$
+
+If one applies the contraction one gets
+$$
+\operatorname{tr}(w \otimes Y) = (w \otimes Y)^\alpha_\alpha = w_\alpha Y^\alpha.
+$$
+
+But
+$$w(Y) = w_\beta dx^\beta \left(Y^\alpha \frac{\mathrm{d}}{\mathrm{d}x^\alpha}\right)=w_\alpha Y^\alpha.$$
+
+And therefore
+\begin{equation}
+    \label{eq:lie_deriv_contract1}
+    \operatorname{tr}(w \otimes Y) =w(Y).
+\end{equation}
+
+Now apply $\mathcal{L}_X$ to both sides and apply the first axiom/requirement,
+\begin{align*}
+    \mathcal{L}_X(\operatorname{tr}(w \otimes Y))
+    &= \mathcal{L}_X(w(Y))\\
+    &\stackrel{1.}{=} (\mathcal{L}_X w)(Y) + w(\mathcal{L}_X Y)
+\end{align*}
+
+Now we use the second axiom/requirement and apply the contraction on both sides.
+\begin{align*}
+\operatorname{tr}(\mathcal{L}_X(w \otimes Y))
+&\stackrel{2.}{=} \operatorname{tr}((\mathcal{L}_X w) \otimes Y) + \operatorname{tr}(w \otimes (\mathcal{L}_X Y)) \\
+&\stackrel{\eqref{eq:lie_deriv_contract1}}{=} (\mathcal{L}_X w)(Y) + w(\mathcal{L}_X Y)
+\end{align*}
+
+That way, comparing the two expressions, we have established the following lemma.
+
+\begin{colorlem}{Lie Derivative Commutes with Contraction for $(1,1)$ Tensors}{}
+Let $w \in \Gamma(\mathrm{T}^*M)$ and $Y \in \Gamma(\mathrm{T}M)$. Then the Lie derivative commutes with contraction:
+\[
+\mathcal{L}_X(\operatorname{tr}(w \otimes Y)) = \operatorname{tr}(\mathcal{L}_X(w \otimes Y)).
+\]
+\end{colorlem}
+
+
+One can also construct this extension the other way round, i.e. we require the Leibnitz rule + the contraction compatibility, and we get the first axiom as a consequence.
+\begin{align*}
+\mathcal{L}_X w(Y) 
+&\stackrel{\eqref{eq:lie_deriv_contract1}}{=} \mathcal{L}_X(\operatorname{tr}(w \otimes Y)) \\
+&= \operatorname{tr}(\mathcal{L}_X(w \otimes Y)) \\
+&= \operatorname{tr}(\mathcal{L}_X w \otimes Y) + \operatorname{tr}(w \otimes \mathcal{L}_X Y)\\
+&= (\mathcal{L}_X w)(Y) + w(\mathcal{L}_X Y)
+\end{align*}
+
+
+
+\begin{colremark}
+\label{rem:lie_derivative_extension_tensor_fields}
+The results from before can be summarised as follows. We have 4 statements.
+\begin{enumerate}[itemsep=0pt, topsep=0pt]
+    \item $(\mathcal{L}_X \omega)(Y) := \mathcal{L}_X(\omega(Y)) - \omega(\mathcal{L}_X Y)$
+    \item Leibnitz rule for tensor products
+    \item $\mathcal{L}_X$ commutes with contractions
+    \item Extension of $\mathcal{L}_X$ to all tensor fields\\
+\end{enumerate}
+
+Then we have
+$$
+1.\text{ and } 2.
+\iff
+3.\text{ and } 4.
+\iff
+(2.\text{ and } 3. \implies 1.)
+$$
+\end{colremark}
+
+
+\begin{colremark}
+In general: Tensors evaluated at their arguments, like $w(Y)$, $g(X,Y)$, can be viewed as contractions of tensor products. E.g.:
+
+$$
+g(X,Y) = g_{ab} X^a Y^b = \operatorname{tr}(\operatorname{tr}(g \otimes X \otimes Y))
+$$
+\end{colremark}
+
+
+\begin{colremark}
+\label{rem:lie_derivative_tensor_coordinates}
+If $T \in T^{k,l}(M)$, and $X = \frac{\partial}{\partial x^i}$, in local coordinates then $$(\mathcal{L}_X T)^{i_1 \ldots i_k}_{j_1 \ldots j_l} = \frac{\partial T^{i_1 \ldots i_k}_{j_1 \ldots j_l}}{\partial x^i}.$$
+See the solution of exercise 4.3b.
+\end{colremark}
+
+
+
+\begin{colorlem}{Lie Derivative Commutator}{lie_derivative_commutator}
+For any $X, Y \in \Gamma(TM)$ and tensor field $T \in T^k_l(M)$, the Lie derivatives with respect to $X$ and $Y$ satisfy
+\[
+\mathcal{L}_{[X,Y]} T=\mathcal{L}_X \mathcal{L}_Y T - \mathcal{L}_Y \mathcal{L}_X T.
+\]
+\end{colorlem}
+
+\begin{proof}
+See exercise 4.3a.
+\end{proof}
+
+
+
+
+\begin{colordef}{Killing Vector Field}{killing}
+Let $(M,g)$ be a Riemannian manifold. A vector field $X \in \Gamma(\mathrm{T}M)$ is called a \emph{Killing vector field} if
+\[
+\mathcal{L}_X g = 0.
+\]
+\end{colordef}
+
+Remark: this is named after Wilhelm Killing, and not after literally \emph{killing} a vector field.\\
+
+
+% For example, as seen in exercise 4.3b, if $X = \frac{\partial}{\partial x^1}$, then $X$ is a Killing vector field for $g$ if and only if $\frac{\partial g_{ij}}{\partial x^1} = 0$, i.e., the metric components are independent of $x^1$. In this case, the flow of $X$ is an isometry. 
+% \todo[inline]{ this is not really what 4.3b shows }
+
+\begin{colorlem}{Isometric flows and Killing Vector Fields}{killing_generates_isometries}
+Let $X \in \Gamma(\mathrm{T}M)$ with flow $\{\Phi_t\}$. If $X$ generates a flow of isometries, it is Killing, i.e.
+$$(\Phi_t)^* (g|_{\Phi_t}) = g\implies \mathcal{L}_X g = 0.$$
+\end{colorlem}
+\begin{proof}
+See exercise 4.3b.
+\end{proof}
+
+We will not show the converse in full generality, but we proved a related statementin exercise 5.1. There we show that if a metric is independent of a coordinate $x^k$, then the flow $F_t$ of $\frac{\partial}{\partial x^k}$ is an isometry, $F^*_t(g|_{F_t}) = g$. We use this several times, for example in exercise 7.2b.
+
+
+
+
+
+\subsection{Connections}
+
+Lie derivatives measure how a tensor field changes along the flow of a vector field. For vector fields $V$ and $Y$, $\mathcal{L}_V Y$ is not suitable as a directional derivative because it is not $\mathbb{R}$-linear in the first argument: for $f \in C^\infty(M)$,
+\[
+\mathcal{L}_{fV} Y \neq f\,\mathcal{L}_V Y ,
+\]
+so $\mathcal{L}_V Y|_p$ depends on $V$ near $p$, not just on $V|_p$.
+
+Given $Y \in \Gamma(TM)$, $p \in M$, and $V \in T_pM$, we want a directional derivative $D_V Y|_p$ that depends only on $V|_p$. This requires comparing tangent vectors at different points, which is not possible immediately, as they live in different spaces. A systematic way to do this defines a \emph{connection}, enabling differentiation of vector fields, curve acceleration, and parallel transport.
+
+
+
+
+\begin{colordef}{Connection}{connection}
+A connection $\nabla$ on $M$ is a map
+$$\nabla \colon \Gamma(\mathrm{T}M) \times \Gamma(\mathrm{T}M) \to \Gamma(\mathrm{T}M)$$
+
+such that:
+\begin{enumerate}
+    \item $\nabla$ is $C^\infty(M)$-linear in the first argument:
+    \[
+    \nabla_{X_1 + f \cdot X_2} Y = \nabla_{X_1} Y + f \cdot \nabla_{X_2} Y
+    \]
+
+    \item $\nabla$ is $\mathbb{R}$-linear in the second argument:
+    \[
+    \nabla_X (Y_1 + a Y_2) = \nabla_X Y_1 + a \nabla_X Y_2, \quad a \in \mathbb{R}
+    \]
+
+    \item Satisfies the Leibniz rule with respect to the second argument:
+    \[
+    \nabla_X (f Y) = X(f) \cdot Y + f \cdot \nabla_X Y
+    \]
+
+\end{enumerate}
+It is also called \emph{covariant derivative}. $\nabla Y$ is a $(1,1)$-tensor field.
+\end{colordef}
+
+It is local: If $U \subseteq M$ is open and $p \in U$, then $(\nabla_X Y)|_p$ depends only on $X|_p$ and $Y|_U$.\\
+
+For the existence of connections, see Theorem \ref{thm:levi_civita}.
+
+Because of the Leibnitz rule in the second argument, connections are not $C^\infty(M)$-linear in the second argument (there is this extra term $X(f)\cdot Y$) and therefore they are not tensor fields.
+
+E.g. on $\mathbb{R}^n$ one can verify that the \emph{Euclidean connection} defined via the standard directional derivative $D$
+\begin{equation}
+    \label{eq:connection_Rn}
+    (D_X Y)^k = X^i \frac{\partial Y^k}{\partial x^i}.
+\end{equation}
+is in fact a connection.
+
+\begin{colorlem}{}{}
+If $\nabla$ is a connection on $M$, it defines a unique connection on any open subset $U \subseteq M$.
+\end{colorlem}
+
+
+\begin{proof}
+    Let $X, Y \in \Gamma(\mathrm{T}U)$, $p \in U$. We want to show that $\nabla_X Y|_p$ is uniquely defined.
+
+    Let $F: M \to [0,1]$ be a smooth cutoff function such that
+    $$
+    F(q)=\begin{cases}
+    1 \text{ if $q$ is in a neighborhood of } p \text{ in } U \\
+    0 \text{ on } M \setminus U.
+    \end{cases}
+    $$
+
+    Then $\widetilde{X} = F \cdot X$, $\widetilde{Y} = F \cdot Y$ extend to the whole of $M$.
+
+    Define $\nabla_X Y|_p = \nabla_{\widetilde{X}} \widetilde{Y}|_p$. This is independent of the choice of $F$: If $Y$, $\widetilde{Y}$ are two vector fields such that $\widetilde{Y} = Y$ in a neighbourhood $V$ of $p$ and if $f: M \to [0,1]$,
+    \[
+    f =
+    \begin{cases}
+        1 & \text{on } V' \subset V \\
+        0 & \text{on } M \setminus V
+    \end{cases}
+    \]
+    then
+    $$
+    \left. \nabla_X \left( f \cdot (Y - \widetilde{Y}) \right) \right|_p = \left. X(f) \right|_p \cdot (\underbrace{Y - \widetilde{Y}}_{=0}) \big|_p + \underbrace{\left. f \right|_p}_{=1} \cdot (\left. \nabla_X (Y - \widetilde{Y}) \right|_p)
+    $$
+
+    But $f \cdot (Y - \widetilde{Y}) = 0$ in a neighborhood of $p$ $\implies$ $\left. \nabla_X Y \right|_p = \left. \nabla_X \widetilde{Y} \right|_p$
+
+\end{proof}
+
+We will use the above in order to talk about $\nabla_X Y$ when $X, Y$ are not defined on the whole of $M$ (e.g. coordinate vector fields), or fields on a chart.
+
+\begin{colordef}{Christoffel Symbols}{christoffel}
+Let $(x^1, \ldots, x^n)$ be a local coordinate system. The Christoffel symbols $\Gamma_{ij}^k$ are defined by
+\[
+\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} = \Gamma_{ij}^k \frac{\partial}{\partial x^k}.
+\]
+One can extract the $k^{th}$ component as follows:
+\[
+\Gamma_{ij}^k = \mathrm{d}x^k \left( \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} \right),
+\]
+and interpret this as the $k^{th}$ component
+$$\Gamma_{ij}^k=\left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}\right)^k$$
+\end{colordef}
+
+Note: $\Gamma_{ij}^k$ are not components of a tensor (see exercise 4.1a). If they would, having zero Cristoffel symbols in one coordinate system (say cartesian) would imply they vanish in all coordinate systems, which is not the case.\\
+
+In local coordinates, the covariant derivative of a vector field $Y$ in the direction of $X$ is given by
+\begin{equation}
+    \label{eq:covariant_derivative_coordinates}
+    (\nabla_X Y)^k = X^i \frac{\partial Y^k}{\partial x^i} + \Gamma_{ij}^k X^i Y^j.
+\end{equation}
+
+
+\todo[inline]{ add a clear example comparing this to the lie derivative }
+
+
+
+\begin{colorlem}{Extension of Connections to Tensor Fields}{}
+Let $M$ be a smooth manifold equipped with a connection $\nabla$. The connection extends to a map
+\[
+\nabla: \Gamma(TM) \times T^k_l(M) \longrightarrow T^k_l(M)
+\]
+by requiring:
+\begin{enumerate}
+    \item The Leibniz rule for tensor products: $\nabla_X(S \otimes T) = (\nabla_X S) \otimes T + S \otimes (\nabla_X T)$
+    \item Compatibility with contractions: $\nabla_X(\operatorname{tr} A) = \operatorname{tr}(\nabla_X A)$
+\end{enumerate}
+
+The coordinate formula for $X=\frac{\partial}{\partial x^a}$ is
+\[
+    (\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
+    = \partial_a T^{i_1 \dots i_k}_{j_1 \dots j_l}
+    + \sum_{r=1}^{k} \Gamma^{i_r}_{a b} \, T^{i_1 \dots b \dots i_k}_{j_1 \dots j_l}
+    - \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}
+    \]
+
+    \todo[inline]{ $\nabla_X$ for general $X$? (the example below states it for 1,1 tensors)}
+\end{colorlem}
+Compare to extension of the Lie derivative Lemma \ref{lem:lie_derivative_extension_tensor} and Remark \ref{rem:lie_derivative_extension_tensor_fields}.
+
+
+Compare to the coordinate expression of the Lie derivative in Remark \ref{rem:lie_derivative_tensor_coordinates}.
+
+
+\todo[inline]{ explain how to compute Lie and covariant derivatives of tensors, not using the large formula, but using the axioms/requirements, which is more intuitive and easier }
+
+
+\begin{proof}
+
+Recall equation \eqref{eq:covariant_derivative_coordinates}. To derive a formula for general $k,l$ tensors, we first extend $\nabla$ to 1-forms. One can use the contraction axiom to get
+$$(\nabla_X \omega)(Y) = X(\omega(Y)) - \omega(\nabla_X Y)$$
+
+which yields the coordinate formula
+\[
+(\nabla_{\partial_i} \omega)_j = \partial_i \omega_j - \Gamma^k_{ij} \omega_k
+\]
+
+Because $\nabla_X$ is $C^\infty(M)$-linear in the vector field argument and linear over sums in tensors, knowing how it acts on the coordinate basis fully determines its action on any tensor field.
+
+See Exercise 4.2 for the full proof.
+\end{proof}
+
+
+\begin{colexample}{}{}
+
+For a (0,1)-tensor, i.e. a 1-form:
+\[
+(\nabla_X \omega)_k = X^i \frac{\partial \omega_k}{\partial x^i} - \Gamma_{ik}^{\alpha} X^i \omega_\alpha
+\]
+
+For $(1,1)$ tensor fields:
+
+\[
+(\nabla_X T)^a_b = X^i \frac{\partial T^a_b}{\partial x^i} + \Gamma_{i\alpha}^{a} X^i T^\alpha_b - \Gamma_{ib}^{m} X^i T^a_m
+\]
+
+\end{colexample}
+
+
+
+
+\begin{colordef}{Torsion of a Connection}{}
+Let $\nabla$ be a connection on $M$. The torsion tensor $T$ is defined by
+\[
+T(X, Y) = \nabla_X Y - \nabla_Y X - [X, Y]
+\]
+for all $X, Y \in \Gamma(TM)$. Here the term $\nabla_Y X + [X, Y]$ is called \emph{adjoint torsion}.
+\end{colordef}
+
+$T$ is an anti-symmetric $(1,2)$ tensor, see exercise 4.1b.
+
+\begin{colremark}[Torsion for coordinate vector fields]
+
+For coordinate vector-fields,
+$$\left[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right] = 0$$
+
+
+so in view of Definition \ref{def:christoffel}, we have
+$$T_{ij}^k = \Gamma_{ij}^k - \Gamma_{ji}^k,$$
+
+and there fore also
+$$
+T = 0 \iff \Gamma_{ij}^k = \Gamma_{ji}^k.
+$$
+
+Suffices to be true in one coordinate system.
+
+\end{colremark}
