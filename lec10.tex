@@ -286,9 +286,7 @@ For all $X, Y, Z, W \in T_p N$ at a point $p \in N$:
 where $\bar R$ is the Riemann curvature tensor of $(N, \bar g)$ and $R$ that of $(M, g)$.
 \end{colortheo}
 
-\begin{proof}
-Skipped.
-\end{proof}
+We will prove this later.\\
 
 The right-hand side depends only on $B$, so the discrepancy between the intrinsic and ambient curvatures is entirely controlled by the second fundamental form.
 
@@ -309,6 +307,7 @@ If $\Pi \subset T_p N$ is a 2-plane spanned by $X, Y \in T_p N$:
 \end{colorcor}
 
 \begin{colremark}[Theorema Egregium]
+    \label{rem:theorema-egregium}
     % {theorema-egregium}
 For a surface $N^2 \subset \mathbb{R}^3$ with the induced metric, the ambient sectional curvature vanishes ($K \equiv 0$ in Euclidean space), so the Gauss equation reduces to
 \[
@@ -350,9 +349,10 @@ There are two more useful equivalent expressions for $b$:
     b(X, Y) = g(\nabla_X Y,\, \hat n).
     \]
     \item By the Weingarten equation (Theorem~\ref{thm:weingarten-equation}) applied with $W = \hat n$,
-    \[
-    b(X, Y) = -\,g(\nabla_X \hat n,\, Y).
-    \]
+    \begin{equation}
+        \label{eq:alternative_scalar_2nd_fund_form}
+        b(X, Y) = -\,g(\nabla_X \hat n,\, Y).
+    \end{equation}
 \end{itemize}
 
 
