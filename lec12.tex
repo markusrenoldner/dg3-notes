@@ -46,12 +46,13 @@ Let $(M, g)$ be a complete Riemannian manifold and $p \in M$. We want to underst
 \end{itemize}
 In this section we focus on the local failure. By the Gauss lemma (Lemma~\ref{lem:gauss}), $\mathrm{d}\exp_p\big|_v$ is the identity on the radial direction, so $\mathrm{d}\exp_p\big|_v(w) = 0$ forces $w \perp v$. Geometrically, the kernel of $\mathrm{d}\exp_p\big|_v$ measures, infinitesimally, families of geodesics starting at $p$ that reintersect at $\exp_p(v)$.
 
-To study this, fix $v \in T_p M$ and let $\gamma(t) = \exp_p(vt)$. For a smooth curve $w \colon (-\epsilon, \epsilon) \to T_p M$ with $w(0) = v$, the map
+To study this, fix $v \in T_p M$ and let $\gamma(t) = \exp_p(vt)$. For a smooth curve $w \colon (-\epsilon, \epsilon) \to T_p M$ (i.e.\ a curve in the tangent space, parametrizing a family of tangent vectors at $p$) with $w(0) = v$, the map
 \[
 \phi(s, t) = \exp_p(w(s) \cdot t)
 \]
 
-\todo[inline]{ exercise 6.3? }
+(Side note: we are using a very similar variation in Lemma \ref{lem:geodesics_orthogonal_submanifold}/exercise 6.3. a)
+% \todo[inline]{ exercise 6.3? }
 
 defines a variation of $\gamma$ in which each $s$-curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $w(s)$. Taking the linear family $w(s) = v + s \, w_0$ for $w_0 \in T_p M$, the variation vector field at $t = 1$ is
 \[
