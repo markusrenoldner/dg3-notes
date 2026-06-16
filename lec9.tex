@@ -116,7 +116,7 @@ Recall the musical isomorphism $\flat \colon TM \to T^*M$, $X \mapsto X^\flat = 
 
 
 
-\begin{colordef}{The (0,4) Riemann curvature tensor}{}
+\begin{colordef}{The (0,4) Riemann curvature tensor}{04-riemann-curvature-tensor}
 We define the $(0,4)$-Riemann curvature tensor $\widehat{R} \in T^0_4(M)$ by
 \begin{align*}
     \widehat{R}(X,Y,Z,W) &:= g(R(X,Y)\cdot W,\, Z) \\
@@ -592,10 +592,12 @@ where $v^i$ are the coordinates of $v$ in the basis $\partial_i$. There is also 
 $$T_pN^\perp = \{w\in T_pM: w^1 = \cdots = w^n = 0\}=\{w\in T_pM: w\perp T_p N\}$$
 
 where $\perp$ is to be understood with respect to the metric $g$. We define the orthogonal projections 
-\begin{align*}
+\begin{align}
+\label{eq:projections_submanifold1}
 \pi^T: T_pM &\to T_pN \\ 
+\label{eq:projections_submanifold2}
 \pi^\perp: T_pM &\to T_pN^\perp.
-\end{align*}
+\end{align}
 
 So all $X$ can be decomposed as 
 $$v = v^T + v^\perp,$$
@@ -614,6 +616,6 @@ We define the \emph{induced metric} (first fundamental form) on $N$ by $\bar g :
 
 For any vector fields $X, Y$ on $N$, we decompose the covariant derivative (computed in $M$) into tangential and normal components:
 $$\nabla_X Y = \pi^T(\nabla_X Y) + \pi^\perp(\nabla_X Y),$$
-where the first term is the induced connection on $N$, and the second one the \emph{second fundamental form}.
+where the first term is the induced connection on $N$, and the second one the \emph{second fundamental form}, also denoted by $B(X,Y)=\pi^\perp(\nabla_X Y)\in TN^\perp$.
 
 
