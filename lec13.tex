@@ -1,0 +1,251 @@
+
+
+
+\vspace{0.4cm}\emph{\textbf{(Lecture 13)}}\\
+
+
+
+\begin{colortheo}{Conjugate points obstruct length minimization}{conjugate-obstruct-minimization}
+Let $\gamma \colon [0, \ell] \to (M, g)$ be a geodesic. If there exist $t_0, t_1 \in (0, \ell)$ with $t_0 < t_1$ such that $\gamma(t_0)$ and $\gamma(t_1)$ are conjugate along $\gamma$, then $\gamma$ is not length-minimizing between $\gamma(0)$ and $\gamma(\ell)$.
+\end{colortheo}
+
+\begin{colexample}{}{}
+On the round sphere $S^n$, any great-circle arc longer than $\pi$ (i.e.\ extending past an antipodal pair) is not length-minimizing.
+\end{colexample}
+
+
+\begin{proof}
+Without loss of generality $\|\dot\gamma\| = 1$. Let $J$ be a nonzero Jacobi field with $J(t_0) = J(t_1) = 0$. We construct an endpoint-fixing variation $\phi$ of $\gamma$ such that
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s=0} < 0;
+\]
+the first variation vanishes automatically since $\gamma$ is a geodesic.
+
+{Step 1: a first attempt with $Y$ from $J$.}
+Define the continuous, piecewise-smooth vector field along $\gamma$
+\[
+Y(t) := \begin{cases} J(t), & t \in [t_0, t_1], \\ 0, & t \in [0, t_0] \cup [t_1, \ell], \end{cases}
+\]
+and let $\phi(s, t) := \exp_{\gamma(t)}\!\big(s\, Y(t)\big)$. This is smooth in $s$, piecewise smooth in $t$, and the variation formulas extend to such variations. The variation vector field at $s = 0$ is $X|_{s = 0} = Y$, and since each $s$-curve $s \mapsto \phi(s, t)$ is a geodesic, $\nabla_X X = 0$ at $s = 0$. By the 2nd variation formula:
+\begin{align*}
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s = 0} 
+&= \int_0^\ell \big(\|\nabla_{\dot\gamma} Y\|^2 - R(\dot\gamma, Y, \dot\gamma, Y)\big)\,\mathrm{d}t \\
+&= \int_{t_0}^{t_1} \big(\|\nabla_{\dot\gamma} J\|^2 - R(\dot\gamma, J, \dot\gamma, J)\big)\,\mathrm{d}t.
+\end{align*}
+
+{Step 2: this first attempt gives zero.}
+Using the Jacobi equation $\nabla_{\dot\gamma}\nabla_{\dot\gamma} J = R(\dot\gamma, J)\dot\gamma$ and integration by parts (noting $J(t_0) = J(t_1) = 0$):
+\begin{align*}
+\int_{t_0}^{t_1} \|\nabla_{\dot\gamma} J\|^2\,\mathrm{d}t 
+&= \int_{t_0}^{t_1} \left(\tfrac{\mathrm{d}}{\mathrm{d}t}\langle \nabla_{\dot\gamma} J, J\rangle - \langle \nabla_{\dot\gamma}\nabla_{\dot\gamma} J, J\rangle\right) \mathrm{d}t \\
+&= 0 - \int_{t_0}^{t_1} \langle R(\dot\gamma, J)\dot\gamma, J\rangle\,\mathrm{d}t = \int_{t_0}^{t_1} R(\dot\gamma, J, \dot\gamma, J)\,\mathrm{d}t.
+\end{align*}
+Hence $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\big|_{s = 0} = 0$.
+
+{Step 3: smoothing the corner at $t_1$ makes the second variation strictly negative.}
+The issue is the corner of $Y$ at $t = t_1$ (and similarly at $t_0$). Note $J'(t_1) \neq 0$, otherwise $J \equiv 0$ by uniqueness. For small $\delta \ll \varepsilon \ll 1$, replace $Y$ on $[t_1 - \delta, t_1 + \varepsilon]$ by a linear interpolation:
+\[
+\tilde Y(t) := \begin{cases} Y(t), & t \notin [t_1 - \delta,\, t_1 + \varepsilon], \\ Y(t_1 - \delta) \cdot \dfrac{(t_1 + \varepsilon) - t}{\varepsilon + \delta}, & t \in [t_1 - \delta,\, t_1 + \varepsilon]. \end{cases}
+\]
+Taylor expansion gives $\|Y(t_1 - \delta)\| = \|J'(t_1)\| \cdot \delta + O(\delta^2)$, so $\|Y - \tilde Y\|(t) \lesssim \delta$ uniformly. Set $\tilde\phi(s, t) = \exp_{\gamma(t)}(s\, \tilde Y(t))$, which agrees with $\phi$ outside $[t_1 - \delta, t_1 + \varepsilon]$.
+
+{Step 4: comparing the second variations.}
+The difference $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\tilde\phi_s)|_{s=0} - \frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\phi_s)|_{s=0}$ is an integral over $[t_1 - \delta, t_1 + \varepsilon]$. The curvature term contributes at most $O(\delta)$:
+\[
+\left| \int_{t_1 - \delta}^{t_1 + \varepsilon} \big(R(\dot\gamma, Y, \dot\gamma, Y) - R(\dot\gamma, \tilde Y, \dot\gamma, \tilde Y)\big)\,\mathrm{d}t \right| \lesssim \delta,
+\]
+since the integrand is bounded by $|K| \cdot \|Y - \tilde Y\| \cdot (\|Y\| + \|\tilde Y\|) \lesssim \delta$. The kinetic terms give the dominant contribution: on $[t_1 - \delta, t_1]$,
+\[
+\|\nabla_{\dot\gamma} Y\| = \|J'(t_1)\| + O(\delta), \qquad \|\nabla_{\dot\gamma} \tilde Y\| = \frac{\|J'(t_1)\|}{\varepsilon + \delta}\, \delta + O\!\big(\tfrac{\delta}{\varepsilon}\big),
+\]
+while on $[t_1, t_1 + \varepsilon]$, $\nabla_{\dot\gamma} Y = 0$ and $\|\nabla_{\dot\gamma} \tilde Y\| = \tfrac{\|J'(t_1)\|\, \delta}{\varepsilon + \delta} + O(\tfrac{\delta^2}{\varepsilon})$. Combining,
+\[
+\int_{t_1 - \delta}^{t_1 + \varepsilon} \big(\|\nabla_{\dot\gamma} Y\|^2 - \|\nabla_{\dot\gamma} \tilde Y\|^2\big)\,\mathrm{d}t = -\|J'(t_1)\|^2 + O(\varepsilon \delta).
+\]
+Hence, for $\delta \ll \varepsilon \ll 1$:
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\tilde\phi_s)\bigg|_{s = 0} = 0 - \|J'(t_1)\|^2 + O(\varepsilon\delta) + O(\delta) < 0. \qedhere
+\]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+% Note that if $p \in (M,g)$: on any geodesic $\gamma(t) = \exp_p(tv)$, conjugate points $\gamma(t)$ of $\gamma(0) = p$ correspond to points where $\ker(\mathrm{d}\exp_p\big|_{tv}) \neq 0$, i.e.\ points where $\exp_p$ fails to be an immersion. Since on a complete and connected manifold every point is connected to $p$ through a length-minimizing geodesic:
+
+% If $\Omega_0 \subseteq T_pM$ is the maximal star-shaped domain where $\exp_p\big|_{\Omega_0}$ is an immersion (not necessarily 1-1):
+% \[
+% M = \exp_p(\overline{\Omega_0}).
+% \]
+
+% Recall: in 2-d, in space of constant sectional curvature $K$: if $J(0) = 0$, then
+% \[
+% J(t) = \begin{cases} \sin(\sqrt{K}\,t) \cdot \frac{J'(0)}{\sqrt{K}}, & K > 0, \\ t \cdot J'(0), & K = 0, \\ \sinh(\sqrt{-K}\,t) \cdot \frac{J'(0)}{\sqrt{-K}}, & K < 0. \end{cases}
+% \]
+
+% More generally, in 2-d $(M,g)$, $(\tilde{M}, \tilde{g})$:
+
+% $\hat{n}$ parallel unit normal. If
+% \[
+% J(t) = f(t) \cdot \hat{n}, \quad f(0) = 0, \qquad \tilde{J}(t) = \tilde{f}(t) \cdot \tilde{\hat{n}}, \quad \tilde{f}(0) = 0,
+% \]
+% then
+% \[
+% f''(t) + K(t)\,f(t) = 0, \qquad \tilde{f}''(t) + \tilde{K}(t)\,\tilde{f}(t) = 0.
+% \]
+
+
+We have the following comparison principle: \emph{larger curvature produces smaller Jacobi fields}.
+
+\begin{colortheo}{Sturm's comparison theorem}{sturm-comparison}
+Let $f, \tilde f \colon [0, \ell] \to \mathbb{R}$ satisfy $f'' + K\,f = 0$ and $\tilde f'' + \widetilde K\,\tilde f = 0$ with $K, \widetilde K \in C^0([0, \ell])$, and assume
+\[
+f(0) = \tilde f(0) = 0, \qquad f'(0) = \tilde f'(0) > 0, \qquad \tilde f \neq 0 \text{ on } (0, \ell].
+\]
+If $\widetilde K(t) \geqslant K(t)$ for all $t \in [0, \ell]$, then
+\[
+\tilde f(t) \leqslant f(t) \quad \text{on } [0, \ell].
+\]
+\end{colortheo}
+
+The higher-dimensional generalization is:
+
+\begin{colortheo}{Rauch comparison theorem}{rauch-comparison}
+Let $\gamma \colon [0, a] \to M^n$ and $\tilde\gamma \colon [0, a] \to \widetilde M^{n'}$ ($n' \geqslant n$) be unit-speed geodesics, and let $J, \tilde J$ be Jacobi fields along them with
+\[
+J(0) = \tilde J(0) = 0, \qquad \langle \dot J(0), \dot\gamma(0)\rangle = \langle \dot{\tilde J}(0), \dot{\tilde\gamma}(0)\rangle, \qquad \|\dot J(0)\| = \|\dot{\tilde J}(0)\|.
+\]
+Assume $\tilde\gamma$ has no conjugate points on $(0, a]$, and that for all $V \in T_{\gamma(t)} M$, $\widetilde V \in T_{\tilde\gamma(t)} \widetilde M$,
+\[
+\widetilde K(\widetilde V, \dot{\tilde\gamma}(t)) \geqslant K(V, \dot\gamma(t)).
+\]
+Then $\|\tilde J(t)\| \leqslant \|J(t)\|$ for all $t \in [0, a]$. Moreover, if $\|\tilde J(a)\| = \|J(a)\|$, then $K(J(t), \dot\gamma(t)) = \widetilde K(\tilde J(t), \dot{\tilde\gamma}(t))$ for all $t \in [0, a]$.
+\end{colortheo}
+
+Rauch is an \emph{infinitesimal} comparison statement (Jacobi fields encode first-order deviation of geodesics). The corresponding statement for finite geodesic triangles is:
+
+\begin{colortheo}{Toponogov's theorem}{toponogov}
+Let $(M, g)$ have sectional curvature $K \geqslant \rho$ for some $\rho \in \mathbb{R}$. Let $\triangle_{pqr}$ be a geodesic triangle in $M$ with $pq$ a minimal geodesic (and, if $\rho > 0$, $\ell(pr) < \pi/\sqrt\rho$). Let $\triangle_{p'q'r'}$ be the comparison triangle in the model 2D space of constant curvature $\rho$, defined by
+\[
+\ell(p'q') = \ell(pq), \quad \ell(p'r') = \ell(pr), \quad \angle_{q'p'r'} = \angle_{qpr}.
+\]
+Then $\ell(qr) \leqslant \ell(q'r')$.
+\end{colortheo}
+
+
+% \todo[inline]{  }
+
+
+% \begin{colortheo}{Sturm's theorem}{}
+% If $f'(0) = \tilde{f}'(0) > 0$, $f(0) = \tilde{f}(0) = 0$, $\tilde{f} \neq 0$ on $[0, \ell]$, then if $\tilde{K}(t) \geqslant K(t)$:
+% \[
+% \tilde{f}(t) \leqslant f(t) \quad \text{on } [0, \ell].
+% \]
+% \end{colortheo}
+
+% More generally:
+
+% \begin{colortheo}{Rauch comparison theorem}{}
+% Let $\gamma \colon [0, a] \to M^n$, $\tilde{\gamma} \colon [0, a] \to \tilde{M}^{n'}$, $n' \geqslant n$, be unit speed geodesics, and $J, \tilde{J}$ Jacobi fields along $\gamma, \tilde{\gamma}$ such that
+% \[
+% J(0) = 0 = \tilde{J}(0), \quad \langle J'(0),\, \dot{\gamma}(0) \rangle = \langle \tilde{J}'(0),\, \dot{\tilde{\gamma}}(0) \rangle, \quad \|J'(0)\| = \|\tilde{J}'(0)\|.
+% \]
+
+% Assume that $\tilde{\gamma}$ does not have conjugate points on $(0, a]$, and that for all $V \in T_{\gamma(t)}M$, $\tilde{V} \in T_{\tilde{\gamma}(t)}\tilde{M}$:
+% \[
+% \tilde{K}(\tilde{V}, \dot{\tilde{\gamma}}(t)) \geqslant K(V, \dot{\gamma}(t)).
+% \]
+% Then $\|\tilde{J}\| \leqslant \|J\|$.
+
+% If at $t = a$ we have $\|\tilde{J}(a)\| = \|J(a)\|$, then
+% \[
+% K(J(t), \dot{\gamma}(t)) = \tilde{K}(\tilde{J}(t), \dot{\tilde{\gamma}}(t)) \quad \forall\, t \in [0, a].
+% \]
+% \end{colortheo}
+
+% This is a comparison theorem for infinitesimal geodesic triangles. For non-infinitesimal ones:
+
+\begin{colortheo}{Toponogov's theorem}{}
+Let $(M,g)$ have sectional curvature $K$ satisfying $K \geqslant \rho$ for some $\rho \in \mathbb{R}$. Let $pqr$ be a geodesic triangle such that $pq$ is a minimal geodesic and (if $\rho > 0$) $\ell(pr) < \tfrac{\pi}{\sqrt{\rho}}$. Let $p'q'r'$ be a triangle on the 2-d space of constant curvature $\rho$ such that
+\[
+\ell(p'q') = \ell(pq), \quad \widehat{q'p'r'} = \widehat{qpr}, \quad \ell(p'r') = \ell(pr).
+\]
+Then $\ell(qr) \leqslant \ell(q'r')$.
+\end{colortheo}
+
+
+
+
+
+
+
+\subsection{The Cartan--Hadamard theorem}
+
+We now study the topology of manifolds with non-positive sectional curvature. The key analytic input is that Jacobi field norms grow convexly.
+
+\begin{colortheo}{Convexity of Jacobi field norm}{convex-jacobi-norm}
+Let $(M, g)$ have sectional curvature $K \leqslant 0$ and let $\gamma$ be a geodesic. Then for any Jacobi field $J$ along $\gamma$, the function $t \mapsto \|J(t)\|$ is convex.
+\end{colortheo}
+
+\begin{proof}
+First, $\|J\|^2$ has convex second derivative:
+\begin{align*}
+\frac{\mathrm{d}^2}{\mathrm{d}t^2}\,\|J\|^2 
+&= 2\,\langle \nabla_{\dot\gamma}\nabla_{\dot\gamma} J,\, J\rangle + 2\,\|\nabla_{\dot\gamma} J\|^2 \\
+&= 2\,\underbrace{\langle R(\dot\gamma, J)\,\dot\gamma,\, J\rangle}_{\geqslant\, 0\;(\text{since } K \leqslant 0)} + 2\,\|\nabla_{\dot\gamma} J\|^2 \;\geqslant\; 2\,\|\nabla_{\dot\gamma} J\|^2,
+\end{align*}
+where we used the Jacobi equation and the sign of the curvature term: $\langle R(\dot\gamma, J)\dot\gamma, J\rangle = -K(\dot\gamma, J)\,\|\dot\gamma \wedge J\|^2 \geqslant 0$.
+
+For $\|J\|$ itself, the chain rule gives
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}t^2}\,\|J\| = \frac{\frac{\mathrm{d}^2}{\mathrm{d}t^2}\|J\|^2}{2\,\|J\|} - \frac{\big(\frac{\mathrm{d}}{\mathrm{d}t}\|J\|^2\big)^2}{4\,\|J\|^3} \geqslant \frac{\|\nabla_{\dot\gamma} J\|^2}{\|J\|} - \frac{\langle \nabla_{\dot\gamma} J, J\rangle^2}{\|J\|^3} \geqslant 0,
+\]
+where the last inequality is Cauchy--Schwarz: $\langle \nabla_{\dot\gamma} J, J\rangle^2 \leqslant \|\nabla_{\dot\gamma} J\|^2 \cdot \|J\|^2$. \qedhere
+\end{proof}
+
+
+\begin{colortheo}{Exponential map is length non-decreasing in non-positive curvature}{exp-non-decreasing}
+Let $(M, g)$ be complete and connected with $K \leqslant 0$. Then for all $p \in M$ and all $v, w \in T_p M$,
+\[
+\|\mathrm{d}\exp_p\big|_v(w)\| \geqslant \|w\|.
+\]
+In particular, $\mathrm{d}\exp_p|_v$ is injective for every $v$, so $\exp_p \colon T_p M \to M$ is a local diffeomorphism.
+\end{colortheo}
+
+\begin{proof}
+For the variation $\phi(t, s) = \exp_p(t(v + sw))$, the variation vector field $J(t) := \frac{\partial \phi}{\partial s}\big|_{s = 0}$ is a Jacobi field along the geodesic $t \mapsto \exp_p(tv)$, and
+\[
+J(t) = \mathrm{d}\exp_p\big|_{tv}(tw),
+\]
+with $J(0) = 0$ and $\dot J(0) = w$ (the latter computed in normal coordinates around $p$, using $\mathrm{d}\exp_p|_0 = \mathrm{id}$).
+
+By Theorem~\ref{thm:convex-jacobi-norm}, $t \mapsto \|J(t)\|$ is convex. A convex function $f$ with $f(0) = 0$ satisfies $f(t) \geqslant t \cdot f'(0^+)$ for $t \geqslant 0$, so
+\[
+\|J(t)\| \geqslant t \cdot \|\dot J(0)\| = t \cdot \|w\|.
+\]
+Evaluating at $t = 1$: $\|\mathrm{d}\exp_p\big|_v(w)\| = \|J(1)\| \geqslant \|w\|$.
+\end{proof}
+
+\begin{colordef}{Smooth covering map}{covering-map}
+A smooth map $\pi \colon N \to M$ between smooth manifolds is a \emph{smooth covering map} if every point $q \in M$ has an open neighborhood $U$ whose preimage $\pi^{-1}(U)$ is a disjoint union of open sets $\{\widetilde U_i\}_{i \in I}$ in $N$, each mapped diffeomorphically onto $U$ by $\pi$:
+\[
+\pi^{-1}(U) = \bigsqcup_{i \in I} \widetilde U_i.
+\]
+\end{colordef}
+
+\begin{colortheo}{Cartan--Hadamard}{cartan-hadamard}
+If $(M, g)$ is connected, complete, and has $K \leqslant 0$, then $\exp_p \colon T_p M \to M$ is a smooth covering map for every $p \in M$.
+\end{colortheo}
+
+\begin{colremark}{Topological consequences}{}
+\begin{itemize}
+    \item If $M$ is simply connected, then $\exp_p$ is a diffeomorphism, so $M \cong \mathbb{R}^n$.
+    \item In particular, no compact, simply connected manifold of dimension $\geqslant 1$ admits a metric with non-positive sectional curvature.
+\end{itemize}
+\end{colremark}
