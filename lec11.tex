@@ -1,0 +1,375 @@
+
+
+\vspace{0.4cm}\emph{\textbf{(Lecture 11)}}\\
+
+
+
+% Last time: If $N \subseteq (M,g)$ is a submanifold:
+
+% $\Gamma(M,N)$: vector fields on $M$ tangent to $N$.
+
+% \emph{Weingarten equation:} If $X, Y \in \Gamma(M,N)$, $W \in \Gamma(M)$, $W_p \perp T_pN$ for all $p \in N$, then
+% \[
+% \langle \nabla_X W,\, Y \rangle = -\langle W,\, B(X,Y) \rangle,
+% \]
+% and $\bar{\nabla}_X Y = (\nabla_X Y)^T$, $B(X,Y) = (\nabla_X Y)^\perp$ (associated to $\bar{g}$, the induced metric).
+
+% \emph{Gauss equation:} For all $X, Y, Z, W \in T_pN$:
+% \[
+% \bar{R}(X,Y,Z,W) - R(X,Y,Z,W) = \langle B(X,Z),\, B(Y,W) \rangle - \langle B(X,W),\, B(Y,Z) \rangle.
+% \]
+
+We will now prove Theorem \ref{thm:gauss-equation}.
+
+\begin{proof}
+Extend $X, Y, Z, W$ to vector fields on $M$ tangent to $N$. Without loss of generality, choose extensions with $[X, Y]_p = 0$ at the point of interest (this is always possible by working in normal coordinates centered at $p$).
+
+Recall $R(X, Y, Z, W) = \langle R(X, Y) W,\, Z\rangle$ (Definition~\ref{def:04-riemann-curvature-tensor}). We expand the intrinsic curvature using $\nabla_X Y = \bar\nabla_X Y + B(X, Y)$:
+\begin{align*}
+\bar\nabla_X \bar\nabla_Y W 
+&= \nabla_X(\bar\nabla_Y W) - B(X, \bar\nabla_Y W) \\
+&= \nabla_X(\nabla_Y W - B(Y, W)) - B(X, \bar\nabla_Y W) \\
+&= \nabla_X \nabla_Y W - \nabla_X(B(Y, W)) - B(X, \bar\nabla_Y W).
+\end{align*}
+Taking the inner product with $Z \in TN$:
+\begin{align*}
+\langle \bar\nabla_X \bar\nabla_Y W,\, Z\rangle 
+&= \langle \nabla_X \nabla_Y W,\, Z\rangle - \langle \nabla_X(B(Y, W)),\, Z\rangle - \underbrace{\langle B(X, \bar\nabla_Y W),\, Z\rangle}_{= 0,\; B \perp TN} \\
+&= \langle \nabla_X \nabla_Y W,\, Z\rangle + \langle B(Y, W),\, \nabla_X Z\rangle \quad \text{(Weingarten, Theorem~\ref{thm:weingarten-equation})} \\
+&= \langle \nabla_X \nabla_Y W,\, Z\rangle + \langle B(Y, W),\, B(X, Z) + \underbrace{\bar\nabla_X Z}_{\in TN}\rangle \\
+&= \langle \nabla_X \nabla_Y W,\, Z\rangle + \langle B(Y, W),\, B(X, Z)\rangle,
+\end{align*}
+where the last step uses $B(Y, W) \perp TN$. Subtracting the analogous expression with $X$ replaced by $Y$ and using $[X, Y]_p = 0$ to identify
+\[
+\bar\nabla_X \bar\nabla_Y W - \bar\nabla_Y \bar\nabla_X W = \bar R(X, Y) W, \qquad \nabla_X \nabla_Y W - \nabla_Y \nabla_X W = R(X, Y) W,
+\]
+yields the Gauss equation. \qedhere
+\end{proof}
+
+
+% When $N$ is a hypersurface (i.e.\ codimension $1$), co-oriented (with unit normal $\hat{n}$):
+
+% \begin{colordef}{Scalar second fundamental form}{}
+% \[
+% b(X,Y) = \langle B(X,Y),\, \hat{n} \rangle.
+% \]
+% \end{colordef}
+
+
+
+
+
+
+
+\begin{colordef}{Weingarten map}{weingarten-map}
+Let $N \subset (M, g)$ be a co-oriented hypersurface with unit normal $\hat n$. The \emph{Weingarten map} is the linear endomorphism
+\[
+L_p \colon T_p N \to T_p N, \qquad L_p(X) := (\nabla_X \hat n)^T.
+\]
+\end{colordef}
+
+The Weingarten map is well-defined: $\nabla_X \hat n$ has no normal component since $\|\hat n\| = 1$ implies $\langle \nabla_X \hat n, \hat n\rangle = \tfrac{1}{2} X(\|\hat n\|^2) = 0$, so $(\nabla_X \hat n)^T = \nabla_X \hat n$.
+
+Combining the Weingarten map with the alternative form of $b$ from \eqref{eq:alternative_scalar_2nd_fund_form} we obtain
+\[
+b(X, Y) = -\langle \nabla_X \hat n,\, Y\rangle = -\langle L(X),\, Y\rangle.
+\]
+Since $b$ is symmetric (Theorem~\ref{thm:second-fundamental-form-properties}~(c)), so is $L$ with respect to $\bar g$:
+\[
+\langle L(X), Y\rangle = \langle X, L(Y)\rangle.
+\]
+Hence $L_p$ is a self-adjoint endomorphism of $T_p N$ and its eigenvalues are real. 
+
+\begin{colordef}{Principal, Gauss, and mean curvatures}{principal-gauss-mean-curvature}
+Let $L_p$ be the Weingarten map at $p \in N$, with eigenvalues $k_1(p), \ldots, k_n(p) \in \mathbb{R}$. We call:
+\begin{itemize}
+    \item the eigenvalues $k_i(p)$ the \emph{principal curvatures} at $p$;
+    \item the determinant $K_{\mathrm{Gauss}}(p) := \det L_p = k_1(p) \cdots k_n(p)$ the \emph{Gauss curvature};
+    \item the normalized trace $H(p) := \tfrac{1}{n}\,\mathrm{tr}\,L_p = \tfrac{1}{n}(k_1(p) + \cdots + k_n(p))$ the \emph{mean curvature};
+    \item $p$ an \emph{umbilic point} if $k_1(p) = \dots = k_n(p)$.
+\end{itemize}
+\end{colordef}
+
+
+
+{Special case: surfaces in 3-space.}
+If $N^2 \subset M^3$ is a hypersurface, $L_p$ has two eigenvalues $k_1, k_2$, so $K_{\mathrm{Gauss}} = k_1 k_2$. The Gauss equation (Corollary~\ref{cor:gauss-sectional-curvature}) then reads
+\[
+\bar K(p) = K(p) + K_{\mathrm{Gauss}}(p),
+\]
+where $\bar K$ is the sectional curvature of $N$ (which for a surface is just the Gauss curvature of $\bar g$) and $K$ is the sectional curvature of $M$ along $T_pN$. In particular, when $M = \mathbb{R}^3$ (so $K \equiv 0$), the Gauss curvature $K_{\mathrm{Gauss}} = \bar K$ is intrinsic, see Remark \ref{rem:theorema-egregium}.
+
+{Level-set hypersurfaces.}
+If $N \subset M$ is given as a regular level set $\{f = c\}$ with $\mathrm{d}f|_N \neq 0$, then the unit normal and scalar second fundamental form are
+\[
+\hat n = \frac{\mathrm{grad}\,f}{\|\mathrm{grad}\,f\|}, \qquad b(X, Y) = -\frac{\mathrm{Hess}\,f(X, Y)}{\|\mathrm{grad}\,f\|},
+\]
+where $\mathrm{grad}\,f = (g^{ab}\,\partial_b f)\,\partial_a$ is the metric gradient (Definition~\ref{def:gradient_function}) and $\mathrm{Hess}\,f := \nabla\,\mathrm{d}f$ is the Hessian, with components $(\mathrm{Hess}\,f)_{\alpha\beta} = \partial^2_{\alpha\beta} f - \Gamma^k_{\alpha\beta}\,\partial_k f$.
+
+{Lie-derivative formula.}
+More generally, one can show that
+\[
+b = -\tfrac{1}{2}\,\mathcal{L}_{\hat n}\, g,
+\]
+where $\mathcal{L}_{\hat n}$ is the Lie derivative along $\hat n$ (extended to a vector field on a neighborhood of $N$).
+
+
+
+% If $N^2 \subset M^3$: Gauss equation: $\bar{K}(p) = K(p) + K_{\mathrm{Gauss}}(p)$. In $\mathbb{R}^3$ ($K(p) = 0$): Gauss curvature is intrinsic ($= \frac{1}{2} S$).
+
+% If the hypersurface $N \subset M$ is given as the level set $\{f = \mathrm{const}\}$ with $\mathrm{d}f|_p \neq 0$:
+% \[
+% \hat{n} = \frac{\mathrm{grad}\,f}{\|\mathrm{grad}\,f\|}, \quad (\mathrm{grad}\,f)^a = g^{ab}\,\partial_b f,
+% \]
+% \[
+% b(X,Y) = -\frac{\mathrm{Hess}\,f(X,Y)}{\|\mathrm{grad}\,f\|}.
+% \]
+% $\mathrm{Hess}\,f = \nabla\,\mathrm{d}f$, so $(\mathrm{Hess}\,f)_{\alpha\beta} = \partial^2_{\alpha\beta} f - \Gamma^k_{\alpha\beta}\,\partial_k f$.
+
+% In general:
+% \[
+% b = -\tfrac{1}{2}\,\mathcal{L}_{\hat{n}}\,g.
+% \]
+
+
+
+
+
+
+\subsection{Second variation formula}
+
+
+We have already seen (Corollary~\ref{cor:geodesics_minimise_length_locally}) that geodesics are locally length-minimizing: on sufficiently short intervals, a geodesic realizes the distance between its endpoints. However, this fails on long intervals. A great circle on the sphere is a geodesic, but going more than halfway around it no longer minimizes distance.
+
+The second variation of length is the tool that detects this failure: $\gamma$ is no longer length-minimizing on $[a, b]$ as soon as we can find an endpoint-fixing variation $\phi_s$ with $\frac{d^2}{ds^2}\ell(\phi_s)|_{s=0} < 0$. We will use this in the Theorems from Bonnet--Myers and from Cartan--Hadamard to deduce topological properties from curvature.
+
+\begin{colortheo}{Second variation of length}{second-variation-length}
+Let $\gamma \colon [a, b] \to (M, g)$ be a geodesic parametrized by arc length ($\|\dot\gamma\| = 1$), and let $\phi \colon (-\varepsilon, \varepsilon) \times [a, b] \to M$ be a variation of $\gamma$ (i.e.\ $\phi_0(t) = \gamma(t)$). Set $X := \partial\phi/\partial s$, the variation vector field. Then
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s=0} = \langle \nabla_X X,\, \dot\gamma\rangle\bigg|_a^b + \int_a^b \!\left(\|\nabla_{\dot\gamma} X^\perp\|^2 - R(\dot\gamma, X, \dot\gamma, X)\right) \mathrm{d}t,
+\]
+where $X^\perp := X - \langle X, \dot\gamma\rangle\,\dot\gamma$ is the component of $X$ perpendicular to $\dot\gamma$.
+\end{colortheo}
+
+The proof requires a few preliminary identities. Set $T := \partial\phi/\partial t$.
+
+\begin{colorlem}{Commutation identities for variations}{variation-commutation}
+With $T, X$ as above:
+\begin{enumerate}
+    \item[(a)] $[T, X] = 0$, hence $\nabla_T X = \nabla_X T$.
+    \item[(b)] $\langle \nabla_X \nabla_T X,\, T\rangle = \langle \nabla_T \nabla_X X,\, T\rangle - R(T, X, T, X)$.
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+\textbf{(a)} Since $T, X$ are pushforwards of the commuting coordinate fields $\partial/\partial t, \partial/\partial s$ and using \eqref{eq:coordinate_fields_commute}:
+\[
+[T, X] = \mathrm{d}\phi\!\left([\partial/\partial t,\, \partial/\partial s]\right) = 0.
+\]
+Torsion-freeness of $\nabla$ then gives $\nabla_T X - \nabla_X T = [T, X] = 0$.
+
+\textbf{(b)} By the definition of $R$ and using $[X, T] = 0$:
+\[
+R(X, T)\, X = \nabla_X \nabla_T X - \nabla_T \nabla_X X.
+\]
+Taking the inner product with $T$ and using the $(0, 4)$-convention $R(A, B, C, D) = g(R(A, B) D, C)$:
+\[
+\langle \nabla_X \nabla_T X, T\rangle - \langle \nabla_T \nabla_X X, T\rangle = \langle R(X, T) X, T\rangle = R(X, T, T, X) = -R(T, X, T, X). \qedhere
+\]
+\end{proof}
+
+\begin{colorlem}{First derivative of length, general $s$}{first-variation-general-s}
+Let $\phi : (-\varepsilon, \varepsilon) \times [a, b] \to M$ be a variation with $T := \partial\phi/\partial t$ nonvanishing. Then for all $s \in (-\varepsilon, \varepsilon)$:
+\[
+\frac{\mathrm{d}}{\mathrm{d}s}\,\ell(\phi_s) = \int_a^b \frac{\langle \nabla_T X,\, T\rangle}{\|T\|}\,\mathrm{d}t.
+\]
+\end{colorlem}
+
+\begin{colremark}{}{}
+At $s = 0$, $T = \dot\gamma$, and if $\|\dot\gamma\|$ is constant, integration by parts recovers the first-variation formula \eqref{eq:first_variation}. The unintegrated form above is needed because we will differentiate once more in $s$ to obtain the second variation, which requires an expression valid in a neighborhood of $s = 0$, not just at the single point.
+\end{colremark}
+
+\begin{proof}
+Differentiating $\ell(\phi_s) = \int_a^b \sqrt{\langle T, T\rangle}\,\mathrm{d}t$ in $s$:
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}s}\,\ell(\phi_s) 
+&= \int_a^b \frac{1}{2\sqrt{\langle T, T\rangle}}\,\frac{\mathrm{d}}{\mathrm{d}s}\langle T, T\rangle\,\mathrm{d}t \\
+&= \int_a^b \frac{\langle \nabla_X T,\, T\rangle}{\|T\|}\,\mathrm{d}t \\
+&= \int_a^b \frac{\langle \nabla_T X,\, T\rangle}{\|T\|}\,\mathrm{d}t,
+\end{align*}
+using metric compatibility in the second line and Lemma~\ref{lem:variation-commutation}~(a) in the third. \qedhere
+\end{proof}
+
+
+\begin{colorlem}{Perpendicular component of $\nabla_{\dot\gamma} X$ at $s = 0$}{perpendicular-nabla-X}
+At $s = 0$:
+\[
+\|\nabla_{\dot\gamma} X^\perp\|^2 = \|\nabla_{\dot\gamma} X\|^2 - \langle \nabla_{\dot\gamma} X,\, \dot\gamma\rangle^2.
+\]
+\end{colorlem}
+
+\begin{proof}
+At $s = 0$, $T|_{s=0} = \dot\gamma$ and $\|\dot\gamma\| = 1$, so $X^\perp = X - \langle X, \dot\gamma\rangle\,\dot\gamma$. Differentiating along $\dot\gamma$ and using that $\nabla_{\dot\gamma}\dot\gamma = 0$ (geodesic):
+\[
+\nabla_{\dot\gamma} X^\perp = \nabla_{\dot\gamma} X - \langle \nabla_{\dot\gamma} X, \dot\gamma\rangle\,\dot\gamma = (\nabla_{\dot\gamma} X)^\perp,
+\]
+where the last equality is the orthogonal decomposition of $\nabla_{\dot\gamma} X$ with respect to $\dot\gamma$. Taking the squared norm:
+\[
+\|\nabla_{\dot\gamma} X^\perp\|^2 = \|(\nabla_{\dot\gamma} X)^\perp\|^2 = \|\nabla_{\dot\gamma} X\|^2 - \langle \nabla_{\dot\gamma} X, \dot\gamma\rangle^2,
+\]
+where the last equality uses the Pythagorean identity for the decomposition. \qedhere
+\end{proof}
+
+
+
+
+% \begin{colorlem}{}{}
+% For any variation:
+% \[
+% \frac{\mathrm{d}}{\mathrm{d}s}\,\ell(\phi_s) = \int_a^b \frac{\langle \nabla_T X,\, T \rangle}{\|T\|}\,\mathrm{d}t \quad \text{(not just at $s = 0$)}.
+% \]
+% \end{colorlem}
+
+% \begin{proof}
+% \[
+% \ell(\phi_s) = \int_a^b \|T\|\,\mathrm{d}t = \int_a^b \sqrt{\langle T, T \rangle}\,\mathrm{d}t.
+% \]
+% \begin{align*}
+% \frac{\mathrm{d}}{\mathrm{d}s}\,\ell(\phi_s) &= \int_a^b \frac{\mathrm{d}}{\mathrm{d}s}\sqrt{\langle T, T \rangle}\,\mathrm{d}t = \int_a^b \frac{1}{2} \cdot \frac{\frac{\mathrm{d}}{\mathrm{d}s}\langle T, T \rangle}{\sqrt{\langle T, T \rangle}}\,\mathrm{d}t \\
+% &= \int_a^b \frac{\langle \nabla_X T,\, T \rangle}{\sqrt{\langle T, T \rangle}}\,\mathrm{d}t \stackrel{[X,T]=0}{=} \int_a^b \frac{\langle \nabla_T X,\, T \rangle}{\|T\|}\,\mathrm{d}t. \qedhere
+% \end{align*}
+% \end{proof}
+
+% \begin{colorlem}{}{}
+% At $s = 0$:
+% \[
+% \|\nabla_{\dot{\gamma}} X^\perp\|^2 = \|\nabla_{\dot{\gamma}} X\|^2 - \langle \nabla_{\dot{\gamma}} X,\, \dot{\gamma} \rangle^2.
+% \]
+% \end{colorlem}
+
+% \begin{proof}
+% $(\nabla_{\dot{\gamma}} X)^\perp$ and $\langle \nabla_{\dot{\gamma}} X,\, \dot{\gamma} \rangle\,\dot{\gamma}$ are orthogonal, and
+% \[
+% \nabla_{\dot{\gamma}} X = (\nabla_{\dot{\gamma}} X)^\perp + \langle \nabla_{\dot{\gamma}} X,\, \dot{\gamma} \rangle\,\dot{\gamma}.
+% \]
+% So
+% \[
+% \|\nabla_{\dot{\gamma}} X\|^2 = \|(\nabla_{\dot{\gamma}} X)^\perp\|^2 + \langle \nabla_{\dot{\gamma}} X,\, \dot{\gamma} \rangle^2.
+% \]
+% And
+% \[
+% \nabla_{\dot{\gamma}}(X^\perp) = \nabla_{\dot{\gamma}}(X - \langle X, \dot{\gamma} \rangle\,\dot{\gamma}) = \nabla_{\dot{\gamma}} X - \langle \nabla_{\dot{\gamma}} X,\, \dot{\gamma} \rangle\,\dot{\gamma} = (\nabla_{\dot{\gamma}} X)^\perp.
+% \]
+% \end{proof}
+
+We are now ready to prove Theorem \ref{thm:second-variation-length}.
+
+\begin{proof}[Proof of the theorem]
+By Lemma~\ref{lem:first-variation-general-s},
+\[
+\frac{\mathrm{d}}{\mathrm{d}s}\,\ell(\phi_s) = \int_a^b \frac{\langle \nabla_T X,\, T\rangle}{\|T\|}\,\mathrm{d}t.
+\]
+We differentiate the integrand once more in $s$ using the quotient rule. Using metric compatibility and $\frac{\partial}{\partial s}\|T\| = \langle \nabla_X T, T\rangle / \|T\|$:
+\[
+\frac{\partial}{\partial s}\!\left(\frac{\langle \nabla_T X, T\rangle}{\|T\|}\right) = \frac{\langle \nabla_X \nabla_T X, T\rangle + \langle \nabla_T X, \nabla_X T\rangle}{\|T\|} - \frac{\langle \nabla_T X, T\rangle \langle \nabla_X T, T\rangle}{\|T\|^3}.
+\]
+Now apply Lemma~\ref{lem:variation-commutation}: part (a) gives $\nabla_X T = \nabla_T X$, and part (b) gives $\langle \nabla_X \nabla_T X, T\rangle = \langle \nabla_T \nabla_X X, T\rangle - R(T, X, T, X)$. Substituting:
+\[
+\frac{\partial}{\partial s}\!\left(\frac{\langle \nabla_T X, T\rangle}{\|T\|}\right) = \frac{\langle \nabla_T \nabla_X X, T\rangle - R(T, X, T, X) + \|\nabla_T X\|^2}{\|T\|} - \frac{\langle \nabla_T X, T\rangle^2}{\|T\|^3}.
+\]
+
+Evaluating at $s = 0$, where $T = \dot\gamma$, $\|T\| = 1$, and $\nabla_{\dot\gamma}\dot\gamma = 0$:
+\begin{itemize}
+    \item $\langle \nabla_{\dot\gamma}\nabla_X X, \dot\gamma\rangle = \dot\gamma\big(\langle \nabla_X X, \dot\gamma\rangle\big) - \langle \nabla_X X, \nabla_{\dot\gamma}\dot\gamma\rangle = \dot\gamma\big(\langle \nabla_X X, \dot\gamma\rangle\big)$, by metric compatibility.
+    \item $\|\nabla_{\dot\gamma} X\|^2 - \langle \nabla_{\dot\gamma} X, \dot\gamma\rangle^2 = \|\nabla_{\dot\gamma} X^\perp\|^2$, by Lemma~\ref{lem:perpendicular-nabla-X}.
+\end{itemize}
+Combining:
+\[
+\frac{\partial}{\partial s}\!\left(\frac{\langle \nabla_T X, T\rangle}{\|T\|}\right)\bigg|_{s=0} = \dot\gamma\big(\langle \nabla_X X, \dot\gamma\rangle\big) + \|\nabla_{\dot\gamma} X^\perp\|^2 - R(\dot\gamma, X, \dot\gamma, X).
+\]
+
+Integrating over $t \in [a, b]$: the first term is a total $t$-derivative and integrates to the boundary term $\langle \nabla_X X, \dot\gamma\rangle\big|_a^b$. This gives the second variation formula.
+\end{proof}
+
+
+Consider the following special case.
+
+Let $\gamma \colon [0, 1] \to M$ be a geodesic with $\|\dot\gamma\| = 1$, and let $Z$ be a parallel unit vector field along $\gamma$ with $Z \perp \dot\gamma$ (so $\nabla_{\dot\gamma} Z = 0$ and $\|Z\| = 1$). Let $f \colon [0, 1] \to \mathbb{R}$ be smooth. Define the variation
+\[
+\phi(s, t) = \exp_{\gamma(t)}\!\big(s \cdot f(t) \cdot Z(t)\big).
+\]
+
+
+\todo[inline]{ link exercise in which i constructed this variation ; is this exo 6.3?}
+
+For each fixed $t$, the curve $s \mapsto \phi(s, t)$ is a geodesic with initial velocity $f(t) Z(t)$. The variation vector field at $s = 0$ is
+\[
+X(t) = \frac{\partial \phi}{\partial s}\bigg|_{s = 0} = f(t)\, Z(t).
+\]
+
+Two simplifications:
+\begin{itemize}
+    \item Since each $s$-curve is a geodesic, $\nabla_X X = 0$, so the boundary term in the second variation formula vanishes.
+    \item Since $X = f Z$ with $Z$ parallel, $\nabla_{\dot\gamma} X = \dot f Z$, and since $Z \perp \dot\gamma$, this is also perpendicular to $\dot\gamma$, hence $X^\perp = X$ and
+    \[
+    \|\nabla_{\dot\gamma} X^\perp\|^2 = \|\dot f Z\|^2 = \dot f^2.
+    \]
+\end{itemize}
+For the curvature term, using $\|\dot\gamma\| = \|Z\| = 1$ and $Z \perp \dot\gamma$ (so $\|\dot\gamma \wedge Z\|^2 = 1$):
+\[
+R(\dot\gamma, X, \dot\gamma, X) = f^2\, R(\dot\gamma, Z, \dot\gamma, Z) = f^2\, K(\dot\gamma, Z).
+\]
+Plugging into the second variation formula:
+\begin{equation}
+    \label{eq:second-variation-special-case}
+    \frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s = 0} = \int_0^1 \!\left(\dot f^2 - K(\dot\gamma, Z)\, f^2\right) \mathrm{d}t.
+\end{equation}
+
+\begin{colremark}{Interpretation and connection to Bonnet--Myers}{}
+
+    The integrand $\dot f^2 - K f^2$ trades off oscillation in $f$ against positive curvature along $\gamma$: rapid oscillation makes $\ell(\phi_s)$ increase to second order, while positive curvature makes it decrease. Concretely, on $S^2$, a great-circle arc longer than $\pi$ fails to minimize length: taking $f(t) = \sin(\pi t)$ and $Z$ a parallel field perpendicular to the arc produces $\frac{d^2}{ds^2}\ell|_{s=0} < 0$. The Bonnet--Myers Theorem below turns this into a global theorem, which converts the sectional-curvature input into a Ricci-curvature bound and forces $\mathrm{diam}(M) \leqslant \pi/a$.
+\end{colremark}
+
+
+
+
+% \todo[inline]{  }
+
+% Let's consider the following special case: Let $\gamma \colon [0,1] \to M$ be a geodesic with $\|\dot{\gamma}\| = 1$, and $Z \in T_\gamma$ with $Z \perp \dot{\gamma}$, $\nabla_{\dot{\gamma}} Z = 0$. Let
+% \[
+% \phi(t,s) = \exp_{\gamma(t)}(s \cdot f(t) \cdot Z).
+% \]
+
+
+% (Note: $\nabla_X X = 0$, since $s \mapsto \phi(t,s)$ is a geodesic.)
+
+% Then
+% \[
+% \frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s=0} = \int_0^1 \!\left(\|\nabla_{\dot{\gamma}} X^\perp\|^2 - R(\dot{\gamma}, X, \dot{\gamma}, X)\right) \mathrm{d}t.
+% \]
+
+% But $X = f(t) \cdot Z$, so $\nabla_{\dot{\gamma}} X = f' \cdot Z$.
+
+% So
+% \[
+% \frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\bigg|_{s=0} = \int_0^1 \!\left((f')^2 - K(\dot{\gamma}, Z) \cdot f^2\right) \mathrm{d}t.
+% \]
+
+% So: if $f$ ``oscillates'' a lot: $\ell(\phi_s)$ increases. If $K > 0$, $f$ almost flat: $\ell(\phi_s)$ decreases. (Compare with the case of an equatorial circle in $S^2$.)
+
+
+
+
+
+
+\begin{colortheo}{Bonnet--Myers}{bonnet-myers}
+Let $(M^n, g)$ be a complete, connected Riemannian manifold with Ricci tensor bounded below by some $a > 0$:
+\[
+\mathrm{Ric}(X, X) \geqslant a^2 (n - 1)\, \|X\|^2 \qquad \text{for all } X \in \Gamma(TM).
+\]
+Then $\mathrm{diam}(M, g) \leqslant \pi/a$; in particular, $M$ is compact.
+\end{colortheo}
+
+\begin{colremark}
+The bound is sharp: the sphere of radius $1/a$ has $\mathrm{Ric} = a^2(n - 1)\, g$ and diameter exactly $\pi/a$.
+\end{colremark}

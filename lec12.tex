@@ -1,0 +1,344 @@
+
+
+
+\vspace{0.4cm}\emph{\textbf{(Lecture 12)}}\\
+
+
+\begin{proof}
+Suppose for contradiction that $\mathrm{diam}(M, g) > \pi/a$. Pick $p, q \in M$ with $\ell := d(p, q) > \pi/a$. By Hopf--Rinow, Theorem \ref{thm:hopf-rinow} there exists a length-minimizing geodesic $\gamma \colon [0, \ell] \to M$ with $\|\dot\gamma\| = 1$, $\gamma(0) = p$, $\gamma(\ell) = q$. We derive a contradiction by constructing endpoint-fixing variations of $\gamma$ with negative second variation.
+
+{Step 1: parallel frame.} By Lemma~\ref{lem:parallel_orthonormal_frame}, there exists a parallel orthonormal frame $\{E_1, \ldots, E_{n-1}, \dot\gamma\}$ along $\gamma$, i.e.\ $\nabla_{\dot\gamma} E_i = 0$ and $\{E_i\}_{i=1}^{n-1}$ is orthonormal and perpendicular to $\dot\gamma$ at each point.
+
+{Step 2: test variations.} For each $i = 1, \ldots, n - 1$, define
+\[
+\phi^{(i)}(s, t) := \exp_{\gamma(t)}\!\big(s \cdot f(t) \cdot E_i(t)\big), \qquad f(t) := \sin\!\left(\tfrac{\pi t}{\ell}\right).
+\]
+Since $f(0) = f(\ell) = 0$, each variation fixes the endpoints. By the test-variation formula \eqref{eq:second-variation-special-case} derived earlier,
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s^{(i)})\bigg|_{s = 0} = \int_0^\ell \!\big(\dot f^2 - K(\dot\gamma, E_i)\, f^2\big)\,\mathrm{d}t.
+\]
+
+{Step 3: integration by parts.} Since $\ddot f = -(\pi/\ell)^2 f$ and $f$ vanishes at the endpoints, integration by parts gives
+\[
+\int_0^\ell \dot f^2\,\mathrm{d}t = -\int_0^\ell f \ddot f\, \mathrm{d}t = \frac{\pi^2}{\ell^2} \int_0^\ell f^2\, \mathrm{d}t.
+\]
+Hence
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s^{(i)})\bigg|_{s = 0} = \int_0^\ell \!\left(\tfrac{\pi^2}{\ell^2} - K(\dot\gamma, E_i)\right) f^2\, \mathrm{d}t.
+\]
+
+{Step 4: summing over $i$.} Summing over $i = 1, \ldots, n - 1$ and using $\sum_{i=1}^{n-1} K(\dot\gamma, E_i) = \mathrm{Ric}(\dot\gamma, \dot\gamma) \geqslant a^2(n - 1)$:
+\begin{align*}
+    \sum_{i=1}^{n-1} \frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s^{(i)})\bigg|_{s = 0} 
+    &= \int_0^\ell \!\left(\tfrac{\pi^2(n-1)}{\ell^2} - \mathrm{Ric}(\dot\gamma, \dot\gamma)\right) f^2\, \mathrm{d}t \\
+    &\leqslant (n - 1) \int_0^\ell \!\left(\tfrac{\pi^2}{\ell^2} - a^2\right) f^2\, \mathrm{d}t \\
+    &< 0,
+\end{align*}
+since $\ell > \pi/a$ gives $\pi^2/\ell^2 < a^2$. Hence at least one $i$ has $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\phi_s^{(i)})|_{s=0} < 0$, contradicting the assumption that $\gamma$ is length-minimizing. \qedhere
+\end{proof}
+
+
+
+Let $(M, g)$ be a complete Riemannian manifold and $p \in M$. We want to understand when $\exp_p$ stops being a diffeomorphism. There are two possible failure modes:
+\begin{itemize}
+    \item \emph{Global failure (not injective):} e.g.\ on the cylinder, two distinct vectors in $T_p M$ can have the same exponential image.
+    \item \emph{Local failure (differential degenerates):} the map $\mathrm{d}\exp_p\big|_v \colon T_v(T_p M) \to T_{\exp_p(v)} M$ fails to be invertible for some $v \in T_p M$.
+\end{itemize}
+In this section we focus on the local failure. By the Gauss lemma (Lemma~\ref{lem:gauss}), $\mathrm{d}\exp_p\big|_v$ is the identity on the radial direction, so $\mathrm{d}\exp_p\big|_v(w) = 0$ forces $w \perp v$. Geometrically, the kernel of $\mathrm{d}\exp_p\big|_v$ measures, infinitesimally, families of geodesics starting at $p$ that reintersect at $\exp_p(v)$.
+
+To study this, fix $v \in T_p M$ and let $\gamma(t) = \exp_p(vt)$. For a smooth curve $w \colon (-\epsilon, \epsilon) \to T_p M$ with $w(0) = v$, the map
+\[
+\phi(s, t) = \exp_p(w(s) \cdot t)
+\]
+
+\todo[inline]{ exercise 6.3? }
+
+defines a variation of $\gamma$ in which each $s$-curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $w(s)$. Taking the linear family $w(s) = v + s \, w_0$ for $w_0 \in T_p M$, the variation vector field at $t = 1$ is
+\[
+\frac{\partial \phi}{\partial s}\bigg|_{(s, t) = (0, 1)} = \mathrm{d}\exp_p\big|_v(w_0).
+\]
+Hence understanding when $\mathrm{d}\exp_p\big|_v$ has nontrivial kernel reduces to understanding when variation vector fields of geodesic variations vanish at $t = 1$.
+
+Since each $s$-curve of $\phi$ is a geodesic, the geodesic deviation equation (Lemma~\ref{lem:geodesic-deviation}) applies and the variation vector field $X = \partial\phi/\partial s$ satisfies
+\[
+\nabla_T \nabla_T X - R(T, X)\, T = 0, \qquad T = \partial \phi / \partial t.
+\]
+This motivates the following definition.
+
+\begin{colordef}{Jacobi vector field}{jacobi-field}
+Let $\gamma \colon [0, \ell] \to (M, g)$ be a geodesic. A vector field $J$ along $\gamma$ is called a \emph{Jacobi vector field} if it satisfies the \emph{Jacobi equation}
+\begin{equation}
+    \label{eq:jacobi-equation}
+    \nabla_{\dot\gamma} \nabla_{\dot\gamma} J - R(\dot\gamma, J)\, \dot\gamma = 0.
+\end{equation}
+This is a second-order linear ODE; a solution is uniquely determined by the initial data $J(0)$ and $\nabla_{\dot\gamma} J(0)$.
+\end{colordef}
+
+
+
+% \todo[inline]{  }
+
+
+% Let $(M, g)$ be a complete Riemannian manifold and $p \in M$. We want to understand when $\exp_p$ stops being a diffeomorphism. There are two possible failure modes:
+% \begin{itemize}
+%     \item \emph{Global failure (not injective):} e.g.\ on the cylinder, two distinct vectors in $T_p M$ can have the same exponential image.
+%     \item \emph{Local failure (differential degenerates):} the map $\mathrm{d}\exp_p\big|_v \colon T_v(T_p M) \to T_{\exp_p(v)} M$ fails to be invertible for some $v \in T_p M$.
+% \end{itemize}
+% In this section we focus on the local failure. By the Gauss lemma (Lemma~\ref{lem:gauss}), $\mathrm{d}\exp_p\big|_v(w) = 0$ can only happen when $w \perp v$. Geometrically, this corresponds to nearby geodesics starting at $p$ re-intersecting at $\exp_p(v)$.
+
+% To study this, fix $v \in T_pM$ and let $\gamma(t) = \exp_p(vt)$. Consider a smooth curve $w \colon (-\epsilon, \epsilon) \to T_p M$ with $w(0) = v$, giving a variation by geodesics through $p$:
+% \[
+% \phi(s, t) = \exp_p(w(s) \cdot t).
+% \]
+
+% \todo[inline]{ exo 6.3?}
+% For each fixed $s$, the curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $w(s)$. Choosing $w(s) = v + s \cdot w_0$ for some $w_0 \in T_p M$, the variation vector field at $t = 1$ is
+% \[
+% \frac{\partial \phi}{\partial s}\bigg|_{(s,t) = (0,1)} = \mathrm{d}\exp_p\big|_v(w_0).
+% \]
+% Hence understanding when $\mathrm{d}\exp_p\big|_v$ has nontrivial kernel reduces to understanding which variation vector fields of geodesic variations vanish at $t = 1$.
+
+% By the geodesic deviation equation (Lemma~\ref{lem:geodesic-deviation}), the variation vector field $X = \partial\phi/\partial s$ of any variation by geodesics satisfies
+% \[
+% \nabla_T \nabla_T X - R(T, X)\, T = 0, \qquad T = \partial \phi / \partial t.
+% \]
+% \todo[inline]{ sign error? ex9.3? Lemma~\ref{lem:geodesic-deviation}?}
+
+
+% This motivates the following definition.
+
+
+% \begin{colordef}{Jacobi vector field}{jacobi-field}
+% Let $\gamma \colon [0, \ell] \to (M, g)$ be a geodesic. A vector field $J$ along $\gamma$ is called a \emph{Jacobi vector field} if it satisfies the \emph{Jacobi equation}
+% \begin{equation}
+%     \label{eq:jacobi-equation}
+%     \nabla_{\dot\gamma} \nabla_{\dot\gamma} J - R(\dot\gamma, J)\, \dot\gamma = 0.
+% \end{equation}
+% This is a second-order linear ODE; a solution is uniquely determined by the initial data $J(0)$ and $\nabla_{\dot\gamma} J(0)$.
+% \end{colordef}
+
+
+
+
+
+
+
+\begin{colremark}{}{}
+By the geodesic deviation equation (Lemma~\ref{lem:geodesic-deviation}), the variation vector field $X = \partial \phi/\partial s$ of any variation by geodesics is a Jacobi field. We will see later (Lemma~\ref{lem:jacobi-comes-from-variation}) that the converse also holds: every Jacobi field arises as the variation vector field of some variation by geodesics.
+\end{colremark}
+
+\begin{colexample}{Trivial Jacobi fields}{trivial-jacobi-fields}
+\begin{itemize}
+    \item Along any geodesic $\gamma$, the field $J(t) = (At + B)\, \dot\gamma(t)$ is a Jacobi field for any $A, B \in \mathbb{R}$. Indeed, $\nabla_{\dot\gamma} J = A\, \dot\gamma$, hence $\nabla_{\dot\gamma}\nabla_{\dot\gamma} J = 0$, and $R(\dot\gamma, \dot\gamma)\dot\gamma = 0$ by antisymmetry, so \eqref{eq:jacobi-equation} holds. In particular, $\dot\gamma$ and $t\,\dot\gamma$ are Jacobi fields.
+    \item On $(\mathbb{R}^n, g_E)$, the curvature vanishes ($R \equiv 0$) and the Levi-Civita connection reduces to the standard directional derivative ($\Gamma^k_{ij} = 0$), so the Jacobi equation becomes
+    \[
+    0 = \nabla_{\dot\gamma} \nabla_{\dot\gamma} J - R(\dot\gamma, J)\, \dot\gamma = \ddot J.
+    \]
+    Integrating twice, all Jacobi fields are of the form $J(t) = t\, V_1 + V_0$ with $V_0, V_1 \in \mathbb{R}^n$ constant.
+\end{itemize}
+\end{colexample}
+
+
+
+
+
+
+
+
+We introduce the notation $\dot J := \nabla_{\dot\gamma} J$.
+
+\begin{colorlem}{Tangential component of a Jacobi field is affine}{jacobi-tangential}
+Let $J$ be a Jacobi field along a geodesic $\gamma$. Then
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}t^2} \langle J, \dot\gamma \rangle = 0,
+\]
+so $\langle J, \dot\gamma\rangle(t) = At + B$ is an affine function of $t$.
+\end{colorlem}
+
+\begin{proof}
+Since $\gamma$ is a geodesic, $\nabla_{\dot\gamma} \dot\gamma = 0$. By metric compatibility,
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} \langle J, \dot\gamma\rangle = \langle \nabla_{\dot\gamma} J, \dot\gamma\rangle + \langle J, \nabla_{\dot\gamma} \dot\gamma\rangle = \langle \dot J, \dot\gamma\rangle.
+\]
+Differentiating once more and using the Jacobi equation \eqref{eq:jacobi-equation}:
+\[
+\frac{\mathrm{d}^2}{\mathrm{d}t^2} \langle J, \dot\gamma\rangle = \langle \nabla_{\dot\gamma} \dot J, \dot\gamma\rangle = \langle R(\dot\gamma, J)\, \dot\gamma, \dot\gamma\rangle = 0,
+\]
+where the last equality holds by the antisymmetry of $R$ in its last two arguments. \qedhere
+\end{proof}
+
+\begin{colorcor}{Perpendicular Jacobi fields stay perpendicular}{perpendicular-jacobi}
+Let $J$ be a Jacobi field along a geodesic $\gamma$. If $J(0) \perp \dot\gamma(0)$ and $\dot J(0) \perp \dot\gamma(0)$, then $J(t) \perp \dot\gamma(t)$ for all $t$.
+\end{colorcor}
+
+\begin{proof}
+By Lemma~\ref{lem:jacobi-tangential}, $f(t) := \langle J(t), \dot\gamma(t)\rangle = At + B$ for some $A, B \in \mathbb{R}$. The hypotheses give
+\[
+B = f(0) = \langle J(0), \dot\gamma(0)\rangle = 0, \qquad A = f'(0) = \langle \dot J(0), \dot\gamma(0)\rangle = 0,
+\]
+where we used $\frac{d}{dt}\langle J, \dot\gamma\rangle = \langle \dot J, \dot\gamma\rangle$ from the proof of Lemma~\ref{lem:jacobi-tangential}. Hence $f \equiv 0$, i.e.\ $J(t) \perp \dot\gamma(t)$ for all $t$. \qedhere
+\end{proof}
+
+
+\begin{colremark}[Dimension count of Jacobi fields]{}
+The space of Jacobi fields along $\gamma$ is $2n$-dimensional, parametrized by the initial data $(J(0), \dot J(0)) \in T_{\gamma(0)} M \times T_{\gamma(0)} M$. By Corollary~\ref{cor:perpendicular-jacobi} and Lemma~\ref{lem:jacobi-tangential}, this splits as
+\[
+\underbrace{2}_{\text{tangential: } (At + B)\,\dot\gamma} \;+\; \underbrace{2(n-1)}_{\text{perpendicular: } J \perp \dot\gamma}.
+\]
+Restricting further to Jacobi fields with $J(0) = 0$ removes $n$ degrees of freedom (the choice of $J(0)$), leaving an $n$-dimensional space; the perpendicular ones among these form an $(n-1)$-dimensional subspace (since the unique tangential Jacobi field with $J(0) = 0$ is $t \cdot \dot\gamma$, up to scaling).
+\end{colremark}
+Hence the interesting Jacobi fields are those perpendicular to $\dot\gamma$: the tangential part is a trivial $(At + B)\dot\gamma$ that carries no curvature information, so we restrict our attention to Jacobi fields $J \perp \dot\gamma$ from now on.
+
+\begin{colorlem}{Jacobi fields come from variations by geodesics (restricted version)}{jacobi-comes-from-variation}
+Let $\gamma : [0, \ell] \to M$ be a geodesic and let $J$ be a Jacobi field along $\gamma$ with $J(0) = 0$. Then there exists a variation by geodesics
+\[
+\phi : (-\epsilon, \epsilon) \times [0, \ell] \to M, \qquad \phi(s, 0) = \gamma(0) \text{ for all } s,
+\]
+whose variation vector field along $\gamma$ recovers $J$:
+\[
+\frac{\partial \phi}{\partial s}\bigg|_{s=0} = J.
+\]
+\end{colorlem}
+
+\begin{proof}
+Let $p = \gamma(0)$, $v = \dot\gamma(0)$, and define $W : (-\epsilon, \epsilon) \to T_p M$ by
+\[
+W(s) := v + s \cdot \dot J(0),
+\]
+so $W(0) = v$ and $W'(0) = \dot J(0)$. Set
+\[
+\phi(s, t) := \exp_p(W(s) \cdot t).
+\]
+Then $\phi(s, 0) = p$ for all $s$, and for each fixed $s$ the curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $W(s)$. So $\phi$ is a variation by geodesics, and 
+\[
+\widetilde J(t) := \frac{\partial \phi}{\partial s}(0, t) = \mathrm{d}\exp_p\big|_{vt}\big(W'(0) \cdot t\big)
+\]
+is a Jacobi field along $\gamma$ by the geodesic deviation equation (Lemma~\ref{lem:geodesic-deviation}).
+
+By uniqueness of solutions to the Jacobi equation, it suffices to verify that $\widetilde J$ and $J$ have the same initial data:
+\begin{itemize}
+    \item $\widetilde J(0) = \mathrm{d}\exp_p\big|_0(0) = 0 = J(0)$.
+    \item $\dot{\widetilde J}(0) = W'(0) = \dot J(0)$, since $\mathrm{d}\exp_p\big|_0 = \mathrm{id}$ (Lemma~\ref{lem:differential_exponential_map}).
+\end{itemize}
+Hence $\widetilde J = J$ on $[0, \ell]$. \qedhere
+\end{proof}
+
+
+\begin{colremark}{}{}
+The hypothesis $J(0) = 0$ is essential to this construction, since the variation $\phi(s, t) = \exp_p(W(s) \cdot t)$ has all geodesics starting at the same point $p$, forcing $\widetilde J(0) = 0$. The general case ($J(0) \neq 0$) also holds — every Jacobi field is the variation vector field of some variation by geodesics — but the construction is more involved and requires varying the starting point as well.
+\end{colremark}
+
+
+
+
+
+% \paragraph{Component form along a parallel frame.}
+By Lemma~\ref{lem:parallel_orthonormal_frame}, there exists an orthonormal frame $\{E_1, \ldots, E_n\}$ along $\gamma$ that is parallel ($\nabla_{\dot\gamma} E_j = 0$) with $E_1$ collinear with $\dot\gamma$. Relabel the perpendicular part as $e_i := E_{i+1}$ for $i = 1, \ldots, n-1$, so $\{e_i\}_{i=1}^{n-1}$ is a parallel orthonormal frame along $\gamma$ with $e_i \perp \dot\gamma$.
+
+For a Jacobi field $J = J^i e_i$ perpendicular to $\dot\gamma$, since the frame is parallel:
+\[
+\nabla_{\dot\gamma} J = \dot J^i\, e_i, \qquad \nabla_{\dot\gamma}\nabla_{\dot\gamma} J = \ddot J^i\, e_i.
+\]
+Expanding the Jacobi equation in this frame:
+\[
+0 = \nabla_{\dot\gamma}\nabla_{\dot\gamma} J - R(\dot\gamma, J)\,\dot\gamma = \ddot J^i\, e_i - J^i\, R(\dot\gamma, e_i)\,\dot\gamma = \ddot J^k\, e_k - \langle R(\dot\gamma, e_i)\,\dot\gamma,\, e_k\rangle\, J^i\, e_k,
+\]
+where in the last step we expanded each vector $R(\dot\gamma, e_i)\,\dot\gamma$ in the orthonormal basis $\{e_k\}$. Reading off the $e_k$-component yields the system of ODEs
+\begin{equation}
+    \label{eq:jacobi-component-form}
+    \ddot J^k + a^k_i\, J^i = 0, \qquad a^k_i := -\langle R(\dot\gamma, e_i)\,\dot\gamma,\, e_k\rangle = R(\dot\gamma, e_i, \dot\gamma, e_k).
+\end{equation}
+The matrix $(a^k_i)$ is symmetric (by the pairwise symmetry of $R$) and depends only on the curvature along $\gamma$.
+
+
+% \begin{colexample}{Constant sectional curvature}{constant-curvature-jacobi}
+% Suppose $(M, g)$ has constant sectional curvature $K$ and $\|\dot\gamma\| = 1$. Using $e_i \perp \dot\gamma$, and
+% \[
+% R(\dot\gamma, e_i)\,\dot\gamma = K\big(g(e_i, \dot\gamma)\,\dot\gamma - g(\dot\gamma, \dot\gamma)\,e_i\big) = -K\, e_i,
+% \]
+% \todo[inline]{ where does this formula come from? }
+
+% so $a^k_i = K\, \delta^k_i$ and the Jacobi equation reduces to
+% \[
+% \ddot J^i + K\, J^i = 0.
+% \]
+% Imposing $J(0) = 0$, $\dot J(0) = J_0$ with $J_0 \perp \dot\gamma$, the solution is
+% \[
+% J(t) = \begin{cases}
+% \sin(\sqrt K\,t) \cdot \dfrac{J_0}{\sqrt K}, & K > 0, \\[1ex]
+% t \cdot J_0, & K = 0, \\[1ex]
+% \sinh(\sqrt{-K}\,t) \cdot \dfrac{J_0}{\sqrt{-K}}, & K < 0.
+% \end{cases}
+% \]
+% \end{colexample}
+
+
+
+
+
+\begin{colordef}{Conjugate point}{conjugate-point}
+Let $\gamma \colon [a, b] \to M$ be a geodesic and $t_0, t_1 \in [a, b]$ with $t_0 \neq t_1$. The point $\gamma(t_1)$ is said to be \emph{conjugate} to $\gamma(t_0)$ along $\gamma$ if there exists a nonzero Jacobi field $J$ along $\gamma$ with $J(t_0) = 0$ and $J(t_1) = 0$. The \emph{multiplicity} of $\gamma(t_1)$ as a conjugate point is the number of linearly independent such Jacobi fields.
+\end{colordef}
+
+% \begin{colremark}{}{}
+% Multiplicity $\leqslant n - 1$ ($t \cdot \dot{\gamma}$ can never vanish again).
+% \end{colremark}
+
+\begin{colremark}{}{}
+The multiplicity is at most $n - 1$: any Jacobi field with $J(t_0) = J(t_1) = 0$ must be perpendicular to $\dot\gamma$ (since the tangential part $(At + B)\dot\gamma$ can vanish at most once unless identically zero), and the space of perpendicular Jacobi fields with $J(t_0) = 0$ is $(n-1)$-dimensional.
+\end{colremark}
+
+
+
+\begin{colexample}{Conjugate points on the round sphere}{}
+On the round sphere $S^n$, the conjugate point of $p$ along any geodesic from $p$ is the antipodal point $-p$, with multiplicity $n - 1$. 
+% Indeed, by the constant-curvature Jacobi field formula (Example~\ref{ex:constant-curvature-jacobi}), Jacobi fields along a great-circle arc starting at $p$ with $J(0) = 0$ have the form $J(t) = \sin(t)\, J_0$ (with $K = 1$), which vanish next at $t = \pi$, i.e.\ at the antipodal point. The freedom in choosing $J_0$ perpendicular to $\dot\gamma$ gives $n - 1$ independent such Jacobi fields.
+\end{colexample}
+
+\begin{colremark}{}{}
+If $\gamma \colon [0, \ell] \to M$ is a geodesic with $\dot{\gamma}(0) = v$, then for $\mathrm{d}\exp_p\big|_{tv}$:
+\[
+\dim \ker = \text{multiplicity of } \gamma(t) \text{ as a conjugate point of } \gamma(0).
+\]
+\end{colremark}
+
+\begin{proof}
+For all $w \in T_{tv}(T_p M)$: if $\phi(t, s) = \exp_p(t \cdot (v + sw))$, then
+\[
+J = \frac{\partial \phi}{\partial s}\bigg|_{s=0} = \mathrm{d}\exp_p\big|_{tv}(tw) \quad \text{is a Jacobi field.} \qedhere
+\]
+\end{proof}
+
+
+
+
+
+
+
+% \begin{colordef}{Conjugate point}{}
+% Let $\gamma \colon [a,b] \to M$ be a geodesic, $t_0 \in [a,b]$. $\gamma(t_1)$, $t_1 \in [a,b] \setminus \{t_0\}$, will be \emph{conjugate} to $\gamma(t_0)$ if there exists a Jacobi field $J$ with $J(t_0) = 0$, $J(t_1) = 0$.
+
+% \emph{Multiplicity:} number of linearly independent such Jacobi fields.
+% \end{colordef}
+
+% \begin{colremark}{}{}
+% Multiplicity $\leqslant n - 1$ ($t \cdot \dot{\gamma}$ can never vanish again).
+% \end{colremark}
+
+% \begin{colexample}{}{}
+% Round sphere: conjugate of $p$: $-p$. Multiplicity: $n - 1$.
+% \end{colexample}
+
+% \begin{colremark}{}{}
+% If $\gamma \colon [0, \ell] \to M$ is a geodesic, $\dot{\gamma}(0) = v$, then for $\mathrm{d}\exp_p\big|_{tv}$:
+% \[
+% \dim \ker = \text{multiplicity of } \gamma(t) \text{ as a conjugate point of } \gamma(0).
+% \]
+% \end{colremark}
+
+% \begin{proof}
+% For all $w \in T_{tv}(T_pM)$: if $\phi(t, s) = \exp_p(t \cdot (v + sw))$:
+% \[
+% J = \frac{\partial \phi}{\partial s}\bigg|_{s=0} = \mathrm{d}\exp_p\big|_{tv}(tw) \quad \text{is a Jacobi field.} \qedhere
+% \]
+% \end{proof}
