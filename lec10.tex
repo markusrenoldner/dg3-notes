@@ -1,0 +1,379 @@
+
+\vspace{0.4cm}\emph{\textbf{(Lecture 10)}}\\
+
+% We will now introduce the curvature tensors, which measure how a Riemannian manifold bends. We will then use them to obtain information about the geometry of submanifolds.
+
+% \begin{colordef}{Sectional curvature}{}
+% \[
+% K(\Pi) = \frac{R(X,Y,X,Y)}{\|X \wedge Y\|^2},
+% \]
+% where $\Pi$ is spanned by $X, Y$. If $e_1, e_2$ are orthonormal, $X = X^1 e_1 + X^2 e_2$, $Y = Y^1 e_1 + Y^2 e_2$:
+% \[
+% \|X \wedge Y\|^2 = \left|\det \begin{pmatrix} X^1 & X^2 \\ Y^1 & Y^2 \end{pmatrix}\right|^2.
+% \]
+% \end{colordef}
+
+% \begin{colordef}{Ricci tensor}{}
+% \[
+% \mathrm{Ric}(X,Y) = \mathrm{tr}\left[Z \mapsto R(Z,X)\,Y\right] = \sum_{i=1}^n \langle R(\partial_i, X)\,Y \rangle^i = R^i{}_{jik}\,X^j\,Y^k.
+% \]
+% So $\mathrm{Ric}_{jk} = R^i{}_{jik} = g^{a\beta}\,R_{ajbk}$, and by symmetry $= g^{a\beta}\,R_{iajk}$ (see exercises).
+% \end{colordef}
+
+% $\mathrm{Ric}(V,W) = \mathrm{Ric}(W,V)$ (see the exercises).
+
+% In an orthonormal basis $e_i$:
+% \[
+% \mathrm{Ric}(V,W) = \sum_{i=1}^n R(e_i, V, e_i, W).
+% \]
+
+% \begin{colordef}{Scalar curvature}{}
+% \[
+% S = g^{ab}\,\mathrm{Ric}_{ab}.
+% \]
+% In an orthonormal basis:
+% \[
+% S = \sum_{i=1}^n \mathrm{Ric}(e_i, e_i) = \sum_{i,j=1}^n R(e_i, e_j, e_i, e_j).
+% \]
+% \end{colordef}
+
+% On a space of constant sectional curvature $K$:
+% \[
+% R(e_i, e_j, e_i, e_j) = \begin{cases} K, & i \neq j, \\ 0, & i = j. \end{cases}
+% \]
+% So $S = n(n-1)\,K$, and $\mathrm{Ric}(e_j, e_j) = (n-1)\,K$. Since $e_j$ can be any unit vector in $T_pM$: $\mathrm{Ric} = (n-1)\,K\,g$.
+
+% \emph{Submanifolds and 2nd fundamental form}
+
+% Let $(\bar{M}^m, g)$ be a Riemannian manifold and $N \subset \bar{M}^m$ a submanifold. For all $p \in N$: $T_pN \subseteq T_pM$, the tangent vectors at $N$ (of dimension $n$).
+
+% \begin{colordef}{Normal space}{}
+% \[
+% T_pN^\perp = \{v \in T_pM : v \perp T_pN\},
+% \]
+% of dimension $m - n$.
+% \end{colordef}
+
+% Let $\pi_p^T \colon T_pM \to T_pN$ and $\pi_p^\perp \colon T_pM \to T_pN^\perp$ be the orthogonal projections, \eqref{eq:projections_submanifold1} and \eqref{eq:projections_submanifold2}.
+
+% \begin{colordef}{First fundamental form}{}
+% The \emph{induced metric} (first fundamental form) is
+% \[
+% \bar{g}_p = g_p\big|_{T_pN}.
+% \]
+% \end{colordef}
+
+% \begin{colordef}{Induced connection and second fundamental form}{}
+% For all $X, Y \in \Gamma(M)$, define:
+% \[
+% \bar{\nabla}_X Y := (\nabla_X Y)^T \quad (= \pi^T(\nabla_X Y)),
+% \]
+% \[
+% B(X,Y) := (\nabla_X Y)^\perp.
+% \]
+% So $\nabla_X Y = \bar{\nabla}_X Y + B(X,Y)$, where $\bar{\nabla}_X Y \in TN$ and $B(X,Y) \in TN^\perp$.
+% \end{colordef}
+
+% $B$ is called the \emph{second fundamental form} of $N$ in $M$.
+
+
+
+% Set of vector fields on $M$ which are tangent to $N$:
+% \[
+% \Gamma(M, N) = \{X \in \Gamma(M) \mid X_p \in T_pN \;\; \forall\, p \in N\}.
+% \]
+
+% Note: Any tangent vector field to $N$ can be extended as a vector field in $\Gamma(M, N)$.
+
+
+
+
+
+
+
+
+
+
+
+We collect three properties of vector $X\in\Gamma(TM)$ fields on a manifold $M$ that are \emph{tangent to} a submanifold $N$ (i.e.\ satisfy $X_p \in T_p N$ for all $p \in N$).
+
+\begin{colorlem}{}{tangent-vector-fields-properties}
+Let $X \in \Gamma(TM)$ be tangent to $N$. Then:
+\begin{enumerate}
+    \item[(a)] $X$ is tangent to $N$ if and only if $X(f)\big|_N = 0$ for every $f \in C^\infty(M)$ that is constant on $N$.
+    \item[(b)] If $X, Y \in \Gamma(TM)$ are both tangent to $N$, then $[X, Y]$ is tangent to $N$.
+    \item[(c)] Every vector field on $N$ admits an extension to a vector field on $M$ tangent to $N$.
+\end{enumerate}
+\end{colorlem}
+
+
+\begin{proof}[Sketch of proof]
+    Locally, around any $p \in N$, we can find coordinates $(x^1, \ldots, x^m)$ such that $N = \{x^{n+1} = \cdots = x^m = 0\}$. Then $X_0 = X^i \partial_i \in \Gamma(M,N)$ if $X^i\big|_N = 0$ for $i = n+1, 
+    \ldots, m$.
+\end{proof}
+
+
+\begin{colortheo}{$\bar\nabla$ is the Levi-Civita connection of $\bar g$}{induced-connection-is-levi-civita}
+The connection $\bar\nabla$ on $N$ defined by $\bar\nabla_X Y := \pi^T(\nabla_X Y)$ is the Levi-Civita connection of the induced metric $\bar g$.
+\end{colortheo}
+
+
+\begin{proof}
+    Recall that the Levi-Civita connection is characterized by two properties: torsion-freeness and metric compatibility.
+    
+    Recall that $B$ is the second fundamental form, defined by $B(X,Y) = \pi^\perp(\nabla_X Y)$, so $\nabla_X Y = \bar\nabla_X Y + B(X,Y)$.
+
+Let $X, Y, Z$ be vector fields on $N$, and extend them to vector fields on $M$ tangent to $N$ (Lemma~\ref{lem:tangent-vector-fields-properties}~(c)). Then $[X, Y]$ is also tangent to $N$ (Lemma~\ref{lem:tangent-vector-fields-properties}~(b)), and along $N$ the ambient bracket $[X, Y]$ coincides with the bracket on $N$.
+
+Torsion-free:
+Using $\nabla_X Y = \bar\nabla_X Y + B(X, Y)$ with $B(X, Y), B(Y, X) \in TN^\perp$,
+\[
+\bar\nabla_X Y - \bar\nabla_Y X = (\nabla_X Y)^T - (\nabla_Y X)^T = (\nabla_X Y - \nabla_Y X)^T = [X, Y]^T = [X, Y],
+\]
+where the last equality uses that $[X, Y]$ is tangent to $N$.\\
+Metric-compatible: For $X, Y, Z$ as above, along $N$:
+\begin{align*}
+X(\bar g(Y, Z)) 
+&= X(g(Y, Z)) &&\quad\text{(since } Y, Z \text{ tangent to } N) \\
+&= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) &&\quad\text{(}\nabla \text{ metric-compatible)} \\
+&= g(\bar\nabla_X Y + B(X, Y), Z) + g(Y, \bar\nabla_X Z + B(X, Z)) \\
+&= g(\bar\nabla_X Y, Z) + g(Y, \bar\nabla_X Z),
+\end{align*}
+where the $B(X, Y)$ and $B(X, Z)$ terms vanish since they lie in $TN^\perp$ while $Z, Y \in TN$. Since $\bar\nabla_X Y, Z$ and $Y, \bar\nabla_X Z$ all lie in $TN$, we can replace $g$ with $\bar g$:
+\[
+X(\bar g(Y, Z)) = \bar g(\bar\nabla_X Y, Z) + \bar g(Y, \bar\nabla_X Z).
+\]
+\end{proof}
+
+
+
+
+
+
+
+% \begin{colortheo}{$\bar{\nabla}$ is the Levi-Civita connection of $\bar{g}$}{}
+%     $\bar{\nabla}$ is the Levi-Civita connection of $\bar{g}$.
+% \end{colortheo}
+
+% \begin{proof}
+% We need to verify the 2 properties:
+
+% 1) $\bar{\nabla}$ is torsion-free: if $X, Y \in \Gamma(M,N)$ (extended from $\Gamma(N)$):
+% \[
+% \bar{\nabla}_X Y - \bar{\nabla}_Y X = (\nabla_X Y)^T - (\nabla_Y X)^T = (\nabla_X Y - \nabla_Y X)^T = ([X,Y])^T = [X,Y],
+% \]
+% since $[X,Y] \in \Gamma(M,N)$.
+
+% 2) $\bar{\nabla}$ respects $\bar{g}$: if $X, Y, Z \in \Gamma(M,N)$:
+% \begin{align*}
+% X(\bar{g}(Y,Z)) &= X(g(Y,Z)) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z) \\
+% &= g(\bar{\nabla}_X Y + B(X,Y),\, Z) + \cdots \\
+% &= g(\bar{\nabla}_X Y, Z) + g(\ldots) \\
+% &= \bar{g}(\bar{\nabla}_X Y, Z) + \cdots,
+% \end{align*}
+% where the $B$ terms vanish since $B(X,Y) \in TN^\perp$ is orthogonal to $Z \in TN$.
+% \end{proof}
+
+
+
+\begin{colortheo}{Properties of the second fundamental form}{second-fundamental-form-properties}
+The second fundamental form $B(X, Y) = \pi^\perp(\nabla_X Y)$ of a submanifold $N \subset (M, g)$ satisfies:
+\begin{enumerate}
+    \item[(a)] $B$ is $C^\infty(N)$-bilinear, i.e.\ a $(0, 2)$-tensor on $N$ with values in $TN^\perp$.
+    \item[(b)] As a consequence of (a), the value $B(X, Y)|_p$ at $p \in N$ depends only on $X_p$ and $Y_p$, giving a well-defined map $B_p \colon T_p N \times T_p N \to T_p N^\perp$.
+    \item[(c)] $B$ is symmetric: $B(X, Y) = B(Y, X)$.
+\end{enumerate}
+\end{colortheo}
+
+\begin{proof}
+Let $X, Y$ be vector fields on $M$ tangent to $N$, and $f \in C^\infty(N)$ (extended arbitrarily to $C^\infty(M)$).\\
+
+(a) Linearity in the first argument is immediate from $C^\infty(M)$-linearity of $\nabla$ in its first slot: $B(fX, Y) = \pi^\perp(f\,\nabla_X Y) = f\, B(X, Y)$. For the second:
+\[
+B(X, fY) = \pi^\perp\!\left(f\,\nabla_X Y + X(f)\, Y\right) = f\, B(X, Y) + X(f)\,\underbrace{\pi^\perp(Y)}_{= 0} = f\, B(X, Y),
+\]
+since $Y$ is tangent to $N$. 
+
+(b) follows from (a) by the standard pointwise-tensor characterization (Theorem~\ref{thm:characterization_tensor_fields}).
+
+(c) Since $\nabla$ is torsion-free and $[X, Y]$ is tangent to $N$:
+\[
+B(X, Y) - B(Y, X) = \pi^\perp(\nabla_X Y - \nabla_Y X) = \pi^\perp([X, Y]) = 0. \qedhere
+\]
+\end{proof}
+
+
+
+% \begin{colortheo}{Properties of the second fundamental form}{}
+% The second fundamental form of a submanifold $N \subset (M,g)$ has the following properties:
+% \begin{enumerate}
+% \item[(a)] $B$ is $C^\infty(N)$-bilinear (i.e.\ it is a $(0,2)$-tensor).
+% \item[(b)] For all $p \in N$: $B|_p \colon T_pN \times T_pN \to T_pN^\perp$ is well defined.
+% \item[(c)] $B$ is symmetric.
+% \end{enumerate}
+% \end{colortheo}
+
+% \begin{proof}
+% $B(X,Y) = (\nabla_X Y)^\perp$ for all $X, Y \in \Gamma(M,N)$.
+
+% (a) $B$ is obviously $\mathbb{R}$-linear. Let $f \in C^\infty(N)$: extend (arbitrarily) to $f \in C^\infty(M)$.
+% \[
+% B(fX, Y) = f\,B(X,Y)
+% \]
+% (by $C^\infty$-linearity of $\nabla$ in the first argument).
+% \begin{align*}
+% B(X, fY) &= (\nabla_X(fY))^\perp = (f\,\nabla_X Y + X(f)\,Y)^\perp \\
+% &= f\,(\nabla_X Y)^\perp + X(f)\,\underbrace{Y^\perp}_{=\,0} = f\,B(X,Y).
+% \end{align*}
+
+% (b) is a consequence of (a).
+
+% (c) $B(X,Y) - B(Y,X) = (\nabla_X Y - \nabla_Y X)^\perp = ([X,Y])^\perp = 0$, since $[X,Y] \in \Gamma(M,N)$ if $X, Y \in \Gamma(M,N)$.
+% \end{proof}
+
+
+
+As in the case of surfaces in $\mathbb{R}^3$: the second fundamental form measures the acceleration (in $M$) of geodesics in $N$:
+
+\begin{colorlem}{Geodesic acceleration}{geodesic-acceleration}
+If $\gamma$ is a geodesic of $(N, \bar g)$, then
+\[
+\nabla_{\dot\gamma} \dot\gamma = B(\dot\gamma, \dot\gamma).
+\]
+\end{colorlem}
+
+\begin{proof}
+By definition of a geodesic in $N$, $\bar\nabla_{\dot\gamma} \dot\gamma = 0$. The decomposition $\nabla_{\dot\gamma} \dot\gamma = \bar\nabla_{\dot\gamma} \dot\gamma + B(\dot\gamma, \dot\gamma)$ then gives the claim.
+\end{proof}
+
+\begin{colordef}{Totally geodesic submanifold}{totally-geodesic}
+$N \subset (M, g)$ is \emph{totally geodesic} if every geodesic in $(N, \bar g)$ is also a geodesic in $(M, g)$. Equivalently, by Lemma~\ref{lem:geodesic-acceleration}, $B \equiv 0$.
+\end{colordef}
+
+\begin{colexample}{}{}
+A linear subspace of $\mathbb{R}^n$, or the equator $S^{n-1} \subset S^n$.
+\end{colexample}
+
+\subsection{The fundamental equations for a Riemannian submanifold}
+
+\begin{colortheo}{Weingarten equation}{weingarten-equation}
+Let $N \subset (M, g)$ be a submanifold, let $X, Y$ be vector fields on $M$ tangent to $N$, and let $W \in \Gamma(TM)$ with $W \perp TN$ along $N$. Then at every point of $N$,
+\[
+g(\nabla_X W,\, Y) = -\,g(W,\, B(X, Y)).
+\]
+\end{colortheo}
+
+\begin{proof}
+Along $N$, $g(W, Y) = 0$. Since $X$ is tangent to $N$, differentiating along $X$ and using metric compatibility:
+\begin{align*}
+0 &= X(g(W, Y)) \\
+&= g(\nabla_X W, Y) + g(W, \nabla_X Y) \\
+&= g(\nabla_X W, Y) + g(W, \bar\nabla_X Y + B(X, Y)) \\
+&= g(\nabla_X W, Y) + g(W, B(X, Y)),
+\end{align*}
+where the term $g(W, \bar\nabla_X Y) = 0$ since $\bar\nabla_X Y \in TN$ and $W \perp TN$. \qedhere
+\end{proof}
+
+
+
+The second fundamental form $B$ relates the intrinsic curvature of $N$ to the ambient curvature of $M$:
+
+\begin{colortheo}{Gauss equation}{gauss-equation}
+For all $X, Y, Z, W \in T_p N$ at a point $p \in N$:
+\[
+\bar R(X, Y, Z, W) - R(X, Y, Z, W) = \langle B(X, Z),\, B(Y, W)\rangle - \langle B(X, W),\, B(Y, Z)\rangle,
+\]
+where $\bar R$ is the Riemann curvature tensor of $(N, \bar g)$ and $R$ that of $(M, g)$.
+\end{colortheo}
+
+\begin{proof}
+Skipped.
+\end{proof}
+
+The right-hand side depends only on $B$, so the discrepancy between the intrinsic and ambient curvatures is entirely controlled by the second fundamental form.
+
+\begin{colorcor}{Gauss equation for totally geodesic submanifolds}{gauss-totally-geodesic}
+If $N \subset (M, g)$ is totally geodesic, then for all $X, Y, Z \in T_p N$ at $p \in N$,
+\[
+\bar R(X, Y)\, Z = R(X, Y)\, Z.
+\]
+\end{colorcor}
+
+Hence, intrinsically, $N$ \emph{looks the same} as the ambient $M$ from the curvature point of view.
+
+\begin{colorcor}{Gauss equation for sectional curvature}{gauss-sectional-curvature}
+If $\Pi \subset T_p N$ is a 2-plane spanned by $X, Y \in T_p N$:
+\[
+\bar K(\Pi) = K(\Pi) + \frac{\langle B(X, X),\, B(Y, Y)\rangle - \|B(X, Y)\|^2}{\|X \wedge Y\|^2}.
+\]
+\end{colorcor}
+
+\begin{colremark}[Theorema Egregium]
+    % {theorema-egregium}
+For a surface $N^2 \subset \mathbb{R}^3$ with the induced metric, the ambient sectional curvature vanishes ($K \equiv 0$ in Euclidean space), so the Gauss equation reduces to
+\[
+\bar K(\Pi) = \frac{\langle B(X, X),\, B(Y, Y)\rangle - \|B(X, Y)\|^2}{\|X \wedge Y\|^2}.
+\]
+
+
+This is the Gauss curvature of the surface. Although the right-hand side is defined using the ambient connection on $\mathbb{R}^3$ (since $B = \pi^\perp \circ \nabla$ uses the ambient $\nabla$ and the orthogonal projection), the \emph{Theorema Egregium} from Gauss states that the result depends only on $\bar g$, the induced metric!
+\end{colremark}
+
+% \todo[inline]{
+% }
+
+\begin{colordef}{Hypersurface}{hypersurface}
+A submanifold $N \subset M$ is called a \emph{hypersurface} if $\dim N = \dim M - 1$. 
+\end{colordef}
+In this case $T_p N^\perp$ is one-dimensional for all $p \in N$.
+
+\begin{colordef}{Co-orientation}{co-orientation}
+A \emph{co-orientation} of a hypersurface $N \subset (M, g)$ is a smooth unit normal vector field $\hat n$ along $N$, i.e.\ $\hat n_p \in T_p N^\perp$ with $\|\hat n_p\| = 1$ for all $p \in N$.
+\end{colordef}
+
+\begin{colremark}{}{}
+A co-orientation exists locally around every point, but not always globally: the Möbius strip is an example of a hypersurface with no global co-orientation. When a global co-orientation exists, $N$ is often called \emph{co-orientable}.
+\end{colremark}
+
+\begin{colordef}{Scalar second fundamental form}{scalar-second-fundamental-form}
+Let $N \subset (M, g)$ be a co-oriented hypersurface with unit normal $\hat n$. The \emph{scalar second fundamental form} is the $(0, 2)$-tensor
+\[
+b(X, Y) := g(B(X, Y),\, \hat n), \qquad X, Y \in TN,
+\]
+so that $B(X, Y) = b(X, Y)\, \hat n$.
+\end{colordef}
+
+There are two more useful equivalent expressions for $b$:
+\begin{itemize}
+    \item Since $B(X, Y) = \pi^\perp(\nabla_X Y)$ and $\hat n$ is a unit normal, $\pi^\perp(\nabla_X Y) = g(\nabla_X Y, \hat n)\, \hat n$, hence
+    \[
+    b(X, Y) = g(\nabla_X Y,\, \hat n).
+    \]
+    \item By the Weingarten equation (Theorem~\ref{thm:weingarten-equation}) applied with $W = \hat n$,
+    \[
+    b(X, Y) = -\,g(\nabla_X \hat n,\, Y).
+    \]
+\end{itemize}
+
+
+
+% \todo[inline]{  }
+
+% We will call $N \subset M$ a \emph{hypersurface} if $\dim N = \dim M - 1$. Then $(T_pN)^\perp$ has dimension 1 for all $p \in N$.
+
+% \begin{colordef}{Co-orientation}{}
+% A \emph{co-orientation} of $N$: a choice of smooth unit vector $\hat{n}$ orthogonal to $N$.
+
+% (Locally: every hypersurface has a co-orientation.)
+% \end{colordef}
+
+% \begin{colordef}{Scalar second fundamental form}{}
+% The \emph{scalar second fundamental form} is the $(0,2)$ tensor $b$:
+% \[
+% b(X,Y) = g(B(X,Y),\, \hat{n}), \quad \text{so} \quad B(X,Y) = b(X,Y)\,\hat{n}.
+% \]
+% Equivalently, $b(X,Y) = g(\nabla_X Y,\, \hat{n})$. By the Weingarten equation:
+% \[
+% b(X,Y) = -\,g(\nabla_X \hat{n},\, Y).
+% \]
+% \end{colordef}
