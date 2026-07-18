@@ -20,7 +20,7 @@ of $\gamma^* TM$ is a vector space, where the bundle projection is given by $\pi
 Hence we can denote the space of all vector fields along $\gamma$ by $\Gamma(\gamma^* TM)$.
 
 \begin{colremark}
-If $\gamma$ self-intersects (i.e., $\gamma(t_1) = \gamma(t_2)$), $X_{t_1}$ does not have to be the same as $X_{t_2}$ (so not a unique value at all points of $M$ belonging to the image of $\gamma$).
+If $\gamma$ self-intersects (i.e., $\gamma(t_1) = \gamma(t_2)$), $X(t_1)$ does not have to be the same as $X(t_2)$ (so not a unique value at all points of $M$ belonging to the image of $\gamma$).
 
 In this case: $X$ does not extend to a vector field on $M$. If $\gamma$ is an embedded curve, $X$ always extends (non-uniquely, i.e. in many different ways) to an element of $\Gamma(TM)$.
 
@@ -208,17 +208,17 @@ P_{s,t}:T_{\gamma(s)}M \longrightarrow T_{\gamma(t)}M,
 \]
 defined as follows: for $v\in T_{\gamma(s)}M$, let $X$ be the unique vector field along $\gamma$ such that
 \[
-\nabla_{\dot{\gamma}}X=0,\qquad X_s=v.
+\nabla_{\dot{\gamma}}X=0,\qquad X(s)=v.
 \]
 Then
 \[
-P_{s,t}(v):=X_t.
+P_{s,t}(v):=X(t).
 \]
-Equivalently, if $X$ is parallel along $\gamma$, then $X_t=P_{s,t}(X_s)$.
+Equivalently, if $X$ is parallel along $\gamma$, then $X(t)=P_{s,t}(X(s))$.
 \end{colordef}
 
 \begin{colortheo}{Existence and Uniqueness of Parallel Transport}{}
-For every $p \in M$, $v \in T_pM$, and smooth curve $\gamma: I \to M$ with $\gamma(0) = p$, there exists a unique vector field $X$ along $\gamma$ such that $X_0 = v$ and $\nabla_{\dot{\gamma}} X = 0$.
+For every $p \in M$, $v \in T_pM$, and smooth curve $\gamma: I \to M$ with $\gamma(0) = p$, there exists a unique vector field $X$ along $\gamma$ such that $X(0) = v$ and $\nabla_{\dot{\gamma}} X = 0$.
 
 \end{colortheo}
 
