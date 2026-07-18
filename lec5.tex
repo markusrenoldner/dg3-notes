@@ -4,12 +4,20 @@
 
 \begin{colordef}{Vector Field Along a Curve}{vecfield-along-curve}
 Let $\gamma: I \to M$ be a smooth curve. We call a smooth map
-\todo[inline]{ find a good notation for the bundle }
 \[
-X:t \longmapsto X_t \in T_{\gamma(t)} M
+X:t \longmapsto X(t) \in T_{\gamma(t)} M
 \]
-a \emph{vector field along a curve} for $t \in I$, assigning to each $t$ a tangent vector at $\gamma(t)$.
+a \emph{vector field along a curve} for $t \in I$, assigning to each $t$ a tangent vector at $\gamma(t)$. 
 \end{colordef}
+
+A vector field along a curve can equivalently be seen as a section $t\mapsto(t,X(t))$ of the bundle $\gamma^* TM$, the latter being the pullback via $\gamma$ of the tangent bundle
+$$\gamma^* TM = \{(t,v) \in I \times TM : v \in T_{\gamma(t)} M\}.$$
+
+Each fiber $\pi^{-1}(t) = {t}\times T_{\gamma(t)}M \cong T_{\gamma(t)}M$
+% Each fiber $\pi^{-1}(t)= T_{\gamma(t)} M$ 
+of $\gamma^* TM$ is a vector space, where the bundle projection is given by $\pi: \gamma^* TM \to I, (t,v) \mapsto t$.
+
+Hence we can denote the space of all vector fields along $\gamma$ by $\Gamma(\gamma^* TM)$.
 
 \begin{colremark}
 If $\gamma$ self-intersects (i.e., $\gamma(t_1) = \gamma(t_2)$), $X_{t_1}$ does not have to be the same as $X_{t_2}$ (so not a unique value at all points of $M$ belonging to the image of $\gamma$).
