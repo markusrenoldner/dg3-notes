@@ -82,11 +82,11 @@ There is a natural basis of $T_pM$ given by the tangent vectors along the coordi
 \begin{colordef}{Coordinate basis vectors}{coordinate_basis}
 Let $M,n,p,f,g,v$ be as above.\\
 We define the coordinate basis vector
-$$\left.\frac{\mathrm{d}}{\mathrm{d}x^i}\right|_p f := \left(\frac{\mathrm{d}}{\mathrm{d}x^i} (f \circ \varphi)\right) \bigg|_{\varphi(p)}.$$
+$$\left.\frac{\partial}{\partial x^i}\right|_p f := \left(\frac{\partial}{\partial x^i} (f \circ \varphi)\right) \bigg|_{\varphi(p)}.$$
 \end{colordef}
 
 \begin{colorlem}{Basis of $T_pM$}{basis_tangent_space}
-The set $\left\{\left.\frac{\mathrm{d}}{\mathrm{d}x^i}\right|_p\right\}_{i=1}^n$ is a basis of $T_pM$. 
+The set $\left\{\left.\frac{\partial}{\partial x^i}\right|_p\right\}_{i=1}^n$ is a basis of $T_pM$. 
 \end{colorlem}
 \begin{proof}
 See chapter 3 in \cite{tsakanikas2024dg2}
@@ -108,15 +108,15 @@ See chapter 8 and appendix C in \cite{tsakanikas2024dg2}
 \end{proof}
 
 
-In local coordinates: $\{\mathrm{d}x^i\}_{i=1}^n$ is the dual basis of $\left\{\frac{\mathrm{d}}{\mathrm{d} x^i}\right\}_{i=1}^n$, as we have
+In local coordinates: $\{\mathrm{d}x^i\}_{i=1}^n$ is the dual basis of $\left\{\frac{\partial}{\partial x^i}\right\}_{i=1}^n$, as we have
 \[
-\mathrm{d}x^i \left( \frac{\mathrm{d}}{\mathrm{d} x^j} \right) = \frac{\mathrm{d}}{\mathrm{d} x^j} (x^i) = \delta_j^i.
+\mathrm{d}x^i \left( \frac{\partial}{\partial x^j} \right) = \frac{\partial}{\partial x^j} (x^i) = \delta_j^i.
 \]
 
 In the following we will use the Einstein summation convenction, which implies summation over repeated indices. For example, we write
-\[v = v^i \frac{\mathrm{d}}{\mathrm{d} x^i}
+\[v = v^i \frac{\partial}{\partial x^i}
 \]instead of
-\[v = \sum_{i=1}^n v^i \frac{\mathrm{d}}{\mathrm{d} x^i}
+\[v = \sum_{i=1}^n v^i \frac{\partial}{\partial x^i}
 \]
 as the dimension $n$ is usually clear from the context.
 
@@ -124,7 +124,7 @@ as the dimension $n$ is usually clear from the context.
 \begin{colordef}{Vector Field and Covector Field / 1-form}{vector_covector_field}
 A vector field is an assignment/map $X:p \mapsto v \in T_pM$ that is smooth in local coordinates/when written in the coordinate basis
 \[
-v = v^i \frac{\mathrm{d}}{\mathrm{d} x^i}.
+v = v^i \frac{\partial}{\partial x^i}.
 \]
 We write $\Gamma(TM)$ for the set of all vector fields on $M$.\\
 
@@ -142,7 +142,7 @@ The next result is easy to show, but nevertheless important.
 \mathrm{d}y^i = \frac{\partial y^i}{\partial x^j} \, \mathrm{d}x^j
 \]
 \[
-\frac{\mathrm{d}}{\mathrm{d} x^i} = \frac{\partial y^j}{\partial x^i} \frac{\mathrm{d}}{\mathrm{d} y^j}
+\frac{\partial}{\partial x^i} = \frac{\partial y^j}{\partial x^i} \frac{\partial}{\partial y^j}
 \]
 \end{colorlem}
 \begin{proof}
@@ -152,14 +152,14 @@ See chapter 3 in \cite{tsakanikas2024dg2}.
 
 \begin{colremark}
 This allows to translate a tangent vector (field)
-$$v=v^i \frac{\mathrm{d}}{\mathrm{d}x^i}=\tilde v^j \frac{\mathrm{d}}{\mathrm{d}y^j}$$
+$$v=v^i \frac{\partial}{\partial x^i}=\tilde v^j \frac{\partial}{\partial y^j}$$
 from the $x^i$ to the $y^i$ coordinates. From the lemma we find
 $$\tilde v^j = \frac{\partial x^i}{\partial y^j} v^i$$
 and similarly for a covector field.\\
 One can also easily recover the components $v^i$ from the vector field $v$ by evaluating $v$ on the coordinate functions:
 $$v^i = v(x^i)$$
 and similarly for a covector field $\omega$:
-$$\omega_i = \omega\left(\frac{\mathrm{d}}{\mathrm{d}x^i}\right)$$ 
+$$\omega_i = \omega\left(\frac{\partial}{\partial x^i}\right)$$ 
 \end{colremark}
 
 We introduce the differential of a map, which can be interpreted as its linearisation at a point.

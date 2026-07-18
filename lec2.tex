@@ -25,7 +25,7 @@ $g$ is a section of the bundle of covariant 2-tensors on $M$. Therefore it can b
 \end{equation}
 
 and the components $g_{ij}$ can be found by
-$$g_{ij} = g\left(\frac{\mathrm{d}}{\mathrm{d} x^i}, \frac{\mathrm{d}}{\mathrm{d} x^j}\right).$$
+$$g_{ij} = g\left(\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right).$$
 This is what the smoothness condition means: $g_{ij}$ are smooth functions. And in our convention, they live on the manifold $M$. The matrix of components $[g_{ij}]$ is symmetric, positive definite.
 We would like to remark, that some people also omit the $\otimes$ symbol and write $g = g_{ij} \mathrm{d}x^i \mathrm{d}x^j$.
 
@@ -53,10 +53,10 @@ g_E\left(v,w\right) :=  \left \langle v,w \right \rangle_{\mathbb{R}^n}.
 This means that its components are given by
 \begin{align*}
     g_{ij}&=
-    g_E\left(\frac{\mathrm{d}}{\mathrm{d}x^i}, \frac{\mathrm{d}}{\mathrm{d}x^j}\right) \\
+    g_E\left(\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}\right) \\
     &=g_E\left(
-        0\frac{\mathrm{d}}{\mathrm{d}x^1}+...+1\frac{\mathrm{d}}{\mathrm{d}x^i}+....0\frac{\mathrm{d}}{\mathrm{d}x^n},
-        0\frac{\mathrm{d}}{\mathrm{d}x^1}+...+1\frac{\mathrm{d}}{\mathrm{d}x^j}+....0\frac{\mathrm{d}}{\mathrm{d}x^n}\right)\\
+        0\frac{\partial}{\partial x^1}+...+1\frac{\partial}{\partial x^i}+....0\frac{\partial}{\partial x^n},
+        0\frac{\partial}{\partial x^1}+...+1\frac{\partial}{\partial x^j}+....0\frac{\partial}{\partial x^n}\right)\\
     &= \delta_{ij}
 \end{align*}
 
@@ -266,7 +266,7 @@ It is obviously symmetric and bilinear. Positivity (using that $F$ is an immersi
 
 In local coordinates one gets
 \[
-F^*g_{ij} = g\left(\mathrm{d}F\left(\frac{\mathrm{d}}{\mathrm{d} x^i}\right), \mathrm{d}F\left(\frac{\mathrm{d}}{\mathrm{d} x^j}\right)\right) = \frac{\partial F^a}{\partial x^i} g_{ab} \frac{\partial F^b}{\partial x^j}.
+F^*g_{ij} = g\left(\mathrm{d}F\left(\frac{\partial}{\partial x^i}\right), \mathrm{d}F\left(\frac{\partial}{\partial x^j}\right)\right) = \frac{\partial F^a}{\partial x^i} g_{ab} \frac{\partial F^b}{\partial x^j}.
 \]
 
 In exercise 1.4, we derive this for the case where $g$ is the Euclidean metric.\\
