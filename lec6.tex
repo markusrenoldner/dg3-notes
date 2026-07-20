@@ -456,14 +456,14 @@ $$\langle w_1, w_2 \rangle_{T_v(T_p M)} := \langle \Phi_v^{-1}(w_1), \Phi_v^{-1}
 
 To give some intuition on the differential of the exponential consider this: By definition, $\exp_p(tv)=\gamma_{p,v}(t)$. We compute now the curve velocity. For this define $c:t\mapsto tv$, so that $\gamma_{p,v}=\exp\circ\ c$.
 \begin{align*}
-    \gamma'_{p,v}(t) 
+    \dot\gamma_{p,v}(t)
     &= \mathrm{d} \gamma_{p,v} \left ( \frac{\mathrm{d}}{\mathrm{d}t}\bigg|_t \right )\\
     &=\mathrm{d} \exp_p|_{c(t)} \circ \mathrm{d} c\left ( \frac{\mathrm{d}}{\mathrm{d}t}\bigg|_t \right )\\
-    &=\mathrm{d} \exp_p|_{vt}\left ( c' (t)\right )
+    &=\mathrm{d} \exp_p|_{vt}\left ( \dot c (t)\right )
 \end{align*}
 
 
-Evaluating at $t=1$ shows that $\mathrm{d} \exp_p|_{v}\left ( v\right )$ is precisely the velocity of the geodesic at $t=1$, $\gamma'_{p,v}(1)$.\\
+Evaluating at $t=1$ shows that $\mathrm{d} \exp_p|_{v}\left ( v\right )$ is precisely the velocity of the geodesic at $t=1$, $\dot\gamma_{p,v}(1)$.\\
 
 
 

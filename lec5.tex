@@ -35,7 +35,7 @@ Let $\gamma: I \to M$ be a smooth curve and $X$ a vector field along $\gamma$. T
 
 \begin{proof}[Sketch of proof]
 
-Assuming $\gamma'(t)\neq 0$, restrict to $\gamma|_{(t-\epsilon,t+\epsilon)}$ so that it is embedded curve.
+Assuming $\dot\gamma(t)\neq 0$, restrict to $\gamma|_{(t-\epsilon,t+\epsilon)}$ so that it is embedded curve.
 
 
 
@@ -260,10 +260,10 @@ P_t : v \longmapsto X(t)
 \]
 is linear and bijective, with inverse given by solving the ODE backward in time.\\
 
-Concerning the isometry property, let $X, Y$ be vector fields on $\gamma$ s.t. $\nabla_\gamma X = \nabla_\gamma Y = 0$. Then
-$$\frac{\mathrm{d}}{\mathrm{d}t} \left \langle X,Y \right \rangle = \gamma' (\left \langle X,Y \right \rangle) = \left \langle \nabla_\gamma X,Y \right \rangle + \left \langle X,\nabla_\gamma Y \right \rangle = 0,$$
+Concerning the isometry property, let $X, Y$ be vector fields on $\gamma$ s.t. $\nabla_{\dot\gamma} X = \nabla_{\dot\gamma} Y = 0$. Then
+$$\frac{\mathrm{d}}{\mathrm{d}t} \left \langle X,Y \right \rangle = \dot\gamma (\left \langle X,Y \right \rangle) = \left \langle \nabla_{\dot\gamma} X,Y \right \rangle + \left \langle X,\nabla_{\dot\gamma} Y \right \rangle = 0,$$
 
-where we have used that for $f(p):=\left \langle X_p,Y_p \right \rangle$ we have $\frac{\mathrm{d}}{\mathrm{d}t}(f\circ \gamma)(t) = \mathrm{d}\gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right )(f)=\gamma'(t)f$. 
+where we have used that for $f(p):=\left \langle X_p,Y_p \right \rangle$ we have $\frac{\mathrm{d}}{\mathrm{d}t}(f\circ \gamma)(t) = \mathrm{d}\gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right )(f)=\dot\gamma(t)f$. 
 
 The map $t\mapsto \left \langle X(t),Y(t) \right \rangle$ lives on $I\subset \mathbb{R}$, and has zero derivative, so we get $\left \langle X(t),Y(t) \right \rangle = \left \langle X(0),Y(0) \right \rangle$, which is exactly the isometric property.
 \end{proof}
@@ -312,7 +312,7 @@ In local coordinates, this yields the \emph{geodesic equations},
 where $\Gamma_{ij}^k$ are the Christoffel symbols of the connection.
 
 \begin{colremark}
-If we reparametrize: $\gamma' = \gamma \circ h$: one can show that $\nabla_{\dot{\gamma}'} \dot{\gamma}' \parallel \dot{\gamma}'$, i.e. there exists a function $\lambda(t)$ such that $\nabla_{\dot{\gamma}'} \dot{\gamma}' =\lambda \dot{\gamma}'$. But we do not necessarily have $\nabla_{\dot{\gamma}'} \dot{\gamma}'=0$ anymore so the above definition is parametrisation dependent. Any curve which satisfies $\nabla_{\dot{\gamma}'} \dot{\gamma}' =\lambda \dot{\gamma}'$ can always be reparametrised to geodesics.
+If we reparametrize: $\tilde\gamma = \gamma \circ h$: one can show that $\nabla_{\dot{\tilde\gamma}} \dot{\tilde\gamma} \parallel \dot{\tilde\gamma}$, i.e. there exists a function $\lambda(t)$ such that $\nabla_{\dot{\tilde\gamma}} \dot{\tilde\gamma} =\lambda \dot{\tilde\gamma}$. But we do not necessarily have $\nabla_{\dot{\tilde\gamma}} \dot{\tilde\gamma}=0$ anymore so the above definition is parametrisation dependent. Any curve which satisfies $\nabla_{\dot{\tilde\gamma}} \dot{\tilde\gamma} =\lambda \dot{\tilde\gamma}$ can always be reparametrised to geodesics.
 \end{colremark}
 
 
@@ -398,20 +398,20 @@ On a general Riemannian manifold, this is not necessarily true (for example, on 
 \todo[inline]{ link stationary points and local minimsaion }
 \end{colremark}
 
-From the definition, we can easily show that $\left\lVert \gamma' \right\rVert=g(\gamma',\gamma')$ is constant in $t$, i.e. geodesics are parametrised at constant speed.
+From the definition, we can easily show that $\left\lVert \dot\gamma \right\rVert^2=g(\dot\gamma,\dot\gamma)$ is constant in $t$, i.e. geodesics are parametrised at constant speed.
 
 \begin{colorlem}{Geodesics are parametrised at constant speed}{geodesics_constant_speed}
 Let $\gamma$ be a geodesic on $(M,g)$, and let $\nabla$ be the Levi-Civita connection. Then 
-$$\frac{\mathrm{d}}{\mathrm{d}t} g(\gamma',\gamma')=0.$$
+$$\frac{\mathrm{d}}{\mathrm{d}t} g(\dot\gamma,\dot\gamma)=0.$$
 \end{colorlem}
 \begin{proof}
     \begin{align*}
-        \frac{\mathrm{d}}{\mathrm{d}t} g(\gamma',\gamma')
-        &= \mathrm{d} \gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right ) \left ( g(\gamma',\gamma') \right )\\
-        &= \gamma'(t) g(\gamma',\gamma')\\
-        &= g(\nabla_{\gamma'}\gamma',\gamma') + g(\gamma',\nabla_{\gamma'}\gamma'). 
+        \frac{\mathrm{d}}{\mathrm{d}t} g(\dot\gamma,\dot\gamma)
+        &= \mathrm{d} \gamma \left ( \frac{\mathrm{d}}{\mathrm{d}t} \right ) \left ( g(\dot\gamma,\dot\gamma) \right )\\
+        &= \dot\gamma(t) g(\dot\gamma,\dot\gamma)\\
+        &= g(\nabla_{\dot\gamma}\dot\gamma,\dot\gamma) + g(\dot\gamma,\nabla_{\dot\gamma}\dot\gamma). 
     \end{align*}
-    But $\nabla_{\gamma'}\gamma'=0$ as $\gamma$ is a geodesic, so we yield the result.
+    But $\nabla_{\dot\gamma}\dot\gamma=0$ as $\gamma$ is a geodesic, so we yield the result.
 \end{proof}
 
 

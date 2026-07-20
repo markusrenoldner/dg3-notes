@@ -519,7 +519,7 @@ In particular, at every $t$ where $\gamma$ is differentiable,
 \[
 \sqrt{\dot r^2 + b^2(r,\theta)\dot\theta^2} = |\dot r|,
 \]
-so $b(r,\theta)\dot\theta = 0$. Since $b > 0$ for $r > 0$, we get $\dot\theta(t) = 0$ for $t > 0$. Thus $\theta$ is constant along $\gamma$, so $\gamma$ is a radial curve. Reparametrizing by arc length (i.e. parametrise so that $\left\lVert \gamma'(t) \right\rVert$ is constant in $t$) gives a radial geodesic from $p$.
+so $b(r,\theta)\dot\theta = 0$. Since $b > 0$ for $r > 0$, we get $\dot\theta(t) = 0$ for $t > 0$. Thus $\theta$ is constant along $\gamma$, so $\gamma$ is a radial curve. Reparametrizing by arc length (i.e. parametrise so that $\left\lVert \dot\gamma(t) \right\rVert$ is constant in $t$) gives a radial geodesic from $p$.
 \end{proof}
 
 
@@ -591,7 +591,7 @@ A curve locally minimizes the length if and only if it is a reparametrization of
 
 By uniqueness of geodesics with given initial data (Theorem~\ref{thm:existence_uniqueness_geodesics}), this radial geodesic coincides with $\gamma|_{[t_1, t_2]}$, up to reparametrization. Hence $\ell(\gamma|_{[t_1, t_2]}) = d(\gamma(t_1), \gamma(t_2))$.
 
-``$\implies$'': Suppose $\gamma$ locally minimizes length. Reparametrize by arc length (i.e. parametrise so that $\left\lVert \gamma'(t) \right\rVert$ is constant in $t$). For each $t_0 \in I$, pick $\varepsilon$ as above so that locally $\gamma$ realizes the distance between its endpoints. By Theorem~\ref{thm:radial_geodesics_minimize}, $\gamma|_{[t_0 - \varepsilon, t_0 + \varepsilon]}$ is a radial geodesic from $\gamma(t_0 - \varepsilon)$, hence in particular a geodesic. Since being a geodesic is a local condition, $\gamma$ is a geodesic on all of $I$.
+``$\implies$'': Suppose $\gamma$ locally minimizes length. Reparametrize by arc length (i.e. parametrise so that $\left\lVert \dot\gamma(t) \right\rVert$ is constant in $t$). For each $t_0 \in I$, pick $\varepsilon$ as above so that locally $\gamma$ realizes the distance between its endpoints. By Theorem~\ref{thm:radial_geodesics_minimize}, $\gamma|_{[t_0 - \varepsilon, t_0 + \varepsilon]}$ is a radial geodesic from $\gamma(t_0 - \varepsilon)$, hence in particular a geodesic. Since being a geodesic is a local condition, $\gamma$ is a geodesic on all of $I$.
 \end{proof}
 
 % \vspace{4cm}
