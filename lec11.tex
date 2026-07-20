@@ -24,7 +24,7 @@ We will now prove Theorem \ref{thm:gauss-equation}.
 \begin{proof}
 Extend $X, Y, Z, W$ to vector fields on $M$ tangent to $N$. Without loss of generality, choose extensions with $[X, Y]_p = 0$ at the point of interest (this is always possible by working in normal coordinates centered at $p$).
 
-Recall $R(X, Y, Z, W) = \langle R(X, Y) W,\, Z\rangle$ (Definition~\ref{def:04-riemann-curvature-tensor}). We expand the intrinsic curvature using $\nabla_X Y = \bar\nabla_X Y + B(X, Y)$:
+Recall that, by the symmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}), $R(X, Y, Z, W) = \langle R(X, Y) W,\, Z\rangle$. We expand the intrinsic curvature using $\nabla_X Y = \bar\nabla_X Y + B(X, Y)$:
 \begin{align*}
 \bar\nabla_X \bar\nabla_Y W 
 &= \nabla_X(\bar\nabla_Y W) - B(X, \bar\nabla_Y W) \\
@@ -97,7 +97,7 @@ If $N^2 \subset M^3$ is a hypersurface, $L_p$ has two eigenvalues $k_1, k_2$, so
 \[
 \bar K(p) = K(p) + K_{\mathrm{Gauss}}(p),
 \]
-where $\bar K$ is the sectional curvature of $N$ (which for a surface is just the Gauss curvature of $\bar g$) and $K$ is the sectional curvature of $M$ along $T_pN$. In particular, when $M = \mathbb{R}^3$ (so $K \equiv 0$), the Gauss curvature $K_{\mathrm{Gauss}} = \bar K$ is intrinsic, see Remark \ref{rem:theorema-egregium}.
+where $\bar K(p)$ is the \emph{intrinsic} sectional curvature of $(N, \bar g)$ at $p$ and $K(p)$ is the sectional curvature of the ambient $M$ along $T_pN$. Note that $K_{\mathrm{Gauss}} = \det L_p$ is defined \emph{extrinsically}, via the Weingarten map, so a priori $\bar K$ and $K_{\mathrm{Gauss}}$ are different quantities. When the ambient space is flat ($K \equiv 0$, e.g.\ $M = \mathbb{R}^3$), the Gauss equation forces $\bar K = K_{\mathrm{Gauss}}$: the extrinsically-defined Gauss curvature turns out to be intrinsic. This is Gauss's \emph{Theorema Egregium}, see Remark~\ref{rem:theorema-egregium}.
 
 {Level-set hypersurfaces.}
 If $N \subset M$ is given as a regular level set $\{f = c\}$ with $\mathrm{d}f|_N \neq 0$, then the unit normal and scalar second fundamental form are
@@ -172,7 +172,7 @@ Torsion-freeness of $\nabla$ then gives $\nabla_T X - \nabla_X T = [T, X] = 0$.
 \[
 R(X, T)\, X = \nabla_X \nabla_T X - \nabla_T \nabla_X X.
 \]
-Taking the inner product with $T$ and using the $(0, 4)$-convention $R(A, B, C, D) = g(R(A, B) D, C)$:
+Taking the inner product with $T$ and using the identity $R(A, B, C, D) = g(R(A, B) D, C)$ (symmetries of $R$, Theorem~\ref{thm:symmetries-riemann-curvature-tensor}):
 \[
 \langle \nabla_X \nabla_T X, T\rangle - \langle \nabla_T \nabla_X X, T\rangle = \langle R(X, T) X, T\rangle = R(X, T, T, X) = -R(T, X, T, X). \qedhere
 \]

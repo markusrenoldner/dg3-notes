@@ -116,16 +116,45 @@ Recall the musical isomorphism $\flat \colon TM \to T^*M$, $X \mapsto X^\flat = 
 
 
 
+% \begin{colordef}{The (0,4) Riemann curvature tensor}{04-riemann-curvature-tensor}
+% We define the $(0,4)$-Riemann curvature tensor $\widehat{R} \in T^0_4(M)$ by
+% \begin{align*}
+%     \widehat{R}(X,Y,Z,W) &:= g(R(X,Y)\cdot W,\, Z) \\
+%     &= -\,g(R(X,Y)\cdot Z,\, W)\\
+%     &= (R(X,Y)W)^\flat(Z).
+% \end{align*}
+% \end{colordef}
+
+% Be aware, that this tensor is often the subject of confusion: different authors have different sign conventions, and further, the $\widehat{\cdot}$ symbol is often not written explicitly. We will also adopt this convention. The type of arguments the tensor is evaluated on will make clear which version of the tensor we are using.
+
+% The components of $R$ as a $(1,3)$-tensor are defined by
+% \[
+% R(\partial_\gamma, \partial_\delta)\,\partial_\beta = R^\alpha{}_{\beta\gamma\delta}\,\partial_\alpha,
+% \]
+% so that $R^\alpha{}_{\beta\gamma\delta} = \big(R(\partial_\gamma, \partial_\delta)\,\partial_\beta\big)^\alpha$. The components of the $(0,4)$-tensor $\widehat R$ are defined as usual by evaluation on the coordinate basis,
+% \[
+% \widehat R_{\alpha\beta\gamma\delta} = \widehat R(\partial_\alpha, \partial_\beta, \partial_\gamma, \partial_\delta) = g(\partial_\alpha,\, R(\partial_\gamma, \partial_\delta)\,\partial_\beta) = g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
+% \]
+% From now on we drop the hat and write
+% \begin{equation}
+%     \label{eq:riemann-tensor-notation}
+%     R_{\alpha\beta\gamma\delta} := g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
+% \end{equation}
+
+
+
 \begin{colordef}{The (0,4) Riemann curvature tensor}{04-riemann-curvature-tensor}
 We define the $(0,4)$-Riemann curvature tensor $\widehat{R} \in T^0_4(M)$ by
-\begin{align*}
-    \widehat{R}(X,Y,Z,W) &:= g(R(X,Y)\cdot W,\, Z) \\
-    &= -\,g(R(X,Y)\cdot Z,\, W)\\
-    &= (R(X,Y)W)^\flat(Z).
-\end{align*}
+\[
+\widehat R(X, Y, Z, W) := g\big(X,\, R(Z, W)\, Y\big).
+\]
+Equivalently, using the musical isomorphism $\flat$:
+\[
+\widehat R(X, Y, Z, W) = X^\flat\big(R(Z, W)\, Y\big).
+\]
 \end{colordef}
 
-Be aware, that this tensor is often the subject of confusion: different authors have different sign conventions, and further, the $\widehat{\cdot}$ symbol is often not written explicitly.
+Be aware, that this tensor is often the subject of confusion: different authors have different sign conventions, and further, the $\widehat{\cdot}$ symbol is often not written explicitly. We will also adopt this convention. The type of arguments the tensor is evaluated on will make clear which version of the tensor we are using.
 
 The components of $R$ as a $(1,3)$-tensor are defined by
 \[
@@ -133,14 +162,13 @@ R(\partial_\gamma, \partial_\delta)\,\partial_\beta = R^\alpha{}_{\beta\gamma\de
 \]
 so that $R^\alpha{}_{\beta\gamma\delta} = \big(R(\partial_\gamma, \partial_\delta)\,\partial_\beta\big)^\alpha$. The components of the $(0,4)$-tensor $\widehat R$ are defined as usual by evaluation on the coordinate basis,
 \[
-\widehat R_{\alpha\beta\gamma\delta} = \widehat R(\partial_\alpha, \partial_\beta, \partial_\gamma, \partial_\delta) = g(\partial_\alpha,\, R(\partial_\gamma, \partial_\delta)\,\partial_\beta) = g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
+\widehat R_{\alpha\beta\gamma\delta} = \widehat R(\partial_\alpha, \partial_\beta, \partial_\gamma, \partial_\delta) = g\big(\partial_\alpha,\, R(\partial_\gamma, \partial_\delta)\,\partial_\beta\big) = g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
 \]
 From now on we drop the hat and write
 \begin{equation}
     \label{eq:riemann-tensor-notation}
     R_{\alpha\beta\gamma\delta} := g_{\alpha\mu}\, R^\mu{}_{\beta\gamma\delta}.
 \end{equation}
-
 
 
 
@@ -478,7 +506,7 @@ and further one can easily compute that
 
 
 \begin{colremark}[$R$ as a quadratic form on bivectors]{}
-
+\label{rem:R-map-on-bivectors222}
 \todo[inline]{ this is kind of a duplicate of the remark \ref{rem:R-map-on-bivectors111} }
 
 The wedge product $X \wedge Y$ here is the bivector in $\Lambda^2 T_p M$, the space of \emph{bivectors} (or 2-vectors) on $T_p M$. This is the same algebraic construction as the wedge product of covectors used to build differential forms, just applied to vectors instead. The induced inner product on $\Lambda^2 T_p M$ is
@@ -487,7 +515,7 @@ The wedge product $X \wedge Y$ here is the bivector in $\Lambda^2 T_p M$, the sp
 \]
 so in particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, matching our denominator.
 
-By the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), the curvature tensor descends to a bilinear map
+By the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), the curvature tensor reduces to a bilinear map
 \[
 \widetilde R : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad \widetilde R(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
 \]
