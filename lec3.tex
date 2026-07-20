@@ -341,7 +341,7 @@ The contraction of tensors is independent of the choice of coordinates.
 \begin{colordef}{Tensor field, space of tensor fields}{tensor_field}
 A tensor field of type $(k, l)$ on $M$ is an assignment at every point $p \in M$ of a $(k, l)$ tensor $T_p$, such that the components $T^{i_1 \cdots i_k}_{j_1 \cdots j_l}$ are smooth functions in any local coordinate system.
 
-The space $\Gamma(E)$ denotes all smooth sections of a vector bundle $E \to M$, hence we will denote the space of all $(k, l)$-tensor fields by
+We will denote the space of all $(k, l)$-tensor fields by
 $$\Gamma(\otimes^k TM \otimes^l T^*M).$$
 
 For brevity, the following notation is also common:
@@ -396,3 +396,33 @@ The direction "tensors are $C^\infty(M)$-multilinear" is true by definition. The
 
 For (0,1) tensors, see exercise 3.5.
 \end{proof}
+
+
+
+\subsection{Notation summary of bundles, sections and tensors}
+
+We have introduced many different bundles and their spaces of sections. For convenience, we summarize them in the following table.
+
+The idea is always as follows: The space $\Gamma(E)$ denotes all smooth sections of a vector bundle $E \to M$, and the symbol $\Lambda$ denotes bundles of alternating tensors (forms and multivectors). 
+
+For completeness, we also include bivector and $k$-vector fields, which are not central to this course (we mention them in Remarks \ref{rem:R-map-on-bivectors111} and \ref{rem:R-map-on-bivectors222}). They are defined analogously to $k$-forms (i.e. they are alternating tensors), but with the tangent bundle instead of the cotangent bundle.\\
+
+\begin{center}
+\begin{tabular}{llll}
+Object & Bundle & Space of sections & Shorthand notations\\
+\hline
+Vector fields & $TM$ & $\Gamma(TM)$ & $\mathfrak{X}(M)$ \\
+1-forms & $T^*M$ & $\Gamma(T^*M)$ & $\mathfrak{X}^*(M)$ or $\Omega^1(M)$ \\
+Bivector fields & $\Lambda^2 TM$ & $\Gamma(\Lambda^2 TM)$ & -\\
+2-forms & $\Lambda^2 T^*M$ & $\Gamma(\Lambda^2 T^*M)$ & $\Omega^2(M)$ \\
+$k$-vector fields & $\Lambda^k TM$ & $\Gamma(\Lambda^k TM)$ & -\\
+$k$-forms & $\Lambda^k T^*M$ & $\Gamma(\Lambda^k T^*M)$ & $\Omega^k(M)$ \\
+$(k, l)$-tensor fields & $\otimes^k TM \otimes^l T^*M$ & $\Gamma(\otimes^k TM \otimes^l T^*M)$ & $T^{k}_{l}(M)$\\
+% \hline
+\end{tabular}
+\end{center}
+
+Some authors use $T^k(TM)$ instead of $\otimes^k TM$ for tensor bundles. It is also always useful to recall that the tensor product of spaces can be identified with the space of multilinear, real-valued maps, so that
+\[
+\otimes^k TM = TM\otimes\cdots\otimes TM \cong L(T^*M, \ldots, T^*M;\, \mathbb{R}).
+\]
