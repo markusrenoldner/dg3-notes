@@ -512,24 +512,23 @@ and further one can easily compute that
 
 \begin{colremark}[$R$ as a quadratic form on bivectors]{}
 \label{rem:R-map-on-bivectors222}
-\todo[inline]{ this is kind of a duplicate of the remark \ref{rem:R-map-on-bivectors111} }
 
-The wedge product $X \wedge Y$ here is the bivector in $\Lambda^2 T_p M$, the space of \emph{bivectors} (or 2-vectors) on $T_p M$. This is the same algebraic construction as the wedge product of covectors used to build differential forms, just applied to vectors instead. The induced inner product on $\Lambda^2 T_p M$ is
+Recall Section \ref{sec:notation-tensors} and Remark \ref{rem:R-map-on-bivectors111}: $R$ can be viewed as a map $\widetilde R$ on bivectors $X \wedge Y \in \Lambda^2 T_p M$. The induced inner product on $\Lambda^2 T_p M$ is
 \[
 \langle X \wedge Y,\, Z \wedge W\rangle = \langle X, Z\rangle \langle Y, W\rangle - \langle X, W\rangle \langle Y, Z\rangle,
 \]
-so in particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, matching our denominator.
-
+so in particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, matching the denominator of $K$.
 By the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), the curvature tensor reduces to a bilinear map
 \[
-\widetilde R : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad \widetilde R(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
+R_{2} : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad R_{2}(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
 \]
-and the pairwise symmetry (item 3) makes $\widetilde R$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. In this picture the sectional curvature reads
+and the pairwise symmetry (item 3) makes $R_{2}$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. In this picture the sectional curvature reads
 \[
-K(\Pi) = \frac{\widetilde R(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
+K(\Pi) = \frac{R_{2}(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
 \]
 which looks a bit like a Rayleigh-quotient: it depends only on the bivector $X \wedge Y$ up to scaling, equivalently only on the plane $\Pi = \mathrm{span}(X, Y)$.
 \end{colremark}
+
 
 
 
