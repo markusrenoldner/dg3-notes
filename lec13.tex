@@ -43,11 +43,11 @@ Using the Jacobi equation $\nabla_{\dot\gamma}\nabla_{\dot\gamma} J = R(\dot\gam
 Hence $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\phi_s)\big|_{s = 0} = 0$.
 
 {Step 3: smoothing the corner at $t_1$ makes the second variation strictly negative.}
-The issue is the corner of $Y$ at $t = t_1$ (and similarly at $t_0$). Note $J'(t_1) \neq 0$, otherwise $J \equiv 0$ by uniqueness. For small $\delta \ll \varepsilon \ll 1$, replace $Y$ on $[t_1 - \delta, t_1 + \varepsilon]$ by a linear interpolation:
+The issue is the corner of $Y$ at $t = t_1$ (and similarly at $t_0$). Note $\dot J(t_1) \neq 0$ (recall $\dot J := \nabla_{\dot\gamma} J$), otherwise $J \equiv 0$ by uniqueness. For small $\delta \ll \varepsilon \ll 1$, replace $Y$ on $[t_1 - \delta, t_1 + \varepsilon]$ by a linear interpolation:
 \[
 \tilde Y(t) := \begin{cases} Y(t), & t \notin [t_1 - \delta,\, t_1 + \varepsilon], \\ Y(t_1 - \delta) \cdot \dfrac{(t_1 + \varepsilon) - t}{\varepsilon + \delta}, & t \in [t_1 - \delta,\, t_1 + \varepsilon]. \end{cases}
 \]
-Taylor expansion gives $\|Y(t_1 - \delta)\| = \|J'(t_1)\| \cdot \delta + O(\delta^2)$, so $\|Y - \tilde Y\|(t) \lesssim \delta$ uniformly. Set $\tilde\phi(s, t) = \exp_{\gamma(t)}(s\, \tilde Y(t))$, which agrees with $\phi$ outside $[t_1 - \delta, t_1 + \varepsilon]$.
+Taylor expansion gives $\|Y(t_1 - \delta)\| = \|\dot J(t_1)\| \cdot \delta + O(\delta^2)$, so $\|Y - \tilde Y\|(t) \lesssim \delta$ uniformly. Set $\tilde\phi(s, t) = \exp_{\gamma(t)}(s\, \tilde Y(t))$, which agrees with $\phi$ outside $[t_1 - \delta, t_1 + \varepsilon]$.
 
 {Step 4: comparing the second variations.}
 The difference $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\tilde\phi_s)|_{s=0} - \frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\phi_s)|_{s=0}$ is an integral over $[t_1 - \delta, t_1 + \varepsilon]$. The curvature term contributes at most $O(\delta)$:
@@ -56,15 +56,15 @@ The difference $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\tilde\phi_s)|_{s=0} - \f
 \]
 since the integrand is bounded by $|K| \cdot \|Y - \tilde Y\| \cdot (\|Y\| + \|\tilde Y\|) \lesssim \delta$. The kinetic terms give the dominant contribution: on $[t_1 - \delta, t_1]$,
 \[
-\|\nabla_{\dot\gamma} Y\| = \|J'(t_1)\| + O(\delta), \qquad \|\nabla_{\dot\gamma} \tilde Y\| = \frac{\|J'(t_1)\|}{\varepsilon + \delta}\, \delta + O\!\big(\tfrac{\delta}{\varepsilon}\big),
+\|\nabla_{\dot\gamma} Y\| = \|\dot J(t_1)\| + O(\delta), \qquad \|\nabla_{\dot\gamma} \tilde Y\| = \frac{\|\dot J(t_1)\|}{\varepsilon + \delta}\, \delta + O\!\big(\tfrac{\delta}{\varepsilon}\big),
 \]
-while on $[t_1, t_1 + \varepsilon]$, $\nabla_{\dot\gamma} Y = 0$ and $\|\nabla_{\dot\gamma} \tilde Y\| = \tfrac{\|J'(t_1)\|\, \delta}{\varepsilon + \delta} + O(\tfrac{\delta^2}{\varepsilon})$. Combining,
+while on $[t_1, t_1 + \varepsilon]$, $\nabla_{\dot\gamma} Y = 0$ and $\|\nabla_{\dot\gamma} \tilde Y\| = \tfrac{\|\dot J(t_1)\|\, \delta}{\varepsilon + \delta} + O(\tfrac{\delta^2}{\varepsilon})$. Combining,
 \[
-\int_{t_1 - \delta}^{t_1 + \varepsilon} \big(\|\nabla_{\dot\gamma} Y\|^2 - \|\nabla_{\dot\gamma} \tilde Y\|^2\big)\,\mathrm{d}t = -\|J'(t_1)\|^2 + O(\varepsilon \delta).
+\int_{t_1 - \delta}^{t_1 + \varepsilon} \big(\|\nabla_{\dot\gamma} Y\|^2 - \|\nabla_{\dot\gamma} \tilde Y\|^2\big)\,\mathrm{d}t = -\|\dot J(t_1)\|^2 + O(\varepsilon \delta).
 \]
 Hence, for $\delta \ll \varepsilon \ll 1$:
 \[
-\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\tilde\phi_s)\bigg|_{s = 0} = 0 - \|J'(t_1)\|^2 + O(\varepsilon\delta) + O(\delta) < 0. \qedhere
+\frac{\mathrm{d}^2}{\mathrm{d}s^2}\,\ell(\tilde\phi_s)\bigg|_{s = 0} = 0 - \|\dot J(t_1)\|^2 + O(\varepsilon\delta) + O(\delta) < 0. \qedhere
 \]
 \end{proof}
 
@@ -171,13 +171,13 @@ Then $\ell(qr) \leqslant \ell(q'r')$.
 
 % This is a comparison theorem for infinitesimal geodesic triangles. For non-infinitesimal ones:
 
-\begin{colortheo}{Toponogov's theorem}{}
-Let $(M,g)$ have sectional curvature $K$ satisfying $K \geqslant \rho$ for some $\rho \in \mathbb{R}$. Let $pqr$ be a geodesic triangle such that $pq$ is a minimal geodesic and (if $\rho > 0$) $\ell(pr) < \tfrac{\pi}{\sqrt{\rho}}$. Let $p'q'r'$ be a triangle on the 2-d space of constant curvature $\rho$ such that
-\[
-\ell(p'q') = \ell(pq), \quad \widehat{q'p'r'} = \widehat{qpr}, \quad \ell(p'r') = \ell(pr).
-\]
-Then $\ell(qr) \leqslant \ell(q'r')$.
-\end{colortheo}
+% \begin{colortheo}{Toponogov's theorem}{}
+% Let $(M,g)$ have sectional curvature $K$ satisfying $K \geqslant \rho$ for some $\rho \in \mathbb{R}$. Let $pqr$ be a geodesic triangle such that $pq$ is a minimal geodesic and (if $\rho > 0$) $\ell(pr) < \tfrac{\pi}{\sqrt{\rho}}$. Let $p'q'r'$ be a triangle on the 2-d space of constant curvature $\rho$ such that
+% \[
+% \ell(p'q') = \ell(pq), \quad \widehat{q'p'r'} = \widehat{qpr}, \quad \ell(p'r') = \ell(pr).
+% \]
+% Then $\ell(qr) \leqslant \ell(q'r')$.
+% \end{colortheo}
 
 
 
