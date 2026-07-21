@@ -50,11 +50,7 @@ To study this, fix $v \in T_p M$ and let $\gamma(t) = \exp_p(vt)$. For a smooth 
 \[
 \phi(s, t) = \exp_p(w(s) \cdot t)
 \]
-
-(Side note: we are using a very similar variation in Lemma \ref{lem:geodesics_orthogonal_submanifold}/exercise 6.3. a)
-% \todo[inline]{ exercise 6.3? }
-
-defines a variation of $\gamma$ in which each $s$-curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $w(s)$. Taking the linear family $w(s) = v + s \, w_0$ for $w_0 \in T_p M$, the variation vector field at $t = 1$ is
+defines a variation of $\gamma$ in which each $s$-curve $t \mapsto \phi(s, t)$ is a geodesic from $p$ with initial velocity $w(s)$. (A very similar variation appears in Lemma~\ref{lem:geodesics_orthogonal_submanifold}, Exercise~6.3(a).) Taking the linear family $w(s) = v + s \, w_0$ for $w_0 \in T_p M$, the variation vector field at $t = 1$ is
 \[
 \frac{\partial \phi}{\partial s}\bigg|_{(s, t) = (0, 1)} = \mathrm{d}\exp_p\big|_v(w_0).
 \]
@@ -302,13 +298,6 @@ If $\gamma \colon [0, \ell] \to M$ is a geodesic with $\dot{\gamma}(0) = v$, the
 \dim \ker = \text{multiplicity of } \gamma(t) \text{ as a conjugate point of } \gamma(0).
 \]
 \end{colremark}
-
-\begin{proof}
-For all $w \in T_{tv}(T_p M)$: if $\phi(t, s) = \exp_p(t \cdot (v + sw))$, then
-\[
-J = \frac{\partial \phi}{\partial s}\bigg|_{s=0} = \mathrm{d}\exp_p\big|_{tv}(tw) \quad \text{is a Jacobi field.} \qedhere
-\]
-\end{proof}
 
 
 
