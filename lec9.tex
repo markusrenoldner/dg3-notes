@@ -389,17 +389,18 @@ and the cyclic sum of $\partial_\alpha R_{\beta\gamma\delta\varepsilon}$ at $p$ 
 \label{rem:R-map-on-bivectors111}
 Since $R$ is antisymmetric in its first two arguments, we can view it as a map on bivectors:
 \[
-R(X, Y) = \widetilde R(X \wedge Y),
+R(X, Y) = R_\wedge(X \wedge Y),
 \]
 where $X \wedge Y \in \Lambda^2 T_p M$. (Recall from Section \ref{sec:notation-tensors} that $\wedge$ can be applied to vectors as well as differential forms.) The antisymmetry $X \wedge Y = -Y \wedge X$ in $\Lambda^2 T_p M$ then automatically encodes the antisymmetry $R(X, Y) = -R(Y, X)$.
-This is a special case of the following general algebraic fact. Let $V,W$ be vector spaces and $B: V \times V \to W$ a bilinear, alternating map (i.e.\ $B(X, Y) = -B(Y, X)$ and $B(X, X) = 0$ for any $X$). Then $B$ \emph{factors through} $\wedge: V\times V\to \Lambda^2 V$: there is a unique linear map $\widetilde B: \Lambda^2 V \to W$ such that
+
+This is a special case of the following general algebraic fact. Let $V,W$ be vector spaces and $B: V \times V \to W$ a bilinear, alternating map (i.e.\ $B(X, Y) = -B(Y, X)$ and $B(X, X) = 0$ for any $X$). Then $B$ \emph{factors through} $\wedge: V\times V\to \Lambda^2 V$: there is a unique linear map $B_\wedge: \Lambda^2 V \to W$ such that
 \[
-B(X, Y) = \widetilde B(X \wedge Y) \qquad \text{for all } X, Y \in V.
+B(X, Y) = B_\wedge(X \wedge Y) \qquad \text{for all } X, Y \in V.
 \]
-One can check this by defining $\widetilde B(X \wedge Y) := B(X, Y)$ on simple bivectors and extending by linearity, then verifying well-definedness (the relations defining $\Lambda^2 V$ are respected) and uniqueness (simple bivectors $X \wedge Y$ span $\Lambda^2 V$).
+One can check this by defining $B_\wedge(X \wedge Y) := B(X, Y)$ on simple bivectors and extending by linearity, then verifying well-definedness (the relations defining $\Lambda^2 V$ are respected) and uniqueness (simple bivectors $X \wedge Y$ span $\Lambda^2 V$).
 \[
 \begin{tikzcd}[row sep=large, column sep=large]
-V \times V \arrow[r, "\wedge"] \arrow[dr, "B"'] & \Lambda^2 V \arrow[d, dashed, "\widetilde B"] \\
+V \times V \arrow[r, "\wedge"] \arrow[dr, "B"'] & \Lambda^2 V \arrow[d, dashed, "B_\wedge"] \\
 & W
 \end{tikzcd}
 \]
@@ -514,7 +515,7 @@ and further one can easily compute that
 \label{rem:R-map-on-bivectors222}
 
 % Recall Section \ref{sec:notation-tensors} and Remark \ref{rem:R-map-on-bivectors111}: $R$ can be viewed as a map $\widetilde R$ on bivectors $X \wedge Y \in \Lambda^2 T_p M$. The induced inner product on $\Lambda^2 T_p M$ is
-Recall Section~\ref{sec:notation-tensors} and Remark~\ref{rem:R-map-on-bivectors111}, where the bivectors $X \wedge Y \in \Lambda^2 T_p M$ were introduced and $R$ was viewed as the operator-valued map $\widetilde R$ acting on a \emph{single} bivector. The map $R_2$ defined below is different: it takes \emph{two} bivectors and returns a scalar in $\mathbb{R}$.
+Recall Section~\ref{sec:notation-tensors} and Remark~\ref{rem:R-map-on-bivectors111}, where the bivectors $X \wedge Y \in \Lambda^2 T_p M$ were introduced and $R$ was viewed as the operator-valued map $R_\wedge$ acting on a \emph{single} bivector. The map $\widehat R_\wedge$ defined below is different: it takes \emph{two} bivectors and returns a scalar in $\mathbb{R}$. $\widehat R_\wedge$ is the $(0,4)$ analogue of $R_\wedge$, exactly as $\widehat R$ is of $R$. (For the tensors $R$ and $\widehat R$ we follow the convention to drop the hat symbol as remarked earlier).
 
 First, note that the natural inner product on $\Lambda^2 T_p M$ is defined by
 \[
@@ -523,11 +524,11 @@ First, note that the natural inner product on $\Lambda^2 T_p M$ is defined by
 so in particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, matching the denominator of $K$.
 By the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), the curvature tensor reduces to a bilinear map
 \[
-R_{2} : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad R_{2}(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
+\widehat R_\wedge : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad \widehat R_\wedge(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
 \]
-and the pairwise symmetry (item 3) makes $R_{2}$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. In this picture the sectional curvature reads
+and the pairwise symmetry (item 3) makes $\widehat R_\wedge$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. In this picture the sectional curvature reads
 \[
-K(\Pi) = \frac{R_{2}(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
+K(\Pi) = \frac{\widehat R_\wedge(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
 \]
 which looks a bit like a Rayleigh-quotient: it depends only on the bivector $X \wedge Y$ up to scaling, equivalently only on the plane $\Pi = \mathrm{span}(X, Y)$.
 \end{colremark}
