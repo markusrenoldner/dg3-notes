@@ -391,12 +391,18 @@ Since $R$ is antisymmetric in its first two arguments, we can view it as a map o
 \[
 R(X, Y) = \widetilde R(X \wedge Y),
 \]
-where $X \wedge Y \in \Lambda^2 T_p M$. The antisymmetry $X \wedge Y = -Y \wedge X$ in $\Lambda^2 T_p M$ then automatically encodes the antisymmetry $R(X, Y) = -R(Y, X)$.
-This is a special case of the following general algebraic fact. Let $V$ be a vector space and $B: V \times V \to \mathbb{R}$ a bilinear, alternating form (i.e.\ $B(X, Y) = -B(Y, X)$ and $B(X, X) = 0$ for any $X$). Then $B$ \emph{factors through} $\wedge: V\times V\to \Lambda^2 V$: there is a unique linear map $\widetilde B: \Lambda^2 V \to \mathbb{R}$ such that
+where $X \wedge Y \in \Lambda^2 T_p M$. (Recall from Section \ref{sec:notation-tensors} that $\wedge$ can be applied to vectors as well as differential forms.) The antisymmetry $X \wedge Y = -Y \wedge X$ in $\Lambda^2 T_p M$ then automatically encodes the antisymmetry $R(X, Y) = -R(Y, X)$.
+This is a special case of the following general algebraic fact. Let $V,W$ be vector spaces and $B: V \times V \to W$ a bilinear, alternating map (i.e.\ $B(X, Y) = -B(Y, X)$ and $B(X, X) = 0$ for any $X$). Then $B$ \emph{factors through} $\wedge: V\times V\to \Lambda^2 V$: there is a unique linear map $\widetilde B: \Lambda^2 V \to W$ such that
 \[
 B(X, Y) = \widetilde B(X \wedge Y) \qquad \text{for all } X, Y \in V.
 \]
 One can check this by defining $\widetilde B(X \wedge Y) := B(X, Y)$ on simple bivectors and extending by linearity, then verifying well-definedness (the relations defining $\Lambda^2 V$ are respected) and uniqueness (simple bivectors $X \wedge Y$ span $\Lambda^2 V$).
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V \times V \arrow[r, "\wedge"] \arrow[dr, "B"'] & \Lambda^2 V \arrow[d, dashed, "\widetilde B"] \\
+& W
+\end{tikzcd}
+\]
 \end{colremark}
 
 \begin{colorlem}{Geodesic deviation equation}{geodesic-deviation}
