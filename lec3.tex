@@ -81,8 +81,12 @@ The cotangent bundle is the disjoint union of all cotangent spaces of $M$,
 \[
 T^*M = \bigsqcup_{p \in M} T_p^* M
 \]
-and admits a natural projection map $\pi:T^*M \to M$, $(p,\omega) \mapsto p$. It also has a natural smooth manifold structure of dimension $2\dim(M)$, and locally looks like $U \times \mathbb{R}^n$. The charts are defined by $(p, \omega) \mapsto (x^1(p), \dots, x^n(p), \omega_1, \dots, \omega_n)$ where $\omega = \omega_i \mathrm{d}x^i|_p$.
+and admits a natural projection map $\pi:T^*M \to M$, $(p,\omega) \mapsto p$.
 \end{colordef}
+
+As for $TM$, it has a natural smooth manifold structure of dimension $2\dim(M)$ and locally looks like $U \times \mathbb{R}^n$, with charts 
+$$(p, \omega) \mapsto (x^1(p), \dots, x^n(p), \omega_1, \dots, \omega_n),$$ 
+where $\omega = \omega_i \mathrm{d}x^i|_p.$
 
 
 \begin{colordef}{1-forms}{}
@@ -250,10 +254,9 @@ This transformation behavior is what historically led to the following terminolo
 \begin{colordef}{Space of Tensors}{space_tensors_at_point}
 The space of tensors of type $(k, l)$ at a point $p \in M$ is denoted by
 $$\otimes^k T_pM\otimes ^l T_p^*M.$$
-
-Recalling Definition \ref{def:tensor_at_point}, it consists of multilinear maps
-$$Q: \underbrace{T_p^* M \times \cdots \times T_p^* M}_{k \text{ times}} \times \underbrace{T_p M \times \cdots \times T_p M}_{l \text{ times}} \longrightarrow \mathbb{R}.$$
 \end{colordef}
+By Definition \ref{def:tensor_at_point}, its elements are the multilinear maps 
+$$Q: \underbrace{T_p^* M \times \cdots \times T_p^* M}_{k \text{ times}} \times \underbrace{T_p M \times \cdots \times T_p M}_{l \text{ times}} \longrightarrow \mathbb{R}.$$
 
 \begin{colremark}[Characterisation of tensors]
 Recall Remark \ref{rem:general_tensors}. Let $T$ be a $(k,l)$ tensor over $V$, meaning $$T: \underbrace{V^* \times \cdots \times V^*}_{k \text{ times}} \times \underbrace{V \times \cdots \times V}_{l \text{ times}} \longrightarrow \mathbb{R}.$$
