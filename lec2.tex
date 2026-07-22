@@ -14,9 +14,8 @@ A Riemannian metric $g$ on a manifold $M$ of dimension $n$ is a map $g_p: T_pM \
     \item $g_p$ is positive definite: $g_p(v, v) \geq 0$ with equality iff $v = 0$
     \item $g_p$ is smooth: $p \mapsto g_p$ is smooth in any local coordinate system (see below).
 \end{enumerate}
-We will sometimes use the following notation for the metric:
-$$\left \langle v,w \right \rangle:=g(v,w).$$
 \end{colordef}
+We will sometimes use the notation $\langle v, w\rangle := g(v, w)$ for the metric.
 
 $g$ is a section of the bundle of covariant 2-tensors on $M$. Therefore it can be written in local coordinates as
 \begin{equation}
@@ -74,9 +73,9 @@ See exercise 1.3 for a derivation.\\
 We make the following informal but nevertheless useful definition.
 
 \begin{colordef}{Geometric property}{}
-A geometric property is a property that is invariant under changes of coordinates.\\
-A bit more concretely: objects in $M$ or $T_pM$ (or products and sections thereof) that can be described in different coordinates may have such properties.
+A geometric property is a property that is invariant under changes of coordinates.
 \end{colordef}
+More concretely: objects in $M$ or $T_pM$ (or products and sections thereof) that can be described in different coordinates may have such properties.
 
 Examples of such properties are
 
@@ -124,9 +123,9 @@ The length functional has the following properties:
     \[
     l(\gamma \circ h) = l(\gamma)
     \]
-    Hence the length is a geometric property.
 \end{enumerate}
 \end{colorlem}
+Property 3 shows that the length is a geometric quantity, independent of the parametrization.
 \begin{proof}
 See exercise 2.1.
 \end{proof}
@@ -172,14 +171,11 @@ Let \((U, \phi)\) be a local coordinate chart, with associated coordinates \((x^
 \[
 \int_{U} h \, dV_g := \int_{\phi(U)} h \left( \phi^{-1}(x) \right) \sqrt{\det \left[ g_{ij}(x) \right]}\circ\phi^{-1} \, \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n
 \]
-The left hand side itself is defined via the usual integral on $\mathbb{R}^n$ as follows:
-$$
-\int_{\phi(U)} f \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n
-:=
-\int_{\phi(U)} f \mathrm{d}x^1 ... \mathrm{d}x^n
-$$
-as explained in Definition 11.11 in \cite{tsakanikas2024dg2}.
 \end{colordef}
+
+The wedge-product integral on the right-hand side is the usual integral on $\mathbb{R}^n$, i.e.\ 
+$$\int_{\phi(U)} f\, \mathrm{d}x^1 \wedge \cdots \wedge \mathrm{d}x^n := \int_{\phi(U)} f\, \mathrm{d}x^1 \cdots \mathrm{d}x^n,$$
+as explained in Definition 11.11 in \cite{tsakanikas2024dg2}.
 
 Here, $h\circ\phi^{-1}$ is the coordinate representation of $h$, and $\sqrt{\det[g_{ij}]}$ is the volume density.
 
@@ -402,8 +398,8 @@ See exercise 3.4a.
 \begin{colordef}{Gradient of a Function}{gradient_function}
 Let $(M, g)$ be a Riemannian manifold and $f \in C^\infty(M)$. The gradient $\nabla f \in \Gamma(TM)$ is defined by $g(\nabla f, X) = \mathrm{d}f(X)$ for all $X \in \Gamma(TM)$, or equivalently
 $$\nabla f := (\mathrm{d}f)^\# .$$
-In local coordinates, $\nabla f = g^{ij} \frac{\partial f}{\partial x^j} \frac{\partial}{\partial x^i}$, where $(g^{ij})$ is the inverse of the metric matrix $(g_{ij})$. See also exercise 3.4b.
 \end{colordef}
+In local coordinates, $\nabla f = g^{ij} \frac{\partial f}{\partial x^j} \frac{\partial}{\partial x^i}$, where $(g^{ij})$ is the inverse of the metric matrix $(g_{ij})$. See also exercise 3.4b.
 \begin{colorlem}{Induced Metric on Cotangent Space}{}
 Let $(M, g)$ be a Riemannian manifold. Define a $(2, 0)$-tensor $\tilde{g}$ on 1-forms by
 \[
