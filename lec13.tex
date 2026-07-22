@@ -101,7 +101,7 @@ Hence, for $\delta \ll \varepsilon \ll 1$:
 % \]
 
 
-We have the following comparison principle: \emph{larger curvature produces smaller Jacobi fields}.
+We have the following comparison principle: \emph{larger curvature produces smaller Jacobi fields}. Indeed, the scalar equation $f'' + K\,f = 0$ in the theorem below is the Jacobi equation~\eqref{eq:jacobi-equation} in dimension $2$, written for the amplitude in a parallel normal frame.
 
 \begin{colortheo}{Sturm's comparison theorem}{sturm-comparison}
 Let $f, \tilde f \colon [0, \ell] \to \mathbb{R}$ satisfy $f'' + K\,f = 0$ and $\tilde f'' + \widetilde K\,\tilde f = 0$ with $K, \widetilde K \in C^0([0, \ell])$, and assume
@@ -114,21 +114,21 @@ If $\widetilde K(t) \geqslant K(t)$ for all $t \in [0, \ell]$, then
 \]
 \end{colortheo}
 
-The higher-dimensional generalization is:
+The higher-dimensional generalization of Theorem~\ref{thm:sturm-comparison}, replacing the scalar ODE by the full Jacobi equation, is:
 
 \begin{colortheo}{Rauch comparison theorem}{rauch-comparison}
-Let $\gamma \colon [0, a] \to M^n$ and $\tilde\gamma \colon [0, a] \to \widetilde M^{n'}$ ($n' \geqslant n$) be unit-speed geodesics, and let $J, \tilde J$ be Jacobi fields along them with
+Let $\gamma \colon [0, a] \to M^n$ and $\tilde\gamma \colon [0, a] \to \widetilde M^{n'}$ ($n' \geqslant n$) be unit-speed geodesics, and let $J, \tilde J$ be Jacobi fields (Definition~\ref{def:jacobi-field}) along them with
 \[
 J(0) = \tilde J(0) = 0, \qquad \langle \dot J(0), \dot\gamma(0)\rangle = \langle \dot{\tilde J}(0), \dot{\tilde\gamma}(0)\rangle, \qquad \|\dot J(0)\| = \|\dot{\tilde J}(0)\|.
 \]
-Assume $\tilde\gamma$ has no conjugate points on $(0, a]$, and that for all $V \in T_{\gamma(t)} M$, $\widetilde V \in T_{\tilde\gamma(t)} \widetilde M$,
+Assume $\tilde\gamma$ has no conjugate points (Definition~\ref{def:conjugate-point}) on $(0, a]$, and that for all $V \in T_{\gamma(t)} M$, $\widetilde V \in T_{\tilde\gamma(t)} \widetilde M$,
 \[
 \widetilde K(\widetilde V, \dot{\tilde\gamma}(t)) \geqslant K(V, \dot\gamma(t)).
 \]
 Then $\|\tilde J(t)\| \leqslant \|J(t)\|$ for all $t \in [0, a]$. Moreover, if $\|\tilde J(a)\| = \|J(a)\|$, then $K(J(t), \dot\gamma(t)) = \widetilde K(\tilde J(t), \dot{\tilde\gamma}(t))$ for all $t \in [0, a]$.
 \end{colortheo}
 
-Rauch is an \emph{infinitesimal} comparison statement (Jacobi fields encode first-order deviation of geodesics). The corresponding statement for finite geodesic triangles is:
+Rauch (Theorem~\ref{thm:rauch-comparison}) is an \emph{infinitesimal} comparison statement (Jacobi fields encode first-order deviation of geodesics). The corresponding statement for finite geodesic triangles is:
 
 \begin{colortheo}{Toponogov's theorem}{toponogov}
 Let $(M, g)$ have sectional curvature $K \geqslant \rho$ for some $\rho \in \mathbb{R}$. Let $\triangle_{pqr}$ be a geodesic triangle in $M$ with $pq$ a minimal geodesic (and, if $\rho > 0$, $\ell(pr) < \pi/\sqrt\rho$). Let $\triangle_{p'q'r'}$ be the comparison triangle in the model 2D space of constant curvature $\rho$, defined by
