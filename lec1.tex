@@ -61,11 +61,10 @@ Functions (and in fact also all covariant tensors, like k-forms) can be pulled b
 If $f: M \to N$ is smooth, then for all $h : N \to \mathbb{R}$, we can always define the pullback of $h$ via $f$ by 
 \begin{align*}
     f^*h: M &\to \mathbb{R}\\
-    p &\mapsto h \circ f(p)
+    p &\mapsto h \circ f(p).
 \end{align*}
-
-We have that $f^* : C^k(N) \to C^k(M)$ is an $\mathbb{R}$-linear map.
 \end{colordef}
+The pullback $f^* : C^k(N) \to C^k(M)$ is an $\mathbb{R}$-linear map.
 
 We will introduce tangent vectors now. We can view a tangent vector as a direction of differentiation or as a differential operator of a smooth function.
 \begin{colordef}{Tangent and Cotangent Space}{tangent_cotangent_space}
@@ -73,14 +72,14 @@ Let $M$ be a smooth manifold of dim $n$, $p \in M$, and $f,g\in C^\infty(M)$. A 
 \[
 v(fg) = v(f)g(p) + f(p)v(g)
 \]
-The $\mathbb{R}$-vector space of tangent vectors at p is then denoted by $T_pM$. It has dimension $n$.
+The $\mathbb{R}$-vector space of tangent vectors at p is then denoted by $T_pM$.
 \end{colordef}
 
-There is a natural basis of $T_pM$ given by the tangent vectors along the coordinate curves. 
+The space $T_pM$ has dimension $n$, with a natural basis given by the tangent vectors along the coordinate curves. 
 
 
 \begin{colordef}{Coordinate basis vectors}{coordinate_basis}
-Let $M,n,p,f,g,v$ be as above.\\
+Let $M,n,p,f,g,v$ be as above. 
 We define the coordinate basis vector
 $$\left.\frac{\partial}{\partial x^i}\right|_p f := \left(\frac{\partial}{\partial x^i} (f \circ \varphi)\right) \bigg|_{\varphi(p)}.$$
 \end{colordef}
@@ -165,21 +164,15 @@ $$\omega_i = \omega\left(\frac{\partial}{\partial x^i}\right)$$
 We introduce the differential of a map, which can be interpreted as its linearisation at a point.
 
 \begin{colordef}{Differential / pushforward of a Map}{differential_pushforward}
-Let $F: M \to N$ be a smooth map. The push forward or differential $F_*$ or $\mathrm{d}F: T_pM \to T_{F(p)}N$ is defined by:
+Let $F: M \to N$ be a smooth map. The push forward or differential $F_*$ or $\mathrm{d}F: T_pM \to T_{F(p)}N$ is defined by
 \[
-\mathrm{d}F(v)(h) = v(h \circ F)
-\]
-
-In local coordinates this is the jacobian matrix of $F$:
-\[
-[\mathrm{d}F]^a_b = \frac{\partial F^a}{\partial x^b}
-\]
-
-If $\gamma:(-\epsilon,\epsilon)\to M$ is a curve with $\gamma(0)=p$ and $\dot\gamma(0)=v$, then
-\[
-\mathrm{d}F_p(\dot\gamma(0)) = \frac{\mathrm{d}}{\mathrm{d}t} (F\circ \gamma)(t)\bigg|_{t=0}
+\mathrm{d}F(v)(h) = v(h \circ F).
 \]
 \end{colordef}
+In local coordinates this is the Jacobian matrix of $F$, $[\mathrm{d}F]^a_b = \tfrac{\partial F^a}{\partial x^b}$. Equivalently, if $\gamma:(-\epsilon,\epsilon)\to M$ is a curve with $\gamma(0)=p$ and $\dot\gamma(0)=v$, then
+\[
+\mathrm{d}F_p(\dot\gamma(0)) = \frac{\mathrm{d}}{\mathrm{d}t} (F\circ \gamma)(t)\bigg|_{t=0}.
+\]
 
 \begin{colordef}{Immersions, Embeddings, and Diffeomorphisms}{immersions_embeddings_diffeomorphisms}
 We introduce three important types of maps, based on the rank of the differential $\mathrm{d}F$.
