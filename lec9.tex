@@ -385,6 +385,17 @@ and the cyclic sum of $\partial_\alpha R_{\beta\gamma\delta\varepsilon}$ at $p$ 
 \end{proof}
 
 
+% \begin{colremark}[$R$ depends only on the bivector $X \wedge Y$]{}
+%     \label{rem:R-map-on-bivectors111}
+% $R(X, Y)$ is bilinear and antisymmetric in its first two arguments, $R(X, Y) = -R(Y, X)$. Together these mean $R(X, Y)$ does not depend on $X$ and $Y$ separately, but only on the \emph{oriented parallelogram} they span: if $(X', Y')$ spans the same plane with the same orientation and area, then $R(X', Y') = R(X, Y)$.
+
+% We give this parallelogram a name: the \emph{bivector}
+% \[
+% X \wedge Y \in \Lambda^2 T_p M,
+% \]
+% the oriented plane element with $X \wedge Y = -\,Y \wedge X$, and $X \wedge Y = 0$ exactly when $X, Y$ are parallel. The sign flip $X \wedge Y = -Y \wedge X$ is precisely the antisymmetry $R(X, Y) = -R(Y, X)$, so we may regard $R$ as a function of the single input $X \wedge Y$. (This is general: any bilinear, antisymmetric quantity depends only on the bivector.)
+% \end{colremark}
+
 \begin{colremark}[$R$ as a map on bivectors]{}
 \label{rem:R-map-on-bivectors111}
 Since $R$ is antisymmetric in its first two arguments, we can view it as a map on bivectors:
@@ -511,6 +522,25 @@ and further one can easily compute that
 
 
 
+
+% \begin{colremark}[$R$ as a quadratic form on bivectors]{}
+% \label{rem:R-map-on-bivectors222}
+% Recall the bivector $X \wedge Y \in \Lambda^2 T_p M$ from Remark~\ref{rem:R-map-on-bivectors111}; the space $\Lambda^2 T_p M$ of all bivectors (or 2-vectors) is built from vectors by the same wedge construction used for differential forms, just applied to vectors instead of covectors. It carries a natural inner product, determined by
+% \[
+% \langle X \wedge Y,\, Z \wedge W\rangle = \langle X, Z\rangle \langle Y, W\rangle - \langle X, W\rangle \langle Y, Z\rangle.
+% \]
+% In particular $\|X \wedge Y\|^2 = \|X\|^2 \|Y\|^2 - \langle X, Y\rangle^2$, which is exactly the squared area of the parallelogram spanned by $X, Y$ --- the denominator of the sectional curvature.
+
+% Feeding two bivectors into the $(0,4)$ tensor,
+% \[
+% \widetilde R : \Lambda^2 T_p M \times \Lambda^2 T_p M \to \mathbb{R}, \qquad \widetilde R(X \wedge Y,\, Z \wedge W) := R(X, Y, Z, W),
+% \]
+% is well-defined on bivectors by the antisymmetries of $R$ (Theorem~\ref{thm:symmetries-riemann-curvature-tensor}, items 1 and 2), and the pairwise symmetry (item 3) makes $\widetilde R$ a \emph{symmetric} bilinear form on $\Lambda^2 T_p M$. With this notation the sectional curvature reads
+% \[
+% K(\Pi) = \frac{\widetilde R(X \wedge Y,\, X \wedge Y)}{\|X \wedge Y\|^2},
+% \]
+% a ratio (like a Rayleigh quotient) depending only on the bivector $X \wedge Y$ up to scaling, equivalently only on the plane $\Pi = \mathrm{span}(X, Y)$.
+% \end{colremark}
 
 \begin{colremark}[$R$ as a quadratic form on bivectors]{}
 \label{rem:R-map-on-bivectors222}
