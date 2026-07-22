@@ -141,8 +141,6 @@ called the flow map, such that for all $q \in \overline{U}$, the curve $\gamma(t
 \]
 
 Moreover, if $X$ is compactly supported, then $U = M$ and $\delta = +\infty$.
-
-See also \cite{tsakanikas2024dg2}, chapter 7.3.
 \end{colortheo}
 
 \begin{proof}
@@ -232,13 +230,11 @@ This expression quantifies how much the flows of $X$ and $Y$ fail to commute. Th
 \subsection{Lie derivative}
 \begin{colordef}{Lie Derivative}{}
 Let $X \in \Gamma(TM)$ and $\{\phi_t\}_{t \in \mathbb{R}}$ be its flow. The Lie derivative is defined by:
-
 \begin{itemize}
     \item For $f \in C^\infty(M)$:
     \[
     \mathcal{L}_X f(p) = \lim_{t \to 0} \frac{f(\phi_t(p)) - f(p)}{t}
     \]
-
     \item For $Y \in \Gamma(TM)$:
     \[
     (\mathcal{L}_X Y)_p
@@ -327,7 +323,7 @@ with $\mathcal{L}_X$ commuting with contractions.
 
 Note that this extension is unique, but we will not prove this here.
 
-We remark that the first axiom is natural, because $\mathcal{L}_X(\omega(Y)) = (\mathcal{L}_X \omega)(Y) + \omega(\mathcal{L}_X Y)$ mimicks a sort of chain rule.
+We remark that the first axiom is natural, because $\mathcal{L}_X(\omega(Y)) = (\mathcal{L}_X \omega)(Y) + \omega(\mathcal{L}_X Y)$ mimics a sort of chain rule.
 
 
 \begin{proof}[Proof sketch]
@@ -484,29 +480,25 @@ Given $Y \in \Gamma(TM)$, $p \in M$, and $V \in T_pM$, we want a directional der
 \begin{colordef}{Connection}{connection}
 A connection $\nabla$ on $M$ is a map
 $$\nabla \colon \Gamma(\mathrm{T}M) \times \Gamma(\mathrm{T}M) \to \Gamma(\mathrm{T}M)$$
-
 such that:
 \begin{enumerate}
     \item $\nabla$ is $C^\infty(M)$-linear in the first argument:
     \[
     \nabla_{X_1 + f \cdot X_2} Y = \nabla_{X_1} Y + f \cdot \nabla_{X_2} Y
     \]
-
     \item $\nabla$ is $\mathbb{R}$-linear in the second argument:
     \[
     \nabla_X (Y_1 + a Y_2) = \nabla_X Y_1 + a \nabla_X Y_2, \quad a \in \mathbb{R}
     \]
-
     \item Satisfies the Leibniz rule with respect to the second argument:
     \[
     \nabla_X (f Y) = X(f) \cdot Y + f \cdot \nabla_X Y
     \]
-
 \end{enumerate}
-It is also called \emph{covariant derivative}. $\nabla Y$ is a $(1,1)$-tensor field.
+It is also called \emph{covariant derivative}.
 \end{colordef}
 
-It is local: If $U \subseteq M$ is open and $p \in U$, then $(\nabla_X Y)|_p$ depends only on $X|_p$ and $Y|_U$.\\
+$\nabla Y$ is a $(1,1)$-tensor field. It is also local: if $U \subseteq M$ is open and $p \in U$, then $(\nabla_X Y)|_p$ depends only on $X|_p$ and $Y|_U$.\\
 
 For the existence of connections, see Theorem \ref{thm:levi_civita}.
 
@@ -561,15 +553,12 @@ Let $(x^1, \ldots, x^n)$ be a local coordinate system. The Christoffel symbols $
 \[
 \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} = \Gamma_{ij}^k \frac{\partial}{\partial x^k}.
 \]
-One can extract the $k^{th}$ component as follows:
-\[
-\Gamma_{ij}^k = \mathrm{d}x^k \left( \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} \right),
-\]
-and interpret this as the $k^{th}$ component
-$$\Gamma_{ij}^k=\left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}\right)^k$$
 \end{colordef}
+Equivalently, 
+$$\Gamma_{ij}^k = \mathrm{d}x^k\!\left( \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} \right) = \left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}\right)^k$$ 
+is the $k^{\text{th}}$ component.
 
-Note: $\Gamma_{ij}^k$ are not components of a tensor (see exercise 4.1a). If they would, having zero Cristoffel symbols in one coordinate system (say cartesian) would imply they vanish in all coordinate systems, which is not the case.\\
+Note: $\Gamma_{ij}^k$ are not components of a tensor (see exercise 4.1a). If they would, having zero Christoffel symbols in one coordinate system (say cartesian) would imply they vanish in all coordinate systems, which is not the case.\\
 
 In local coordinates, the covariant derivative of a vector field $Y$ in the direction of $X$ is given by
 \begin{equation}
@@ -592,17 +581,18 @@ by requiring:
     \item The Leibniz rule for tensor products: $\nabla_X(S \otimes T) = (\nabla_X S) \otimes T + S \otimes (\nabla_X T)$
     \item Compatibility with contractions: $\nabla_X(\operatorname{tr} A) = \operatorname{tr}(\nabla_X A)$
 \end{enumerate}
+\end{colorlem}
 
 The coordinate formula for $X=\frac{\partial}{\partial x^a}$ is
 \[
-    (\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
-    = \partial_a T^{i_1 \dots i_k}_{j_1 \dots j_l}
-    + \sum_{r=1}^{k} \Gamma^{i_r}_{a b} \, T^{i_1 \dots b \dots i_k}_{j_1 \dots j_l}
-    - \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}
-    \]
+(\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
+= \partial_a T^{i_1 \dots i_k}_{j_1 \dots j_l}
++ \sum_{r=1}^{k} \Gamma^{i_r}_{a b} \, T^{i_1 \dots b \dots i_k}_{j_1 \dots j_l}
+- \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}
+\]
 
-    \todo[inline]{ $\nabla_X$ for general $X$? (the example below states it for 1,1 tensors)}
-\end{colorlem}
+
+\todo[inline]{ $\nabla_X$ for general $X$? (the example below states it for 1,1 tensors)}
 Compare to extension of the Lie derivative Lemma \ref{lem:lie_derivative_extension_tensor} and Remark \ref{rem:lie_derivative_extension_tensor_fields}.
 
 
