@@ -201,21 +201,14 @@ See exercise 5.4.
 On a general manifold, parallel transport is the closest thing to a constant vector field along a curve.
 
 \begin{colordef}{Parallel Transport}{}
-    \todo[inline]{ make this definition of par. transp a bit more concise }
-Let $\gamma: I \to M$ be smooth, and $\nabla$ be any connection. For $s,t\in I$, the \emph{parallel transport} along $\gamma$
+Let $\gamma: I \to M$ be smooth and $\nabla$ any connection. For $s, t \in I$, the \emph{parallel transport} along $\gamma$ is the map
 \[
-P_{s,t}:T_{\gamma(s)}M \longrightarrow T_{\gamma(t)}M,
+P_{s,t} \colon T_{\gamma(s)}M \longrightarrow T_{\gamma(t)}M, \qquad P_{s,t}(v) := X(t),
 \]
-defined as follows: for $v\in T_{\gamma(s)}M$, let $X$ be the unique vector field along $\gamma$ such that
-\[
-\nabla_{\dot{\gamma}}X=0,\qquad X(s)=v.
-\]
-Then
-\[
-P_{s,t}(v):=X(t).
-\]
-Equivalently, if $X$ is parallel along $\gamma$, then $X(t)=P_{s,t}(X(s))$.
+where $X$ is the unique \emph{parallel vector field along} $\gamma$, namely $\nabla_{\dot\gamma} X = 0$, and satisfies $X(s) = v$.
 \end{colordef}
+
+With this terminology, $X(t) = P_{s,t}(X(s))$ for every parallel field $X$ along $\gamma$.
 
 \begin{colortheo}{Existence and Uniqueness of Parallel Transport}{}
 For every $p \in M$, $v \in T_pM$, and smooth curve $\gamma: I \to M$ with $\gamma(0) = p$, there exists a unique vector field $X$ along $\gamma$ such that $X(0) = v$ and $\nabla_{\dot{\gamma}} X = 0$.
@@ -432,7 +425,7 @@ We will see later, that isometries map geodesics to geodesics.
 
 
 
-\begin{colexample}{Geodesics and constants of motion in the Poincaré Half-Plane}{}
+\begin{colexample}{Poincaré Half-Plane, geodesics and constants of motion}{}
 Let $\mathbb{H}^2:=\{(x,y):y>0\}$ be the Poincaré half-plane with $g_H = \frac{dx^2 + dy^2}{y^2}$. In exercise 5.2 we show that 
 \begin{itemize}[itemsep=0pt, topsep=0pt]
     \item Maps $f(z) = \frac{az+b}{cz+d}$, with $ad-bc>0$, are isometries
@@ -448,6 +441,7 @@ Let $\mathbb{H}^2:=\{(x,y):y>0\}$ be the Poincaré half-plane with $g_H = \frac{
     P being a constant of motion associated to the Killing vector field $\frac{\partial}{\partial x}$, as in Lemma \ref{lem:noether}.
 \item The geodesics are semicircles orthogonal to the x-axis.
 \end{itemize}
+\end{colexample}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.0,>=stealth]
@@ -465,8 +459,6 @@ Let $\mathbb{H}^2:=\{(x,y):y>0\}$ be the Poincaré half-plane with $g_H = \frac{
     \node at (3,3) {\small $\mathbb H^2=\{(x,y):y>0\}$};
 \end{tikzpicture}
 \end{center}
-
-\end{colexample}
 
 
 
