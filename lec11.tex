@@ -113,6 +113,22 @@ b = -\tfrac{1}{2}\,\mathcal{L}_{\hat n}\, g,
 \]
 where $\mathcal{L}_{\hat n}$ is the Lie derivative along $\hat n$ (extended to a vector field on a neighborhood of $N$).
 
+We consider now graph hypersurfaces. A graph $\{t = f(x)\}$ is a globally co-oriented hypersurface of Euclidean space, for which the above quantities specialize to explicit formulas. Since the ambient space is flat, the Gauss equation determines the intrinsic curvature entirely from $b$ (a concrete instance of the Theorema Egregium discussed above).
+
+\begin{colorlem}{Curvature of a graph submanifold}{curvature-of-graph}
+Let $f \colon \mathbb{R}^n \to \mathbb{R}$ be smooth and let $M_f = \{(t, x) \in \mathbb{R}^{n+1} : t = f(x)\} \subset (\mathbb{R}^{n+1}, g_E)$ be its graph, with induced metric $\bar g$. Then, in the coordinates $(x^1, \ldots, x^n)$ on $M_f$:
+\begin{align*}
+    \bar g_{ij} &= \delta_{ij} + \partial_i f\, \partial_j f, \\
+    b_{ij} &= \frac{\partial_i \partial_j f}{\sqrt{1 + |\nabla f|^2}}, \\
+    \bar R_{ijkl} &= \frac{\partial_i \partial_k f\, \partial_j \partial_l f - \partial_i \partial_l f\, \partial_j \partial_k f}{1 + |\nabla f|^2},
+\end{align*}
+where $b_{ij}$ is the scalar second fundamental form with respect to the coorientation $\hat n = (1 + |\nabla f|^2)^{-1/2}(\partial_t - \sum_j \partial_j f\, \partial_{x^j})$, and $|\nabla f|^2 := \sum_i (\partial_i f)^2$.
+\end{colorlem}
+
+\begin{proof}
+See Exercise~10.3.
+\end{proof}
+
 
 
 % If $N^2 \subset M^3$: Gauss equation: $\bar{K}(p) = K(p) + K_{\mathrm{Gauss}}(p)$. In $\mathbb{R}^3$ ($K(p) = 0$): Gauss curvature is intrinsic ($= \frac{1}{2} S$).
