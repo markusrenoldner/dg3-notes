@@ -287,7 +287,7 @@ Let $X \in \Gamma(TM)$ and $\{\phi_t\}_{t \in \mathbb{R}}$ be its flow. The Lie 
 % \end{figure}
 
 
-\begin{colortheo}{Lie Derivative of Functions and Vector Fields}{}
+\begin{colortheo}{Lie Derivative of Functions and Vector Fields}{lie_derivative_functions_vector_fields}
 Let $X \in \Gamma(TM)$ with flow $\{\phi_t\}_{t \in \mathbb{R}}$. Then:
 \begin{align*}
 \mathcal{L}_X f &= X(f) \quad \text{for all } f \in C^\infty(M), \\
@@ -316,9 +316,6 @@ This yields a map
 \mathcal{L}: \Gamma(TM)\times T^k_l(M) \longrightarrow T^k_l(M)
 \]
 with $\mathcal{L}_X$ commuting with contractions.
-
-\todo[inline]{maybe add the coordinate expression for this map}
-
 \end{colorlem}
 
 Note that this extension is unique, but we will not prove this here.
@@ -420,6 +417,42 @@ $$
 If $T \in T^k_l(M)$, and $X = \frac{\partial}{\partial x^i}$, in local coordinates then $$(\mathcal{L}_X T)^{i_1 \ldots i_k}_{j_1 \ldots j_l} = \frac{\partial T^{i_1 \ldots i_k}_{j_1 \ldots j_l}}{\partial x^i}.$$
 See the solution of exercise 4.3b.
 \end{colremark}
+
+\todo[inline]{ added this section which explains how to compute lie derivatives for any tensor }
+In fact we never need a general coordinate formula. Locally, any tensor is a $C^\infty(M)$-linear combination of tensor products of the coordinate fields $\partial_i$ and $\mathrm{d}x^j$, so the Leibniz rule reduces \emph{every} computation of a Lie derivative to the action of $\mathcal{L}_X$ on these three building blocks.
+
+% \begin{colorlem}{Computing $\mathcal{L}_X$ on any tensor}{lie_derivative_recipe}
+For $X = X^m \partial_m$, the Lie derivative $\mathcal{L}_X$ is determined by $\mathbb{R}$-linearity and the Leibniz rule together with its action on functions and on the coordinate basis fields:
+\begin{equation}
+\label{eq:lie_derivative_recipe}
+\mathcal{L}_X f = X^m\,\partial_m f, \qquad
+\mathcal{L}_X \partial_i = -(\partial_i X^m)\,\partial_m, \qquad
+\mathcal{L}_X \mathrm{d}x^j = (\partial_i X^j)\,\mathrm{d}x^i .
+\end{equation}
+% \end{colorlem}
+
+% \begin{proof}
+The first two identities follow from Theorem \ref{thm:lie_derivative_functions_vector_fields}; the third follows from the covector axiom of Lemma \ref{lem:lie_derivative_extension_tensor}: applying the LHS to a vector field $\partial_i$ gives $(\mathcal{L}_X \mathrm{d}x^j)(\partial_i) = X(\delta^j_i) - \mathrm{d}x^j([X,\partial_i]) =...= \partial_i X^j$, and the latter is exactly what we get if we evaluate the RHS on $\partial_i$.
+% \end{proof}
+
+To differentiate an arbitrary tensor, expand it in the coordinate basis and apply the Leibniz rule to each factor.
+
+
+
+\begin{colexample}{Lie derivative of the metric}{}
+    For instance, for the metric $g = g_{ij}\,\mathrm{d}x^i \otimes \mathrm{d}x^j$,
+    \begin{align*}
+    \mathcal{L}_X g
+    &= (\mathcal{L}_X g_{ij})\,\mathrm{d}x^i\otimes \mathrm{d}x^j
+     + g_{ij}\,(\mathcal{L}_X \mathrm{d}x^i)\otimes \mathrm{d}x^j
+     + g_{ij}\,\mathrm{d}x^i\otimes(\mathcal{L}_X \mathrm{d}x^j) \\
+    &= \big(X^m\,\partial_m g_{ij} + g_{mj}\,\partial_i X^m + g_{im}\,\partial_j X^m\big)\,\mathrm{d}x^i\otimes \mathrm{d}x^j ,
+    \end{align*}
+    where in step 1 we used the Leibniz rule and in step 2 we used the first and third identity in equation \eqref{eq:lie_derivative_recipe}.
+\end{colexample}
+
+
+In particular, $X$ is a Killing field (Definition~\ref{def:killing}) precisely when the bracketed expression vanishes.
 
 
 
