@@ -439,7 +439,7 @@ To differentiate an arbitrary tensor, expand it in the coordinate basis and appl
 
 
 
-\begin{colexample}{Lie derivative of the metric}{}
+\begin{colexample}{Lie derivative of the metric}{lie_derivative_metric}
     For instance, for the metric $g = g_{ij}\,\mathrm{d}x^i \otimes \mathrm{d}x^j$,
     \begin{align*}
     \mathcal{L}_X g
@@ -593,7 +593,7 @@ is the $k^{\text{th}}$ component.
 
 Note: $\Gamma_{ij}^k$ are not components of a tensor (see exercise 4.1a). If they would, having zero Christoffel symbols in one coordinate system (say cartesian) would imply they vanish in all coordinate systems, which is not the case.\\
 
-In local coordinates, the covariant derivative of a vector field $Y$ in the direction of $X$ is given by
+In local coordinates and using the Leibnitz rule, we can easily see that the covariant derivative of a vector field $Y$ in the direction of $X$ is given by
 \begin{equation}
     \label{eq:covariant_derivative_coordinates}
     (\nabla_X Y)^k = X^i \frac{\partial Y^k}{\partial x^i} + \Gamma_{ij}^k X^i Y^j.
