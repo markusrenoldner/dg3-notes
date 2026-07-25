@@ -613,14 +613,12 @@ by requiring:
 \end{enumerate}
 \end{colorlem}
 
-The coordinate formula for $X=\frac{\partial}{\partial x^a}$ is
-\[
-(\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
+As we show in exercise 4.2, the coordinate formula for the connection of a general tensor $T$ in the direction $X=\frac{\partial}{\partial x^a}$ is
+\begin{equation}
+    \label{eq:covariant_derivative_tensor_coordinates}
+    (\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
 = \partial_a T^{i_1 \dots i_k}_{j_1 \dots j_l}
 + \sum_{r=1}^{k} \Gamma^{i_r}_{a b} \, T^{i_1 \dots b \dots i_k}_{j_1 \dots j_l}
-- \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}
-\]
-
 
 \todo[inline]{ $\nabla_X$ for general $X$? (the example below states it for 1,1 tensors)}
 Compare to extension of the Lie derivative Lemma \ref{lem:lie_derivative_extension_tensor} and Remark \ref{rem:lie_derivative_extension_tensor_fields}.
@@ -628,6 +626,8 @@ Compare to extension of the Lie derivative Lemma \ref{lem:lie_derivative_extensi
 
 Compare to the coordinate expression of the Lie derivative in Remark \ref{rem:lie_derivative_tensor_coordinates}.
 
+- \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}.
+\end{equation}
 
 \todo[inline]{ explain how to compute Lie and covariant derivatives of tensors, not using the large formula, but using the axioms/requirements, which is more intuitive and easier }
 
