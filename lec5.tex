@@ -137,25 +137,27 @@ dF(\nabla_X^{(g)} Y) = \nabla_{dF(X)}^{(h)} dF(Y).
 \]
 \end{colorlem}
 
-\begin{proof}
+In short: an isometry leaves every term of Koszul's formula invariant, so it must map the Levi-Civita connection of $g$ to that of $h$.\\
 
-All the terms in the Koszul formula are "respected" by $dF$. I.e. we have $F$-isometry
-
+\begin{proof}[Proof sketch]
+Every term in Koszul's formula is respected by $dF$. Since $F$ is a (local) isometry it preserves the inner product,
 \[
-\langle dF(v), dF(w) \rangle_h = \langle v, w \rangle_g
+\langle dF(X), dF(Y) \rangle_h = \langle X, Y \rangle_g ,
 \]
-
-As well as
+and, being a local diffeomorphism, its pushforward preserves the Lie bracket,
 \[
-[dF(v), dF(w)] = dF([v, w])
+[dF(X), dF(Y)] = dF([X, Y]) .
 \]
-for any smooth map.
-
-So Koszuls formula stays the same under pushforwards by isometries, and therefore the Levi-Civita connection is preserved by isometries.
-\todo[inline]{make this proof more readable}
+Hence Koszul's formula for $\nabla^{(h)}$, evaluated on $dF(X), dF(Y), dF(Z)$, reduces term by term to Koszul's formula for $\nabla^{(g)}$ on $X, Y, Z$, so that
+\[
+\langle \nabla^{(h)}_{dF(X)} dF(Y),\, dF(Z) \rangle_h = \langle dF(\nabla^{(g)}_X Y),\, dF(Z) \rangle_h
+\qquad \text{for all } Z .
+\]
+Since $dF$ is a linear isomorphism on each tangent space, $dF(Z)$ ranges over all tangent vectors; as $h$ is nondegenerate, the two sides agree as vectors,
+\[
+dF(\nabla^{(g)}_X Y) = \nabla^{(h)}_{dF(X)} dF(Y) . \qedhere
+\]
 \end{proof}
-
-
 
 
 \begin{colorlem}{Christoffel symbols via orthogonal projection for an immersion}{}
