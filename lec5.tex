@@ -72,27 +72,20 @@ Let $(M, g)$ be a Riemannian manifold. There exists a \textit{unique} connection
 \textit{Uniqueness}: It suffices to prove that in any local coordinate system, conditions 1. \& 2. uniquely fix the Christoffel symbols.
 
 In any local coordinates $(x^1, \ldots, x^n)$ we have
-
-\begin{align*}
-\frac{\partial}{\partial x^i} g_{jh} &= \frac{\partial}{\partial x^i}\left(g\left(\frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right)\right) \\
-&= g\left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^h}\right) \\
-&= g\left(\Gamma_{ij}^a \frac{\partial}{\partial x^a}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \Gamma_{ih}^a \frac{\partial}{\partial x^a}\right) \\
-& = \Gamma_{ij}^a g_{ah} + \Gamma_{ih}^a g_{aj}
-\tag{4}
-\end{align*}
+\begin{align}
+\frac{\partial}{\partial x^i} g_{jh} &= \frac{\partial}{\partial x^i}\left(g\left(\frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right)\right) \nonumber \\
+&= g\left(\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^h}\right) \nonumber \\
+&= g\left(\Gamma_{ij}^a \frac{\partial}{\partial x^a}, \frac{\partial}{\partial x^h}\right) + g\left(\frac{\partial}{\partial x^j}, \Gamma_{ih}^a \frac{\partial}{\partial x^a}\right) \nonumber \\
+& = \Gamma_{ij}^a g_{ah} + \Gamma_{ih}^a g_{aj} \label{eq:christoffel_perm_i}
+\end{align}
 
 Permuting indices:
+\begin{align}
+\frac{\partial}{\partial x^h} g_{ij} &= \Gamma_{hj}^a g_{ai} + \Gamma_{hi}^a g_{aj} \label{eq:christoffel_perm_h} \\
+\frac{\partial}{\partial x^j} g_{ih} &= \Gamma_{ji}^a g_{ah} + \Gamma_{jh}^a g_{ai} \label{eq:christoffel_perm_j}
+\end{align}
 
-\[
-\frac{\partial}{\partial x^h} g_{ij} = \Gamma_{hj}^a g_{ai} + \Gamma_{hi}^a g_{aj} \quad \tag{1}
-\]
-
-\[
-\frac{\partial}{\partial x^j} g_{ih} = \Gamma_{ji}^a g_{ah} + \Gamma_{jh}^a g_{ai} \quad \tag{2}
-\]
-
-So (1) + (2) - (4):
-
+So \eqref{eq:christoffel_perm_h} + \eqref{eq:christoffel_perm_j} - \eqref{eq:christoffel_perm_i}:
 \[
 \frac{\partial}{\partial x^i} g_{jh} + \frac{\partial}{\partial x^j} g_{ih} - \frac{\partial}{\partial x^h} g_{ij} = 2 \Gamma_{ij}^a g_{ah}
 \]
@@ -107,26 +100,13 @@ Where, as usual, $[g^{ij}]$ is the inverse matrix of $[g_{ij}]$. We see, that $\
 
 \textit{Existence}:
 Instead of using the above formula to construct a connection, we go a slightly different path. Let us use the shorthand notation $\langle \cdot, \cdot \rangle := g(\cdot, \cdot)$. In order to define $\nabla_X Y$, $X, Y \in \Gamma(TM)$, it suffices to define $\langle \nabla_X Y, Z \rangle$, $\forall X, Y, Z \in \Gamma(TM)$.
+\begin{align}
+X \langle Y, Z \rangle &= \langle \nabla_X Y, Z \rangle + \langle Y, \nabla_X Z \rangle \label{eq:koszul_deriv_1} \\
+Y \langle X, Z \rangle &= \langle \nabla_Y X, Z \rangle + \langle X, \nabla_Y Z \rangle \label{eq:koszul_deriv_2} \\
+Z \langle X, Y \rangle &= \langle \nabla_Z X, Y \rangle + \langle X, \nabla_Z Y \rangle \label{eq:koszul_deriv_3}
+\end{align}
 
-(1)
-\[
-X \langle Y, Z \rangle = \langle \nabla_X Y, Z \rangle + \langle Y, \nabla_X Z \rangle
-\]
-
-(2)
-\[
-Y \langle X, Z \rangle = \langle \nabla_Y X, Z \rangle + \langle X, \nabla_Y Z \rangle
-\]
-
-(3)
-\[
-Z \langle X, Y \rangle = \langle \nabla_Z X, Y \rangle + \langle X, \nabla_Z Y \rangle
-\]
-
-We use now the torsion-free condition, $\nabla_X Y - \nabla_Y X = [X, Y]$.
-
-From (1), (2), (3), we obtain Koszul's formula:
-
+We use now the torsion-free condition, $\nabla_X Y - \nabla_Y X = [X, Y]$. From \eqref{eq:koszul_deriv_1}, \eqref{eq:koszul_deriv_2}, \eqref{eq:koszul_deriv_3}, we obtain Koszul's formula:
 \[
 \langle \nabla_X Y, Z \rangle
 = \frac{1}{2} \Big(
@@ -134,7 +114,6 @@ From (1), (2), (3), we obtain Koszul's formula:
 \]
 
 One can use this formula to define a connection $\nabla$ on $M$. It is essentially a coordinate-free definition of, the Levi-Civita connection, while equation \eqref{eq:christoffel_levi_civita} is its coordinate expression.
-\todo[inline]{ clean up the equation numbers }
 
 \end{proof}
 
