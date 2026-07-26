@@ -1,0 +1,88 @@
+
+% \usetikzlibrary{arrows.meta}
+% \begin{document}
+ 
+% ---------------------------------------------------------------
+%  orthographic projection  (x,y,z) |--> page coordinates
+%  azimuth -45 deg, elevation 25 deg
+% ---------------------------------------------------------------
+\newcommand{\PX}[3]{0.7071*(#1)+0.7071*(#2)}
+\newcommand{\PY}[3]{-0.2988*(#1)+0.2988*(#2)+0.9063*(#3)}
+\newcommand{\pt}[3]{({\PX{#1}{#2}{#3}},{\PY{#1}{#2}{#3}})}
+ 
+% height function of the surface
+\newcommand{\hgt}[2]{1.6*exp(-((#1)*(#1)+(#2)*(#2))/2.2)}
+ 
+% \definecolor{mesh}{RGB}{70,105,150}
+% \definecolor{geo}{RGB}{190,60,45}
+% \definecolor{tp}{RGB}{40,120,110}
+
+
+\colorlet{mesh}{Ardoise}
+\colorlet{geo}{Groseille}
+\colorlet{tp}{Canard}
+ 
+\begin{tikzpicture}[line join=round,line cap=round,scale=1.15]
+ 
+% ---------- surface: coordinate mesh -------------------------------
+\begin{scope}[mesh,opacity=0.55,line width=0.25pt]
+  \foreach \u in {-3,-2.5,...,3}{
+    \draw plot[variable=\t,domain=-2.5:2.5,samples=70]
+      ({\PX{\u}{\t}{0}},{\PY{\u}{\t}{\hgt{\u}{\t}}});}
+  \foreach \v in {-2.5,-2,...,2.5}{
+    \draw plot[variable=\t,domain=-3:3,samples=70]
+      ({\PX{\t}{\v}{0}},{\PY{\t}{\v}{\hgt{\t}{\v}}});}
+\end{scope}
+ 
+% ---------- boundary of the patch ----------------------------------
+\begin{scope}[mesh,line width=0.7pt]
+  \draw plot[variable=\t,domain=-3:3,samples=70]  ({\PX{\t}{-2.5}{0}},{\PY{\t}{-2.5}{\hgt{\t}{-2.5}}});
+  \draw plot[variable=\t,domain=-3:3,samples=70]  ({\PX{\t}{2.5}{0}},{\PY{\t}{2.5}{\hgt{\t}{2.5}}});
+  \draw plot[variable=\t,domain=-2.5:2.5,samples=70] ({\PX{-3}{\t}{0}},{\PY{-3}{\t}{\hgt{-3}{\t}}});
+  \draw plot[variable=\t,domain=-2.5:2.5,samples=70] ({\PX{3}{\t}{0}},{\PY{3}{\t}{\hgt{3}{\t}}});
+\end{scope}
+ 
+% ---------- tangent plane at p -------------------------------------
+% p = (-0.555,-1.540,0.473),  basis (1,0,f_x), (0,1,f_y) with f_x=0.239, f_y=0.663
+\def\px{-0.555}\def\py{-1.540}\def\pz{0.473}
+\filldraw[tp,fill=tp!12,fill opacity=0.7,line width=0.5pt]
+   \pt{-0.555+1.15}{-1.540+0.80}{0.473+1.15*0.239+0.80*0.663}
+-- \pt{-0.555-1.15}{-1.540+0.80}{0.473-1.15*0.239+0.80*0.663}
+-- \pt{-0.555-1.15}{-1.540-0.80}{0.473-1.15*0.239-0.80*0.663}
+-- \pt{-0.555+1.15}{-1.540-0.80}{0.473+1.15*0.239-0.80*0.663}
+-- cycle;
+ 
+% ---------- the geodesic (numerically integrated) ------------------
+\draw[geo,line width=1.3pt]
+   \pt{-2.899}{-1.500}{0.013} -- \pt{-2.714}{-1.500}{0.020} -- \pt{-2.530}{-1.500}{0.031}
+-- \pt{-2.346}{-1.501}{0.047} -- \pt{-2.163}{-1.501}{0.068} -- \pt{-1.981}{-1.503}{0.096}
+-- \pt{-1.800}{-1.505}{0.131} -- \pt{-1.620}{-1.508}{0.173} -- \pt{-1.441}{-1.513}{0.220}
+-- \pt{-1.264}{-1.519}{0.271} -- \pt{-1.088}{-1.526}{0.324} -- \pt{-0.911}{-1.532}{0.377}
+-- \pt{-0.734}{-1.538}{0.428} -- \pt{-0.555}{-1.540}{0.473} -- \pt{-0.375}{-1.538}{0.512}
+-- \pt{-0.193}{-1.530}{0.543} -- \pt{-0.010}{-1.515}{0.564} -- \pt{0.172}{-1.491}{0.575}
+-- \pt{0.354}{-1.459}{0.574} -- \pt{0.534}{-1.419}{0.563} -- \pt{0.710}{-1.371}{0.541}
+-- \pt{0.884}{-1.317}{0.510} -- \pt{1.054}{-1.258}{0.470} -- \pt{1.221}{-1.195}{0.424}
+-- \pt{1.387}{-1.130}{0.374} -- \pt{1.551}{-1.064}{0.321} -- \pt{1.714}{-0.998}{0.268}
+-- \pt{1.879}{-0.932}{0.216} -- \pt{2.045}{-0.868}{0.170} -- \pt{2.214}{-0.804}{0.129}
+-- \pt{2.383}{-0.740}{0.094} -- \pt{2.555}{-0.678}{0.067} -- \pt{2.727}{-0.615}{0.046}
+-- \pt{2.900}{-0.552}{0.030};
+ 
+% -------- gamma' at other times (parallel along gamma) -------------
+% \begin{scope}[geo,opacity=0.45,line width=0.8pt,-{Stealth[length=3.2pt]}]
+%   \draw \pt{-2.163}{-1.501}{0.068} -- \pt{-1.122}{-1.507}{0.208};
+%   \draw \pt{1.054}{-1.258}{0.470}  -- \pt{2.014}{-0.909}{0.225};
+% \end{scope}
+ 
+% ---------- the point p and the tangent vector ---------------------
+\draw[geo,line width=1.1pt,-{Stealth[length=4pt]}]
+   \pt{-0.555}{-1.540}{0.473} -- \pt{-0.555+1.362}{-1.540-0.003}{0.473+0.323};
+\fill[geo] \pt{-0.555}{-1.540}{0.473} circle (1.5pt);
+ 
+% ---------- labels -------------------------------------------------
+\node[mesh,anchor=west,font=\small]      at \pt{3.05}{2.55}{0.05} {$M$};
+\node[mesh,anchor=north west,font=\small] at \pt{1.55}{0.10}{0.0} {$\gamma$};
+\node[mesh,anchor=north east,font=\small]     at \pt{-0.60}{-1.60}{0.40} {$p$};
+\node[geo,anchor=south west,font=\small] at \pt{0.15}{-1.94}{0.82} {$\dot\gamma(0)$};
+\node[tp,anchor=north,font=\small]       at \pt{-0.495}{-2.84}{0.19} {$T_pM$};
+ 
+\end{tikzpicture}
