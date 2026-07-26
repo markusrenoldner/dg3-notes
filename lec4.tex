@@ -643,21 +643,84 @@ See Exercise 4.2.
 \end{proof}
 
 
+\todo[inline]{ added section about connection of arbitrary tensors }
+
+
+For a function $f \in C^\infty(M)$, viewed as a $(0,0)$-tensor, the connection acts as the directional derivative, $\nabla_X f = X(f)$. This is forced by comparing two expansions of $\nabla_X(fY)$: the Leibniz rule of Definition~\ref{def:connection} gives $\nabla_X(fY) = X(f)\,Y + f\,\nabla_X Y$, while viewing $fY = f \otimes Y$ and applying the tensor Leibniz rule from Lemma \ref{lem:connection_extension_tensor} gives $\nabla_X(fY) = (\nabla_X f)\,Y + f\,\nabla_X Y$. The common term $f\,\nabla_X Y$ cancels, leaving $(\nabla_X f)\,Y = X(f)\,Y$ for all $Y$, hence $\nabla_X f = X(f)$. Writing $X = X^i \frac{\partial}{\partial x^i}$, the coordinate expression is therefore
+\begin{equation}
+    \label{eq:covariant_derivative_function_coordinates}
+    \nabla_X f = X(f) = X^i \frac{\partial f}{\partial x^i}.
+\end{equation}
 
 
 
 
 
 
+Similarly, the action of $\nabla$ on a basis $1$-form $\mathrm{d}x^j$ is determined once we know it on functions and on the basis vector fields. Since $\mathrm{d}x^j(\partial_i) = \delta^j_i$ is a constant function (which vanishes under the connection, see \eqref{eq:covariant_derivative_function_coordinates}) and the pairing $\omega(Y)$ is a contraction of $\omega \otimes Y$, the contraction compatibility of Lemma~\ref{lem:connection_extension_tensor} gives
+\begin{align*}
+    0
+    &= \nabla_{\partial_a}\big(\delta^j_i\big) \\
+    &= \nabla_{\partial_a}\big(\mathrm{d}x^j(\partial_i)\big) \\
+    &= \nabla_{\partial_a}\big(\operatorname{tr}(\mathrm{d}x^j \otimes \partial_i)\big) \\
+    &= \operatorname{tr}\big(\nabla_{\partial_a}(\mathrm{d}x^j \otimes \partial_i)\big) \\
+    &= \operatorname{tr}\big((\nabla_{\partial_a}\mathrm{d}x^j) \otimes \partial_i + \mathrm{d}x^j \otimes (\nabla_{\partial_a}\partial_i)\big) \\
+    &= \operatorname{tr}\big((\nabla_{\partial_a}\mathrm{d}x^j) \otimes \partial_i\big) + \operatorname{tr}\big(\mathrm{d}x^j \otimes (\nabla_{\partial_a}\partial_i)\big) \\
+    &= (\nabla_{\partial_a}\mathrm{d}x^j)(\partial_i) + \mathrm{d}x^j(\nabla_{\partial_a}\partial_i)  \\
+    &= (\nabla_{\partial_a}\mathrm{d}x^j)(\partial_i) + \Gamma^j_{ai}.
+\end{align*}
 
-\begin{colexample}{}{}
-
-For a (0,1)-tensor, i.e. a 1-form:
+In the very last step we have used Definition \ref{def:christoffel} to find $\nabla_{\partial_a}\partial_i = \Gamma^k_{ai}\,\partial_k$, and then $\mathrm{d}x^j(\Gamma^k_{ai}\,\partial_k) = \Gamma^k_{ai}\,\mathrm{d}x^j(\partial_k) = \Gamma^k_{ai}\,\delta^j_k = \Gamma^j_{ai}$. So we have shown
 \[
+(\nabla_{\partial_a}\mathrm{d}x^j)(\partial_i) = -\Gamma^j_{ai}.
 \]
 
+As a $1$-form is determined by its values on the basis fields, this means
+\begin{equation}
+    \label{eq:covariant_derivative_oneform_coordinates}
+    \nabla_{\partial_a}\mathrm{d}x^j = -\Gamma^j_{ak}\,\mathrm{d}x^k.
+\end{equation}
 
 
+
+
+
+
+To compute the connection of a general tensor wrt. a general vector field $X$ in practice, i.e. in local coordinates, we have two options:
+\begin{enumerate}[itemsep=0pt, topsep=0pt]
+    \item 
+    Unlike the Lie derivative, $\nabla$ is $C^\infty(M)$-linear in its direction argument, $\nabla_{fX} = f\,\nabla_X$, so $\nabla_X T = X^a\,\nabla_{\partial_a} T$ and we can use \eqref{eq:covariant_derivative_tensor_coordinates}.
+    \item 
+    Alternatively, to avoid having to memorise formula \eqref{eq:covariant_derivative_tensor_coordinates}, we can proceed similarly as for the Lie derivative (see \eqref{eq:lie_derivative_recipe} and Example \ref{ex:lie_derivative_metric}) and use the Leibniz rule to reduce to the coordinate basis and then apply identites \eqref{eq:covariant_derivative_function_coordinates}, \eqref{eq:covariant_derivative_coordinates}, and \eqref{eq:covariant_derivative_oneform_coordinates}, namely
+    \begin{equation}
+        \label{eq:connection_recipe}
+        \nabla_{\partial_a} f = \partial_a f, \qquad
+        \nabla_{\partial_a}\partial_i = \Gamma^k_{ai}\,\partial_k, \qquad
+        \nabla_{\partial_a}\mathrm{d}x^j = -\Gamma^j_{ak}\,\mathrm{d}x^k,
+    \end{equation}
+    together with the $C^\infty(M)$-linearity $\nabla_X T = X^a\,\nabla_{\partial_a} T$. \\
+\end{enumerate}
+
+On a manifold, there are possibly infinitely many connections. So, this recipe is as far as we can go with a general connection: the Christoffel symbols are \emph{not} determined by the connection axioms, but are precisely the data specifying the connection (different connections have different $\Gamma^k_{ij}$), so the recipe reduces every computation to them without computing them. For the canonical connection of a Riemannian manifold, the Levi-Civita connection, the Christoffel symbols are instead given explicitly in terms of the metric; see Theorem~\ref{thm:levi_civita} and formula~\eqref{eq:christoffel_levi_civita} in the next lecture.\\
+
+
+
+\begin{colexample}{Covariant derivative of the metric}{covariant_derivative_metric}
+    Using option 2 and the identities \eqref{eq:connection_recipe}, we compute the covariant derivative of a general metric $g = g_{ij}\,\mathrm{d}x^i \otimes \mathrm{d}x^j$ in the direction of a general vector field $X = X^a \partial_a$, exactly as we did for the Lie derivative in Example~\ref{ex:lie_derivative_metric}. The Leibniz rule gives
+    \begin{align*}
+    \nabla_{X} g
+    &= (\nabla_{X} g_{ij})\,\mathrm{d}x^i\otimes \mathrm{d}x^j
+     + g_{ij}\,(\nabla_{X} \mathrm{d}x^i)\otimes \mathrm{d}x^j
+     + g_{ij}\,\mathrm{d}x^i\otimes(\nabla_{X} \mathrm{d}x^j) \\
+    &= X^a(\nabla_{\partial_a} g_{ij})\,\mathrm{d}x^i\otimes \mathrm{d}x^j
+     + g_{ij}\,X^a(\nabla_{\partial_a} \mathrm{d}x^i)\otimes \mathrm{d}x^j
+     + g_{ij}\,X^a\,\mathrm{d}x^i\otimes(\nabla_{\partial_a} \mathrm{d}x^j) \\
+    &= X^a(\partial_a g_{ij})\,\mathrm{d}x^i\otimes \mathrm{d}x^j
+     - g_{ij}\,X^a\Gamma^i_{ak}\,\mathrm{d}x^k\otimes \mathrm{d}x^j
+     - g_{ij}\,X^a\Gamma^j_{ak}\,\mathrm{d}x^i\otimes \mathrm{d}x^k \\
+    &= X^a\big(\partial_a g_{ij} - \Gamma^m_{ai}\,g_{mj} - \Gamma^m_{aj}\,g_{im}\big)\,\mathrm{d}x^i\otimes \mathrm{d}x^j ,
+    \end{align*}
+    where in the second step we used the $C^\infty(M)$-linearity $\nabla_X = X^a\,\nabla_{\partial_a}$, in the third the building blocks \eqref{eq:covariant_derivative_function_coordinates} and \eqref{eq:covariant_derivative_oneform_coordinates}, and in the fourth we relabelled the summation indices. And of course the components are $(\nabla_{X} g)_{ij} = X^a\big(\partial_a g_{ij} - \Gamma^m_{ai}\,g_{mj} - \Gamma^m_{aj}\,g_{im}\big)$.
 \end{colexample}
 
 % \begin{colexample}{}{}
