@@ -52,6 +52,7 @@
 \numberwithin{equation}{section}
 
 
+
 % LONG ARROWS FOR MAPPINGS
 % \renewcommand{\to}{\longrightarrow}
 % \renewcommand{\mapsto}{\longmapsto}
@@ -66,6 +67,28 @@
 \definecolor{Leman}{RGB}{0,167,159}
 \definecolor{Ardoise}{RGB}{65,61,58}
 \definecolor{Perle}{RGB}{202,199,199}
+
+
+% TITLE COLOR
+\usepackage{titlesec}
+% \colorlet{chapcolor}{black}
+\colorlet{headingcolor}{Groseille}
+
+% \titleformat{\chapter}[display]
+%   {\normalfont\huge\bfseries\color{chapcolor}}
+%   {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{headingcolor}}
+  {\thesection}{1em}{\scshape}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{headingcolor}}
+  {\thesubsection}{1em}{\scshape}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{headingcolor}}
+  {\thesubsubsection}{1em}{\scshape}
 
 
 % THEOREMS
