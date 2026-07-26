@@ -368,8 +368,7 @@ If you have two curves $\gamma_1, \gamma_2$ such that $\gamma_1(0) = \gamma_2(0)
 \label{rem:euclidean_geodesics_are_straight}
 Recall that $\Gamma_{ij}^k=0$ in cartesian coordinates due to \eqref{eq:christoffel_levi_civita}. Hence geodesics satisfy $\ddot{\gamma}^k + \Gamma_{ij}^k \dot{\gamma}^i \dot{\gamma}^j = \ddot{\gamma}^k = 0$, so by integrating twice we get $\gamma^k(t) = a^k t + b^k$, i.e. geodesics are straight lines in $\mathbb{R}^n$. Hence they minimize the distance between points.
 
-On a general Riemannian manifold, this is not necessarily true (for example, on the sphere). However, geodesics are always stationary points of the length functional, as we will see later.
-\todo[inline]{ link stationary points and local minimsaion }
+On a general Riemannian manifold, this is not necessarily true (for example, on the sphere). However, geodesics are always stationary points of the length functional (Lemma~\ref{lem:geodesics_critical_points_length}), and they still minimize length \emph{locally}, i.e.\ between sufficiently close points (Corollary~\ref{cor:geodesics_minimise_length_locally}).
 \end{colremark}
 
 From the definition, we can easily show that $\left\lVert \dot\gamma \right\rVert^2=g(\dot\gamma,\dot\gamma)$ is constant in $t$, i.e. geodesics are parametrised at constant speed.
