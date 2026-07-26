@@ -510,10 +510,10 @@ Fix polar coordinates $(r,\theta)$ around $p$, defined on the ball $r < i(p)$. I
 g = \mathrm{d}r^2 + b^2(r,\theta)\,\mathrm{d}\theta^2.
 \]
 For any $t_0 \in [0,1]$ such that $\gamma|_{[0,t_0]}$ lies in the chart, writing $\gamma(t) = (r(t), \theta(t))$:
-\[
-\ell(\gamma|_{[0,t_0]}) = \int_0^{t_0} \sqrt{\dot r^2 + b^2 \dot\theta^2}\,\mathrm{d}t \geqslant \int_0^{t_0} |\dot r|\,\mathrm{d}t \geqslant r(t_0) - r(0) = r(t_0). \tag{$\ast$}
-\]
-Since $\ell(\gamma) = d < i(p)$, the curve cannot escape the chart: if it did, $r(t)$ would reach $i(p)$, forcing $\ell(\gamma) \geqslant i(p)$, a contradiction. So $\gamma([0,1])$ lies in the chart, and applying ($\ast$) at $t_0 = 1$ gives $d = \ell(\gamma) \geqslant r(1)$. Conversely, the radial geodesic from $p$ to $\gamma(1)$ has length $r(1)$, so $d \leqslant r(1)$. Hence $\ell(\gamma) = r(1)$, i.e. equality holds in ($\ast$).
+\begin{equation}\label{eq:radial_length_bound}
+\ell(\gamma|_{[0,t_0]}) = \int_0^{t_0} \sqrt{\dot r^2 + b^2 \dot\theta^2}\,\mathrm{d}t \geqslant \int_0^{t_0} |\dot r|\,\mathrm{d}t \geqslant r(t_0) - r(0) = r(t_0).
+\end{equation}
+Since $\ell(\gamma) = d < i(p)$, the curve cannot escape the chart: if it did, $r(t)$ would reach $i(p)$, forcing $\ell(\gamma) \geqslant i(p)$, a contradiction. So $\gamma([0,1])$ lies in the chart, and applying \eqref{eq:radial_length_bound} at $t_0 = 1$ gives $d = \ell(\gamma) \geqslant r(1)$. Conversely, the radial geodesic from $p$ to $\gamma(1)$ has length $r(1)$, so $d \leqslant r(1)$. Hence $\ell(\gamma) = r(1)$, i.e. equality holds in \eqref{eq:radial_length_bound}.
 
 In particular, at every $t$ where $\gamma$ is differentiable,
 \[

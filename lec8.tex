@@ -96,9 +96,9 @@ By the triangle inequality, for all $s \in [0,d]$,
 d(p,q) \leqslant d(p, \gamma(s)) + d(\gamma(s), q) \leqslant s + d(\gamma(s), q),
 \]
 so
-\[
-d(\gamma(s), q) \geqslant d - s \qquad \forall\, s \in [0,d]. \tag{$*$}
-\]
+\begin{equation}\label{eq:dist_lower_bound}
+d(\gamma(s), q) \geqslant d - s \qquad \forall\, s \in [0,d].
+\end{equation}
 Define
 \[
 J := \{s \in [0,d] : d(\gamma(s), q) = d - s\}.
@@ -110,7 +110,7 @@ We will show $d \in J$, which gives $d(\gamma(d), q) = 0$, hence $\gamma(d) = q$
 \[
 d(\gamma(t), q) \leqslant d(\gamma(t), \gamma(t_0)) + d(\gamma(t_0), q) \leqslant (t_0 - t) + (d - t_0) = d - t,
 \]
-which combined with $(*)$ gives $t \in J$.
+which combined with \eqref{eq:dist_lower_bound} gives $t \in J$.
 \item $J$ is closed in $[0,d]$, by continuity of $s \mapsto d(\gamma(s), q)$.
 \item $\varepsilon \in J$, by Step~1.\\
 \end{enumerate}
