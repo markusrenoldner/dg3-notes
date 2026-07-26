@@ -743,6 +743,23 @@ On a manifold, there are possibly infinitely many connections. So, this recipe i
 
 
 
+\begin{colremark}[Lie derivative vs.\ covariant derivative]
+Both $\mathcal{L}_X$ and $\nabla_X$ turn a direction field $X$ and a tensor into a tensor of the same type, but they differ fundamentally. Comparing the two computations for the metric (Examples~\ref{ex:lie_derivative_metric} and~\ref{ex:covariant_derivative_metric}),
+\begin{align*}
+(\mathcal{L}_X g)_{ij} &= X^m\,\partial_m g_{ij} + g_{mj}\,\partial_i X^m + g_{im}\,\partial_j X^m, \\
+(\nabla_X g)_{ij} &= X^a\big(\partial_a g_{ij} - \Gamma^m_{ai}\,g_{mj} - \Gamma^m_{aj}\,g_{im}\big),
+\end{align*}
+Some differences stand out:
+\begin{enumerate}[itemsep=0pt, topsep=0pt]
+    \item \emph{Dependence on $X$.} In $\nabla_X g$ the field $X$ enters only through the pointwise factor $X^a$, so $(\nabla_X g)|_p$ depends only on $X|_p$ (indeed $\nabla$ is $C^\infty(M)$-linear in $X$). In $\mathcal{L}_X g$ the derivatives $\partial_i X^m$ appear, so $(\mathcal{L}_X g)|_p$ depends on $X$ in a whole neighbourhood of $p$ ($\mathcal{L}$ is only $\mathbb{R}$-linear in $X$). Only $\nabla_X$ is a genuine generalisation of the directional derivative.
+    \item \emph{Required data.} $\mathcal{L}_X$ uses only the smooth structure (via the flow of $X$), whereas $\nabla_X$ requires a choice of connection, i.e.\ the Christoffel symbols $\Gamma^k_{ij}$.
+    \item Further, on vector fields the two are related directly: $\mathcal{L}_X Y = [X,Y] = \nabla_X Y - \nabla_Y X$ whenever $\nabla$ is \emph{torsion-free}, see Definition~\ref{def:torsion} below.
+\end{enumerate}
+\end{colremark}
+
+
+
+
 
 \begin{colordef}{Torsion of a Connection}{torsion}
 Let $\nabla$ be a connection on $M$. The torsion tensor $T$ is defined by
