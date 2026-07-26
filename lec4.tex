@@ -621,31 +621,24 @@ As we show in exercise 4.2, the coordinate formula for the connection of a gener
     (\nabla_{\partial_a} T)^{i_1 \dots i_k}_{j_1 \dots j_l}
 = \partial_a T^{i_1 \dots i_k}_{j_1 \dots j_l}
 + \sum_{r=1}^{k} \Gamma^{i_r}_{a b} \, T^{i_1 \dots b \dots i_k}_{j_1 \dots j_l}
-
-\todo[inline]{ $\nabla_X$ for general $X$? (the example below states it for 1,1 tensors)}
-Compare to extension of the Lie derivative Lemma \ref{lem:lie_derivative_extension_tensor} and Remark \ref{rem:lie_derivative_extension_tensor_fields}.
-
-
-Compare to the coordinate expression of the Lie derivative in Remark \ref{rem:lie_derivative_tensor_coordinates}.
-
 - \sum_{s=1}^{l} \Gamma^{b}_{a j_s} \, T^{i_1 \dots i_k}_{j_1 \dots b \dots j_l}.
 \end{equation}
 
-\todo[inline]{ explain how to compute Lie and covariant derivatives of tensors, not using the large formula, but using the axioms/requirements, which is more intuitive and easier }
 
 \begin{proof}[Proof of the Lemma]
 
-Recall equation \eqref{eq:covariant_derivative_coordinates}. To derive a formula for general $k,l$ tensors, we first extend $\nabla$ to 1-forms. One can use the contraction axiom to get
-$$(\nabla_X \omega)(Y) = X(\omega(Y)) - \omega(\nabla_X Y)$$
+% Recall equation \eqref{eq:covariant_derivative_coordinates}. To derive a formula for general $k,l$ tensors, we first extend $\nabla$ to 1-forms. One can use the contraction axiom to get
+% $$(\nabla_X \omega)(Y) = X(\omega(Y)) - \omega(\nabla_X Y)$$
 
-which yields the coordinate formula
-\[
-(\nabla_{\partial_i} \omega)_j = \partial_i \omega_j - \Gamma^k_{ij} \omega_k
-\]
+% which yields the coordinate formula
+% \[
+% (\nabla_{\partial_i} \omega)_j = \partial_i \omega_j - \Gamma^k_{ij} \omega_k
+% \]
 
-Because $\nabla_X$ is $C^\infty(M)$-linear in the vector field argument and linear over sums in tensors, knowing how it acts on the coordinate basis fully determines its action on any tensor field.
+% Because $\nabla_X$ is $C^\infty(M)$-linear in the vector field argument and linear over sums in tensors, knowing how it acts on the coordinate basis fully determines its action on any tensor field.
+% See Exercise 4.2 for the full proof.
 
-See Exercise 4.2 for the full proof.
+See Exercise 4.2.
 \end{proof}
 
 
