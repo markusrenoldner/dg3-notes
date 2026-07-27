@@ -37,6 +37,57 @@ Hence
 since $\ell > \pi/a$ gives $\pi^2/\ell^2 < a^2$. Hence at least one $i$ has $\frac{\mathrm{d}^2}{\mathrm{d}s^2}\ell(\phi_s^{(i)})|_{s=0} < 0$, contradicting the assumption that $\gamma$ is length-minimizing. \qedhere
 \end{proof}
 
+\subsection{Einstein manifolds and homogeneity}
+
+The Bonnet--Myers bound is attained by the sphere, where $\mathrm{Ric} = a^2(n - 1)\, g$ is a constant multiple of the metric. This proportionality is the defining feature of an important class of manifolds.
+
+\begin{colordef}{Einstein tensor and Einstein manifolds}{einstein-tensor-manifold}
+The \emph{Einstein tensor} of $(M, g)$ is the $(0, 2)$-tensor
+\[
+G := \mathrm{Ric} - \tfrac{1}{2}\, S\, g,
+\]
+where $S$ is the scalar curvature. A Riemannian manifold $(M, g)$ is called an \emph{Einstein manifold} if there exists a smooth function $\Lambda \colon M \to \mathbb{R}$ with $\mathrm{Ric} = \Lambda\, g$.
+\end{colordef}
+
+\begin{colorlem}{Properties of the Einstein tensor and Einstein manifolds}{einstein-properties}
+\begin{enumerate}
+    \item[(a)] The Einstein tensor is divergence-free: in local coordinates,
+    \[
+    g^{ab}\, \nabla_a G_{bc} = 0.
+    \]
+    \item[(b)] If $(M, g)$ is an Einstein manifold of dimension $\dim M \geqslant 3$, then $\Lambda$ is constant on each connected component of $M$.
+    \item[(c)] If $(M, g)$ is a connected Einstein manifold with $\dim M = 3$, then $(M, g)$ has constant sectional curvature.
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+See Exercise~11.2.
+\end{proof}
+
+\begin{colremark}
+In general relativity, a vacuum region of spacetime is modelled by a Lorentzian manifold satisfying $G = \Lambda\, g$, where $\Lambda$ is the \emph{cosmological constant}. By parts~(b) and (c) of the lemma, non-trivial vacuum spacetimes exist only in dimension $\geqslant 4$.
+\end{colremark}
+
+
+Highly symmetric manifolds are automatically Einstein. To state this precisely, we first define a notion of symmetry.
+
+\begin{colordef}{$k$-homogeneous Riemannian manifold}{k-homogeneous}
+Let $(M, g)$ be a Riemannian manifold and $k \geqslant 1$ an integer. $(M, g)$ is called \emph{$k$-homogeneous} if for any two $k$-tuples $(p_1, \ldots, p_k)$ and $(q_1, \ldots, q_k)$ in $M^k$ satisfying $\mathrm{dist}_g(p_i, p_j) = \mathrm{dist}_g(q_i, q_j)$ for all $i, j \in \{1, \ldots, k\}$, there exists an isometry $F \colon M \to M$ with $F(p_i) = q_i$ for all $i$. The case $k = 1$ recovers the usual notion of a homogeneous Riemannian manifold (Exercise~8.2).
+\end{colordef}
+
+\begin{colorlem}{Properties of $k$-homogeneous manifolds}{k-homogeneous-properties}
+Let $(M, g)$ be a Riemannian manifold.
+\begin{enumerate}
+    \item[(a)] If $(M, g)$ is $k$-homogeneous for some $k \geqslant 2$, then it is also $(k-1)$-homogeneous. In particular, every $k$-homogeneous space is complete.
+    \item[(b)] If $(M, g)$ is 2-homogeneous, it is isotropic (Exercise~8.3). If moreover $\dim M \geqslant 3$, then $(M, g)$ is Einstein (Definition~\ref{def:einstein-tensor-manifold}): $\mathrm{Ric} = \lambda\, g$ for some $\lambda \in \mathbb{R}$.
+    \item[(c)] If $(M, g)$ is 3-homogeneous, then it has constant sectional curvature.
+\end{enumerate}
+\end{colorlem}
+
+\begin{proof}
+See Exercise~12.2.
+\end{proof}
+
 \subsection{Jacobi fields and conjugate points}
 
 
