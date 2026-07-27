@@ -249,3 +249,30 @@ If $(M, g)$ is connected, complete, and has $K \leqslant 0$, then $\exp_p \colon
     \item In particular, no compact, simply connected manifold of dimension $\geqslant 1$ admits a metric with non-positive sectional curvature.
 \end{itemize}
 \end{colremark}
+
+
+\subsection{The divergence and the divergence theorem}
+
+Recall the volume form $dV_g$ and the integral $\int_M h\, dV_g$ from Section~\ref{subsec:integration-riemannian}. We can now define the divergence operator and state the Riemannian divergence theorem.
+
+\begin{colordef}{Divergence}{divergence}
+The \emph{divergence} of a vector field $X \in \Gamma(TM)$ is $\mathrm{div}\, X := \mathrm{tr}(\nabla X) = (\nabla_i X)^i$. For a 1-form $\omega$, set $\mathrm{div}\, \omega := \mathrm{div}(\omega^\sharp) = g^{ij}(\nabla_i \omega)_j$.
+\end{colordef}
+
+See also Example~\ref{ex:divergence-not-tensor} and Lemma~\ref{lem:einstein-properties}(a).
+
+\begin{colorlem}{Divergence theorem}{divergence-theorem}
+Let $(M, g)$ be a Riemannian manifold, $\omega$ a smooth 1-form on $M$, and $\Omega \subset M$ an open domain with compact closure and piecewise smooth boundary $\partial\Omega$. Let $\hat n$ denote the outward unit normal and $\bar g$ the induced metric on $\partial\Omega$. Then
+\begin{equation}
+    \label{eq:divergence-theorem}
+    \int_\Omega \mathrm{div}\, \omega\; dV_g = \int_{\partial\Omega} \omega(\hat n)\; dV_{\bar g}.
+\end{equation}
+Moreover, in any local coordinate system,
+\[
+\mathrm{div}\, \omega = \frac{1}{\sqrt{\det g}}\, \partial_i\!\big(g^{ij}\, \sqrt{\det g}\, \omega_j\big).
+\]
+\end{colorlem}
+
+\begin{proof}
+See Exercise~13.3.
+\end{proof}
