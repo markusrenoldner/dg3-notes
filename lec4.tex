@@ -418,7 +418,7 @@ If $T \in T^k_l(M)$, and $X = \frac{\partial}{\partial x^i}$, in local coordinat
 See the solution of exercise 4.3b.
 \end{colremark}
 
-\todo[inline]{ added this section which explains how to compute lie derivatives for any tensor }
+% \todo[inline]{ added this section which explains how to compute lie derivatives for any tensor }
 In fact we never need a general coordinate formula. Locally, any tensor is a $C^\infty(M)$-linear combination of tensor products of the coordinate fields $\partial_i$ and $\mathrm{d}x^j$, so the Leibniz rule reduces \emph{every} computation of a Lie derivative to the action of $\mathcal{L}_X$ on these three building blocks.
 
 % \begin{colorlem}{Computing $\mathcal{L}_X$ on any tensor}{lie_derivative_recipe}
@@ -643,7 +643,7 @@ See Exercise 4.2.
 \end{proof}
 
 
-\todo[inline]{ added section about connection of arbitrary tensors }
+% \todo[inline]{ added section about connection of arbitrary tensors }
 
 
 For a function $f \in C^\infty(M)$, viewed as a $(0,0)$-tensor, the connection acts as the directional derivative, $\nabla_X f = X(f)$. This is forced by comparing two expansions of $\nabla_X(fY)$: the Leibniz rule of Definition~\ref{def:connection} gives $\nabla_X(fY) = X(f)\,Y + f\,\nabla_X Y$, while viewing $fY = f \otimes Y$ and applying the tensor Leibniz rule from Lemma \ref{lem:connection_extension_tensor} gives $\nabla_X(fY) = (\nabla_X f)\,Y + f\,\nabla_X Y$. The common term $f\,\nabla_X Y$ cancels, leaving $(\nabla_X f)\,Y = X(f)\,Y$ for all $Y$, hence $\nabla_X f = X(f)$. Writing $X = X^i \frac{\partial}{\partial x^i}$, the coordinate expression is therefore
