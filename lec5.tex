@@ -324,16 +324,16 @@ is invariant under time differentiation, so \(\gamma(t) \subset V\) for all \(t\
     \draw[thick, Groseille] (-2,1) -- (2,1);
     
     % Draw tangent vector
-    \draw[->, thick, Canard, shift={(0,1)}] (0,0) -- (1,0);
-    \node[right, above, Canard] at (1,1) {$\dot\gamma$};
+    \draw[->, thick, Leman, shift={(0,1)}] (0,0) -- (1,0);
+    \node[right, above, Leman] at (1,1) {$\dot\gamma$};
 
     \node[right, above, Groseille] at (-1,1) {$T_{\gamma(t)} S^{n}$};
     \draw[fill=black] (0,0) circle (0.05);
     \node[right, below, black] at (0,0) {$0\in\mathbb{R}^{n+1}$};
     
     % acceleration
-    \draw[->, thick, Canard, shift={(0,0)}] (0,1) -- (0,0.5);
-    \node[right, Canard] at (0,0.5) {$\ddot\gamma$};
+    \draw[->, thick, Leman, shift={(0,0)}] (0,1) -- (0,0.5);
+    \node[right, Leman] at (0,0.5) {$\ddot\gamma$};
 
     % Image of exp_p(v) on sphere (projected along circle)
     % \coordinate (q) at (0.8,0.6); % on circle
@@ -433,7 +433,7 @@ Let $\mathbb{H}^2:=\{(x,y):y>0\}$ be the Poincaré half-plane with $g_H = \frac{
     % Geodesics in H^2: vertical lines and semicircles orthogonal to y=0
     \draw[->,very thick,Rouge] (0.0,0) -- (0.0,3.0);
     \draw[<-,very thick,Groseille] (-3.2,0) arc[start angle=180,end angle=0,radius=1.6];
-    \draw[->,very thick,Canard] (0.0,0) arc[start angle=180,end angle=0,radius=2.0];
+    \draw[->,very thick,Leman] (0.0,0) arc[start angle=180,end angle=0,radius=2.0];
     \draw[->,very thick,Leman] (0,0) arc[start angle=180,end angle=0,radius=0.9];
 
     \node at (3,3) {\small $\mathbb H^2=\{(x,y):y>0\}$};
